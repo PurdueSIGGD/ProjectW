@@ -14,6 +14,7 @@ public abstract class PlayerInput : PlayerComponent {
         public bool jump;
         public bool[] useAbilities;
         public bool melee;
+        public bool pause;
     }
     /**
      * To be implemented by the different sort of player inputs
@@ -23,13 +24,24 @@ public abstract class PlayerInput : PlayerComponent {
 	void Update () {
         if (isLocalPlayer) {
             InputData myData = getData();
-            myBase.myMovement.processMovement(myData);
-
-            for (int i = 0; i < myBase.myAbilities.Length; i++) {
-                if (myData.useAbilities[i]) {
-                    myBase.myAbilities[i].use();
-                }
+            if (myData.pause) {
+                print("pausing");
+                myBase.myGUI.TogglePause();
             }
+            if (myBase.myGUI.isPaused) {
+                // Empty inputs
+                myBase.myMovement.processMovement(new InputData());
+            } else {
+                myBase.myMovement.processMovement(myData);
+
+                for (int i = 0; i < myBase.myAbilities.Length; i++) {
+                    if (myData.useAbilities[i]) {
+                        myBase.myAbilities[i].use();
+                    }
+                }
+
+            }
+           
         }
         
 	}

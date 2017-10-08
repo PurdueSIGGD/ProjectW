@@ -6,5 +6,5 @@ using UnityEngine;
 #endif
 
 public interface IHittable {
-    void CmdHit(float damage, GameObject owner, Hittable.DamageType type);
+    void Hit(float damage, GameObject owner, Hittable.DamageType type);
 }

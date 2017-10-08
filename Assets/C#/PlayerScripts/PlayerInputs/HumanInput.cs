@@ -8,6 +8,8 @@ public class HumanInput : PlayerInput {
         data.horizontal = Input.GetAxis("Horizontal");
         data.vertical = Input.GetAxis("Vertical");
         data.mouseX = Input.GetAxis("Mouse X");
+        data.mouseY = Input.GetAxis("Mouse Y");
+        data.pause = Input.GetAxis("Pause") > 0;
         data.jump = Input.GetAxis("Jump") > 0;
         data.useAbilities = new bool[ABILITY_INPUTS];
         // ability list starts at 1

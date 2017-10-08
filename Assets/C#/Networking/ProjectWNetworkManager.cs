@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 
 public class ProjectWNetworkManager : NetworkManager {
     public GameObject lobbyCamera;
+    public GameObject[] spawnablePrefabs;
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId) {
         Transform start = GetStartPosition();

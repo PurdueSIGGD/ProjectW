@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class PlayerMovement : PlayerComponent {
+    public Transform cameraRotator;
     public float runSpeed = 7;
     public float runSpeedModifier = 1;
     public float jumpCooldown = 1;
@@ -37,8 +38,6 @@ public class PlayerMovement : PlayerComponent {
             CheckGroundStatus();
             lastPosition = transform.position;
         } else {
-            //if (isServer)
-                //print(sHorizontal + " " + sVertical + " " + sAirborne + " " + sJump);
 
         }
 
@@ -65,6 +64,19 @@ public class PlayerMovement : PlayerComponent {
         }
         
         transform.Rotate(0, data.mouseX, 0);
+        
+        float newX = cameraRotator.rotation.eulerAngles.x + data.mouseY;
+        //We do some fancy math to ensure 0 < newX < 360, nothing more
+        newX = (newX + 360) % 360;
+        //Ensure it doesn't go past our top or low bounds
+        if ((newX > 0 && newX < 90) || (newX < 360 && newX > 270)) {
+            // Camera rotation
+            cameraRotator.Rotate(data.mouseY, 0, 0);
+        } else {
+            // We don't want you to look all the way behind you, that's weird
+        }
+
+
         transform.Translate(Time.deltaTime * runSpeed * runSpeedModifier * new Vector3(data.horizontal, 0, data.vertical));
         sVertical =  data.vertical * runSpeedModifier;
         sHorizontal = data.horizontal * runSpeedModifier;

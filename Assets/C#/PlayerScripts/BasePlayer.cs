@@ -25,6 +25,8 @@ public class BasePlayer : NetworkBehaviour {
     public NetworkIdentity myNetworkIdentity;
     [HideInInspector]
     public PlayerNetworking myNetworking;
+    [HideInInspector]
+    public PlayerGUI myGUI;
     
 	// Use this for initialization
 	void Start () {
@@ -33,6 +35,7 @@ public class BasePlayer : NetworkBehaviour {
         myMovement = (PlayerMovement)GetComponent<PlayerMovement>().initialize(this);
         myStats = (PlayerStats)GetComponent<PlayerStats>().initialize(this);
         myNetworking = (PlayerNetworking)GetComponent<PlayerNetworking>().initialize(this);
+        myGUI = (PlayerGUI)GetComponent<PlayerGUI>().initialize(this);
         myAbilities = GetComponents<PlayerAbility>();
         foreach (PlayerAbility playerAbility in myAbilities) {
             playerAbility.initialize(this);
