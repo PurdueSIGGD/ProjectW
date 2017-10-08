@@ -1,0 +1,4 @@
+FBX for Unity
+With Skin (at least once)
+30 FPS
+No keyframe reduction
