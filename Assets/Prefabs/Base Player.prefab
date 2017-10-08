@@ -80,7 +80,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4246783480362446}
   - component: {fileID: 33653220543687876}
-  - component: {fileID: 65705764584986444}
   - component: {fileID: 23032071725639744}
   m_Layer: 8
   m_Name: HealthBar
@@ -2273,18 +2272,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!65 &65705764584986444
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1065950065839726}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!81 &81643216433317160
 AudioListener:
   m_ObjectHideFlags: 1
@@ -2346,7 +2333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 3
   m_SendInterval: 0.1
-  m_SyncRotationAxis: 7
+  m_SyncRotationAxis: 2
   m_RotationSyncCompression: 0
   m_SyncSpin: 0
   m_MovementTheshold: 0.001
