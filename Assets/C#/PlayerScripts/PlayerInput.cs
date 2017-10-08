@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public abstract class PlayerInput : PlayerComponent {
     public static int ABILITY_INPUTS = 3;
@@ -20,13 +21,16 @@ public abstract class PlayerInput : PlayerComponent {
     public abstract InputData getData();
 	// Update is called once per frame
 	void Update () {
-        InputData myData = getData();
-        myBase.myMovement.processMovement(myData);
+        if (isLocalPlayer) {
+            InputData myData = getData();
+            myBase.myMovement.processMovement(myData);
 
-        for (int i = 0; i < myBase.myAbilities.Length; i++) {
-            if (myData.useAbilities[i]) {
-                myBase.myAbilities[i].use();
+            for (int i = 0; i < myBase.myAbilities.Length; i++) {
+                if (myData.useAbilities[i]) {
+                    myBase.myAbilities[i].use();
+                }
             }
         }
+        
 	}
 }
