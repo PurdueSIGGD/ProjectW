@@ -22,8 +22,6 @@ GameObject:
   - component: {fileID: 135731410289461372}
   - component: {fileID: 54347207868276298}
   - component: {fileID: 114734006888993276}
-  - component: {fileID: 114110705491719674}
-  - component: {fileID: 114626636594834158}
   - component: {fileID: 82140413722873082}
   - component: {fileID: 82086196044666526}
   m_Layer: 9
@@ -323,38 +321,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &114110705491719674
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1506924135921468}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 66
-    i1: 104
-    i2: 139
-    i3: 130
-    i4: 245
-    i5: 226
-    i6: 48
-    i7: 164
-    i8: 249
-    i9: 54
-    i10: 178
-    i11: 184
-    i12: 129
-    i13: 127
-    i14: 237
-    i15: 126
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
 --- !u!114 &114470603780954292
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -367,27 +333,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   p: {fileID: 0}
---- !u!114 &114626636594834158
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1506924135921468}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 3
-  m_SendInterval: 0.125
-  m_SyncRotationAxis: 0
-  m_RotationSyncCompression: 0
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 9.65
 --- !u!114 &114734006888993276
 MonoBehaviour:
   m_ObjectHideFlags: 1

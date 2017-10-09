@@ -964,6 +964,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114989715467682310, guid: 7dd9680bcf19de34abfca57195c154b8,
+        type: 2}
+      propertyPath: m_SpawnPrefabs.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4115677730837770, guid: 7dd9680bcf19de34abfca57195c154b8, type: 2}
       propertyPath: m_LocalPosition.x
       value: -5.6481943
@@ -1001,6 +1006,22 @@ Prefab:
       propertyPath: lobbyCamera
       value: 
       objectReference: {fileID: 1936016638}
+    - target: {fileID: 114989715467682310, guid: 7dd9680bcf19de34abfca57195c154b8,
+        type: 2}
+      propertyPath: m_SpawnPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114989715467682310, guid: 7dd9680bcf19de34abfca57195c154b8,
+        type: 2}
+      propertyPath: m_SpawnPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114989715467682310, guid: 7dd9680bcf19de34abfca57195c154b8,
+        type: 2}
+      propertyPath: m_SpawnPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 1791040125161058, guid: ca0226fd4f1999946943a2f0e7abd9ac,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7dd9680bcf19de34abfca57195c154b8, type: 2}
   m_IsPrefabParent: 0
@@ -1046,21 +1067,6 @@ Prefab:
     - target: {fileID: 1506924135921468, guid: 42688b82f5e230a4f936b2b8817fed7e, type: 2}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114626636594834158, guid: 42688b82f5e230a4f936b2b8817fed7e,
-        type: 2}
-      propertyPath: m_TransformSyncMode
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114626636594834158, guid: 42688b82f5e230a4f936b2b8817fed7e,
-        type: 2}
-      propertyPath: m_InterpolateMovement
-      value: 7.82
-      objectReference: {fileID: 0}
-    - target: {fileID: 114626636594834158, guid: 42688b82f5e230a4f936b2b8817fed7e,
-        type: 2}
-      propertyPath: m_SendInterval
-      value: 0.33333334
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 42688b82f5e230a4f936b2b8817fed7e, type: 2}

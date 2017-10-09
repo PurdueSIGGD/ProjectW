@@ -20,12 +20,14 @@ public abstract class CooldownAbility : PlayerAbility {
         }
     }
 
-    void Update() {
+    public override void ability_Update() {
         if (Time.time - lastUse > cooldown && !hasNotified) {
             use_CanUse();
             hasNotified = true;
         }
+        cooldown_Update();
     }
+    public abstract void cooldown_Update(); // Called once every frame
     public abstract void use_CooledDown(); // Called when the input says to use this ability
     public abstract void use_CanUse(); // Called when the cooldown timer has reset, can be empty
 }

@@ -1520,7 +1520,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4638546234324212}
-  - component: {fileID: 114566238648606996}
   m_Layer: 0
   m_Name: Cube_Shattered
   m_TagString: Untagged
@@ -10140,35 +10139,3 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300198, guid: 3e26ec7a6c4843241bff72f1af912ec0, type: 3}
---- !u!114 &114566238648606996
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1791040125161058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 202
-    i1: 2
-    i2: 38
-    i3: 253
-    i4: 79
-    i5: 25
-    i6: 153
-    i7: 148
-    i8: 105
-    i9: 67
-    i10: 162
-    i11: 240
-    i12: 231
-    i13: 171
-    i14: 217
-    i15: 172
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0

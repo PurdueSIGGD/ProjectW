@@ -29,7 +29,7 @@ public class PlayerMovement : PlayerComponent {
     bool sAirborne = false;
     [SyncVar]
     bool sJump = false;
-    [SyncVar]
+
     public float sRunSpeedModifier = 1;
 
 
@@ -85,11 +85,11 @@ public class PlayerMovement : PlayerComponent {
         sAirborne = !isGrounded;
         sJump = data.jump;
 
-        CmdSetPlayerData(sVertical, sHorizontal, sAirborne, sJump, sRunSpeedModifier);
+        CmdSetPlayerData(sVertical, sHorizontal, sAirborne, sJump);
         
     }
     [Command]
-    public void CmdSetPlayerData(float vertical, float horizontal, bool airborne, bool jump, float speedFactor) {
+    public void CmdSetPlayerData(float vertical, float horizontal, bool airborne, bool jump) {
         sVertical = vertical;
         sHorizontal = horizontal;
         sAirborne = airborne;

@@ -80,4 +80,5 @@ public class PlayerStats : PlayerComponent, IHittable {
             MoveToLayer(child, layer);
         }
     }
+    
 }

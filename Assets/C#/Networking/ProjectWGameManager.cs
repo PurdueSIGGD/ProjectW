@@ -12,7 +12,7 @@ public class ProjectWGameManager : NetworkBehaviour {
     //private Hashtable table;
     
     public void AddDeath(GameObject player, string playerid) {
-        print("Adding death as player: " + playerid);
+        //print("Adding death as player: " + playerid);
         //table.Add(playerid, true);
         StartCoroutine(cRespawnPlayer(player.GetComponent<PlayerStats>()));
     }

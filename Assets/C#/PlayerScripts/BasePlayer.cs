@@ -38,9 +38,27 @@ public class BasePlayer : NetworkBehaviour {
         myStats = (PlayerStats)GetComponent<PlayerStats>().initialize(this);
         myNetworking = (PlayerNetworking)GetComponent<PlayerNetworking>().initialize(this);
         myGUI = (PlayerGUI)GetComponent<PlayerGUI>().initialize(this);
-        myAbilities = GetComponents<PlayerAbility>();
-        foreach (PlayerAbility playerAbility in myAbilities) {
-            playerAbility.initialize(this);
+        PlayerAbility[] abilityCandidates = GetComponents<PlayerAbility>();
+        myAbilities = new PlayerAbility[abilityCandidates.Length];
+        int myAbilityIndex = 0;
+        bool failed = false;
+        foreach (PlayerAbility playerAbility in abilityCandidates) {
+            foreach (PlayerAbility myAbility in myAbilities) {
+                if (myAbility != null && playerAbility.GetType() == myAbility.GetType()) {
+                    Debug.LogError("You cannot add two of the same abilities. Talk to Andrew if you want more information on the subject.");
+                    Destroy(playerAbility);
+                    /* note to Andrew: look at PlayerAbility, and the odd ramifications of sending messages across the network to components */
+                    failed = true;
+                    break;
+                }
+            }
+            if (!failed) {
+
+                myAbilities[myAbilityIndex] = (PlayerAbility)playerAbility.initialize(this);
+                myAbilityIndex++; 
+               
+            }
+            failed = false;
         }
         
 

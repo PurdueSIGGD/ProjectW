@@ -48,7 +48,8 @@ public abstract class PlayerInput : PlayerComponent {
 
                     for (int i = 0; i < myBase.myAbilities.Length; i++) {
                         if (myData.useAbilities[i]) {
-                            myBase.myAbilities[i].use();
+                            print(myBase.myAbilities[i] is Ability_SpeedBoost);
+                            myBase.myAbilities[i].CmdUse(myBase.myAbilities[i].GetType().ToString());
                         }
                     }
                 }
@@ -60,4 +61,6 @@ public abstract class PlayerInput : PlayerComponent {
     void Death() {
         reticles.gameObject.SetActive(false);
     }
+
+    
 }

@@ -6,15 +6,13 @@ using UnityEditor;
 #endif
 using UnityEngine.Networking;
 
-public class Projectile : NetworkBehaviour {
+public class Projectile : MonoBehaviour {
     [HideInInspector]
-    //[SyncVar]
     public GameObject sourcePlayer;
 
     public float damage;
     public Hittable.DamageType damageType;
     public bool dieOnHit = true;
-    public bool faked; // If we are faked, we won't collide with anything, since the server processes the collision
     public GameObject explodeParticles;
     public ParticleSystem trailParticles;
 
@@ -29,11 +27,28 @@ public class Projectile : NetworkBehaviour {
             //print(ps);
             if (ps.gameObject == sourcePlayer.gameObject) return;
         }
-        if (!faked && (col.GetComponentInParent<IHittable>() != null)) {
-            
+        IHittable h;
+        if ((h = col.GetComponentInParent<IHittable>()) != null) {
             //print("i am going to hit" + hitPlayer);
-            hitPlayer = col.gameObject;
-            sourcePlayer.GetComponent<PlayerStats>().CmdApplyDamage(col.gameObject, damage, damageType);
+            PlayerStats myPlayerStats = sourcePlayer.GetComponent<PlayerStats>();
+            NetworkBehaviour targetBehavior;
+            if ((targetBehavior = col.GetComponentInParent<NetworkBehaviour>())) {
+                // If the target is network bound, and we are tracking our own collision
+                // This is an  object that exists and is tracked on all clients
+                if (myPlayerStats.isServer) {
+                    // Favor the server
+                }
+                if (myPlayerStats.isLocalPlayer) {
+                    // Favor the client
+                    hitPlayer = targetBehavior.gameObject;
+                    myPlayerStats.CmdApplyDamage(targetBehavior.gameObject, damage, damageType);
+                } 
+            } else {
+                // This is an object that may or may not exist on all clients, so we will handle collision locally
+                h.Hit(damage, sourcePlayer, damageType);
+            }
+            
+            
         }
 
         if (dieOnHit) {
@@ -41,10 +56,8 @@ public class Projectile : NetworkBehaviour {
                 ParticleSystem.MainModule m = trailParticles.main;
                 m.loop = false;
                 trailParticles.transform.parent = null;
-                GameObject p = GameObject.Instantiate(explodeParticles, transform.position, Quaternion.identity);
-                if (isServer) {
-                    NetworkServer.Spawn(p);
-                }
+                GameObject.Instantiate(explodeParticles, transform.position, Quaternion.identity);
+               
             } 
             Destroy(this.gameObject);
             
