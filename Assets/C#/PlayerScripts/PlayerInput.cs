@@ -25,7 +25,6 @@ public abstract class PlayerInput : PlayerComponent {
         if (isLocalPlayer) {
             InputData myData = getData();
             if (myData.pause) {
-                print("pausing");
                 myBase.myGUI.TogglePause();
             }
             if (myBase.myGUI.isPaused) {

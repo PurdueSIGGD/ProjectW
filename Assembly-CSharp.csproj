@@ -52,6 +52,8 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\C#\AnimationBehavior\JumpForcePush.cs" />
+     <Compile Include="Assets\C#\Helpers\DestroyAfterParticlesEnd.cs" />
+     <Compile Include="Assets\C#\Helpers\DestroyAfterSoundEnds.cs" />
      <Compile Include="Assets\C#\Helpers\VectorExt.cs" />
      <Compile Include="Assets\C#\Hittable.cs" />
      <Compile Include="Assets\C#\IHittable.cs" />
@@ -71,8 +73,9 @@
      <Compile Include="Assets\C#\PlayerScripts\PlayerNetworking.cs" />
      <Compile Include="Assets\C#\PlayerScripts\PlayerStats.cs" />
      <Compile Include="Assets\C#\Usable.cs" />
+     <Compile Include="Assets\C#\World\DestructibleItem.cs" />
      <Compile Include="Assets\C#\World\Hazard.cs" />
-     <None Include="Assets\Mixamo\IMPORT STYLE.txt" />
+     <None Include="Assets\FBX\Mixamo\IMPORT STYLE.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

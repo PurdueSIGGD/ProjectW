@@ -20,6 +20,7 @@ public class PlayerStats : PlayerComponent, IHittable {
         }
     }
     public float changeHealth(float f) {
+        print("took hit");
         float returnVal = 0;
         health += f;
         if (health > healthMax) {
@@ -39,6 +40,7 @@ public class PlayerStats : PlayerComponent, IHittable {
      */
     [Command]
     public void CmdApplyDamage(GameObject target, float damage, Hittable.DamageType type) {
-        target.GetComponent<IHittable>().Hit(damage, this.gameObject, type);
+        //print("applying damage");
+        target.GetComponentInParent<IHittable>().Hit(damage, this.gameObject, type);
     }
 }

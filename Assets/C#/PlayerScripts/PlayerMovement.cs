@@ -6,7 +6,6 @@ using UnityEngine.Networking;
 public class PlayerMovement : PlayerComponent {
     public Transform cameraRotator;
     public float runSpeed = 7;
-    public float runSpeedModifier = 1;
     public float jumpCooldown = 1;
     public float jumpHeight = 1000;
     public float airborneSpeedMultiplier = 0.5f; // How much control a player should have while jumping
@@ -31,7 +30,9 @@ public class PlayerMovement : PlayerComponent {
     bool sAirborne = false;
     [SyncVar]
     bool sJump = false;
-    
+    [SyncVar]
+    public float sRunSpeedModifier = 1;
+
 
     public void FixedUpdate() {
         if (isLocalPlayer) {
@@ -45,6 +46,7 @@ public class PlayerMovement : PlayerComponent {
         myBase.myAnimator.SetFloat("Horizontal", sHorizontal);
         myBase.myAnimator.SetBool("Airborne", sAirborne);
         myBase.myAnimator.SetBool("Jump", sJump);
+        myBase.myAnimator.SetFloat("SpeedFactor", sRunSpeedModifier);
     }
     
 
@@ -77,20 +79,21 @@ public class PlayerMovement : PlayerComponent {
         }
 
 
-        transform.Translate(Time.deltaTime * runSpeed * runSpeedModifier * new Vector3(data.horizontal, 0, data.vertical));
-        sVertical =  data.vertical * runSpeedModifier;
-        sHorizontal = data.horizontal * runSpeedModifier;
+        transform.Translate(Time.deltaTime * runSpeed * sRunSpeedModifier * new Vector3(data.horizontal, 0, data.vertical));
+        sVertical =  data.vertical * sRunSpeedModifier;
+        sHorizontal = data.horizontal * sRunSpeedModifier;
         sAirborne = !isGrounded;
         sJump = data.jump;
 
-        CmdSetPlayerData(sVertical, sHorizontal, sAirborne, sJump);
+        CmdSetPlayerData(sVertical, sHorizontal, sAirborne, sJump, sRunSpeedModifier);
     }
     [Command]
-    public void CmdSetPlayerData(float vertical, float horizontal, bool airborne, bool jump) {
+    public void CmdSetPlayerData(float vertical, float horizontal, bool airborne, bool jump, float speedFactor) {
         sVertical = vertical;
         sHorizontal = horizontal;
         sAirborne = airborne;
         sJump = jump;
+
     }
 
     public void addJumpForce() {

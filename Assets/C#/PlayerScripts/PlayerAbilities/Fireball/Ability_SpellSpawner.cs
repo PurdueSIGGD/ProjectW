@@ -18,6 +18,7 @@ public class Ability_SpellSpawner : CooldownAbility {
     public override void use_CooledDown() {
         //SpawnProjectile(false);
         Vector3 spawnAngle = aimAngle.forward;
+        Debug.DrawRay(spawnPoint.position, spawnAngle, Color.green, 10);
         CmdSpawnProjcetile(spawnAngle);
     }
     [Command]
