@@ -400,7 +400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sourcePlayer: {fileID: 0}
-  damage: 5
+  damage: 25
   damageType: 1
   dieOnHit: 1
   faked: 0

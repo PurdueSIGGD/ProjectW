@@ -5,7 +5,6 @@ using UnityEngine.Networking;
 
 public class ProjectWNetworkManager : NetworkManager {
     public GameObject lobbyCamera;
-    public GameObject[] spawnablePrefabs;
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId) {
         Transform start = GetStartPosition();
@@ -39,4 +38,7 @@ public class ProjectWNetworkManager : NetworkManager {
     public override void OnServerError(NetworkConnection conn, int errorCode) {
 
     }
+    
+
+    
 }

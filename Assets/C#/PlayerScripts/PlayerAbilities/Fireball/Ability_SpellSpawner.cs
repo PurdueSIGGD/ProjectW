@@ -16,13 +16,12 @@ public class Ability_SpellSpawner : CooldownAbility {
     public float spawnSpeed;
     
     public override void use_CooledDown() {
-        //SpawnProjectile(false);
         Vector3 spawnAngle = aimAngle.forward;
         Debug.DrawRay(spawnPoint.position, spawnAngle, Color.green, 10);
-        CmdSpawnProjcetile(spawnAngle);
+        CmdSpawnProjectile(spawnAngle);
     }
     [Command]
-    public void CmdSpawnProjcetile(Vector3 angle) {
+    public void CmdSpawnProjectile(Vector3 angle) {
         GameObject spawn = GameObject.Instantiate(itemToSpawn, spawnPoint.position, Quaternion.identity);
         NetworkServer.Spawn(spawn);
         Projectile p;
@@ -30,5 +29,9 @@ public class Ability_SpellSpawner : CooldownAbility {
             p.sourcePlayer = this.gameObject;
         }
         spawn.GetComponent<Rigidbody>().AddForce(angle * spawnSpeed);
+    }
+
+    public override void use_CanUse() {
+        // nothing
     }
 }

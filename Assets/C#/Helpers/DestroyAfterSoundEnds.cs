@@ -13,12 +13,15 @@ public class DestroyAfterSoundEnds : MonoBehaviour {
         }
     }
 
-
 	// Update is called once per frame
 	void Update () {
-		if (!s.isPlaying) {
+        if (s.isPlaying) {
+            
+        } else {
             Destroy(s.gameObject);
         }
-	}
+
+
+    }
 }
  

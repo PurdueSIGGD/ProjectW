@@ -10,7 +10,6 @@ public class PlayerMovement : PlayerComponent {
     public float jumpHeight = 1000;
     public float airborneSpeedMultiplier = 0.5f; // How much control a player should have while jumping
     public float jumpPushoffMultiplier = 1000; // If going in a direction before jumping, push off at this force
-
     public Collider[] collidersToIgnore;
 
     private float lastJump = -1; //Time at last jump
@@ -47,11 +46,12 @@ public class PlayerMovement : PlayerComponent {
         myBase.myAnimator.SetBool("Airborne", sAirborne);
         myBase.myAnimator.SetBool("Jump", sJump);
         myBase.myAnimator.SetFloat("SpeedFactor", sRunSpeedModifier);
+        
     }
     
 
     public void processMovement(PlayerInput.InputData data) {
-
+      
         if (data.vertical < 0) {
             // If moving backwards, move a wee bit slower
             data.horizontal /= 2;
@@ -66,7 +66,7 @@ public class PlayerMovement : PlayerComponent {
         }
         
         transform.Rotate(0, data.mouseX, 0);
-        
+
         float newX = cameraRotator.rotation.eulerAngles.x + data.mouseY;
         //We do some fancy math to ensure 0 < newX < 360, nothing more
         newX = (newX + 360) % 360;
@@ -86,6 +86,7 @@ public class PlayerMovement : PlayerComponent {
         sJump = data.jump;
 
         CmdSetPlayerData(sVertical, sHorizontal, sAirborne, sJump, sRunSpeedModifier);
+        
     }
     [Command]
     public void CmdSetPlayerData(float vertical, float horizontal, bool airborne, bool jump, float speedFactor) {

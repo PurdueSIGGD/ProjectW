@@ -10,12 +10,22 @@ public abstract class CooldownAbility : PlayerAbility {
      */
     public float cooldown = 1; // Cooldown, in seconds
     private float lastUse = -100; // Last time we used it, in seconds;
+    private bool hasNotified;
+
     public override void use() {
         if (Time.time - lastUse > cooldown) {
-            use_CooledDown();
             lastUse = Time.time;
+            hasNotified = false;
+            use_CooledDown();
         }
     }
-    public abstract void use_CooledDown();
 
+    void Update() {
+        if (Time.time - lastUse > cooldown && !hasNotified) {
+            use_CanUse();
+            hasNotified = true;
+        }
+    }
+    public abstract void use_CooledDown(); // Called when the input says to use this ability
+    public abstract void use_CanUse(); // Called when the cooldown timer has reset, can be empty
 }

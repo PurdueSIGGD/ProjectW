@@ -18,8 +18,10 @@ public class Projectile : NetworkBehaviour {
     public GameObject explodeParticles;
     public ParticleSystem trailParticles;
 
-	void OnTriggerEnter(Collider col) {
+    private GameObject hitPlayer;
 
+	void OnTriggerEnter(Collider col) {
+        if (hitPlayer) return; // We only want to hit one object... for some reason it collides multiple times before destroying itself
         if (col.isTrigger) return; // Only want our own trigger effects
         PlayerStats ps;
         if (!sourcePlayer) return; // Shouldn't collide with anything that isn't a source player
@@ -29,8 +31,8 @@ public class Projectile : NetworkBehaviour {
         }
         if (!faked && (col.GetComponentInParent<IHittable>() != null)) {
             
-            // You have to call the static method here, since you can't directly tell it to damage
-            print("i am going to hit");
+            //print("i am going to hit" + hitPlayer);
+            hitPlayer = col.gameObject;
             sourcePlayer.GetComponent<PlayerStats>().CmdApplyDamage(col.gameObject, damage, damageType);
         }
 

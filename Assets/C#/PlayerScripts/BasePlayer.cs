@@ -20,6 +20,8 @@ public class BasePlayer : NetworkBehaviour {
     [HideInInspector]
     public Rigidbody myRigid;
     [HideInInspector]
+    public Collider myCollider;
+    [HideInInspector]
     public PlayerAbility[] myAbilities;
     [HideInInspector]
     public NetworkIdentity myNetworkIdentity;
@@ -44,6 +46,7 @@ public class BasePlayer : NetworkBehaviour {
 
         myAnimator = transform.GetChild(0).GetComponent<Animator>();
         myRigid = GetComponent<Rigidbody>();
+        myCollider = GetComponent<Collider>();
         myNetworkIdentity = this.GetComponent<NetworkIdentity>();
     }
 	

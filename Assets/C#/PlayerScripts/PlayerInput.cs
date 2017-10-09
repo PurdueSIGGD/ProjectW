@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public abstract class PlayerInput : PlayerComponent {
+    public Transform reticles;
+    public Transform cameras;
+    public Transform deathTarget;
+
     public static int ABILITY_INPUTS = 3;
 	public class InputData {
         // Class to store all input data
@@ -20,7 +24,11 @@ public abstract class PlayerInput : PlayerComponent {
      * To be implemented by the different sort of player inputs
      */
     public abstract InputData getData();
-	// Update is called once per frame
+    void Start() {
+        if (!isLocalPlayer) {
+            reticles.gameObject.SetActive(false);
+        }
+    }
 	void Update () {
         if (isLocalPlayer) {
             InputData myData = getData();
@@ -31,17 +39,25 @@ public abstract class PlayerInput : PlayerComponent {
                 // Empty inputs
                 myBase.myMovement.processMovement(new InputData());
             } else {
-                myBase.myMovement.processMovement(myData);
+                if (myBase.myStats.death) {
+                    // take care of camera
+                    cameras.LookAt(deathTarget);
+                    
+                } else {
+                    myBase.myMovement.processMovement(myData);
 
-                for (int i = 0; i < myBase.myAbilities.Length; i++) {
-                    if (myData.useAbilities[i]) {
-                        myBase.myAbilities[i].use();
+                    for (int i = 0; i < myBase.myAbilities.Length; i++) {
+                        if (myData.useAbilities[i]) {
+                            myBase.myAbilities[i].use();
+                        }
                     }
                 }
-
             }
            
         }
         
 	}
+    void Death() {
+        reticles.gameObject.SetActive(false);
+    }
 }

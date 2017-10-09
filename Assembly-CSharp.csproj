@@ -57,6 +57,7 @@
      <Compile Include="Assets\C#\Helpers\VectorExt.cs" />
      <Compile Include="Assets\C#\Hittable.cs" />
      <Compile Include="Assets\C#\IHittable.cs" />
+     <Compile Include="Assets\C#\Networking\ProjectWGameManager.cs" />
      <Compile Include="Assets\C#\Networking\ProjectWNetworkManager.cs" />
      <Compile Include="Assets\C#\PlayerScripts\BasePlayer.cs" />
      <Compile Include="Assets\C#\PlayerScripts\PlayerAbilities\CooldownAbility.cs" />
@@ -75,6 +76,7 @@
      <Compile Include="Assets\C#\Usable.cs" />
      <Compile Include="Assets\C#\World\DestructibleItem.cs" />
      <Compile Include="Assets\C#\World\Hazard.cs" />
+     <Compile Include="Assets\C#\World\Noisy.cs" />
      <None Include="Assets\FBX\Mixamo\IMPORT STYLE.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
