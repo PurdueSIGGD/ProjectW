@@ -9,8 +9,7 @@ public class Ability_SpeedBoost : CooldownAbility {
     public float duration = 3f;
     public GameObject startSound, endSound;
 
-    public override void use_CooledDown() {
-        print("using speed");
+    public override void use_UseAbility() {
         Effect_SpeedBoost boost = this.gameObject.AddComponent<Effect_SpeedBoost>();
         boost.Initialize(myBase.myMovement, percentageGain, duration, startSound, endSound);
     }
@@ -18,4 +17,8 @@ public class Ability_SpeedBoost : CooldownAbility {
     public override void cooldown_Update() { }
 
     public override void use_CanUse() { }
+
+    public override void cooldown_Start() {
+
+    }
 }

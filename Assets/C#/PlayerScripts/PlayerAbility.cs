@@ -17,6 +17,7 @@ public abstract class PlayerAbility : PlayerComponent {
     void Start() {
         // We gather abilities here. If you want to add a new ability at runtime, you must run RepopulateAbilities()
         RepopulateAbilities();
+        ability_Start();
     }
     public void RepopulateAbilities() {
         myAbilities = this.GetComponents<PlayerAbility>();
@@ -45,7 +46,13 @@ public abstract class PlayerAbility : PlayerComponent {
         }
         ability_Update();
     }
+    void Death() {
+        used = 0;
+        hasUsed = 0;
+    }
+    /* these are the other methods you must implement. Can be empty, there for your own benefit */
+    public abstract void ability_Start(); // Called when the object is alive
     public abstract void ability_Update(); // Called once every frame
-    public abstract void use(); 
+    public abstract void use();  // Called when either your input or the server tells you to use these
 
 }

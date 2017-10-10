@@ -13,17 +13,17 @@ public class Ability_SpellSpawner : CooldownAbility {
     public GameObject itemToSpawn;
     public Transform spawnPoint;
     [SyncVar]
-    public Vector3 spawnAngle;
+    Vector3 spawnAngle;
     [SyncVar]
-    public Vector3 spawnPosition;
+    Vector3 spawnPosition;
     private Vector3 lastSpawnPosition;
     private Vector3 lastSpawnAngle;
     private Vector3 localAngle;
     private Vector3 localPosition;
     public Transform aimAngle;
     public float spawnSpeed;
-    
-    public override void use_CooledDown() {
+
+    public override void use_UseAbility() {
         if (isLocalPlayer) {
             // We dictate our own angle, everyone else uses our own
             localAngle = aimAngle.forward;
@@ -37,17 +37,26 @@ public class Ability_SpellSpawner : CooldownAbility {
         spawnAngle = angle;
         spawnPosition = position;
     }
-   
+    public void Death() {
+        spawnAngle = Vector3.zero;
+        spawnPosition = Vector3.zero;
+        lastSpawnAngle = Vector3.zero;
+        lastSpawnPosition = Vector3.zero;
+    }
     public override void use_CanUse() {
         // nothing
     }
 
+    public override void cooldown_Start() {
+
+    }
     public override void cooldown_Update() {
         // Shoot the ball as soon as we get the latest angle
-        if (!isLocalPlayer && lastSpawnAngle != spawnAngle && spawnPosition != lastSpawnPosition) {
+        if (!isLocalPlayer && lastSpawnAngle != spawnAngle && spawnPosition != lastSpawnPosition && !myBase.myStats.death) {
             SpawnSpell();
             lastSpawnAngle = spawnAngle;
         }
+       
     }
     private void SpawnSpell() {
         Debug.DrawRay(spawnPoint.position, spawnAngle, Color.green, 10);
@@ -60,4 +69,6 @@ public class Ability_SpellSpawner : CooldownAbility {
         }
         spawn.GetComponent<Rigidbody>().AddForce((isLocalPlayer ? localAngle : spawnAngle) * spawnSpeed);
     }
+
+    
 }

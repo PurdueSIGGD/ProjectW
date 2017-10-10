@@ -48,7 +48,7 @@ public abstract class PlayerInput : PlayerComponent {
 
                     for (int i = 0; i < myBase.myAbilities.Length; i++) {
                         if (myData.useAbilities[i]) {
-                            print(myBase.myAbilities[i] is Ability_SpeedBoost);
+                            //print(myBase.myAbilities[i] is Ability_SpeedBoost);
                             myBase.myAbilities[i].CmdUse(myBase.myAbilities[i].GetType().ToString());
                         }
                     }

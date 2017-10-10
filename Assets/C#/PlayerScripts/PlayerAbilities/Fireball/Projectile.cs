@@ -15,8 +15,13 @@ public class Projectile : MonoBehaviour {
     public bool dieOnHit = true;
     public GameObject explodeParticles;
     public ParticleSystem trailParticles;
+    public float lifetime = 10;
 
     private GameObject hitPlayer;
+
+    void Start() {
+        Destroy(this.gameObject, 10);
+    }
 
 	void OnTriggerEnter(Collider col) {
         if (hitPlayer) return; // We only want to hit one object... for some reason it collides multiple times before destroying itself
