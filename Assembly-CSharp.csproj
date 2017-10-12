@@ -54,6 +54,7 @@
      <Compile Include="Assets\C#\AnimationBehavior\JumpForcePush.cs" />
      <Compile Include="Assets\C#\Helpers\DestroyAfterParticlesEnd.cs" />
      <Compile Include="Assets\C#\Helpers\DestroyAfterSoundEnds.cs" />
+     <Compile Include="Assets\C#\Helpers\MaterialScaling.cs" />
      <Compile Include="Assets\C#\Helpers\VectorExt.cs" />
      <Compile Include="Assets\C#\Hittable.cs" />
      <Compile Include="Assets\C#\IHittable.cs" />
@@ -62,6 +63,7 @@
      <Compile Include="Assets\C#\PlayerScripts\BasePlayer.cs" />
      <Compile Include="Assets\C#\PlayerScripts\PlayerAbilities\CooldownAbility.cs" />
      <Compile Include="Assets\C#\PlayerScripts\PlayerAbilities\Fireball\Ability_SpellSpawner.cs" />
+     <Compile Include="Assets\C#\PlayerScripts\PlayerAbilities\Fireball\Explosion.cs" />
      <Compile Include="Assets\C#\PlayerScripts\PlayerAbilities\Fireball\Projectile.cs" />
      <Compile Include="Assets\C#\PlayerScripts\PlayerAbilities\SpeedBoost\Ability_SpeedBoost.cs" />
      <Compile Include="Assets\C#\PlayerScripts\PlayerAbilities\SpeedBoost\Effect_SpeedBoost.cs" />

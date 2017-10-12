@@ -17,43 +17,28 @@ public class Projectile : MonoBehaviour {
     public ParticleSystem trailParticles;
     public float lifetime = 10;
 
-    private GameObject hitPlayer;
+    private bool hasHit;
+
+    //private GameObject hitPlayer;
 
     void Start() {
         Destroy(this.gameObject, 10);
     }
 
 	void OnTriggerEnter(Collider col) {
-        if (hitPlayer) return; // We only want to hit one object... for some reason it collides multiple times before destroying itself
+        /* CHECKS FOR HIT VALIDIDTY */
+        if (hasHit && dieOnHit) return; // We only want to hit one object... for some reason it collides multiple times before destroying itself
         if (col.isTrigger) return; // Only want our own trigger effects
         PlayerStats ps;
         if (!sourcePlayer) return; // Shouldn't collide with anything that isn't a source player
         if ((ps = col.GetComponentInParent<PlayerStats>())) {
-            //print(ps);
             if (ps.gameObject == sourcePlayer.gameObject) return;
         }
-        IHittable h;
-        if ((h = col.GetComponentInParent<IHittable>()) != null) {
-            //print("i am going to hit" + hitPlayer);
-            PlayerStats myPlayerStats = sourcePlayer.GetComponent<PlayerStats>();
-            NetworkBehaviour targetBehavior;
-            if ((targetBehavior = col.GetComponentInParent<NetworkBehaviour>())) {
-                // If the target is network bound, and we are tracking our own collision
-                // This is an  object that exists and is tracked on all clients
-                if (myPlayerStats.isServer) {
-                    // Favor the server
-                }
-                if (myPlayerStats.isLocalPlayer) {
-                    // Favor the client
-                    hitPlayer = targetBehavior.gameObject;
-                    myPlayerStats.CmdApplyDamage(targetBehavior.gameObject, damage, damageType);
-                } 
-            } else {
-                // This is an object that may or may not exist on all clients, so we will handle collision locally
-                h.Hit(damage, sourcePlayer, damageType);
-            }
-            
-            
+        /* ACTIONS TO TAKE POST-HIT */
+
+        hasHit = true;
+        if (col.GetComponentInParent<IHittable>() != null) {
+            Hittable.Hit(col.gameObject, sourcePlayer, damage, damageType);
         }
 
         if (dieOnHit) {
@@ -61,7 +46,11 @@ public class Projectile : MonoBehaviour {
                 ParticleSystem.MainModule m = trailParticles.main;
                 m.loop = false;
                 trailParticles.transform.parent = null;
-                GameObject.Instantiate(explodeParticles, transform.position, Quaternion.identity);
+                GameObject spawn = GameObject.Instantiate(explodeParticles, transform.position, Quaternion.identity);
+                Explosion e;
+                if ((e = spawn.GetComponent<Explosion>())) {
+                    e.sourcePlayer = sourcePlayer;
+                }
                
             } 
             Destroy(this.gameObject);

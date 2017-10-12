@@ -32,14 +32,19 @@ public class PlayerStats : PlayerComponent, IHittable {
             returnVal = health;
             health = 0;
         }
-        if (health == 0 && !hasDeath && isServer) {
-            CmdDeath();
-        }
         return returnVal;
     }
     void Update() {
         healthBar.transform.localScale = new Vector3(health, health>0?1:0, health > 0 ? 1 : 0);
+
+        if (health == 0 && !hasDeath && isLocalPlayer) {
+            // Player has to handle their own death
+            CmdDeath();
+            this.BroadcastMessage("Death");
+            hasDeath = true;
+        }
         if (death && !hasDeath) {
+            // Other players have to react to the death
             this.BroadcastMessage("Death");
             hasDeath = true;
         }
@@ -54,6 +59,7 @@ public class PlayerStats : PlayerComponent, IHittable {
     }
     [Command]
     public void CmdDeath() {
+        //print("adding death");
         GameObject.FindObjectOfType<ProjectWGameManager>().AddDeath(this.gameObject, Network.player.ToString());
         death = true;
     }
@@ -67,7 +73,7 @@ public class PlayerStats : PlayerComponent, IHittable {
         myBase.myCollider.enabled = false;
         // Move all parts to the ragdoll layer
         // So it interacts with the world, but not itself
-        MoveToLayer(myBase.myAnimator.transform, 8);
+        MoveToLayer(myBase.myAnimator.transform, 10);
         // Add death sound
         GameObject result = GameObject.Instantiate(deathSounds[UnityEngine.Random.Range(0, deathSounds.Length - 1)], transform);
         result.transform.localPosition = Vector3.zero; // Center on parent

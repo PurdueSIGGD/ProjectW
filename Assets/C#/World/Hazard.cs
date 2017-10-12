@@ -30,6 +30,7 @@ public class Hazard : MonoBehaviour {
 
     public IEnumerator DamagingBehavior(IHittable h) {
         do {
+            // Local damage only
             h.Hit(damage, this.gameObject, type);
             yield return new WaitForSeconds(rate);
         } while (h != null && toDamage.Contains(h));

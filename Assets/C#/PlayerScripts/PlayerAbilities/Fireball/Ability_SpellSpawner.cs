@@ -16,32 +16,39 @@ public class Ability_SpellSpawner : CooldownAbility {
     Vector3 spawnAngle;
     [SyncVar]
     Vector3 spawnPosition;
+    [SyncVar]
+    int spawnCount;
     private Vector3 lastSpawnPosition;
     private Vector3 lastSpawnAngle;
+    private int lastSpawnCount;
     private Vector3 localAngle;
     private Vector3 localPosition;
+    private int localSpawnCount;
     public Transform aimAngle;
     public float spawnSpeed;
 
     public override void use_UseAbility() {
         if (isLocalPlayer) {
-            // We dictate our own angle, everyone else uses our own
+            // We dictate our own angle instantly, everyone else uses our own
             localAngle = aimAngle.forward;
             localPosition = spawnPoint.position;
-            CmdSetTrajectory(localAngle, localPosition);
+            localSpawnCount = spawnCount + 1;
+            CmdSetTrajectory(localAngle, localPosition, localSpawnCount);
             SpawnSpell();
         }
     }
     [Command]
-    public void CmdSetTrajectory(Vector3 angle, Vector3 position) {
+    public void CmdSetTrajectory(Vector3 angle, Vector3 position, int count) {
         spawnAngle = angle;
         spawnPosition = position;
+        spawnCount = count;
     }
     public void Death() {
         spawnAngle = Vector3.zero;
         spawnPosition = Vector3.zero;
         lastSpawnAngle = Vector3.zero;
         lastSpawnPosition = Vector3.zero;
+        spawnCount = 0;
     }
     public override void use_CanUse() {
         // nothing
@@ -52,9 +59,13 @@ public class Ability_SpellSpawner : CooldownAbility {
     }
     public override void cooldown_Update() {
         // Shoot the ball as soon as we get the latest angle
-        if (!isLocalPlayer && lastSpawnAngle != spawnAngle && spawnPosition != lastSpawnPosition && !myBase.myStats.death) {
+        if (!isLocalPlayer && 
+            (lastSpawnAngle != spawnAngle ||  spawnPosition != lastSpawnPosition || spawnCount != lastSpawnCount) && 
+            !myBase.myStats.death) {
             SpawnSpell();
             lastSpawnAngle = spawnAngle;
+            lastSpawnCount = spawnCount;
+            lastSpawnPosition = spawnPosition;
         }
        
     }
