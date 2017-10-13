@@ -21,8 +21,9 @@ public class ProjectWGameManager : NetworkBehaviour {
         NetworkConnection connection = player.connectionToClient;
         Transform startPosition = GetStartPosition();
         GameObject newPlayer = Instantiate(playerPrefab, startPosition.position, startPosition.rotation);
-        // Destroy(player.gameObject);
         NetworkServer.ReplacePlayerForConnection(connection, newPlayer, 0);
+        yield return new WaitForSeconds(15);
+        Destroy(player.gameObject);
     }
     void Start() {
         //table = new Hashtable();
