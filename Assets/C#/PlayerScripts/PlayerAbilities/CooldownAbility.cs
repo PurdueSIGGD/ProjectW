@@ -10,12 +10,29 @@ public abstract class CooldownAbility : PlayerAbility {
      */
     public float cooldown = 1; // Cooldown, in seconds
     private float lastUse = -100; // Last time we used it, in seconds;
+    private bool hasNotified;
+    public override void ability_Start() {
+        cooldown_Start();
+    }
+
     public override void use() {
         if (Time.time - lastUse > cooldown) {
-            use_CooledDown();
             lastUse = Time.time;
+            hasNotified = false;
+            use_UseAbility();
         }
     }
-    public abstract void use_CooledDown();
 
+    public override void ability_Update() {
+        if (Time.time - lastUse > cooldown && !hasNotified) {
+            use_CanUse();
+            hasNotified = true;
+        }
+        cooldown_Update();
+    }
+    /* these are the other methods you must implement. Can be empty, there for your own benefit */
+    public abstract void use_UseAbility(); // Called when the input says to use this ability
+    public abstract void cooldown_Start(); // Called when the object is alive
+    public abstract void cooldown_Update(); // Called once every frame
+    public abstract void use_CanUse(); // Called at the exact time the cooldown timer has reset
 }

@@ -13,12 +13,12 @@ TagManager:
   - UI
   - 
   - 
-  - EnvironmentCollision
-  - GameplayCollision
-  - 
-  - 
-  - 
-  - 
+  - Player_Physics
+  - Player_Hitboxes
+  - Ragdoll
+  - Map
+  - Map_NoCollide
+  - Abilities
   - 
   - 
   - 

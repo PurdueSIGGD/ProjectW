@@ -1,32 +1,57 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class PlayerMovement : PlayerComponent {
+    public Transform cameraRotator;
     public float runSpeed = 7;
-    public float runSpeedModifier = 1;
     public float jumpCooldown = 1;
     public float jumpHeight = 1000;
     public float airborneSpeedMultiplier = 0.5f; // How much control a player should have while jumping
     public float jumpPushoffMultiplier = 1000; // If going in a direction before jumping, push off at this force
-
     public Collider[] collidersToIgnore;
 
     private float lastJump = -1; //Time at last jump
     private bool isGrounded;
     private const float checkGroundDistance = 0.5f;
     private const float checkGroundWidth = 0.5f;
-    private Vector2 lastInputs;
     // Needed for push-off velocity
     private Vector3 lastPosition;
-    
+
+    /* network dictated values for player animation */
+
+    [SyncVar]
+    float sVertical = 0;
+    [SyncVar]
+    float sHorizontal = 0;
+    [SyncVar]
+    bool sAirborne = false;
+    [SyncVar]
+    bool sJump = false;
+
+    public float sRunSpeedModifier = 1;
+
 
     public void FixedUpdate() {
-        CheckGroundStatus();
-        lastPosition = transform.position;
-    }
-    public void processMovement(PlayerInput.InputData data) {
+        if (isLocalPlayer) {
+            CheckGroundStatus();
+            lastPosition = transform.position;
+        } else {
 
+        }
+
+        myBase.myAnimator.SetFloat("Vertical", sVertical);
+        myBase.myAnimator.SetFloat("Horizontal", sHorizontal);
+        myBase.myAnimator.SetBool("Airborne", sAirborne);
+        myBase.myAnimator.SetBool("Jump", sJump);
+        myBase.myAnimator.SetFloat("SpeedFactor", sRunSpeedModifier);
+        
+    }
+    
+
+    public void processMovement(PlayerInput.InputData data) {
+      
         if (data.vertical < 0) {
             // If moving backwards, move a wee bit slower
             data.horizontal /= 2;
@@ -39,15 +64,39 @@ public class PlayerMovement : PlayerComponent {
         if (data.jump && (Time.time - lastJump < jumpCooldown || !isGrounded)) {
             data.jump = false;
         }
-
-        lastInputs = new Vector2(data.horizontal, data.vertical);
+        
         transform.Rotate(0, data.mouseX, 0);
-        transform.Translate(Time.deltaTime * runSpeed * runSpeedModifier * new Vector3(data.horizontal, 0, data.vertical));
-        myBase.myAnimator.SetFloat("Vertical", data.vertical * runSpeedModifier);
-        myBase.myAnimator.SetFloat("Horizontal", data.horizontal * runSpeedModifier);
-        myBase.myAnimator.SetBool("Airborne", !isGrounded);
-        myBase.myAnimator.SetBool("Jump", data.jump);
+
+        float newX = cameraRotator.rotation.eulerAngles.x + data.mouseY;
+        //We do some fancy math to ensure 0 < newX < 360, nothing more
+        newX = (newX + 360) % 360;
+        //Ensure it doesn't go past our top or low bounds
+        if ((newX > 0 && newX < 90) || (newX < 360 && newX > 270)) {
+            // Camera rotation
+            cameraRotator.Rotate(data.mouseY, 0, 0);
+        } else {
+            // We don't want you to look all the way behind you, that's weird
+        }
+
+
+        transform.Translate(Time.deltaTime * runSpeed * sRunSpeedModifier * new Vector3(data.horizontal, 0, data.vertical));
+        sVertical =  data.vertical * sRunSpeedModifier;
+        sHorizontal = data.horizontal * sRunSpeedModifier;
+        sAirborne = !isGrounded;
+        sJump = data.jump;
+
+        CmdSetPlayerData(sVertical, sHorizontal, sAirborne, sJump);
+        
     }
+    [Command]
+    public void CmdSetPlayerData(float vertical, float horizontal, bool airborne, bool jump) {
+        sVertical = vertical;
+        sHorizontal = horizontal;
+        sAirborne = airborne;
+        sJump = jump;
+
+    }
+
     public void addJumpForce() {
         if (isGrounded) {
             lastJump = Time.time;
