@@ -19,7 +19,7 @@ public abstract class CooldownAbility : PlayerAbility {
         // Clients should not worry about magic draw
         if (Time.time - lastUse > cooldown) {
             if (!isLocalPlayer || myBase.myStats.canUseMagic(magicDraw)) {
-                myBase.myStats.changeMagic(magicDraw);
+                myBase.myStats.changeMagic(-1 * magicDraw);
                 lastUse = Time.time;
                 hasNotified = false;
                 use_UseAbility();

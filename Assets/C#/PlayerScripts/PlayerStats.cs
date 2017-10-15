@@ -6,10 +6,10 @@ using UnityEngine.Networking;
 
 public class PlayerStats : PlayerComponent, IHittable {
     public GameObject healthBar;
+    public GameObject magicBar;
     [SyncVar]
     public float health = 100;
     public float healthMax = 100;
-    [SyncVar]
     public float magic = 100;
     public float magicMax = 100;
     [HideInInspector]
@@ -17,10 +17,20 @@ public class PlayerStats : PlayerComponent, IHittable {
     public bool death;
     private bool hasDeath;
     public GameObject[] deathSounds;
+
+    public void Start() {
+        if (!isLocalPlayer) {
+            magicBar.SetActive(false);
+        } else {
+            // once we have a GUI
+            //healthBar.SetActive(false);
+            //magicBar.SetActive(false);
+        }
+    }
     
     public void Hit(float damage, GameObject owner, Hittable.DamageType type, PlayerEffects.Effects effect) {
         changeHealth(-1 * damage);
-        if (effect != null) {
+        if (effect != PlayerEffects.Effects.none) {
             myBase.myEffects.AddEffect(effect);
         }
     }
@@ -54,6 +64,8 @@ public class PlayerStats : PlayerComponent, IHittable {
     }
     void Update() {
         healthBar.transform.localScale = new Vector3(health, health>0?1:0, health > 0 ? 1 : 0);
+        magicBar.transform.localScale = new Vector3(magic, magic > 0 ? 1 : 0, magic > 0 ? 1 : 0);
+
         changeMagic(Time.deltaTime * 30 * myBase.myEffects.magicRegenModifier); // Update magic at our regen rate
         if (health == 0 && !hasDeath && isLocalPlayer) {
             // Player has to handle their own death
@@ -83,6 +95,10 @@ public class PlayerStats : PlayerComponent, IHittable {
     }
     public void Death() {
         // Take care of death on each client's end
+
+        healthBar.SetActive(false);
+        magicBar.SetActive(false);
+
         foreach (Rigidbody r in GetComponentsInChildren<Rigidbody>()) {
             r.isKinematic = false;
         }

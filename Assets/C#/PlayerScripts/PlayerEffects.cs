@@ -9,8 +9,8 @@ public class PlayerEffects : PlayerComponent {
      * If adding a new modifier, be sure to add it into any classes that may use it, and add it to the clear modifiers list
      * I should have a reference for each effect prefab that I should stun
      */
-     // 0 for time slow, 1 for time fast, 2 for run speed, 3 for magic regen slow, 4 for magic regen fast, 5 for stunning 
-
+    // 0 for time slow, 1 for time fast, 2 for run speed, 3 for magic regen slow, 4 for magic regen fast, 5 for stunning 
+    public PrefabHolder effectPrefabHolder;
     public GameObject[] effectTypes;
     public enum Effects { none, timeSlow, timeFast, runSpeed, magicRegenSlow, magicRegenFast, stun };
     // Time and speed
@@ -27,7 +27,9 @@ public class PlayerEffects : PlayerComponent {
     int effectCount;
     int lastEffectCount;
 
-
+    public void Start() {
+        effectTypes = effectPrefabHolder.prefabs;
+    }
     public void AddEffect(PlayerEffects.Effects effect) {
         if (effect != Effects.none) {
             effectToSpawn = effect;
@@ -38,8 +40,8 @@ public class PlayerEffects : PlayerComponent {
     public void Update() {
         if (effectCount != lastEffectCount) {
             lastEffectCount = effectCount;
-            print("spawning effect " + (effectToSpawn - 1));
-            GameObject spawnedEffect = GameObject.Instantiate(effectTypes[(int)effectToSpawn - 1], transform);
+            //print("spawning effect " + (effectToSpawn - 1));
+            GameObject.Instantiate(effectTypes[(int)effectToSpawn - 1], transform);
         }
     }
 
