@@ -23,8 +23,8 @@ public class PlayerStats : PlayerComponent, IHittable {
             magicBar.SetActive(false);
         } else {
             // once we have a GUI
-            //healthBar.SetActive(false);
-            //magicBar.SetActive(false);
+            healthBar.SetActive(false);
+            magicBar.SetActive(false);
         }
     }
     
@@ -62,10 +62,9 @@ public class PlayerStats : PlayerComponent, IHittable {
         }
         return returnVal;
     }
-    void Update() {
+    public void Update() {
         healthBar.transform.localScale = new Vector3(health, health>0?1:0, health > 0 ? 1 : 0);
         magicBar.transform.localScale = new Vector3(magic, magic > 0 ? 1 : 0, magic > 0 ? 1 : 0);
-
         changeMagic(Time.deltaTime * 30 * myBase.myEffects.magicRegenModifier); // Update magic at our regen rate
         if (health == 0 && !hasDeath && isLocalPlayer) {
             // Player has to handle their own death

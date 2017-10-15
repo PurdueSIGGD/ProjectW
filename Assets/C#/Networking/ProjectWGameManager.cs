@@ -27,6 +27,7 @@ public class ProjectWGameManager : NetworkBehaviour {
     }
     void Start() {
         //table = new Hashtable();
+
     }
 
     // Update is called once per frame

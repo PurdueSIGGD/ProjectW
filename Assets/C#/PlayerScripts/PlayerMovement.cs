@@ -31,7 +31,9 @@ public class PlayerMovement : PlayerComponent {
         startMass = myBase.myRigid.mass;
     }
 
+    public void Update() {
 
+    }
     public void FixedUpdate() {
         if (isLocalPlayer) {
             CheckGroundStatus();

@@ -27,5 +27,10 @@ public class PlayerNetworking : PlayerComponent {
         }
         playerListener.enabled = shouldI;
     }
-	
+    public void Update() {
+
+    }
+
+
+
 }

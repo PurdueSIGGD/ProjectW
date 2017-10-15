@@ -39,7 +39,7 @@ public abstract class PlayerAbility : PlayerComponent {
     public void useAbility() {
         used++;
     }
-    void Update() {
+    public void Update() {
         if (used != hasUsed) {
             //print("server has told us to use");
             hasUsed++;
