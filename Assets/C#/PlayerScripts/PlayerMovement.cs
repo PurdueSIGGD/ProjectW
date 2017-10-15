@@ -18,34 +18,39 @@ public class PlayerMovement : PlayerComponent {
     private const float checkGroundWidth = 0.5f;
     // Needed for push-off velocity
     private Vector3 lastPosition;
+    private float startMass;
 
     /* network dictated values for player animation */
+    
+    float vertical = 0;
+    float horizontal = 0;
+    bool airborne = false;
+    bool jump = false;
 
-    [SyncVar]
-    float sVertical = 0;
-    [SyncVar]
-    float sHorizontal = 0;
-    [SyncVar]
-    bool sAirborne = false;
-    [SyncVar]
-    bool sJump = false;
-
-    public float sRunSpeedModifier = 1;
+    public void Start() {
+        startMass = myBase.myRigid.mass;
+    }
 
 
     public void FixedUpdate() {
         if (isLocalPlayer) {
             CheckGroundStatus();
             lastPosition = transform.position;
+
+            myBase.myAnimator.SetFloat("Vertical", vertical);
+            myBase.myAnimator.SetFloat("Horizontal", horizontal);
+            myBase.myAnimator.SetBool("Airborne", airborne);
+            myBase.myAnimator.SetBool("Jump", jump);
+            myBase.myAnimator.SetFloat("TimeFactor", myBase.myEffects.runSpeedModifier);
+            myBase.myAnimator.SetFloat("SpeedFactor", myBase.myEffects.runSpeedModifier * myBase.myEffects.timeModifier);
+
+            myBase.myRigid.drag = 5 * (1 - myBase.myEffects.timeModifier);
+            myBase.myRigid.mass = startMass * myBase.myEffects.timeModifier;
         } else {
 
         }
 
-        myBase.myAnimator.SetFloat("Vertical", sVertical);
-        myBase.myAnimator.SetFloat("Horizontal", sHorizontal);
-        myBase.myAnimator.SetBool("Airborne", sAirborne);
-        myBase.myAnimator.SetBool("Jump", sJump);
-        myBase.myAnimator.SetFloat("SpeedFactor", sRunSpeedModifier);
+        
         
     }
     
@@ -79,30 +84,22 @@ public class PlayerMovement : PlayerComponent {
         }
 
 
-        transform.Translate(Time.deltaTime * runSpeed * sRunSpeedModifier * new Vector3(data.horizontal, 0, data.vertical));
-        sVertical =  data.vertical * sRunSpeedModifier;
-        sHorizontal = data.horizontal * sRunSpeedModifier;
-        sAirborne = !isGrounded;
-        sJump = data.jump;
-
-        CmdSetPlayerData(sVertical, sHorizontal, sAirborne, sJump);
+        transform.Translate(Time.deltaTime * runSpeed * myBase.myEffects.runSpeedModifier * myBase.myEffects.timeModifier * new Vector3(data.horizontal, 0, data.vertical));
+        vertical =  data.vertical * myBase.myEffects.runSpeedModifier * myBase.myEffects.timeModifier;
+        horizontal = data.horizontal * myBase.myEffects.runSpeedModifier * myBase.myEffects.timeModifier;
+        airborne = !isGrounded;
+        jump = data.jump;
+        
         
     }
-    [Command]
-    public void CmdSetPlayerData(float vertical, float horizontal, bool airborne, bool jump) {
-        sVertical = vertical;
-        sHorizontal = horizontal;
-        sAirborne = airborne;
-        sJump = jump;
 
-    }
-
+    
     public void addJumpForce() {
         if (isGrounded) {
             lastJump = Time.time;
             Vector3 verticalDirection = Vector3.up * myBase.myRigid.mass * jumpHeight;
             Vector3 pushOffDirection = myBase.myRigid.mass * jumpPushoffMultiplier * (transform.position - lastPosition);
-            myBase.myRigid.AddForce(verticalDirection + pushOffDirection);
+            myBase.myRigid.AddForce((verticalDirection + pushOffDirection) * 1/myBase.myEffects.timeModifier);
         }
     }
 

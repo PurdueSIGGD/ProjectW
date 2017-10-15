@@ -6,6 +6,9 @@ using UnityEngine.Networking;
 [RequireComponent(typeof(PlayerInput))]
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(PlayerStats))]
+[RequireComponent(typeof(PlayerNetworking))]
+[RequireComponent(typeof(PlayerGUI))]
+[RequireComponent(typeof(PlayerEffects))]
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(NetworkIdentity))]
 public class BasePlayer : NetworkBehaviour {
@@ -29,15 +32,18 @@ public class BasePlayer : NetworkBehaviour {
     public PlayerNetworking myNetworking;
     [HideInInspector]
     public PlayerGUI myGUI;
-    
-	// Use this for initialization
-	void Start () {
+    [HideInInspector]
+    public PlayerEffects myEffects;
+
+    // Use this for initialization
+    void Start () {
         /* every component that is a PlayerComponent must be initialized with the base player */
         myInput = (PlayerInput)GetComponent<PlayerInput>().initialize(this);
         myMovement = (PlayerMovement)GetComponent<PlayerMovement>().initialize(this);
         myStats = (PlayerStats)GetComponent<PlayerStats>().initialize(this);
         myNetworking = (PlayerNetworking)GetComponent<PlayerNetworking>().initialize(this);
         myGUI = (PlayerGUI)GetComponent<PlayerGUI>().initialize(this);
+        myEffects = (PlayerEffects)GetComponent<PlayerEffects>().initialize(this);
         PlayerAbility[] abilityCandidates = GetComponents<PlayerAbility>();
         myAbilities = new PlayerAbility[abilityCandidates.Length];
         int myAbilityIndex = 0;

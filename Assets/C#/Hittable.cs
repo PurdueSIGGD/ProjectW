@@ -17,7 +17,7 @@ public abstract class Hittable {
      * Determine if we should favor the shooter, the server, or do local collision
      * 
      */
-    public static void Hit(GameObject target, GameObject sourcePlayer, float damage, DamageType damageType) {
+    public static void Hit(GameObject target, GameObject sourcePlayer, float damage, DamageType damageType, PlayerEffects.Effects effect) {
         //print("i am going to hit" + hitPlayer);
         PlayerStats myPlayerStats = sourcePlayer.GetComponent<PlayerStats>();
         NetworkBehaviour targetBehavior;
@@ -32,12 +32,12 @@ public abstract class Hittable {
                 //hitPlayer = targetBehavior.gameObject;
 
                 //Debug.Log("CMD Hitting for " + damage);
-                myPlayerStats.CmdApplyDamage(targetBehavior.gameObject, damage, damageType);
+                myPlayerStats.CmdApplyDamage(targetBehavior.gameObject, damage, damageType, effect);
             }
         } else {
             // This is an object that may or may not exist on all clients, so we will handle collision locally
             //Debug.Log("local hitting for " + damage);
-            target.GetComponentInParent<IHittable>().Hit(damage, sourcePlayer, damageType);
+            target.GetComponentInParent<IHittable>().Hit(damage, sourcePlayer, damageType, effect);
         }
     }
 }

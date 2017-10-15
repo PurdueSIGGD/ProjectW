@@ -49,7 +49,7 @@ public class Explosion : MonoBehaviour {
                     if (ps) {
                         target = ps.transform;
                     }
-                    Hittable.Hit(hit.transform.gameObject, sourcePlayer, (isSourcePlayer ? sourcePlayerDamageMultiplier : 1) * ((maxDamage/Vector3.Distance(target.position, transform.position)) + minDamage), damageType);
+                    Hittable.Hit(hit.transform.gameObject, sourcePlayer, (isSourcePlayer ? sourcePlayerDamageMultiplier : 1) * ((maxDamage/Vector3.Distance(target.position, transform.position)) + minDamage), damageType, PlayerEffects.Effects.none);
                     hitHittables.Add(h);
                 }
 

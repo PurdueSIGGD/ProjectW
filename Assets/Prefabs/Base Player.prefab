@@ -265,6 +265,7 @@ GameObject:
   - component: {fileID: 114500500384651316}
   - component: {fileID: 114460131984041114}
   - component: {fileID: 114250630257279978}
+  - component: {fileID: 114797263445738462}
   - component: {fileID: 114801520852274544}
   - component: {fileID: 114019098470336412}
   - component: {fileID: 95531283670853542}
@@ -2953,10 +2954,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00ff71551fbf4d14095397460a278317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  magicDraw: 50
   cooldown: 7
   percentageGain: 0.5
   duration: 3
-  startSound: {fileID: 1793994771404290, guid: fa8f400d42843214da091685621cabc3, type: 2}
+  startEffect: {fileID: 1793994771404290, guid: fa8f400d42843214da091685621cabc3,
+    type: 2}
   endSound: {fileID: 1229230672039204, guid: 55f81c31e660a204f90cf2119e3f5bc2, type: 2}
 --- !u!114 &114250630257279978
 MonoBehaviour:
@@ -2982,12 +2985,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d0bb171ff7f4444af6aa5145e4ff2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 1
-  itemToSpawn: {fileID: 1506924135921468, guid: 42688b82f5e230a4f936b2b8817fed7e,
+  magicDraw: 20
+  cooldown: 0.5
+  itemToSpawn: {fileID: 1851383594523318, guid: e4def256446fd1e4d9a8baea3a554847,
     type: 2}
   spawnPoint: {fileID: 4558809872725608}
   aimAngle: {fileID: 4960235172847064}
-  spawnSpeed: 300
+  spawnSpeed: 200
 --- !u!114 &114460131984041114
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3028,7 +3032,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 95585448712308376}
-  m_ParameterSendBits: 31
+  m_ParameterSendBits: 63
   param0: 
   param1: 
   param2: 
@@ -3056,6 +3060,27 @@ MonoBehaviour:
   - {fileID: 1229230672039204, guid: f6c34fa114903af43ab64ffb7d62e8ef, type: 2}
   - {fileID: 1229230672039204, guid: d3dc9b8d9113112459310d74a3516d00, type: 2}
   - {fileID: 1229230672039204, guid: fefeeacd706d9564ea14ded6bc6b3b1a, type: 2}
+--- !u!114 &114797263445738462
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1178322756519792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ce7db194f9d8d940b94606268a24b73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectTypes:
+  - {fileID: 1987065641983284, guid: 011cace5dd7cc6042a65006f14b4b832, type: 2}
+  - {fileID: 1554926284569932, guid: 246e0bbb6ef5fde4d88a17e1d4d17774, type: 2}
+  - {fileID: 1793994771404290, guid: fa8f400d42843214da091685621cabc3, type: 2}
+  - {fileID: 1714536927532656, guid: 38f4be1af9c04b04eafcb41c30f21d32, type: 2}
+  - {fileID: 1413593025640610, guid: 8b64c25531bef5b44ab95782224a21fc, type: 2}
+  timeModifier: 1
+  runSpeedModifier: 1
+  magicRegenModifier: 1
+  stunned: 0
 --- !u!114 &114801520852274544
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3109,6 +3134,7 @@ MonoBehaviour:
   myNetworkIdentity: {fileID: 0}
   myNetworking: {fileID: 0}
   myGUI: {fileID: 0}
+  myEffects: {fileID: 0}
 --- !u!114 &114879697656262860
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3144,7 +3170,6 @@ MonoBehaviour:
   airborneSpeedMultiplier: 0.5
   jumpPushoffMultiplier: 1000
   collidersToIgnore: []
-  sRunSpeedModifier: 1
 --- !u!124 &124389950781689320
 Behaviour:
   m_ObjectHideFlags: 1

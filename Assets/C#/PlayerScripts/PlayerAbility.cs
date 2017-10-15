@@ -13,6 +13,7 @@ public abstract class PlayerAbility : PlayerComponent {
      * In order to preserve network behavior, used and hasUsed track the amount of times that it has been called
      * If a client notices used has changed, they execute the method and try again.
      */
+    public float magicDraw; // Has to be handled in your player ability class. Can be total amt, can be magica per second, etc.
     private PlayerAbility[] myAbilities;
     void Start() {
         // We gather abilities here. If you want to add a new ability at runtime, you must run RepopulateAbilities()
