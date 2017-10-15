@@ -46,6 +46,9 @@ public class PlayerGUI : PlayerComponent {
         
 
     }
+    public void Death() {
+        rootGUI.SetActive(false);
+    }
 
     public void TogglePause() {
         if (isLocalPlayer) {
