@@ -27,7 +27,7 @@ public class PlayerEffects : PlayerComponent {
     int effectCount;
     int lastEffectCount;
 
-    public void Start() {
+    public override void PlayerComponent_Start() {
         effectTypes = effectPrefabHolder.prefabs;
     }
     public void AddEffect(PlayerEffects.Effects effect) {
@@ -37,7 +37,7 @@ public class PlayerEffects : PlayerComponent {
         }
         
     }
-    public void Update() {
+    public override void PlayerComponent_Update() {
         if (effectCount != lastEffectCount) {
             lastEffectCount = effectCount;
             //print("spawning effect " + (effectToSpawn - 1));

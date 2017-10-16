@@ -15,9 +15,10 @@ public abstract class PlayerAbility : PlayerComponent {
      */
     public float magicDraw; // Has to be handled in your player ability class. Can be total amt, can be magica per second, etc.
     private PlayerAbility[] myAbilities;
-    void Start() {
+    public override void PlayerComponent_Start() {
         // We gather abilities here. If you want to add a new ability at runtime, you must run RepopulateAbilities()
         RepopulateAbilities();
+        abilityGUID = Guid.NewGuid().ToString();
         ability_Start();
     }
     public void RepopulateAbilities() {
@@ -25,21 +26,26 @@ public abstract class PlayerAbility : PlayerComponent {
     }
     [SyncVar]
     int used;
+    [SyncVar]
+    String abilityGUID; // Unique ID assigned by server for component communication
     int hasUsed;
     /* it's a pain in the ass because there's a bug where two components of the same type can't get a command referenced to a specific one */
     /* so we pass the string of the type... because you can't pass abstract parameters */
     [Command]
     public void CmdUse(String p) {
         foreach (PlayerAbility myP in myAbilities) {
-            if (myP.GetType().ToString() == p) {
+            if (myP.abilityGUID == p) {
                 myP.useAbility();
             }
         }
     }
+    public string getGUID() {
+        return abilityGUID;
+    }
     public void useAbility() {
         used++;
     }
-    public void Update() {
+    public override void PlayerComponent_Update() {
         if (used != hasUsed) {
             //print("server has told us to use");
             hasUsed++;

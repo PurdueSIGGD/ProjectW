@@ -18,7 +18,7 @@ public class PlayerStats : PlayerComponent, IHittable {
     private bool hasDeath;
     public GameObject[] deathSounds;
 
-    public void Start() {
+    public override void PlayerComponent_Start() {
         if (!isLocalPlayer) {
             magicBar.SetActive(false);
         } else {
@@ -62,16 +62,24 @@ public class PlayerStats : PlayerComponent, IHittable {
         }
         return returnVal;
     }
-    public void Update() {
+    public override void PlayerComponent_Update() {
         healthBar.transform.localScale = new Vector3(health, health>0?1:0, health > 0 ? 1 : 0);
         magicBar.transform.localScale = new Vector3(magic, magic > 0 ? 1 : 0, magic > 0 ? 1 : 0);
         changeMagic(Time.deltaTime * 30 * myBase.myEffects.magicRegenModifier); // Update magic at our regen rate
-        if (health == 0 && !hasDeath && isLocalPlayer) {
-            // Player has to handle their own death
-            CmdDeath();
+        //print(this.gameObject.name + " " + this.playerControllerId + " " + isServer + " " + isClient);
+        // Spawned enemies can 
+        if (health == 0 && !hasDeath) {
+            if (isLocalPlayer) {
+                // Player has to handle their own death
+                CmdDeath();
+            } else if (myBase.myInput.isBot()) {
+                // Specific message for non-cmd things
+                ServerDeath();
+            }
             this.BroadcastMessage("Death");
             hasDeath = true;
         }
+        
         if (death && !hasDeath) {
             // Other players have to react to the death
             this.BroadcastMessage("Death");
@@ -89,6 +97,11 @@ public class PlayerStats : PlayerComponent, IHittable {
     [Command]
     public void CmdDeath() {
         //print("adding death");
+        GameObject.FindObjectOfType<ProjectWGameManager>().AddDeath(this.gameObject, Network.player.ToString());
+        death = true;
+    }
+    // Called to kill a bot, only by a server
+    public void ServerDeath() {
         GameObject.FindObjectOfType<ProjectWGameManager>().AddDeath(this.gameObject, Network.player.ToString());
         death = true;
     }

@@ -10,4 +10,24 @@ public abstract class PlayerComponent : NetworkBehaviour {
         myBase = p;
         return this;
     }
+
+    // Script start execution is grumpy with me, so I am manually overriding this to make sure BasePlayer starts first
+    public abstract void PlayerComponent_Start();
+    public abstract void PlayerComponent_Update();
+    bool hasStarted = false;
+    public void Start() {
+        if (myBase == null) {
+            hasStarted = true;
+        } else {
+            PlayerComponent_Start();
+        }
+    }
+    public void Update() {
+        if (myBase != null) {
+            if (hasStarted) {
+                Start(); // Try again
+            } 
+            PlayerComponent_Update();
+        }
+    }
 }

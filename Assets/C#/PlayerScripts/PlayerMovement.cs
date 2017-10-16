@@ -27,11 +27,11 @@ public class PlayerMovement : PlayerComponent {
     bool airborne = false;
     bool jump = false;
 
-    public void Start() {
+    public override void PlayerComponent_Start() {
         startMass = myBase.myRigid.mass;
     }
 
-    public void Update() {
+    public override void PlayerComponent_Update() {
 
     }
     public void FixedUpdate() {

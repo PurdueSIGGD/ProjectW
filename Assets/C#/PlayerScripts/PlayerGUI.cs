@@ -14,14 +14,16 @@ public class PlayerGUI : PlayerComponent {
     public RectTransform healthBar;
     public RectTransform magicBar;
 
-    public void Start() {
+    public override void PlayerComponent_Start() {
         UnPauseGame();
-        if (!isLocalPlayer) {
+        if (isLocalPlayer) {
             // Don't want enemy GUIs on top of ours
+            rootGUI.SetActive(true);
+        } else {
             rootGUI.SetActive(false);
         }
     }
-    public void Update() {
+    public override void PlayerComponent_Update() {
         if (isLocalPlayer) {
             // Set health and magic in GUI
             healthBar.localScale = new Vector2(myBase.myStats.health / myBase.myStats.healthMax, 1);
