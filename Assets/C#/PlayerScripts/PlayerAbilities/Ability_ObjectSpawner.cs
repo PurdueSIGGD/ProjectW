@@ -5,19 +5,18 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 
-public class Ability_SpellSpawner : CooldownAbility {
-    /**
-     * IF YOU ARE EVER USING THIS 
-     * PLEASE ENSURE TO ADD THE PREFAB TO THE LIST IN ProjectWNetworkManager
-     */
+public class Ability_ObjectSpawner : CooldownAbility {
     public GameObject itemToSpawn;
     public Transform spawnPoint;
+    public Vector3 spawnOffset;
     [SyncVar]
     Vector3 spawnAngle;
     [SyncVar]
     Vector3 spawnPosition;
     [SyncVar]
     int spawnCount;
+    private Ability_ObjectSpawner[] myObjectSpawners;
+    private int myIndex;
     private Vector3 lastSpawnPosition;
     private Vector3 lastSpawnAngle;
     private int lastSpawnCount;
@@ -33,12 +32,20 @@ public class Ability_SpellSpawner : CooldownAbility {
             localAngle = aimAngle.forward;
             localPosition = spawnPoint.position;
             localSpawnCount = spawnCount + 1;
-            CmdSetTrajectory(localAngle, localPosition, localSpawnCount);
+            CmdSetTrajectory(myIndex, localAngle, localPosition, localSpawnCount);
             SpawnSpell();
         }
     }
     [Command]
-    public void CmdSetTrajectory(Vector3 angle, Vector3 position, int count) {
+    public void CmdSetTrajectory(int spawnerIndex, Vector3 angle, Vector3 position, int count) {
+        myObjectSpawners[spawnerIndex].SetTrajectory(angle, position, count);
+    }
+    /**
+     * We have to tell a specific object spawner to spawn, otherwise it just assumes the first
+     * So if we have multiple object spawners, we have to account for that
+     */
+    public void SetTrajectory(Vector3 angle, Vector3 position, int count)
+    {
         spawnAngle = angle;
         spawnPosition = position;
         spawnCount = count;
@@ -55,10 +62,17 @@ public class Ability_SpellSpawner : CooldownAbility {
     }
 
     public override void cooldown_Start() {
-
+        myObjectSpawners = GetComponents<Ability_ObjectSpawner>();
+        for (int i = 0; i < myObjectSpawners.Length; i++)
+        {
+            if (myObjectSpawners[i] == this)
+            {
+                myIndex = i;
+            }
+        }
     }
     public override void cooldown_Update() {
-        // Shoot the ball as soon as we get the latest angle
+        // Spawn the object as soon as we get a new angle, but not if we are the player
         if (!isLocalPlayer && 
             (lastSpawnAngle != spawnAngle ||  spawnPosition != lastSpawnPosition || spawnCount != lastSpawnCount) && 
             !myBase.myStats.death) {
@@ -70,15 +84,23 @@ public class Ability_SpellSpawner : CooldownAbility {
        
     }
     private void SpawnSpell() {
-        Debug.DrawRay(spawnPoint.position, spawnAngle, Color.green, 10);
+        Debug.DrawRay(spawnPoint.position + spawnOffset, spawnAngle, Color.green, 10);
         // Spawn our spell in the place the server told us
         // However if we are the client, we don't wait for that luxury.
-        GameObject spawn = GameObject.Instantiate(itemToSpawn, (isLocalPlayer ? localPosition : spawnPosition), Quaternion.identity);
-        Projectile p;
-        if (p = spawn.GetComponent<Projectile>()) {
-            p.sourcePlayer = this.gameObject;
+        GameObject spawn = GameObject.Instantiate(itemToSpawn, (isLocalPlayer ? localPosition : spawnPosition) + transform.TransformDirection(spawnOffset), Quaternion.identity);
+        Rigidbody r;
+        if (r = spawn.GetComponent<Rigidbody>())
+        {
+            r.AddForce((isLocalPlayer ? localAngle : spawnAngle) * spawnSpeed);
         }
-        spawn.GetComponent<Rigidbody>().AddForce((isLocalPlayer ? localAngle : spawnAngle) * spawnSpeed);
+        OnSpellSpawned(spawn);
+    }
+    /**
+     * Called whenever we spawn a spell, to be implemented by the inheriting class
+     */
+    public virtual void OnSpellSpawned(GameObject spawn)
+    {
+
     }
 
     

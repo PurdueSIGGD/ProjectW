@@ -15,7 +15,8 @@ public abstract class CooldownAbility : PlayerAbility {
         cooldown_Start();
     }
 
-    public override void use() {
+    public override void use()
+    {
         // Clients should not worry about magic draw
         if (Time.time - lastUse > cooldown) {
             if (!isLocalPlayer || myBase.myStats.canUseMagic(magicDraw)) {

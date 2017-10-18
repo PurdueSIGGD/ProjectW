@@ -17,14 +17,15 @@ public abstract class PlayerComponent : NetworkBehaviour {
     bool hasStarted = false;
     public void Start() {
         if (myBase == null) {
-            hasStarted = true;
+            hasStarted = false;
         } else {
             PlayerComponent_Start();
+            hasStarted = true;
         }
     }
     public void Update() {
         if (myBase != null) {
-            if (hasStarted) {
+            if (!hasStarted) {
                 Start(); // Try again
             } 
             PlayerComponent_Update();

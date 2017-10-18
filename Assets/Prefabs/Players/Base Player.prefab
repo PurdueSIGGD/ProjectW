@@ -3268,7 +3268,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1178322756519792}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84d0bb171ff7f4444af6aa5145e4ff2b, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b91a0a0674f3c14f8416a158944a208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   magicDraw: 30
@@ -3276,6 +3276,7 @@ MonoBehaviour:
   itemToSpawn: {fileID: 1851383594523318, guid: e4def256446fd1e4d9a8baea3a554847,
     type: 2}
   spawnPoint: {fileID: 4558809872725608}
+  spawnOffset: {x: 0, y: 0, z: 0}
   aimAngle: {fileID: 4960235172847064}
   spawnSpeed: 200
 --- !u!114 &114232774284143798
@@ -3379,7 +3380,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1178322756519792}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84d0bb171ff7f4444af6aa5145e4ff2b, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b91a0a0674f3c14f8416a158944a208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   magicDraw: 40
@@ -3387,6 +3388,7 @@ MonoBehaviour:
   itemToSpawn: {fileID: 1506924135921468, guid: 42688b82f5e230a4f936b2b8817fed7e,
     type: 2}
   spawnPoint: {fileID: 4558809872725608}
+  spawnOffset: {x: 0, y: 0, z: 0}
   aimAngle: {fileID: 4960235172847064}
   spawnSpeed: 300
 --- !u!114 &114460131984041114

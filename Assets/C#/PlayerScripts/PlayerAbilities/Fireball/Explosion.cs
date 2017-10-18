@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Explosion : MonoBehaviour {
-    [HideInInspector]
+    //[HideInInspector]
     public GameObject sourcePlayer;
     public Hittable.DamageType damageType;
 
-    public float pushForce, range;
+    public float pushForce, range, verticalPushForce = 1;
     public float minDamage, maxDamage; // Distance based damages, i.e. minDamage at range away, maxDamage when direct hit
 
     public float sourcePlayerDamageMultiplier;
@@ -32,7 +32,7 @@ public class Explosion : MonoBehaviour {
             if ((r = hit.transform.GetComponent<Rigidbody>()) != null) {
                 if (ps) {
                     // Do something different, not as harsh hit forces
-                    if (!ps.death) r.AddForce(Vector3.up * (isSourcePlayer ? (pushForce * sourcePlayerForceMultiplier):pushForce) * 2);
+                    if (!ps.death) r.AddForce(Vector3.up * verticalPushForce * (isSourcePlayer ? (pushForce * sourcePlayerForceMultiplier):pushForce) * 2);
                     r.AddExplosionForce((isSourcePlayer ? (pushForce * sourcePlayerForceMultiplier) : pushForce) * 0.5f, transform.position, range);
                 } else {
                     r.AddExplosionForce(pushForce, transform.position, range);

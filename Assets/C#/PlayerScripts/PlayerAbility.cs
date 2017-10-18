@@ -18,7 +18,6 @@ public abstract class PlayerAbility : PlayerComponent {
     public override void PlayerComponent_Start() {
         // We gather abilities here. If you want to add a new ability at runtime, you must run RepopulateAbilities()
         RepopulateAbilities();
-        abilityGUID = Guid.NewGuid().ToString();
         ability_Start();
     }
     public void RepopulateAbilities() {
@@ -26,31 +25,33 @@ public abstract class PlayerAbility : PlayerComponent {
     }
     [SyncVar]
     int used;
-    [SyncVar]
-    String abilityGUID; // Unique ID assigned by server for component communication
+    //public String abilityGUID = Guid.NewGuid().ToString(); // Unique ID assigned by server for component communication
     int hasUsed;
     /* it's a pain in the ass because there's a bug where two components of the same type can't get a command referenced to a specific one */
-    /* so we pass the string of the type... because you can't pass abstract parameters */
+    /* so we pass the string of the GUID... because you can't pass abstract parameters like a player component */
     [Command]
-    public void CmdUse(String p) {
-        foreach (PlayerAbility myP in myAbilities) {
+    public void CmdUse(int index)
+    {
+        //print("player is telling us to use ability " + index + " " + myAbilities[index].ToString() + " " + myAbilities[index].magicDraw);
+        myAbilities[index].useAbility();
+        /*foreach (PlayerAbility myP in myAbilities) {
             if (myP.abilityGUID == p) {
                 myP.useAbility();
             }
-        }
+        }*/
     }
-    public string getGUID() {
-        return abilityGUID;
-    }
+   
     public void useAbility() {
         used++;
     }
     public override void PlayerComponent_Update() {
         if (used != hasUsed) {
+            //print(" I (" + this.ToString() + ") am using ability");
             //print("server has told us to use");
             hasUsed++;
             use();
         }
+        //print(this + "used: " + used + " hasUsed: " + hasUsed);
         ability_Update();
     }
     void Death() {
