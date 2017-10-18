@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public abstract class PlayerComponent : NetworkBehaviour {
     /* Base class that stores a reference to the player movement */
@@ -16,19 +18,107 @@ public abstract class PlayerComponent : NetworkBehaviour {
     public abstract void PlayerComponent_Update();
     bool hasStarted = false;
     public void Start() {
-        if (myBase == null) {
+        if (myBase == null && !hasStarted) {
             hasStarted = false;
         } else {
+            // Our actual start is here
+            //print("actual start: " + this);
+            //bufs.Callback = BufChanged;
+            myComponents = this.GetComponents<PlayerComponent>();
+            for (int i = 0; i < myComponents.Length; i++) {
+                if (myComponents[i] == this) myComponentIndex = i;
+            }
             PlayerComponent_Start();
             hasStarted = true;
+
         }
     }
     public void Update() {
         if (myBase != null) {
             if (!hasStarted) {
                 Start(); // Try again
-            } 
+            }
             PlayerComponent_Update();
+            //if (delegates.Count > 0) print(playerControllerId + ", delegates size " + delegates.Count);
         }
     }
+
+    /**
+     * ============================================
+     * Methods to help with network synchronization
+     * ============================================
+     */
+     public struct BufWrapper {
+        public int index;
+        public Buf buf;
+    };
+    public struct Buf {
+        public string methodName;
+        // Filled with all the data that you may need, feel free to expand if needed
+        public int[] intList;
+        public float[] floatList;
+        public Vector3[] vectorList;
+    };
+    public class CallbackBufs : SyncListStruct<Buf> { }
+    // Our syncvar, synchronized across all clients
+    public Buf bufData;
+        //CallbackBufs bufs = new CallbackBufs();
+    public delegate void OnClientNotify(Buf values);
+    public Hashtable delegates = new Hashtable();
+    private PlayerComponent[] myComponents;
+    private int myComponentIndex;
+
+    /**
+     * To be called at class initialization, same across server and all clients
+     */
+    public void ResgisterDelegate(string methodName, OnClientNotify method) {
+        delegates.Add(methodName, method);
+        //print("resgistering delegate: " + methodName + " " + method + " " + delegates.Count);
+    }
+
+    public void NotifyAllClientDelegates(Buf data) {
+        // We can call the method directly if we are calling this from the player
+
+        if (isLocalPlayer || myBase.myInput.isBot()) {
+            BufWrapper bufW = new BufWrapper();
+            bufW.buf = data;
+            bufW.index = myComponentIndex;
+            ((OnClientNotify)delegates[data.methodName]).Invoke(data);
+            CmdNotifyAll(bufW);
+        } else {
+            Debug.LogWarning("You are not the owner of this object! Not sending any data.");
+        } 
+    }
+
+    [Command]
+    public void CmdNotifyAll(BufWrapper data) {
+        RpcAddBuf(data);
+        
+    }
+
+    [ClientRpc]
+    void RpcAddBuf(BufWrapper data) {
+        //Debug.Log("adding buf at index " + data.index + " which is " + myComponents[data.index]);
+        for (int i = 0; i < myComponents.Length; i++) {
+            if (i == data.index) {
+                myComponents[i].bufData = data.buf;
+                myComponents[i].BufChanged();
+            }
+        }
+    }
+    /**
+     * Clear the latest change, wait for the next operation
+     */
+    void BufChanged() {
+        if (!isLocalPlayer) {
+            Buf data = bufData;
+            //print("buf now at size: " + bufs.Count);
+            //(data.methodName + " " + delegates.Count + " " + delegates[data.methodName] + " " + this);
+            ((OnClientNotify)delegates[data.methodName]).Invoke(data);
+           
+        }
+
+    }
+       
+
 }

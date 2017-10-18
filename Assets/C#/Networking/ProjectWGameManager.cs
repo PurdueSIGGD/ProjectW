@@ -4,13 +4,13 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class ProjectWGameManager : NetworkBehaviour {
+    public ProjectWNetworkManager networkManager;
     public float respawnTime = 5;
     public float timeLimit = 20 * 60 * 60; // 20 minutes
     public Transform[] startPositions;
     public GameObject playerPrefab;
     public int botCount = 0;
-
-    //private Hashtable table;
+    
     
     public void AddDeath(GameObject player, string playerid) {
         //print("Adding death as player: " + playerid);
@@ -32,6 +32,10 @@ public class ProjectWGameManager : NetworkBehaviour {
     void Start() {
         //table = new Hashtable();
         if (isServer) {
+            if (playerPrefab == null) {
+                playerPrefab = networkManager.playerPrefab;
+            }
+
             for (int i = 0; i < botCount; i++) {
                 Transform startPosition = GetStartPosition();
                 GameObject spawn = Instantiate(playerPrefab, startPosition.position, startPosition.rotation);

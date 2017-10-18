@@ -5,9 +5,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class Ability_SpeedBoost : CooldownAbility {
-    public float percentageGain = 0.3f;
-    public float duration = 3f;
-    public GameObject startEffect, endSound;
+    public GameObject startEffect;
 
     public override void use_UseAbility() {
         GameObject.Instantiate(startEffect, transform);

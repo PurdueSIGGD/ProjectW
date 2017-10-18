@@ -3246,6 +3246,7 @@ MonoBehaviour:
   myNetworking: {fileID: 0}
   myGUI: {fileID: 0}
   myEffects: {fileID: 0}
+  playerId: 
 --- !u!114 &114127821173740640
 MonoBehaviour:
   m_ObjectHideFlags: 1

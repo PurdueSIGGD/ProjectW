@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -34,9 +35,14 @@ public class BasePlayer : NetworkBehaviour {
     public PlayerGUI myGUI;
     [HideInInspector]
     public PlayerEffects myEffects;
+    [HideInInspector]
+    [SyncVar]
+    public string playerId;
 
     // Use this for initialization
     void Start () {
+        
+
         /* every component that is a PlayerComponent must be initialized with the base player */
         myInput = (PlayerInput)GetComponent<PlayerInput>().initialize(this);
         myMovement = (PlayerMovement)GetComponent<PlayerMovement>().initialize(this);
@@ -57,6 +63,10 @@ public class BasePlayer : NetworkBehaviour {
         myRigid = GetComponent<Rigidbody>();
         myCollider = GetComponent<Collider>();
         myNetworkIdentity = this.GetComponent<NetworkIdentity>();
+
+        if (isServer) {
+            playerId = Guid.NewGuid().ToString();
+        }
     }
 	
 }

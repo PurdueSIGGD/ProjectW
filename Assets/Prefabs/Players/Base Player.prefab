@@ -307,8 +307,6 @@ GameObject:
   - component: {fileID: 114019098470336412}
   - component: {fileID: 95531283670853542}
   - component: {fileID: 114664666753676864}
-  - component: {fileID: 114430629853766182}
-  - component: {fileID: 114180514545263426}
   - component: {fileID: 114154566402361926}
   m_Layer: 8
   m_Name: Base Player
@@ -3255,30 +3253,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magicDraw: 50
   cooldown: 7
-  percentageGain: 0.5
-  duration: 3
   startEffect: {fileID: 1793994771404290, guid: fa8f400d42843214da091685621cabc3,
     type: 2}
-  endSound: {fileID: 1229230672039204, guid: 55f81c31e660a204f90cf2119e3f5bc2, type: 2}
---- !u!114 &114180514545263426
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1178322756519792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b91a0a0674f3c14f8416a158944a208, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  magicDraw: 30
-  cooldown: 3
-  itemToSpawn: {fileID: 1851383594523318, guid: e4def256446fd1e4d9a8baea3a554847,
-    type: 2}
-  spawnPoint: {fileID: 4558809872725608}
-  spawnOffset: {x: 0, y: 0, z: 0}
-  aimAngle: {fileID: 4960235172847064}
-  spawnSpeed: 200
 --- !u!114 &114232774284143798
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3372,25 +3348,6 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
---- !u!114 &114430629853766182
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1178322756519792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b91a0a0674f3c14f8416a158944a208, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  magicDraw: 40
-  cooldown: 0.3
-  itemToSpawn: {fileID: 1506924135921468, guid: 42688b82f5e230a4f936b2b8817fed7e,
-    type: 2}
-  spawnPoint: {fileID: 4558809872725608}
-  spawnOffset: {x: 0, y: 0, z: 0}
-  aimAngle: {fileID: 4960235172847064}
-  spawnSpeed: 300
 --- !u!114 &114460131984041114
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3598,6 +3555,7 @@ MonoBehaviour:
   myNetworking: {fileID: 0}
   myGUI: {fileID: 0}
   myEffects: {fileID: 0}
+  playerId: 
 --- !u!114 &114879697656262860
 MonoBehaviour:
   m_ObjectHideFlags: 1
