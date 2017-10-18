@@ -15,6 +15,7 @@ public abstract class PlayerAbility : PlayerComponent {
      */
     public float magicDraw; // Has to be handled in your player ability class. Can be total amt, can be magica per second, etc.
     private PlayerAbility[] myAbilities;
+    private int abilityIndex;
     public override void PlayerComponent_Start() {
         // We gather abilities here. If you want to add a new ability at runtime, you must run RepopulateAbilities()
         RepopulateAbilities();
