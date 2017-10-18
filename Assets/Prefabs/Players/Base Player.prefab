@@ -515,6 +515,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1381114229532178
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4879603096891972}
+  - component: {fileID: 136697958049657372}
+  m_Layer: 8
+  m_Name: NoFrictionSides
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1383644203839356
 GameObject:
   m_ObjectHideFlags: 1
@@ -2434,6 +2450,19 @@ Transform:
   m_Father: {fileID: 4972384048390920}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4879603096891972
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1381114229532178}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4985786085834832}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4899159850582088
 Transform:
   m_ObjectHideFlags: 1
@@ -2574,6 +2603,7 @@ Transform:
   - {fileID: 4912201880670604}
   - {fileID: 4194826140958816}
   - {fileID: 4487293836064938}
+  - {fileID: 4879603096891972}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3715,6 +3745,19 @@ CapsuleCollider:
   m_Height: 0.36
   m_Direction: 0
   m_Center: {x: 0.1392076, y: 0, z: 0}
+--- !u!136 &136697958049657372
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1381114229532178}
+  m_Material: {fileID: 13400000, guid: 7babedefde3f5e84b9ea6bf18ae6f895, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.35
+  m_Height: 1.9
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.89, z: 0}
 --- !u!136 &136789765386673382
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -3750,7 +3793,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.23
   m_Height: 1.95
   m_Direction: 1
   m_Center: {x: 0, y: 0.89, z: 0}

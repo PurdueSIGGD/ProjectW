@@ -18,15 +18,20 @@ public class ProjectWGameManager : NetworkBehaviour {
         StartCoroutine(cRespawnPlayer(player.GetComponent<PlayerStats>()));
     }
     public IEnumerator cRespawnPlayer(PlayerStats player) {
+        print("Starting respawn player");
         yield return new WaitForSeconds(respawnTime);
+        print("Now respawning player");
         NetworkConnection connection = player.connectionToClient;
         Transform startPosition = GetStartPosition();
         GameObject newPlayer = Instantiate(playerPrefab, startPosition.position, startPosition.rotation);
         // If not a bot, move connection to a new thing
-        if (player.playerControllerId != -1) {
+        if (player.GetComponent<PlayerInput>().isBot()) {
+            newPlayer.GetComponent<PlayerInput>().SendMessage("setBot");
+        } else {
             NetworkServer.ReplacePlayerForConnection(connection, newPlayer, 0);
         }
         yield return new WaitForSeconds(15);
+        print("Now deleting player");
         Destroy(player.gameObject);
     }
     void Start() {

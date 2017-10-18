@@ -117,6 +117,7 @@ public class PlayerStats : PlayerComponent, IHittable {
         myBase.myRigid.isKinematic = true;
         myBase.myAnimator.enabled = false;
         myBase.myCollider.enabled = false;
+        myBase.myNoFrictionCollider.enabled = false;
         // Move all parts to the ragdoll layer
         // So it interacts with the world, but not itself
         MoveToLayer(myBase.myAnimator.transform, 10);

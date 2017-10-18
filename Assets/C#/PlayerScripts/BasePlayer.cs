@@ -26,6 +26,8 @@ public class BasePlayer : NetworkBehaviour {
     [HideInInspector]
     public Collider myCollider;
     [HideInInspector]
+    public Collider myNoFrictionCollider;
+    [HideInInspector]
     public PlayerAbility[] myAbilities;
     [HideInInspector]
     public NetworkIdentity myNetworkIdentity;
@@ -62,6 +64,7 @@ public class BasePlayer : NetworkBehaviour {
         myAnimator = transform.GetChild(0).GetComponent<Animator>();
         myRigid = GetComponent<Rigidbody>();
         myCollider = GetComponent<Collider>();
+        myNoFrictionCollider = transform.Find("NoFrictionSides").GetComponent<Collider>();
         myNetworkIdentity = this.GetComponent<NetworkIdentity>();
 
         if (isServer) {

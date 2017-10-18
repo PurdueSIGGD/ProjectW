@@ -84,9 +84,9 @@ public class PlayerMovement : PlayerComponent {
         } else {
             // We don't want you to look all the way behind you, that's weird
         }
-
-
-        transform.Translate(Time.deltaTime * runSpeed * myBase.myEffects.runSpeedModifier * myBase.myEffects.timeModifier * new Vector3(data.horizontal, 0, data.vertical));
+        Vector3 dirVector = new Vector3(data.horizontal, 0, data.vertical);
+        float distanceMultiplier = Time.deltaTime * runSpeed * myBase.myEffects.runSpeedModifier * myBase.myEffects.timeModifier;
+        myBase.myRigid.MovePosition(transform.position + transform.TransformDirection(dirVector) * distanceMultiplier);
         vertical =  data.vertical * myBase.myEffects.runSpeedModifier * myBase.myEffects.timeModifier;
         horizontal = data.horizontal * myBase.myEffects.runSpeedModifier * myBase.myEffects.timeModifier;
         airborne = !isGrounded;
@@ -94,7 +94,6 @@ public class PlayerMovement : PlayerComponent {
         
         
     }
-
     
     public void addJumpForce() {
         if (isGrounded) {

@@ -143,7 +143,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -187,7 +187,7 @@ MonoBehaviour:
   minDamage: 20
   maxDamage: 40
   sourcePlayerDamageMultiplier: 0
-  sourcePlayerForceMultiplier: 7
+  sourcePlayerForceMultiplier: 3
 --- !u!114 &114981460985902070
 MonoBehaviour:
   m_ObjectHideFlags: 1

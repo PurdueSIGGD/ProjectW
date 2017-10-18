@@ -1225,7 +1225,7 @@ MonoBehaviour:
   - {fileID: 965796855}
   - {fileID: 2109960027}
   playerPrefab: {fileID: 0}
-  botCount: 0
+  botCount: 3
 --- !u!1001 &590150929
 Prefab:
   m_ObjectHideFlags: 0
