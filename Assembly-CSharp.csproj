@@ -65,10 +65,11 @@
      <Compile Include="Assets\C#\PlayerScripts\BasePlayer.cs" />
      <Compile Include="Assets\C#\PlayerScripts\PlayerAbilities\Ability_ObjectSpawner.cs" />
      <Compile Include="Assets\C#\PlayerScripts\PlayerAbilities\Ability_ProjectileSpawner.cs" />
+     <Compile Include="Assets\C#\PlayerScripts\PlayerAbilities\BaseProjectiles\Explosion.cs" />
+     <Compile Include="Assets\C#\PlayerScripts\PlayerAbilities\BaseProjectiles\Projectile.cs" />
+     <Compile Include="Assets\C#\PlayerScripts\PlayerAbilities\BaseProjectiles\Projectile_Accelerating.cs" />
      <Compile Include="Assets\C#\PlayerScripts\PlayerAbilities\CooldownAbility.cs" />
      <Compile Include="Assets\C#\PlayerScripts\PlayerAbilities\Explosion\Ability_ExplosionSpawner.cs" />
-     <Compile Include="Assets\C#\PlayerScripts\PlayerAbilities\Fireball\Explosion.cs" />
-     <Compile Include="Assets\C#\PlayerScripts\PlayerAbilities\Fireball\Projectile.cs" />
      <Compile Include="Assets\C#\PlayerScripts\PlayerAbilities\SpeedBoost\Ability_SpeedBoost.cs" />
      <Compile Include="Assets\C#\PlayerScripts\PlayerAbility.cs" />
      <Compile Include="Assets\C#\PlayerScripts\PlayerComponent.cs" />

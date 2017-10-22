@@ -20,30 +20,27 @@ public class PlayerEffects : PlayerComponent {
     public float magicRegenModifier = 1;
     // Blocking effects
     public bool stunned = false;
-
-    [SyncVar]
-    PlayerEffects.Effects effectToSpawn;
-    [SyncVar]
-    int effectCount;
-    int lastEffectCount;
+    
 
     public override void PlayerComponent_Start() {
         effectTypes = effectPrefabHolder.prefabs;
     }
-    public void AddEffect(PlayerEffects.Effects effect) {
+    public void AddEffect(PlayerEffects.Effects effect, float duration) {
         if (effect != Effects.none) {
-            effectToSpawn = effect;
-            effectCount++;
+            RpcAddEffect(effect, duration);
         }
         
     }
-    public override void PlayerComponent_Update() {
-        if (effectCount != lastEffectCount) {
-            lastEffectCount = effectCount;
-            //print("spawning effect " + (effectToSpawn - 1));
-            GameObject.Instantiate(effectTypes[(int)effectToSpawn - 1], transform);
-        }
+    [ClientRpc]
+    public void RpcAddEffect(Effects effect, float duration) {
+        GameObject eff = GameObject.Instantiate(effectTypes[(int)effect - 1], transform);
+        eff.GetComponent<Effect>().duration = duration;
     }
+
+    public override void PlayerComponent_Update() {
+
+    }
+
 
     public void ClearModifiers() {
         timeModifier = 1;

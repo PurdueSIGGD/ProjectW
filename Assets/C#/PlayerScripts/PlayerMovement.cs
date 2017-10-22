@@ -43,11 +43,12 @@ public class PlayerMovement : PlayerComponent {
             myBase.myAnimator.SetFloat("Horizontal", horizontal);
             myBase.myAnimator.SetBool("Airborne", airborne);
             myBase.myAnimator.SetBool("Jump", jump);
-            myBase.myAnimator.SetFloat("TimeFactor", myBase.myEffects.runSpeedModifier);
+            myBase.myAnimator.SetFloat("TimeFactor", myBase.myEffects.runSpeedModifier* myBase.myEffects.timeModifier);
             myBase.myAnimator.SetFloat("SpeedFactor", myBase.myEffects.runSpeedModifier * myBase.myEffects.timeModifier);
 
-            myBase.myRigid.drag = 5 * (1 - myBase.myEffects.timeModifier);
-            myBase.myRigid.mass = startMass * myBase.myEffects.timeModifier;
+            float multiplier = 5 * (1 - myBase.myEffects.timeModifier);
+            myBase.myRigid.drag = multiplier > 0 ? multiplier : 0;
+            myBase.myRigid.mass = myBase.myEffects.timeModifier < 1 ? startMass * myBase.myEffects.timeModifier : startMass;
         } else {
 
         }
@@ -100,7 +101,7 @@ public class PlayerMovement : PlayerComponent {
             lastJump = Time.time;
             Vector3 verticalDirection = Vector3.up * myBase.myRigid.mass * jumpHeight;
             Vector3 pushOffDirection = myBase.myRigid.mass * jumpPushoffMultiplier * (transform.position - lastPosition);
-            myBase.myRigid.AddForce((verticalDirection + pushOffDirection) * 1/myBase.myEffects.timeModifier);
+            myBase.myRigid.AddForce((verticalDirection + pushOffDirection) /** 1/myBase.myEffects.timeModifier*/);
         }
     }
 

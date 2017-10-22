@@ -16,9 +16,8 @@ public class Noisy : MonoBehaviour {
     }
 
 	void OnTriggerEnter(Collider col) {
-        //if (loud) print(Vector3.Distance(transform.position, lastPos));
         if (Time.time - lastHit > cooldown && 
-            Vector3.Distance(transform.position, lastPos) > 2 &&
+            Vector3.Distance(transform.position, lastPos) > .2 &&
             !col.GetComponent<Noisy>()) {
             
 

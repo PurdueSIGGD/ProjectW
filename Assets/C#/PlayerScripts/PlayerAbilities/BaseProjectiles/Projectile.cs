@@ -17,6 +17,7 @@ public class Projectile : MonoBehaviour {
     public ParticleSystem trailParticles;
     public float lifetime = 10;
     public PlayerEffects.Effects effect;
+    public float effectDuration = 3;
 
     private bool hasHit;
 
@@ -39,7 +40,7 @@ public class Projectile : MonoBehaviour {
 
         hasHit = true;
         if (col.GetComponentInParent<IHittable>() != null) {
-            Hittable.Hit(col.gameObject, sourcePlayer, damage, damageType, effect);
+            Hittable.Hit(col.gameObject, sourcePlayer, damage, damageType, effect, effectDuration);
         }
 
         if (dieOnHit) {

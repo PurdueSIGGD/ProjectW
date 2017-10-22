@@ -18,9 +18,9 @@ public class ProjectWGameManager : NetworkBehaviour {
         StartCoroutine(cRespawnPlayer(player.GetComponent<PlayerStats>()));
     }
     public IEnumerator cRespawnPlayer(PlayerStats player) {
-        print("Starting respawn player");
+        //print("Starting respawn player");
         yield return new WaitForSeconds(respawnTime);
-        print("Now respawning player");
+        //print("Now respawning player");
         NetworkConnection connection = player.connectionToClient;
         Transform startPosition = GetStartPosition();
         GameObject newPlayer = Instantiate(playerPrefab, startPosition.position, startPosition.rotation);
@@ -45,6 +45,7 @@ public class ProjectWGameManager : NetworkBehaviour {
                 Transform startPosition = GetStartPosition();
                 GameObject spawn = Instantiate(playerPrefab, startPosition.position, startPosition.rotation);
                 spawn.SendMessage("setBot");
+                NetworkServer.Spawn(spawn);
             }
         } else {
             this.gameObject.SetActive(false);

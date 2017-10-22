@@ -6,6 +6,8 @@ public class Explosion : MonoBehaviour {
     //[HideInInspector]
     public GameObject sourcePlayer;
     public Hittable.DamageType damageType;
+    public PlayerEffects.Effects effect;
+    public float effectDuration = 3;
 
     public float pushForce, range, verticalPushForce = 1;
     public float minDamage, maxDamage; // Distance based damages, i.e. minDamage at range away, maxDamage when direct hit
@@ -49,7 +51,7 @@ public class Explosion : MonoBehaviour {
                     if (ps) {
                         target = ps.transform;
                     }
-                    Hittable.Hit(hit.transform.gameObject, sourcePlayer, (isSourcePlayer ? sourcePlayerDamageMultiplier : 1) * ((maxDamage/Vector3.Distance(target.position, transform.position)) + minDamage), damageType, PlayerEffects.Effects.none);
+                    Hittable.Hit(hit.transform.gameObject, sourcePlayer, (isSourcePlayer ? sourcePlayerDamageMultiplier : 1) * ((maxDamage/Vector3.Distance(target.position, transform.position)) + minDamage), damageType, effect, effectDuration);
                     hitHittables.Add(h);
                 }
 

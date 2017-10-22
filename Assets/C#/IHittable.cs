@@ -6,5 +6,5 @@ using UnityEngine;
 #endif
 
 public interface IHittable {
-    void Hit(float damage, GameObject owner, Hittable.DamageType type, PlayerEffects.Effects effect);
+    void Hit(float damage, GameObject owner, Hittable.DamageType type, PlayerEffects.Effects effect, float effectDuration);
 }
