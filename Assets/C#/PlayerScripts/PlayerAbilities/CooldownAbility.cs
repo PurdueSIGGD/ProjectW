@@ -15,11 +15,19 @@ public abstract class CooldownAbility : PlayerAbility {
         cooldown_Start();
     }
 
-    public override void use() {
+    public override void use()
+    {
+        // Clients should not worry about magic draw
         if (Time.time - lastUse > cooldown) {
-            lastUse = Time.time;
-            hasNotified = false;
-            use_UseAbility();
+            if (!isLocalPlayer || myBase.myStats.canUseMagic(magicDraw)) {
+                myBase.myStats.changeMagic(-1 * magicDraw);
+                lastUse = Time.time;
+                hasNotified = false;
+                use_UseAbility();
+            } else {
+                // Not enough magic
+            }
+           
         }
     }
 

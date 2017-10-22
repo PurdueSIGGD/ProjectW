@@ -6,7 +6,7 @@ public class PlayerNetworking : PlayerComponent {
     public Camera[] playerCameras;
     public AudioListener playerListener;
 
-	void Start () {
+	public override void PlayerComponent_Start () {
         
         if (myBase.isLocalPlayer) {
             // If we have any spectator cameras, get rid of them
@@ -27,5 +27,10 @@ public class PlayerNetworking : PlayerComponent {
         }
         playerListener.enabled = shouldI;
     }
-	
+    public override void PlayerComponent_Update() {
+
+    }
+
+
+
 }

@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class ProjectWGameManager : NetworkBehaviour {
+    public ProjectWNetworkManager networkManager;
     public float respawnTime = 5;
     public float timeLimit = 20 * 60 * 60; // 20 minutes
     public Transform[] startPositions;
     public GameObject playerPrefab;
-
-    //private Hashtable table;
+    public int botCount = 0;
+    
     
     public void AddDeath(GameObject player, string playerid) {
         //print("Adding death as player: " + playerid);
@@ -17,16 +18,39 @@ public class ProjectWGameManager : NetworkBehaviour {
         StartCoroutine(cRespawnPlayer(player.GetComponent<PlayerStats>()));
     }
     public IEnumerator cRespawnPlayer(PlayerStats player) {
+        //print("Starting respawn player");
         yield return new WaitForSeconds(respawnTime);
+        //print("Now respawning player");
         NetworkConnection connection = player.connectionToClient;
         Transform startPosition = GetStartPosition();
         GameObject newPlayer = Instantiate(playerPrefab, startPosition.position, startPosition.rotation);
-        NetworkServer.ReplacePlayerForConnection(connection, newPlayer, 0);
+        // If not a bot, move connection to a new thing
+        if (player.GetComponent<PlayerInput>().isBot()) {
+            newPlayer.GetComponent<PlayerInput>().SendMessage("setBot");
+        } else {
+            NetworkServer.ReplacePlayerForConnection(connection, newPlayer, 0);
+        }
         yield return new WaitForSeconds(15);
+        print("Now deleting player");
         Destroy(player.gameObject);
     }
     void Start() {
         //table = new Hashtable();
+        if (isServer) {
+            if (playerPrefab == null) {
+                playerPrefab = networkManager.playerPrefab;
+            }
+
+            for (int i = 0; i < botCount; i++) {
+                Transform startPosition = GetStartPosition();
+                GameObject spawn = Instantiate(playerPrefab, startPosition.position, startPosition.rotation);
+                spawn.SendMessage("setBot");
+                NetworkServer.Spawn(spawn);
+            }
+        } else {
+            this.gameObject.SetActive(false);
+        }
+       
     }
 
     // Update is called once per frame

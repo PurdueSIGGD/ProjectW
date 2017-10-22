@@ -55,7 +55,7 @@ MonoBehaviour:
   manager: {fileID: 0}
   showGUI: 1
   offsetX: 0
-  offsetY: 0
+  offsetY: 500
 --- !u!114 &114989715467682310
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -76,16 +76,14 @@ MonoBehaviour:
   m_ScriptCRCCheck: 1
   m_MaxDelay: 0.01
   m_LogLevel: 2
-  m_PlayerPrefab: {fileID: 1178322756519792, guid: ec4c44f5e4d2f424a876680f5671399d,
+  m_PlayerPrefab: {fileID: 1063181966065962, guid: f804b1090b443784fb88ce2f19a28406,
     type: 2}
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 0
   m_OfflineScene: 
   m_OnlineScene: 
   m_SpawnPrefabs:
-  - {fileID: 1506924135921468, guid: 42688b82f5e230a4f936b2b8817fed7e, type: 2}
-  - {fileID: 1791040125161058, guid: ca0226fd4f1999946943a2f0e7abd9ac, type: 2}
-  - {fileID: 1469220445907016, guid: 30ca49af444dc294fa8644f561470aec, type: 2}
+  - {fileID: 1987065641983284, guid: 011cace5dd7cc6042a65006f14b4b832, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -142,4 +140,3 @@ MonoBehaviour:
   isNetworkActive: 0
   matchMaker: {fileID: 0}
   lobbyCamera: {fileID: 0}
-  spawnablePrefabs: []

@@ -13,42 +13,33 @@ public abstract class PlayerAbility : PlayerComponent {
      * In order to preserve network behavior, used and hasUsed track the amount of times that it has been called
      * If a client notices used has changed, they execute the method and try again.
      */
-    private PlayerAbility[] myAbilities;
-    void Start() {
-        // We gather abilities here. If you want to add a new ability at runtime, you must run RepopulateAbilities()
-        RepopulateAbilities();
+    public float magicDraw; // Has to be handled in your player ability class. Can be total amt, can be magica per second, etc.
+
+    private static string USE_METHOD_NAME = "Use";
+    
+    public override void PlayerComponent_Start() {
+        ResgisterDelegate(USE_METHOD_NAME, UseWrapper);
         ability_Start();
     }
-    public void RepopulateAbilities() {
-        myAbilities = this.GetComponents<PlayerAbility>();
-    }
-    [SyncVar]
-    int used;
-    int hasUsed;
-    /* it's a pain in the ass because there's a bug where two components of the same type can't get a command referenced to a specific one */
-    /* so we pass the string of the type... because you can't pass abstract parameters */
-    [Command]
-    public void CmdUse(String p) {
-        foreach (PlayerAbility myP in myAbilities) {
-            if (myP.GetType().ToString() == p) {
-                myP.useAbility();
-            }
-        }
-    }
-    public void useAbility() {
-        used++;
-    }
-    void Update() {
-        if (used != hasUsed) {
-            //print("server has told us to use");
-            hasUsed++;
-            use();
-        }
+    
+   
+    public override void PlayerComponent_Update() {
+        
         ability_Update();
     }
+    /**
+     * Tell all instances of this player to use this ability
+     */
+    public void ClientsUse() {
+        Buf buf = new Buf();
+        buf.methodName = USE_METHOD_NAME;
+        NotifyAllClientDelegates(buf);
+    }
     void Death() {
-        used = 0;
-        hasUsed = 0;
+
+    }
+    public void UseWrapper(Buf data) {
+        use();
     }
     /* these are the other methods you must implement. Can be empty, there for your own benefit */
     public abstract void ability_Start(); // Called when the object is alive

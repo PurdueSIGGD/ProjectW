@@ -20,7 +20,7 @@ public class DestructibleItem : MonoBehaviour, IHittable {
     public GameObject gibs;
 
 
-    public void Hit(float damage, GameObject owner, Hittable.DamageType type) {
+    public void Hit(float damage, GameObject owner, Hittable.DamageType type, PlayerEffects.Effects effect, float effectDuration) {
        
 
             //print("was hit");

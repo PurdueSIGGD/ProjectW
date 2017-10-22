@@ -6,6 +6,12 @@ using UnityEngine.Networking;
 public class ProjectWNetworkManager : NetworkManager {
     public GameObject lobbyCamera;
 
+    public void Start() {
+        if (lobbyCamera != null) {
+            lobbyCamera.SetActive(true);
+        }
+    }
+
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId) {
         Transform start = GetStartPosition();
         GameObject player = (GameObject)GameObject.Instantiate(playerPrefab, start.position, start.rotation);
