@@ -52,8 +52,8 @@ public class Explosion : MonoBehaviour {
                         target = ps.transform;
                     }
                     HitManager.HitClientside(new HitArguments()
-                        .withTarget(hit.transform.gameObject.GetComponentInParent<PlayerStats>())
-                        .withSourcePlayer(hit.transform.GetComponentInParent<PlayerStats>())
+                        .withTarget(((Component)hit.transform.gameObject.GetComponentInParent<IHittable>()).gameObject)
+                        .withSourcePlayer(sourcePlayer.GetComponentInParent<PlayerStats>().gameObject)
                         .withDamage( (isSourcePlayer ? sourcePlayerDamageMultiplier : 1) * ((maxDamage/Vector3.Distance(target.position, transform.position)) + minDamage))
                         .withDamageType(damageType)
                         .withEffect(effect)

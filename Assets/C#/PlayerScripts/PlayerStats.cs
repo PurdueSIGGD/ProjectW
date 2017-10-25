@@ -18,6 +18,7 @@ public class PlayerStats : PlayerComponent, IHittable {
     private bool hasDeath;
     public GameObject[] deathSounds;
     public AudioSource hitSound;
+    public Animator hitAnimator;
 
     public override void PlayerComponent_Start() {
         if (!isLocalPlayer) {
@@ -96,16 +97,16 @@ public class PlayerStats : PlayerComponent, IHittable {
         if (HitManager.VerifyHit(ver, hit))
         {
             hit.target.GetComponentInParent<IHittable>().Hit(hit);
-        }
-       
-        if (hit.target.GetComponentInParent<PlayerStats>() && hit.target != this.gameObject) {
-            RpcPlayHitSound(hit.damage);
+            if (hit.target.GetComponentInParent<PlayerStats>() && hit.target != this.gameObject) {
+                RpcConfirmHit(hit.damage);
+            }
         }
     }
     [ClientRpc]
-    public void RpcPlayHitSound(float damage) {
+    public void RpcConfirmHit(float damage) {
         if (isLocalPlayer) {
             hitSound.Play();
+            hitAnimator.SetTrigger("Hit");
         }
     }
     [Command]

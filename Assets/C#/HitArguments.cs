@@ -5,8 +5,8 @@ using UnityEngine;
 public class HitArguments {
     public enum DamageType { Neutral, Fire, Ice, Electric, Denim };
 
-    public PlayerStats target;
-    public PlayerStats sourcePlayer;
+    public GameObject target;
+    public GameObject sourcePlayer;
     public float damage;
     public DamageType damageType;
     public PlayerEffects.Effects effect;
@@ -18,12 +18,12 @@ public class HitArguments {
         damageType = DamageType.Neutral;
     }
 
-    public HitArguments withTarget(PlayerStats target)
+    public HitArguments withTarget(GameObject target)
     {
         this.target = target;
         return this;
     }
-    public HitArguments withSourcePlayer(PlayerStats sourcePlayer)
+    public HitArguments withSourcePlayer(GameObject sourcePlayer)
     {
         this.sourcePlayer = sourcePlayer;
         return this;

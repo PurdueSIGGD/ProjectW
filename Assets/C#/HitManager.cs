@@ -53,7 +53,6 @@ public class HitManager : NetworkBehaviour {
             if (myPlayerStats.isLocalPlayer)    
             {
                 // Call network event through server
-                print(myPlayerStats.gameObject);
                 myPlayerStats.CmdApplyDamage(verificationMethod, args);
             }
         }
