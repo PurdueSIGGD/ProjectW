@@ -11,7 +11,7 @@ public class Projectile : MonoBehaviour {
     public GameObject sourcePlayer;
 
     public float damage;
-    public Hittable.DamageType damageType;
+    public HitArguments.DamageType damageType;
     public bool dieOnHit = true;
     public GameObject explodeParticles;
     public ParticleSystem trailParticles;
@@ -40,7 +40,13 @@ public class Projectile : MonoBehaviour {
 
         hasHit = true;
         if (col.GetComponentInParent<IHittable>() != null) {
-            Hittable.Hit(col.gameObject, sourcePlayer, damage, damageType, effect, effectDuration);
+            HitManager.HitClientside(HitManager.HitVerificationMethod.projectile, new HitArguments()
+                .withTarget(col.gameObject.GetComponentInParent<PlayerStats>())
+                .withSourcePlayer(sourcePlayer.GetComponentInParent<PlayerStats>())
+                .withDamage(damage)
+                .withDamageType(damageType)
+                .withEffect(effect)
+                .withEffectDuration(effectDuration));
         }
 
         if (dieOnHit) {

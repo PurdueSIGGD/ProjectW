@@ -62,29 +62,43 @@ public abstract class PlayerComponent : NetworkBehaviour {
     public class CallbackBufs : SyncListStruct<Buf> { }
     // Our syncvar, synchronized across all clients
     public Buf bufData;
-        //CallbackBufs bufs = new CallbackBufs();
     public delegate void OnClientNotify(Buf values);
+    public delegate bool ServerVerifyClientNotification(Buf values);
     public Hashtable delegates = new Hashtable();
+    public Hashtable verifications = new Hashtable();
     private PlayerComponent[] myComponents;
     private int myComponentIndex;
 
     /**
      * To be called at class initialization, same across server and all clients
      */
-    public void ResgisterDelegate(string methodName, OnClientNotify method) {
+    public void ResgisterDelegate(string methodName, OnClientNotify method, ServerVerifyClientNotification verification) {
         delegates.Add(methodName, method);
+        verifications.Add(methodName, verification);
         //print("resgistering delegate: " + methodName + " " + method + " " + delegates.Count);
+    }
+    public void ResgisterDelegate(string methodName, OnClientNotify method)
+    {
+        ServerVerifyClientNotification alwaysTrue = (values) => { return true; };
+        ResgisterDelegate(methodName, method, alwaysTrue);
     }
 
     public void NotifyAllClientDelegates(Buf data) {
         // We can call the method directly if we are calling this from the player
 
         if (isLocalPlayer || myBase.myInput.isBot()) {
-            BufWrapper bufW = new BufWrapper();
-            bufW.buf = data;
-            bufW.index = myComponentIndex;
-            ((OnClientNotify)delegates[data.methodName]).Invoke(data);
-            CmdNotifyAll(bufW);
+            /* Server verification method */
+            if (((ServerVerifyClientNotification)verifications[data.methodName]).Invoke(data)) {
+                BufWrapper bufW = new BufWrapper();
+                bufW.buf = data;
+                bufW.index = myComponentIndex;
+                ((OnClientNotify)delegates[data.methodName]).Invoke(data);
+                CmdNotifyAll(bufW);
+            } else
+            {
+                Debug.LogError("Request was denied by the server. We should probably kick this player.");
+            }
+           
         } else {
             Debug.LogWarning("You are not the owner of this object! Not sending any data.");
         } 

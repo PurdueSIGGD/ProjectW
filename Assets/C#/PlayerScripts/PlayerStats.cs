@@ -29,10 +29,10 @@ public class PlayerStats : PlayerComponent, IHittable {
         }
     }
     
-    public void Hit(float damage, GameObject owner, Hittable.DamageType type, PlayerEffects.Effects effect, float effectDuration) {
-        changeHealth(-1 * damage);
-        if (effect != PlayerEffects.Effects.none) {
-            myBase.myEffects.AddEffect(effect, effectDuration);
+    public void Hit(HitArguments hit) {
+        changeHealth(-1 * hit.damage);
+        if (hit.effect != PlayerEffects.Effects.none) {
+            myBase.myEffects.AddEffect(hit.effect, hit.effectDuration);
         }
     }
     public float changeHealth(float f) {
@@ -91,11 +91,15 @@ public class PlayerStats : PlayerComponent, IHittable {
      * You can only tell the server to do a command inside of the root player control, so this will allow the server to do damage
      */
     [Command]
-    public void CmdApplyDamage(GameObject target, float damage, Hittable.DamageType type, PlayerEffects.Effects effect, float effectDuration) {
+    public void CmdApplyDamage(HitManager.HitVerificationMethod ver, HitArguments hit) {
         //print("applying damage");
-        target.GetComponentInParent<IHittable>().Hit(damage, this.gameObject, type, effect, effectDuration);
-        if (target.GetComponent<PlayerStats>() && target != this.gameObject) {
-            RpcPlayHitSound(damage);
+        if (HitManager.VerifyHit(ver, hit))
+        {
+            hit.target.GetComponentInParent<IHittable>().Hit(hit);
+        }
+       
+        if (hit.target.GetComponentInParent<PlayerStats>() && hit.target != this.gameObject) {
+            RpcPlayHitSound(hit.damage);
         }
     }
     [ClientRpc]

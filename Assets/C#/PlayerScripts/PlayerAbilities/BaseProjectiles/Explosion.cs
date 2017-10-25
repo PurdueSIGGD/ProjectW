@@ -5,7 +5,7 @@ using UnityEngine;
 public class Explosion : MonoBehaviour {
     //[HideInInspector]
     public GameObject sourcePlayer;
-    public Hittable.DamageType damageType;
+    public HitArguments.DamageType damageType;
     public PlayerEffects.Effects effect;
     public float effectDuration = 3;
 
@@ -51,7 +51,13 @@ public class Explosion : MonoBehaviour {
                     if (ps) {
                         target = ps.transform;
                     }
-                    Hittable.Hit(hit.transform.gameObject, sourcePlayer, (isSourcePlayer ? sourcePlayerDamageMultiplier : 1) * ((maxDamage/Vector3.Distance(target.position, transform.position)) + minDamage), damageType, effect, effectDuration);
+                    HitManager.HitClientside(new HitArguments()
+                        .withTarget(hit.transform.gameObject.GetComponentInParent<PlayerStats>())
+                        .withSourcePlayer(hit.transform.GetComponentInParent<PlayerStats>())
+                        .withDamage( (isSourcePlayer ? sourcePlayerDamageMultiplier : 1) * ((maxDamage/Vector3.Distance(target.position, transform.position)) + minDamage))
+                        .withDamageType(damageType)
+                        .withEffect(effect)
+                        .withEffectDuration(effectDuration));
                     hitHittables.Add(h);
                 }
 
