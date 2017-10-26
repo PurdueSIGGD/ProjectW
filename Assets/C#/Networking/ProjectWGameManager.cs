@@ -9,6 +9,7 @@ public class ProjectWGameManager : NetworkBehaviour {
     public float timeLimit = 20 * 60 * 60; // 20 minutes
     public Transform[] startPositions;
     public GameObject playerPrefab;
+    public GameObject[] botPrefabs;
     public int botCount = 0;
     
     
@@ -44,7 +45,7 @@ public class ProjectWGameManager : NetworkBehaviour {
 
             for (int i = 0; i < botCount; i++) {
                 Transform startPosition = GetStartPosition();
-                GameObject spawn = Instantiate(playerPrefab, startPosition.position, startPosition.rotation);
+                GameObject spawn = Instantiate(botPrefabs[Random.Range(0, botPrefabs.Length - 1)], startPosition.position, startPosition.rotation);
                 spawn.SendMessage("setBot");
                 NetworkServer.Spawn(spawn);
             }

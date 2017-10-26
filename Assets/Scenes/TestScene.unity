@@ -593,6 +593,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &267908604
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4128680235078320, guid: 4f7e7255ee95adf4d852a3d29f9dd46e, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 1.667
+      objectReference: {fileID: 0}
+    - target: {fileID: 4128680235078320, guid: 4f7e7255ee95adf4d852a3d29f9dd46e, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 3.203506
+      objectReference: {fileID: 0}
+    - target: {fileID: 4128680235078320, guid: 4f7e7255ee95adf4d852a3d29f9dd46e, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 3.2133439
+      objectReference: {fileID: 0}
+    - target: {fileID: 4128680235078320, guid: 4f7e7255ee95adf4d852a3d29f9dd46e, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4128680235078320, guid: 4f7e7255ee95adf4d852a3d29f9dd46e, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4128680235078320, guid: 4f7e7255ee95adf4d852a3d29f9dd46e, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4128680235078320, guid: 4f7e7255ee95adf4d852a3d29f9dd46e, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4128680235078320, guid: 4f7e7255ee95adf4d852a3d29f9dd46e, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 4f7e7255ee95adf4d852a3d29f9dd46e, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &302760211
 GameObject:
   m_ObjectHideFlags: 0
@@ -1180,6 +1222,10 @@ MonoBehaviour:
   - {fileID: 965796855}
   - {fileID: 2109960027}
   playerPrefab: {fileID: 0}
+  botPrefabs:
+  - {fileID: 1178322756519792, guid: ec4c44f5e4d2f424a876680f5671399d, type: 2}
+  - {fileID: 1063181966065962, guid: f804b1090b443784fb88ce2f19a28406, type: 2}
+  - {fileID: 1860666892717170, guid: 30eb4c1a1bd224c44a0d4ac296483ba9, type: 2}
   botCount: 3
 --- !u!114 &574942620
 MonoBehaviour:
@@ -2311,7 +2357,7 @@ Prefab:
         type: 2}
       propertyPath: m_PlayerPrefab
       value: 
-      objectReference: {fileID: 1063181966065962, guid: f804b1090b443784fb88ce2f19a28406,
+      objectReference: {fileID: 1259769144471876, guid: 4f7e7255ee95adf4d852a3d29f9dd46e,
         type: 2}
     - target: {fileID: 114989715467682310, guid: 7dd9680bcf19de34abfca57195c154b8,
         type: 2}
