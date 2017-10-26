@@ -24,6 +24,7 @@ public class ProjectWGameManager : NetworkBehaviour {
         NetworkConnection connection = player.connectionToClient;
         Transform startPosition = GetStartPosition();
         GameObject newPlayer = Instantiate(playerPrefab, startPosition.position, startPosition.rotation);
+        NetworkServer.Spawn(newPlayer);
         // If not a bot, move connection to a new thing
         if (player.GetComponent<PlayerInput>().isBot()) {
             newPlayer.GetComponent<PlayerInput>().SendMessage("setBot");

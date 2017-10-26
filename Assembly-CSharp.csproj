@@ -58,6 +58,8 @@
      <Compile Include="Assets\C#\Helpers\MaterialScaling.cs" />
      <Compile Include="Assets\C#\Helpers\PrefabHolder.cs" />
      <Compile Include="Assets\C#\Helpers\VectorExt.cs" />
+     <Compile Include="Assets\C#\HitArguments.cs" />
+     <Compile Include="Assets\C#\HitManager.cs" />
      <Compile Include="Assets\C#\Hittable.cs" />
      <Compile Include="Assets\C#\IHittable.cs" />
      <Compile Include="Assets\C#\Networking\ProjectWGameManager.cs" />

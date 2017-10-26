@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 public class Hazard : MonoBehaviour {
     private ArrayList toDamage;
-    public Hittable.DamageType type;
+    public HitArguments.DamageType type;
     public float damage;
     public float rate;
 	
@@ -31,7 +31,9 @@ public class Hazard : MonoBehaviour {
     public IEnumerator DamagingBehavior(IHittable h) {
         do {
             // Local damage only
-            h.Hit(damage, this.gameObject, type, PlayerEffects.Effects.none, 0);
+            h.Hit(new HitArguments()
+                .withDamage(damage)
+                .withDamageType(type));
             yield return new WaitForSeconds(rate);
         } while (h != null && toDamage.Contains(h));
     }

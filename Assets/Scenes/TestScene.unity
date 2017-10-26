@@ -1106,6 +1106,7 @@ GameObject:
   - component: {fileID: 574942618}
   - component: {fileID: 574942617}
   - component: {fileID: 574942619}
+  - component: {fileID: 574942620}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1180,6 +1181,17 @@ MonoBehaviour:
   - {fileID: 2109960027}
   playerPrefab: {fileID: 0}
   botCount: 3
+--- !u!114 &574942620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 574942616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3e8f34829d726a438412903c47a9130, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &590150929
 Prefab:
   m_ObjectHideFlags: 0
@@ -1241,7 +1253,7 @@ Prefab:
     - target: {fileID: 224327605619529876, guid: f804b1090b443784fb88ce2f19a28406,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -766
+      value: -558
       objectReference: {fileID: 0}
     - target: {fileID: 224962856127083640, guid: f804b1090b443784fb88ce2f19a28406,
         type: 2}
@@ -1261,7 +1273,7 @@ Prefab:
     - target: {fileID: 224962856127083640, guid: f804b1090b443784fb88ce2f19a28406,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -816
+      value: -608
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f804b1090b443784fb88ce2f19a28406, type: 2}
@@ -1899,7 +1911,7 @@ Prefab:
     - target: {fileID: 224034024726578000, guid: 30eb4c1a1bd224c44a0d4ac296483ba9,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -640
+      value: -558
       objectReference: {fileID: 0}
     - target: {fileID: 224918939712926508, guid: 30eb4c1a1bd224c44a0d4ac296483ba9,
         type: 2}
@@ -1919,7 +1931,7 @@ Prefab:
     - target: {fileID: 224918939712926508, guid: 30eb4c1a1bd224c44a0d4ac296483ba9,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -690
+      value: -608
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30eb4c1a1bd224c44a0d4ac296483ba9, type: 2}
@@ -2322,7 +2334,7 @@ Prefab:
     - target: {fileID: 114989715467682310, guid: 7dd9680bcf19de34abfca57195c154b8,
         type: 2}
       propertyPath: m_PlayerSpawnMethod
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7dd9680bcf19de34abfca57195c154b8, type: 2}
@@ -3663,7 +3675,7 @@ Prefab:
     - target: {fileID: 224264065847923784, guid: ec4c44f5e4d2f424a876680f5671399d,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -640
+      value: -558
       objectReference: {fileID: 0}
     - target: {fileID: 224608759623237480, guid: ec4c44f5e4d2f424a876680f5671399d,
         type: 2}
@@ -3683,7 +3695,7 @@ Prefab:
     - target: {fileID: 224608759623237480, guid: ec4c44f5e4d2f424a876680f5671399d,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -690
+      value: -608
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ec4c44f5e4d2f424a876680f5671399d, type: 2}
