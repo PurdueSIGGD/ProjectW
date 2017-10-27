@@ -5,46 +5,117 @@ using UnityEngine.Networking;
 
 public class Spectator : NetworkBehaviour {
     public ParticleSystem myParticles;
-    public float moveSpeed;
+    public GameObject camera;
+    public float moveSpeed = 1;
     private Rigidbody myRigid;
-	// Use this for initialization
-	void Start () {
+    private SpectatorUIController uiController;
+
+    // UI Stuff
+    public bool isPaused;
+    public float pauseCooldown = 1; // Cooldown, in seconds
+    private float lastUse = -100; // Last time we used it, in seconds;
+    private bool shouldBeLocked;
+
+    // Use this for initialization
+    void Start () {
 		if (isLocalPlayer)
         {
             myParticles.Pause();
+        } else {
+            camera.SetActive(false);
         }
         myRigid = this.GetComponent<Rigidbody>();
+        uiController = GameObject.FindObjectOfType<SpectatorUIController>();
+        uiController.SetUnpause(TogglePause);
+        shouldBeLocked = true;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-        float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = Input.GetAxis("Mouse Y");
-        bool pause = Input.GetAxis("Pause") > 0;
-        float up = Input.GetAxis("Jump");
-        float down = Input.GetAxis("Crouch");
 
-        transform.Rotate(0, mouseX, 0);
-
-        float newX = transform.rotation.eulerAngles.x + mouseY;
-        //We do some fancy math to ensure 0 < newX < 360, nothing more
-        newX = (newX + 360) % 360;
-        //Ensure it doesn't go past our top or low bounds
-        if ((newX > 0 && newX < 90) || (newX < 360 && newX > 270))
-        {
-            // Camera rotation
-            transform.Rotate(mouseY, 0, 0);
-        }
-        else
-        {
-            // We don't want you to look all the way behind you, that's weird
+    void LateUpdate() {
+        if (isLocalPlayer) {
+            // Unity is buggy as fuck sometimes
+            // You have to click back on the window in order to be locked again
+            if (shouldBeLocked) {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            } else {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
         }
 
 
-        Vector3 dirVector = new Vector3(horizontal, up - down, vertical);
-        float distanceMultiplier = Time.deltaTime * moveSpeed;
-        myRigid.MovePosition(transform.position + transform.TransformDirection(dirVector) * distanceMultiplier);
+    }
+
+    // Update is called once per frame
+    void FixedUpdate () {
+        if (isLocalPlayer) {
+            bool pause = Input.GetAxis("Pause") > 0;
+            if (pause) {
+                TogglePause();
+            }
+
+            if (isPaused) {
+
+            } else {
+                float horizontal = Input.GetAxis("Horizontal");
+                float vertical = Input.GetAxis("Vertical");
+                float mouseX = Input.GetAxis("Mouse X");
+                float mouseY = Input.GetAxis("Mouse Y");
+                float up = Input.GetAxis("Jump");
+                float down = Input.GetAxis("Crouch");
+
+
+                float newX = transform.rotation.eulerAngles.x + (mouseY * Time.deltaTime);
+                //We do some fancy math to ensure 0 < newX < 360, nothing more
+                newX = (newX + 360) % 360;
+                //Ensure it doesn't go past our top or low bounds
+                if ((newX > 0 && newX < 90) || (newX < 360 && newX > 270)) {
+                    // Camera rotation
+                    myRigid.MoveRotation(Quaternion.Euler(newX, transform.eulerAngles.y + (mouseX * Time.deltaTime), transform.eulerAngles.z));
+                } else {
+                    // We don't want you to look all the way behind you, that's weird
+                    myRigid.MoveRotation(Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y + mouseX * Time.deltaTime, transform.eulerAngles.z));
+                }
+
+
+                Vector3 dirVector = new Vector3(horizontal, up - down, vertical);
+                float distanceMultiplier = Time.deltaTime * moveSpeed;
+                myRigid.MovePosition(transform.position + transform.TransformDirection(dirVector) * distanceMultiplier);
+
+                
+            }
+           
+
+        }
+       
+    }
+    public void TogglePause() {
+        if (isLocalPlayer) {
+            if (Time.unscaledTime - lastUse > pauseCooldown) {
+                Pause();
+                lastUse = Time.unscaledTime;
+            }
+        }
+    }
+    private void Pause() {
+        if (isLocalPlayer) {
+            isPaused = !isPaused;
+            if (isPaused) {
+                PauseGame();
+            } else {
+                UnPauseGame();
+            }
+        }
+
+
+    }
+    private void PauseGame() {
+        shouldBeLocked = false;
+        uiController.Pause();
+
+    }
+    private void UnPauseGame() {
+        shouldBeLocked = true;
+        uiController.UnPause();
     }
 }

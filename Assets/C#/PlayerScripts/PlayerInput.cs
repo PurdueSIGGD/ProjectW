@@ -36,7 +36,7 @@ public abstract class PlayerInput : PlayerComponent {
 	public override void PlayerComponent_Update() {
         if (isLocalPlayer) {
             InputData myData = getData();
-            if (myData.pause) {
+            if (myData.pause && !isBot()) {
                 myBase.myGUI.TogglePause();
             }
             if (myBase.myGUI.isPaused) {

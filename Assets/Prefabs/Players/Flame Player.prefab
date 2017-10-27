@@ -3811,6 +3811,9 @@ MonoBehaviour:
   rootGUI: {fileID: 1709513197805416}
   healthBar: {fileID: 224388255084880586}
   magicBar: {fileID: 224103282930881398}
+  pauseMenuPrefab: {fileID: 1097975504611938, guid: 774a3862ad430f94b9419567fb1872f9,
+    type: 2}
+  pauseMenu: {fileID: 0}
 --- !u!114 &114827118183941698
 MonoBehaviour:
   m_ObjectHideFlags: 1

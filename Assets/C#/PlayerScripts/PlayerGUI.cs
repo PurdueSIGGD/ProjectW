@@ -14,11 +14,17 @@ public class PlayerGUI : PlayerComponent {
     public RectTransform healthBar;
     public RectTransform magicBar;
 
+
+    public GameObject pauseMenuPrefab;
+    [HideInInspector]
+    public GameObject pauseMenu;
+
     public override void PlayerComponent_Start() {
-        UnPauseGame();
-        if (isLocalPlayer) {
+        if (isLocalPlayer && !myBase.myInput.isBot()) {
             // Don't want enemy GUIs on top of ours
             rootGUI.SetActive(true);
+            pauseMenu = GameObject.Instantiate(pauseMenuPrefab, rootGUI.transform);
+            UnPauseGame();
         } else {
             rootGUI.SetActive(false);
         }
@@ -53,7 +59,7 @@ public class PlayerGUI : PlayerComponent {
     }
 
     public void TogglePause() {
-        if (isLocalPlayer) {
+        if (isLocalPlayer && !myBase.myInput.isBot()) {
             if (Time.unscaledTime - lastUse > pauseCooldown) {
                 Pause();
                 lastUse = Time.unscaledTime;
@@ -74,10 +80,11 @@ public class PlayerGUI : PlayerComponent {
     }
     private void PauseGame() {
         shouldBeLocked = false;
-
+        pauseMenu.SetActive(true);
     }
     private void UnPauseGame() {
         shouldBeLocked = true;
+        pauseMenu.SetActive(false);
 
     }
 }
