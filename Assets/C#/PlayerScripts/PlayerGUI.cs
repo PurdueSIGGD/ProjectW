@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class PlayerGUI : PlayerComponent {
     public bool isPaused;
@@ -10,20 +11,21 @@ public class PlayerGUI : PlayerComponent {
     private float lastUse = -100; // Last time we used it, in seconds;
     private bool shouldBeLocked;
 
+    [SyncVar]
+    public int classIndex;
+
     public GameObject rootGUI;
     public RectTransform healthBar;
     public RectTransform magicBar;
 
-
-    public GameObject pauseMenuPrefab;
-    [HideInInspector]
-    public GameObject pauseMenu;
+    public SpectatorUIController spectatorUIController;
 
     public override void PlayerComponent_Start() {
         if (isLocalPlayer && !myBase.myInput.isBot()) {
             // Don't want enemy GUIs on top of ours
             rootGUI.SetActive(true);
-            pauseMenu = GameObject.Instantiate(pauseMenuPrefab, rootGUI.transform);
+            spectatorUIController = GameObject.FindObjectOfType<SpectatorUIController>();
+            spectatorUIController.AssignOwner(this.gameObject, UnPauseGameWithoutUI);
             UnPauseGame();
         } else {
             rootGUI.SetActive(false);
@@ -80,11 +82,32 @@ public class PlayerGUI : PlayerComponent {
     }
     private void PauseGame() {
         shouldBeLocked = false;
-        pauseMenu.SetActive(true);
+        spectatorUIController.Pause();
+
     }
     private void UnPauseGame() {
         shouldBeLocked = true;
-        pauseMenu.SetActive(false);
-
+        spectatorUIController.UnPause();
+    }
+    private void UnPauseGameWithoutUI() {
+        shouldBeLocked = true;
+        isPaused = false;
+    }
+    public void HandlePickingClass(int index) {
+        CmdHandlePickingClass(index);
+    }
+    [Command]
+    public void CmdHandlePickingClass(int index) {
+        // Called by the GUI
+        classIndex = index;
+    }
+    public void ExitServer() {
+        if (isServer) {
+            NetworkServer.DisconnectAll();
+        } else {
+            Network.Disconnect();
+            MasterServer.UnregisterHost();
+            NetworkServer.RemoveExternalConnection(this.connectionToServer.connectionId);
+        }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 public class Spectator : NetworkBehaviour {
     public ParticleSystem myParticles;
-    public GameObject camera;
+    public GameObject myCamera;
     public float moveSpeed = 1;
     private Rigidbody myRigid;
     private SpectatorUIController uiController;
@@ -18,16 +18,21 @@ public class Spectator : NetworkBehaviour {
 
     // Use this for initialization
     void Start () {
-		if (isLocalPlayer)
-        {
-            myParticles.Pause();
-        } else {
-            camera.SetActive(false);
-        }
         myRigid = this.GetComponent<Rigidbody>();
         uiController = GameObject.FindObjectOfType<SpectatorUIController>();
-        uiController.SetUnpause(TogglePause);
-        shouldBeLocked = true;
+       
+        shouldBeLocked = false;
+        isPaused = true;
+      
+        if (isLocalPlayer)
+        {
+            myParticles.Pause();
+            uiController.AssignOwner(this.gameObject, UnPauseGameWithoutUI);
+            uiController.JoinServer();
+        } else {
+            myCamera.SetActive(false);
+        }
+        
 	}
 
     void LateUpdate() {
@@ -94,6 +99,8 @@ public class Spectator : NetworkBehaviour {
             if (Time.unscaledTime - lastUse > pauseCooldown) {
                 Pause();
                 lastUse = Time.unscaledTime;
+            } else {
+
             }
         }
     }
@@ -117,5 +124,27 @@ public class Spectator : NetworkBehaviour {
     private void UnPauseGame() {
         shouldBeLocked = true;
         uiController.UnPause();
+    }
+    private void UnPauseGameWithoutUI() {
+        shouldBeLocked = true;
+        isPaused = false;
+    }
+    public void HandlePickingClass(int index) {
+        CmdHandlePickingClass(index);
+    }
+    [Command]
+    public void CmdHandlePickingClass(int index) {
+        // Called by the GUI
+        GameObject.FindObjectOfType<ProjectWGameManager>().SpawnPlayer(index, this.gameObject);
+    }
+    public void ExitServer() {
+        if (isServer) {
+            NetworkServer.DisconnectAll();
+        } else {
+            Network.Disconnect();
+            MasterServer.UnregisterHost();
+            NetworkServer.RemoveExternalConnection(this.connectionToServer.connectionId);
+        }
+     
     }
 }

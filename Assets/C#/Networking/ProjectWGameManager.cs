@@ -8,12 +8,12 @@ public class ProjectWGameManager : NetworkBehaviour {
     public float respawnTime = 5;
     public float timeLimit = 20 * 60 * 60; // 20 minutes
     public Transform[] startPositions;
-    public GameObject playerPrefab;
-    public GameObject[] botPrefabs;
+    public GameObject[] classPrefabs;
     public int botCount = 0;
     
     
     public void AddDeath(GameObject player, string playerid) {
+        if (!isServer) return;
         //print("Adding death as player: " + playerid);
         //table.Add(playerid, true);
         StartCoroutine(cRespawnPlayer(player.GetComponent<PlayerStats>()));
@@ -24,7 +24,7 @@ public class ProjectWGameManager : NetworkBehaviour {
         //print("Now respawning player");
         NetworkConnection connection = player.connectionToClient;
         Transform startPosition = GetStartPosition();
-        GameObject newPlayer = Instantiate(playerPrefab, startPosition.position, startPosition.rotation);
+        GameObject newPlayer = Instantiate(classPrefabs[player.GetComponent<PlayerGUI>().classIndex], startPosition.position, startPosition.rotation);
         NetworkServer.Spawn(newPlayer);
         // If not a bot, move connection to a new thing
         if (player.GetComponent<PlayerInput>().isBot()) {
@@ -37,20 +37,17 @@ public class ProjectWGameManager : NetworkBehaviour {
         Destroy(player.gameObject);
     }
     void Start() {
-        //table = new Hashtable();
         if (isServer) {
-            if (playerPrefab == null) {
-                playerPrefab = networkManager.playerPrefab;
-            }
 
             for (int i = 0; i < botCount; i++) {
                 Transform startPosition = GetStartPosition();
-                GameObject spawn = Instantiate(botPrefabs[Random.Range(0, botPrefabs.Length - 1)], startPosition.position, startPosition.rotation);
+                GameObject spawn = Instantiate(classPrefabs[Random.Range(0, classPrefabs.Length - 1)], startPosition.position, startPosition.rotation);
                 spawn.SendMessage("setBot");
                 NetworkServer.Spawn(spawn);
             }
         } else {
-            this.gameObject.SetActive(false);
+            // this should not do anything, but should still display values such as time remaining and teams
+            //this.gameObject.SetActive(false);
         }
        
     }
@@ -67,5 +64,15 @@ public class ProjectWGameManager : NetworkBehaviour {
     Transform GetStartPosition() {
         return startPositions[UnityEngine.Random.Range(0, startPositions.Length - 1)];
     }
-   
+
+    public void SpawnPlayer(int classIndex, GameObject source) {
+        NetworkConnection connection = source.GetComponent<NetworkBehaviour>().connectionToClient;
+        Transform startPosition = GetStartPosition();
+        GameObject newPlayer = Instantiate(classPrefabs[classIndex], startPosition.position, startPosition.rotation);
+        NetworkServer.Spawn(newPlayer);
+        // If not a bot, move connection to a new thing
+        NetworkServer.ReplacePlayerForConnection(connection, newPlayer, 0);
+        GameObject.Destroy(source);
+    }
+
 }

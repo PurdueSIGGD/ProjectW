@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myParticles: {fileID: 198584523301570462}
-  camera: {fileID: 1790827395241324}
+  myCamera: {fileID: 1790827395241324}
   moveSpeed: 10
   isPaused: 0
   pauseCooldown: 1
@@ -291,7 +291,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1630370303
+  randomSeed: -191253654
   InitialModule:
     serializedVersion: 3
     enabled: 1
