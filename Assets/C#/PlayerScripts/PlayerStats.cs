@@ -16,6 +16,8 @@ public class PlayerStats : PlayerComponent, IHittable {
     [SyncVar]
     public bool death;
     private bool hasDeath;
+	public int teamIndex = -1;
+	public string playerName;
     public GameObject[] deathSounds;
     public AudioSource hitSound;
     public Animator hitAnimator;

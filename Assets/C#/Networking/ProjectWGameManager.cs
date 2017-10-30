@@ -9,34 +9,50 @@ public class ProjectWGameManager : NetworkBehaviour {
     public float timeLimit = 20 * 60 * 60; // 20 minutes
     public Transform[] startPositions;
     public GameObject[] classPrefabs;
+	public GameObject spectatorPrefab;
     public int botCount = 0;
-    
+	public Team[] teams;
+
+	[System.Serializable]
+	public struct Team
+	{
+		public string teamName;
+	}
     
     public void AddDeath(GameObject player, string playerid) {
         if (!isServer) return;
         //print("Adding death as player: " + playerid);
         //table.Add(playerid, true);
-        StartCoroutine(cRespawnPlayer(player.GetComponent<PlayerStats>()));
+        StartCoroutine(cRespawnPlayer(player));
     }
-    public IEnumerator cRespawnPlayer(PlayerStats player) {
+    public IEnumerator cRespawnPlayer(GameObject player) {
         //print("Starting respawn player");
         yield return new WaitForSeconds(respawnTime);
-        //print("Now respawning player");
-        NetworkConnection connection = player.connectionToClient;
-        Transform startPosition = GetStartPosition();
-        GameObject newPlayer = Instantiate(classPrefabs[player.GetComponent<PlayerGUI>().classIndex], startPosition.position, startPosition.rotation);
-        NetworkServer.Spawn(newPlayer);
-        // If not a bot, move connection to a new thing
-        if (player.GetComponent<PlayerInput>().isBot()) {
-            newPlayer.GetComponent<PlayerInput>().SendMessage("setBot");
-        } else {
-            NetworkServer.ReplacePlayerForConnection(connection, newPlayer, 0);
-        }
+		//print("Now respawning player");
+		PlayerGUI oldP;
+		// if it is -1, they want to be a spectator, so no respawn
+		if ((oldP = player.GetComponent<PlayerGUI>()) && oldP.teamIndex != -1) {
+			NetworkConnection connection = oldP.connectionToClient;
+			Transform startPosition = GetStartPosition();
+			GameObject newPlayer = Instantiate(classPrefabs[player.GetComponent<PlayerGUI>().classIndex], startPosition.position, startPosition.rotation);
+			PlayerGUI newP = newPlayer.GetComponent<PlayerGUI> ();
+			NetworkServer.Spawn(newPlayer);
+			// If not a bot, move connection to a new thing
+			if (player.GetComponent<PlayerInput>().isBot()) {
+				newPlayer.GetComponent<PlayerInput>().SendMessage("setBot");
+			} else {
+				NetworkServer.ReplacePlayerForConnection(connection, newPlayer, 0);
+				newP.CmdHandlePickingClass (oldP.classIndex, oldP.teamIndex, oldP.playerName);
+			}
+		}
+       
         yield return new WaitForSeconds(15);
-        print("Now deleting player");
         Destroy(player.gameObject);
     }
     void Start() {
+		GameObject.FindObjectOfType<SpectatorUIController> ().playerPrefabs = classPrefabs;
+		GameObject.FindObjectOfType<SpectatorUIController> ().teams = teams;
+
         if (isServer) {
 
             for (int i = 0; i < botCount; i++) {
@@ -47,7 +63,7 @@ public class ProjectWGameManager : NetworkBehaviour {
             }
         } else {
             // this should not do anything, but should still display values such as time remaining and teams
-            //this.gameObject.SetActive(false);
+            this.gameObject.SetActive(false);
         }
        
     }
@@ -65,14 +81,30 @@ public class ProjectWGameManager : NetworkBehaviour {
         return startPositions[UnityEngine.Random.Range(0, startPositions.Length - 1)];
     }
 
-    public void SpawnPlayer(int classIndex, GameObject source) {
+	public void SpawnPlayer(int classIndex, int teamIndex, string playerName, GameObject source) {
         NetworkConnection connection = source.GetComponent<NetworkBehaviour>().connectionToClient;
         Transform startPosition = GetStartPosition();
         GameObject newPlayer = Instantiate(classPrefabs[classIndex], startPosition.position, startPosition.rotation);
+		newPlayer.name = playerName;
+		PlayerStats p = newPlayer.GetComponent<PlayerStats> ();
+		p.teamIndex = teamIndex;
+		p.playerName = playerName;
         NetworkServer.Spawn(newPlayer);
         // If not a bot, move connection to a new thing
         NetworkServer.ReplacePlayerForConnection(connection, newPlayer, 0);
         GameObject.Destroy(source);
     }
+	public void SpawnSpectator(GameObject source) {
+		source.GetComponent<PlayerNetworking> ().initializeCameras (false);
+
+		NetworkConnection connection = source.GetComponent<NetworkBehaviour>().connectionToClient;
+		Transform startPosition = GetStartPosition();
+		GameObject newPlayer = Instantiate(spectatorPrefab, startPosition.position, startPosition.rotation);
+
+		NetworkServer.Spawn(newPlayer);
+
+		NetworkServer.ReplacePlayerForConnection(connection, newPlayer, 0);
+		//GameObject.Destroy(source);
+	}
 
 }

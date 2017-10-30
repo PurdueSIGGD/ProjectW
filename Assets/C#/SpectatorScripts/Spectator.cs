@@ -15,6 +15,8 @@ public class Spectator : NetworkBehaviour {
     public float pauseCooldown = 1; // Cooldown, in seconds
     private float lastUse = -100; // Last time we used it, in seconds;
     private bool shouldBeLocked;
+	[SyncVar]
+	private bool shouldJoinServer;
 
     // Use this for initialization
     void Start () {
@@ -27,13 +29,20 @@ public class Spectator : NetworkBehaviour {
         if (isLocalPlayer)
         {
             myParticles.Pause();
-            uiController.AssignOwner(this.gameObject, UnPauseGameWithoutUI);
-            uiController.JoinServer();
+			uiController.AssignOwner(this.gameObject, UnPauseGameWithoutUI);
+			RefreshTeams ();
+
+			if (shouldJoinServer)
+				uiController.JoinServer ();
+			shouldBeLocked = uiController.screenIndex == -1;
+			isPaused = !shouldBeLocked;
+
         } else {
-            myCamera.SetActive(false);
+            GameObject.Destroy(myCamera);
         }
         
 	}
+
 
     void LateUpdate() {
         if (isLocalPlayer) {
@@ -94,6 +103,9 @@ public class Spectator : NetworkBehaviour {
         }
        
     }
+	public void EnableCursor() {
+		shouldBeLocked = false;
+	}
     public void TogglePause() {
         if (isLocalPlayer) {
             if (Time.unscaledTime - lastUse > pauseCooldown) {
@@ -129,13 +141,13 @@ public class Spectator : NetworkBehaviour {
         shouldBeLocked = true;
         isPaused = false;
     }
-    public void HandlePickingClass(int index) {
-        CmdHandlePickingClass(index);
-    }
+	public void HandlePickingClass(SpectatorUIController.ClassSelectionArgs args) {
+		CmdHandlePickingClass(args.classIndex, args.teamIndex, args.playerName);
+	}
     [Command]
-    public void CmdHandlePickingClass(int index) {
+	public void CmdHandlePickingClass(int classIndex, int teamIndex, string playerName) {
         // Called by the GUI
-        GameObject.FindObjectOfType<ProjectWGameManager>().SpawnPlayer(index, this.gameObject);
+		GameObject.FindObjectOfType<ProjectWGameManager>().SpawnPlayer(classIndex, teamIndex, playerName, this.gameObject);
     }
     public void ExitServer() {
         if (isServer) {
@@ -147,4 +159,25 @@ public class Spectator : NetworkBehaviour {
         }
      
     }
+	public void RefreshTeams() {
+		CmdRefreshTeams ();
+	}
+	[Command]
+	public void CmdRefreshTeams() {
+		ProjectWGameManager manager = GameObject.FindObjectOfType<ProjectWGameManager> ();
+		RpcRefreshTeams(manager.teams);
+	}
+	[ClientRpc]
+	public void RpcRefreshTeams(ProjectWGameManager.Team[] teams) {
+		GameObject.FindObjectOfType<SpectatorUIController> ().RefreshTeams (teams);
+
+	}
+	public void JoinServer() {
+		// Called by the network manager when we join a server
+		shouldJoinServer = true;
+
+	}
+	public void Spectate() {
+		// Nothing
+	}
 }

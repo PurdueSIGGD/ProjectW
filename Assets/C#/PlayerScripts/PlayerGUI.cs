@@ -13,6 +13,10 @@ public class PlayerGUI : PlayerComponent {
 
     [SyncVar]
     public int classIndex;
+	[SyncVar]
+	public int teamIndex;
+	[SyncVar]
+	public string playerName;
 
     public GameObject rootGUI;
     public RectTransform healthBar;
@@ -93,13 +97,15 @@ public class PlayerGUI : PlayerComponent {
         shouldBeLocked = true;
         isPaused = false;
     }
-    public void HandlePickingClass(int index) {
-        CmdHandlePickingClass(index);
+	public void HandlePickingClass(SpectatorUIController.ClassSelectionArgs args) {
+		CmdHandlePickingClass(args.classIndex, args.teamIndex, args.playerName);
     }
     [Command]
-    public void CmdHandlePickingClass(int index) {
+	public void CmdHandlePickingClass(int classIndex, int teamIndex, string playerName) {
         // Called by the GUI
-        classIndex = index;
+		this.classIndex = classIndex;
+		this.teamIndex = teamIndex;
+		this.playerName = playerName;
     }
     public void ExitServer() {
         if (isServer) {
@@ -110,4 +116,25 @@ public class PlayerGUI : PlayerComponent {
             NetworkServer.RemoveExternalConnection(this.connectionToServer.connectionId);
         }
     }
+	public void RefreshTeams() {
+		CmdRefreshTeams ();
+	}
+	[Command]
+	public void CmdRefreshTeams() {
+		RpcRefreshTeams(GameObject.FindObjectOfType<ProjectWGameManager> ().teams);
+	}
+	[ClientRpc]
+	public void RpcRefreshTeams(ProjectWGameManager.Team[] teams) {
+		GameObject.FindObjectOfType<SpectatorUIController> ().teams = teams;
+	}
+	public void Spectate() {
+		// Force our player to die and move to spectators
+		CmdSpectate();
+	}
+	[Command]
+	public void CmdSpectate() {
+		this.myBase.myStats.teamIndex = -1;
+		this.myBase.myStats.CmdDeath ();
+		GameObject.FindObjectOfType<ProjectWGameManager>().SpawnSpectator(this.gameObject);
+	}
 }

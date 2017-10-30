@@ -19,6 +19,7 @@ public class ProjectWNetworkManager : NetworkManager {
         if (lobbyCamera != null) {
             lobbyCamera.SetActive(false);
         }
+		player.SendMessage("JoinServer");
     }
 
     // called when a client connects 
