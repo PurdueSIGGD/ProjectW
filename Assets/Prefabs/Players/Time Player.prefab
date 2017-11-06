@@ -1064,6 +1064,7 @@ GameObject:
   - component: {fileID: 114207067422742926}
   - component: {fileID: 114849264696230426}
   - component: {fileID: 114187196035932632}
+  - component: {fileID: 114413950209045444}
   m_Layer: 8
   m_Name: Time Player
   m_TagString: Untagged
@@ -3233,6 +3234,18 @@ MonoBehaviour:
   playerName: 
   hudPrefab: {fileID: 1262117317672522, guid: 37522bd2f314560428e5904851d78f03, type: 2}
   spectatorUIController: {fileID: 0}
+--- !u!114 &114413950209045444
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1860666892717170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5706400b0cc9d8042bd09b031ef980c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trackType: 1
 --- !u!114 &114607037948189518
 MonoBehaviour:
   m_ObjectHideFlags: 1

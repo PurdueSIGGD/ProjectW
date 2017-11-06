@@ -35,7 +35,7 @@ public class PlayerGUI : PlayerComponent {
 			magicBar = gameHud.magicBar;
 			myBase.myStats.hitAnimator = gameHud.hitMarker;
             spectatorUIController = GameObject.FindObjectOfType<SpectatorUIController>();
-            spectatorUIController.AssignOwner(this.gameObject, UnPauseGameWithoutUI);
+			spectatorUIController.AssignOwner(this.gameObject, UnPauseGameWithoutUI, myBase.myNetworking.playerCameras[0]);
             UnPauseGame();
         } else {
 			

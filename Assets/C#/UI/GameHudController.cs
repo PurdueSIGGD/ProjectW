@@ -7,13 +7,4 @@ public class GameHudController : MonoBehaviour {
 	public RectTransform magicBar;
 	public Animator hitMarker;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

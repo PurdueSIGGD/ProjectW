@@ -30,6 +30,7 @@ public class SpectatorUIController : MonoBehaviour {
 	public Button selectClassButton;
 	[HideInInspector]
 	public ProjectWGameManager.Team[] teams;
+	public TrackedItemController itemTracker;
 
     // Use this for initialization
     void Start () {
@@ -89,9 +90,10 @@ public class SpectatorUIController : MonoBehaviour {
 
     unPauseDelegate unPause;
     public delegate void unPauseDelegate();
-    public void AssignOwner(GameObject sourcePlayer, unPauseDelegate del) {
+    public void AssignOwner(GameObject sourcePlayer, unPauseDelegate del, Camera myCamera) {
         this.unPause = del;
         player = sourcePlayer;
+		itemTracker.myCamera = myCamera;
     }
 
 

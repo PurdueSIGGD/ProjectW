@@ -29,7 +29,7 @@ public class Spectator : NetworkBehaviour {
         if (isLocalPlayer)
         {
             myParticles.Pause();
-			uiController.AssignOwner(this.gameObject, UnPauseGameWithoutUI);
+			uiController.AssignOwner(this.gameObject, UnPauseGameWithoutUI, myCamera.GetComponent<Camera>());
 			RefreshTeams ();
 
 			if (shouldJoinServer)

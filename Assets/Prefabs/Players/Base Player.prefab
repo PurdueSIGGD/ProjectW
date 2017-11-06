@@ -241,6 +241,7 @@ GameObject:
   - component: {fileID: 114019098470336412}
   - component: {fileID: 95531283670853542}
   - component: {fileID: 114664666753676864}
+  - component: {fileID: 114061755421010294}
   m_Layer: 8
   m_Name: Base Player
   m_TagString: Untagged
@@ -3074,6 +3075,18 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 0.5
   m_InterpolateMovement: 1
+--- !u!114 &114061755421010294
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1178322756519792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5706400b0cc9d8042bd09b031ef980c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trackType: 1
 --- !u!114 &114067849462498082
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3134,7 +3147,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e6142a9ff9a5d8429eccfb809441c1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reticles: {fileID: 0}
   cameraSlider: {fileID: 4912461126437930}
   deathTarget: {fileID: 4747311741825298}
   rotator: {fileID: 4194826140958816}

@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 114545205896067940}
   - component: {fileID: 114071815810301062}
   - component: {fileID: 114243021831766576}
+  - component: {fileID: 114944165981954688}
   m_Layer: 8
   m_Name: Flame Player
   m_TagString: Untagged
@@ -3147,7 +3148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e6142a9ff9a5d8429eccfb809441c1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reticles: {fileID: 0}
   cameraSlider: {fileID: 4441937693489626}
   deathTarget: {fileID: 4101970800040188}
   rotator: {fileID: 4272697417821866}
@@ -3338,6 +3338,18 @@ MonoBehaviour:
   - {fileID: 1229230672039204, guid: fefeeacd706d9564ea14ded6bc6b3b1a, type: 2}
   hitSound: {fileID: 82787702486171828}
   hitAnimator: {fileID: 0}
+--- !u!114 &114944165981954688
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1063181966065962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5706400b0cc9d8042bd09b031ef980c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trackType: 1
 --- !u!124 &124262174036875840
 Behaviour:
   m_ObjectHideFlags: 1
