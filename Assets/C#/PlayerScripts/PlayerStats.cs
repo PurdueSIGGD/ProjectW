@@ -19,8 +19,9 @@ public class PlayerStats : PlayerComponent, IHittable {
 	public int teamIndex = -1;
 	public string playerName;
     public GameObject[] deathSounds;
-    public AudioSource hitSound;
-    public Animator hitAnimator;
+	public AudioSource hitSound;
+	[HideInInspector]
+    public Animator hitAnimator; // Assigned in playerGUI
 
     public override void PlayerComponent_Start() {
         if (!isLocalPlayer) {
@@ -106,7 +107,7 @@ public class PlayerStats : PlayerComponent, IHittable {
     }
     [ClientRpc]
     public void RpcConfirmHit(float damage) {
-        if (isLocalPlayer) {
+		if (isLocalPlayer && !myBase.myInput.isBot()) {
             hitSound.Play();
             hitAnimator.SetTrigger("Hit");
         }

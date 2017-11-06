@@ -18,22 +18,28 @@ public class PlayerGUI : PlayerComponent {
 	[SyncVar]
 	public string playerName;
 
-    public GameObject rootGUI;
-    public RectTransform healthBar;
-    public RectTransform magicBar;
-
+	public GameObject hudPrefab;
+	private GameObject hudRoot;
+	private GameHudController gameHud;
+	private RectTransform healthBar;
+	private RectTransform magicBar;
+	[HideInInspector]
     public SpectatorUIController spectatorUIController;
 
     public override void PlayerComponent_Start() {
         if (isLocalPlayer && !myBase.myInput.isBot()) {
             // Don't want enemy GUIs on top of ours
-            rootGUI.SetActive(true);
+			GameObject instancedHudPrefab = GameObject.Instantiate(hudPrefab, myBase.myMovement.cameraRotator);
+			gameHud = instancedHudPrefab.GetComponent<GameHudController>();
+			healthBar = gameHud.healthBar;
+			magicBar = gameHud.magicBar;
+			myBase.myStats.hitAnimator = gameHud.hitMarker;
             spectatorUIController = GameObject.FindObjectOfType<SpectatorUIController>();
             spectatorUIController.AssignOwner(this.gameObject, UnPauseGameWithoutUI);
             UnPauseGame();
         } else {
-            rootGUI.SetActive(false);
-        }
+			
+		}
     }
     public override void PlayerComponent_Update() {
         if (isLocalPlayer) {
@@ -61,7 +67,7 @@ public class PlayerGUI : PlayerComponent {
 
     }
     public void Death() {
-        rootGUI.SetActive(false);
+		// GUI Death state
     }
 
     public void TogglePause() {
