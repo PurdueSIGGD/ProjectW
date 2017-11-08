@@ -3307,9 +3307,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPaused: 0
   pauseCooldown: 1
-  classIndex: 0
-  teamIndex: 0
-  playerName: 
+  desiredPlayerClass: 0
+  desiredPlayerName: 
+  desiredTeamIndex: 0
   hudPrefab: {fileID: 1262117317672522, guid: 37522bd2f314560428e5904851d78f03, type: 2}
   spectatorUIController: {fileID: 0}
 --- !u!114 &114827118183941698
@@ -3332,6 +3332,7 @@ MonoBehaviour:
   death: 0
   teamIndex: -1
   playerName: 
+  classIndex: -1
   deathSounds:
   - {fileID: 1229230672039204, guid: f6c34fa114903af43ab64ffb7d62e8ef, type: 2}
   - {fileID: 1229230672039204, guid: d3dc9b8d9113112459310d74a3516d00, type: 2}
@@ -3349,6 +3350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5706400b0cc9d8042bd09b031ef980c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   trackType: 1
 --- !u!124 &124262174036875840
 Behaviour:

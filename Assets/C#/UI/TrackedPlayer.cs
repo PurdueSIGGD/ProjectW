@@ -12,6 +12,7 @@ public class TrackedPlayer : TrackedItem {
 	 */
 	public override void Start_Extended(Transform player) {
 		trackedPlayerStats = player.GetComponent<PlayerStats>();
+        seeThrough = false;
 	}
 
 	/**

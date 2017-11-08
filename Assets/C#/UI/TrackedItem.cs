@@ -8,16 +8,22 @@ public class TrackedItem : MonoBehaviour {
 	public Transform locationToTrack;
 	public Vector3 hudOffset, worldOffset;
 	public Text itemName;
+    public Image sprite;
 	private bool hasStarted = false;
+    public bool seeThrough = true;
+    private Animator myAnim;
 
 	public void StartTracker (Transform target, Camera myCamera) {
 		this.myCamera = myCamera;
 		locationToTrack = target;
 		hasStarted = true;
+        sprite.sprite = target.GetComponent<ItemToTrack>().sprite;
+        myAnim = this.GetComponent<Animator>();
+        myAnim.SetBool("Showing", true);
 		Start_Extended(target);
 	}
 
-	void Update () {
+	void LateUpdate () {
 		if (locationToTrack == null) {
 			if (hasStarted)
 				GameObject.Destroy(this.gameObject);
