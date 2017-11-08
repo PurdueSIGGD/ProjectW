@@ -7,7 +7,7 @@ public class TrackedItem : MonoBehaviour {
 	public Camera myCamera;
 	public Transform locationToTrack;
 	public Vector3 hudOffset, worldOffset;
-	public Text name;
+	public Text itemName;
 	private bool hasStarted = false;
 
 	public void StartTracker (Transform target, Camera myCamera) {
@@ -26,14 +26,12 @@ public class TrackedItem : MonoBehaviour {
 				Vector3 targetPosition = myCamera.WorldToScreenPoint(locationToTrack.position + worldOffset) + hudOffset;
 				// If it is being annoying and updating in negative space, hide it
 				if (targetPosition.z > 0) {
-					print("updating yes" + targetPosition);
 					transform.position = targetPosition;
 				} else {
-					print("updating no");
 					transform.position = new Vector3(-10000f, targetPosition.y, targetPosition.z);
-				}
-				name.text = locationToTrack.name;
-				Update_Extended();
+                }
+                itemName.text = locationToTrack.gameObject.name;
+                Update_Extended();
 			}
 		}
 	}

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TrackedItemController : MonoBehaviour {
-	[HideInInspector]
 	public Camera myCamera;
 	private GameObject player;
 
@@ -23,7 +22,28 @@ public class TrackedItemController : MonoBehaviour {
 	void Update () {
 		UpdateTrackedItems(); // This could probably be done every second or so, slow down amount of calls	
 	}
-
+    public void UpdateCamera(Camera newCamera)
+    {
+        myCamera = newCamera;
+        ItemToTrack target;
+        if (target = myCamera.GetComponentInParent<ItemToTrack>())
+        {
+            player = target.gameObject;
+        }
+        else
+        {
+            player = myCamera.gameObject;
+        }
+        foreach (TrackedItem it in trackedPlayerParent.GetComponentsInChildren<TrackedItem>())
+        {
+            it.myCamera = myCamera;
+            PlayerStats stats;
+            if ((stats = it.locationToTrack.GetComponentInParent<PlayerStats>()) && stats.gameObject == player)
+            {
+                Destroy(it.gameObject);
+            }
+        }
+    }
 	void UpdateTrackedItems() {
 		if (myCamera == null) return; // Can't do anything without a camera
 		if (player == null) {

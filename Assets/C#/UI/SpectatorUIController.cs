@@ -93,7 +93,7 @@ public class SpectatorUIController : MonoBehaviour {
     public void AssignOwner(GameObject sourcePlayer, unPauseDelegate del, Camera myCamera) {
         this.unPause = del;
         player = sourcePlayer;
-		itemTracker.myCamera = myCamera;
+        itemTracker.UpdateCamera(myCamera);
     }
 
 

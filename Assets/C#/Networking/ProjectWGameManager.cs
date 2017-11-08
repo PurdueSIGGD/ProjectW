@@ -28,23 +28,31 @@ public class ProjectWGameManager : NetworkBehaviour {
     public IEnumerator cRespawnPlayer(GameObject player) {
         //print("Starting respawn player");
         yield return new WaitForSeconds(respawnTime);
-		//print("Now respawning player");
-		PlayerGUI oldP;
+		print("Now respawning player");
+		PlayerStats oldP;
+        PlayerGUI oldPG;
 		// if it is -1, they want to be a spectator, so no respawn
-		if ((oldP = player.GetComponent<PlayerGUI>()) && oldP.teamIndex != -1) {
+		if ((oldP = player.GetComponent<PlayerStats>()) != null && (oldPG = player.GetComponent<PlayerGUI>()) != null && oldP.teamIndex != -1) {
 			NetworkConnection connection = oldP.connectionToClient;
 			Transform startPosition = GetStartPosition();
-			GameObject newPlayer = Instantiate(classPrefabs[player.GetComponent<PlayerGUI>().classIndex], startPosition.position, startPosition.rotation);
-			PlayerGUI newP = newPlayer.GetComponent<PlayerGUI> ();
-			NetworkServer.Spawn(newPlayer);
-			// If not a bot, move connection to a new thing
-			if (player.GetComponent<PlayerInput>().isBot()) {
+            GameObject newPlayer = Instantiate(classPrefabs[oldP.classIndex], startPosition.position, startPosition.rotation);
+            newPlayer.name = oldP.playerName;
+            PlayerStats newP = newPlayer.GetComponent<PlayerStats> ();
+            newP.playerName = oldPG.desiredPlayerName;
+            newP.classIndex = oldPG.desiredPlayerClass;
+            newP.teamIndex = oldPG.desiredTeamIndex;
+            PlayerGUI newPG = newPlayer.GetComponent<PlayerGUI>();
+            newPG.desiredPlayerName = oldPG.desiredPlayerName;
+            newPG.desiredPlayerClass = oldPG.desiredPlayerClass;
+            newPG.desiredTeamIndex = oldPG.desiredTeamIndex;
+            NetworkServer.Spawn(newPlayer);
+            // If not a bot, move connection to a new thing
+            if (player.GetComponent<PlayerInput>().isBot()) {
 				newPlayer.GetComponent<PlayerInput>().SendMessage("setBot");
 			} else {
 				NetworkServer.ReplacePlayerForConnection(connection, newPlayer, 0);
-				newP.CmdHandlePickingClass (oldP.classIndex, oldP.teamIndex, oldP.playerName);
-			}
-		}
+            }
+        }
        
         yield return new WaitForSeconds(15);
         Destroy(player.gameObject);
@@ -57,8 +65,19 @@ public class ProjectWGameManager : NetworkBehaviour {
 
             for (int i = 0; i < botCount; i++) {
                 Transform startPosition = GetStartPosition();
-                GameObject spawn = Instantiate(classPrefabs[Random.Range(0, classPrefabs.Length - 1)], startPosition.position, startPosition.rotation);
+                int classIndex = Random.Range(0, classPrefabs.Length - 1);
+                GameObject spawn = Instantiate(classPrefabs[classIndex], startPosition.position, startPosition.rotation);
                 spawn.SendMessage("setBot");
+                PlayerStats stats = spawn.GetComponent<PlayerStats>();
+                stats.classIndex = classIndex;
+                stats.teamIndex = 0; /*TODO*/
+                stats.playerName = classPrefabs[classIndex].name + " " + i;
+
+                PlayerGUI newPG = spawn.GetComponent<PlayerGUI>();
+                newPG.desiredPlayerName = stats.playerName;
+                newPG.desiredPlayerClass = stats.classIndex;
+                newPG.desiredTeamIndex = stats.teamIndex;
+                spawn.name = stats.playerName;
                 NetworkServer.Spawn(spawn);
             }
         } else {
@@ -88,7 +107,12 @@ public class ProjectWGameManager : NetworkBehaviour {
 		newPlayer.name = playerName;
 		PlayerStats p = newPlayer.GetComponent<PlayerStats> ();
 		p.teamIndex = teamIndex;
-		p.playerName = playerName;
+        p.playerName = playerName;
+        p.classIndex = classIndex;
+        PlayerGUI newPG = newPlayer.GetComponent<PlayerGUI>();
+        newPG.desiredPlayerName = playerName;
+        newPG.desiredPlayerClass = classIndex;
+        newPG.desiredTeamIndex = teamIndex;
         NetworkServer.Spawn(newPlayer);
         // If not a bot, move connection to a new thing
         NetworkServer.ReplacePlayerForConnection(connection, newPlayer, 0);

@@ -12,11 +12,11 @@ public class PlayerGUI : PlayerComponent {
     private bool shouldBeLocked;
 
     [SyncVar]
-    public int classIndex;
-	[SyncVar]
-	public int teamIndex;
-	[SyncVar]
-	public string playerName;
+    public int desiredPlayerClass;
+    [SyncVar]
+    public string desiredPlayerName;
+    [SyncVar]
+    public int desiredTeamIndex;
 
 	public GameObject hudPrefab;
 	private GameObject hudRoot;
@@ -109,9 +109,11 @@ public class PlayerGUI : PlayerComponent {
     [Command]
 	public void CmdHandlePickingClass(int classIndex, int teamIndex, string playerName) {
         // Called by the GUI
-		this.classIndex = classIndex;
-		this.teamIndex = teamIndex;
-		this.playerName = playerName;
+        
+        //PlayerStats myStats = this.GetComponent<PlayerStats>(); // Sometimes it doesn't initialize fast enough
+        desiredPlayerClass = classIndex;
+        desiredTeamIndex = teamIndex;
+        desiredPlayerName = playerName;
     }
     public void ExitServer() {
         if (isServer) {
@@ -139,7 +141,7 @@ public class PlayerGUI : PlayerComponent {
 	}
 	[Command]
 	public void CmdSpectate() {
-		this.myBase.myStats.teamIndex = -1;
+		this.desiredTeamIndex = -1;
 		this.myBase.myStats.CmdDeath ();
 		GameObject.FindObjectOfType<ProjectWGameManager>().SpawnSpectator(this.gameObject);
 	}

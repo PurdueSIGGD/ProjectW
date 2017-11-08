@@ -638,13 +638,6 @@ MonoBehaviour:
   healthBar: {fileID: 224214004918534720}
   magicBar: {fileID: 224595608087423076}
   hitMarker: {fileID: 95459517851516486}
-  myCamera: {fileID: 0}
-  trackedPlayerParent: {fileID: 224177406597295162}
-  trackedObjectParent: {fileID: 224697836195808884}
-  trackedPlayerPrefab: {fileID: 1125676577818826, guid: 1b11436b4033b6f42b9c018601e8221d,
-    type: 2}
-  trackedObjectPrefab: {fileID: 1835229890827348, guid: 88ae977fb6903f24eabb97170c906d0c,
-    type: 2}
 --- !u!114 &114950044966527622
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1036,7 +1029,7 @@ RectTransform:
   m_GameObject: {fileID: 1262117317672522}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224608783270551534}
   - {fileID: 224025319740506932}

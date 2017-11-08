@@ -171,7 +171,7 @@ MonoBehaviour:
   locationToTrack: {fileID: 0}
   hudOffset: {x: 0, y: 0, z: 0}
   worldOffset: {x: 0, y: 2, z: 0}
-  name: {fileID: 114065601390418838}
+  itemName: {fileID: 114065601390418838}
   trackedPlayerStats: {fileID: 0}
   health: {fileID: 224001146701564914}
 --- !u!114 &114636858446240638
@@ -349,6 +349,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 2000, y: 2000}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}

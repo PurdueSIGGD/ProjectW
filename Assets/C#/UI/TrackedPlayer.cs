@@ -19,8 +19,10 @@ public class TrackedPlayer : TrackedItem {
 	 */
 	public override void Update_Extended() {
 		health.localScale = new Vector3(trackedPlayerStats.health / trackedPlayerStats.healthMax, 1, 1);
-		if (trackedPlayerStats.death) {
+        itemName.text = trackedPlayerStats.playerName;
+        if (trackedPlayerStats.death) {
 			GameObject.Destroy(this.gameObject);
 		}
+
 	}
 }

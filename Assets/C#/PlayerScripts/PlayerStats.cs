@@ -16,8 +16,12 @@ public class PlayerStats : PlayerComponent, IHittable {
     [SyncVar]
     public bool death;
     private bool hasDeath;
-	public int teamIndex = -1;
-	public string playerName;
+    [SyncVar]
+    public int teamIndex = -1;
+    [SyncVar]
+    public string playerName;
+    [SyncVar]
+    public int classIndex = -1;
     public GameObject[] deathSounds;
 	public AudioSource hitSound;
 	[HideInInspector]
@@ -26,6 +30,7 @@ public class PlayerStats : PlayerComponent, IHittable {
     public override void PlayerComponent_Start() {
         if (!isLocalPlayer) {
             magicBar.SetActive(false);
+            healthBar.SetActive(false);
         } else {
             // once we have a GUI
             healthBar.SetActive(false);
