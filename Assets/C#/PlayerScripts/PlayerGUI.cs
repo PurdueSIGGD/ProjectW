@@ -142,7 +142,15 @@ public class PlayerGUI : PlayerComponent {
 	[Command]
 	public void CmdSpectate() {
 		this.desiredTeamIndex = -1;
-		this.myBase.myStats.CmdDeath ();
 		GameObject.FindObjectOfType<ProjectWGameManager>().SpawnSpectator(this.gameObject);
 	}
+    public void StopGUI()
+    {
+        this.RpcStopGUI();
+    }
+    [ClientRpc]
+    public void RpcStopGUI()
+    {
+        if (gameHud) gameHud.gameObject.SetActive(false);
+    }
 }
