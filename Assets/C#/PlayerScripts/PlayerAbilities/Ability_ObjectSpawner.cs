@@ -36,7 +36,7 @@ public class Ability_ObjectSpawner : CooldownAbility {
         Debug.DrawRay(spawnPoint.position + spawnOffset, spawnAngle, Color.green, 10);
         // Spawn our spell in the place the server told us
         // However if we are the client, we don't wait for that luxury.
-        GameObject spawn = GameObject.Instantiate(itemToSpawn, spawnPosition + transform.TransformDirection(spawnOffset), Quaternion.identity);
+        GameObject spawn = GameObject.Instantiate(itemToSpawn, spawnPosition + transform.TransformDirection(spawnOffset), transform.rotation);
         Rigidbody r;
         if (r = spawn.GetComponent<Rigidbody>())
         {
