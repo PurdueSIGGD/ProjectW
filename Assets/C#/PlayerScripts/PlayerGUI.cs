@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class PlayerGUI : PlayerComponent {
     public bool isPaused;
@@ -10,18 +11,35 @@ public class PlayerGUI : PlayerComponent {
     private float lastUse = -100; // Last time we used it, in seconds;
     private bool shouldBeLocked;
 
-    public GameObject rootGUI;
-    public RectTransform healthBar;
-    public RectTransform magicBar;
+    [SyncVar]
+    public int desiredPlayerClass;
+    [SyncVar]
+    public string desiredPlayerName;
+    [SyncVar]
+    public int desiredTeamIndex;
+
+	public GameObject hudPrefab;
+	private GameObject hudRoot;
+	private GameHudController gameHud;
+	private RectTransform healthBar;
+	private RectTransform magicBar;
+	[HideInInspector]
+    public SpectatorUIController spectatorUIController;
 
     public override void PlayerComponent_Start() {
-        UnPauseGame();
-        if (isLocalPlayer) {
+        if (isLocalPlayer && !myBase.myInput.isBot()) {
             // Don't want enemy GUIs on top of ours
-            rootGUI.SetActive(true);
+			GameObject instancedHudPrefab = GameObject.Instantiate(hudPrefab, myBase.myMovement.cameraRotator);
+			gameHud = instancedHudPrefab.GetComponent<GameHudController>();
+			healthBar = gameHud.healthBar;
+			magicBar = gameHud.magicBar;
+			myBase.myStats.hitAnimator = gameHud.hitMarker;
+            spectatorUIController = GameObject.FindObjectOfType<SpectatorUIController>();
+			spectatorUIController.AssignOwner(this.gameObject, UnPauseGameWithoutUI, myBase.myNetworking.playerCameras[0]);
+            UnPauseGame();
         } else {
-            rootGUI.SetActive(false);
-        }
+			
+		}
     }
     public override void PlayerComponent_Update() {
         if (isLocalPlayer) {
@@ -49,11 +67,11 @@ public class PlayerGUI : PlayerComponent {
 
     }
     public void Death() {
-        rootGUI.SetActive(false);
+		// GUI Death state
     }
 
     public void TogglePause() {
-        if (isLocalPlayer) {
+        if (isLocalPlayer && !myBase.myInput.isBot()) {
             if (Time.unscaledTime - lastUse > pauseCooldown) {
                 Pause();
                 lastUse = Time.unscaledTime;
@@ -74,10 +92,65 @@ public class PlayerGUI : PlayerComponent {
     }
     private void PauseGame() {
         shouldBeLocked = false;
+        spectatorUIController.Pause();
 
     }
     private void UnPauseGame() {
         shouldBeLocked = true;
-
+        spectatorUIController.UnPause();
+    }
+    private void UnPauseGameWithoutUI() {
+        shouldBeLocked = true;
+        isPaused = false;
+    }
+	public void HandlePickingClass(SpectatorUIController.ClassSelectionArgs args) {
+		CmdHandlePickingClass(args.classIndex, args.teamIndex, args.playerName);
+    }
+    [Command]
+	public void CmdHandlePickingClass(int classIndex, int teamIndex, string playerName) {
+        // Called by the GUI
+        
+        //PlayerStats myStats = this.GetComponent<PlayerStats>(); // Sometimes it doesn't initialize fast enough
+        desiredPlayerClass = classIndex;
+        desiredTeamIndex = teamIndex;
+        desiredPlayerName = playerName;
+    }
+    public void ExitServer() {
+        if (isServer) {
+            NetworkServer.DisconnectAll();
+        } else {
+            Network.Disconnect();
+            MasterServer.UnregisterHost();
+            NetworkServer.RemoveExternalConnection(this.connectionToServer.connectionId);
+        }
+    }
+	public void RefreshTeams() {
+		CmdRefreshTeams ();
+	}
+	[Command]
+	public void CmdRefreshTeams() {
+		RpcRefreshTeams(GameObject.FindObjectOfType<ProjectWGameManager> ().teams);
+	}
+	[ClientRpc]
+	public void RpcRefreshTeams(ProjectWGameManager.Team[] teams) {
+		GameObject.FindObjectOfType<SpectatorUIController> ().teams = teams;
+	}
+	public void Spectate() {
+		// Force our player to die and move to spectators
+		CmdSpectate();
+	}
+	[Command]
+	public void CmdSpectate() {
+		this.desiredTeamIndex = -1;
+		GameObject.FindObjectOfType<ProjectWGameManager>().SpawnSpectator(this.gameObject);
+	}
+    public void StopGUI()
+    {
+        this.RpcStopGUI();
+    }
+    [ClientRpc]
+    public void RpcStopGUI()
+    {
+        if (gameHud) gameHud.gameObject.SetActive(false);
     }
 }

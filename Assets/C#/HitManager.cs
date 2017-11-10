@@ -47,8 +47,8 @@ public class HitManager : NetworkBehaviour {
     public static void HitClientside(HitVerificationMethod verificationMethod, HitArguments args)
     {
         PlayerStats myPlayerStats = args.sourcePlayer.GetComponent<PlayerStats>();
-        NetworkBehaviour targetBehavior;
-        if ((targetBehavior = args.target.GetComponentInParent<NetworkBehaviour>()))
+        //NetworkBehaviour targetBehavior;
+        if ((/*targetBehavior = */args.target.GetComponentInParent<NetworkBehaviour>()))
         {
             if (myPlayerStats.isLocalPlayer)    
             {

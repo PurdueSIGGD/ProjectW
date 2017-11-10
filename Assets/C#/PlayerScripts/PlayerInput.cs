@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public abstract class PlayerInput : PlayerComponent {
-    public Transform reticles;
     public Transform cameraSlider;
     public Transform deathTarget;
     public Transform rotator;
@@ -29,14 +28,11 @@ public abstract class PlayerInput : PlayerComponent {
      */
     public abstract InputData getData();
     public override void PlayerComponent_Start() {
-        if (!isLocalPlayer) {
-            reticles.gameObject.SetActive(false);
-        }
     }
 	public override void PlayerComponent_Update() {
         if (isLocalPlayer) {
             InputData myData = getData();
-            if (myData.pause) {
+            if (myData.pause && !isBot()) {
                 myBase.myGUI.TogglePause();
             }
             if (myBase.myGUI.isPaused) {
@@ -86,7 +82,7 @@ public abstract class PlayerInput : PlayerComponent {
         return bot;
     }
     void Death() {
-        reticles.gameObject.SetActive(false);
+		
     }
 
     

@@ -85,6 +85,13 @@
      <Compile Include="Assets\C#\PlayerScripts\PlayerMovement.cs" />
      <Compile Include="Assets\C#\PlayerScripts\PlayerNetworking.cs" />
      <Compile Include="Assets\C#\PlayerScripts\PlayerStats.cs" />
+     <Compile Include="Assets\C#\SpectatorScripts\Spectator.cs" />
+     <Compile Include="Assets\C#\UI\GameHudController.cs" />
+     <Compile Include="Assets\C#\UI\ItemToTrack.cs" />
+     <Compile Include="Assets\C#\UI\SpectatorUIController.cs" />
+     <Compile Include="Assets\C#\UI\TrackedItem.cs" />
+     <Compile Include="Assets\C#\UI\TrackedItemController.cs" />
+     <Compile Include="Assets\C#\UI\TrackedPlayer.cs" />
      <Compile Include="Assets\C#\Usable.cs" />
      <Compile Include="Assets\C#\World\DestructibleItem.cs" />
      <Compile Include="Assets\C#\World\Hazard.cs" />
@@ -104,9 +111,6 @@
  </Reference>
  <Reference Include="UnityEngine.Timeline">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.HoloLens">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>

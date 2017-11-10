@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HumanInput : PlayerInput { 
+public class HumanInput : PlayerInput {
+    public float sensitivityy = 0.05f;
 	public override PlayerInput.InputData getData() {
         InputData data = new InputData();
         data.horizontal = Input.GetAxis("Horizontal");
         data.vertical = Input.GetAxis("Vertical");
-        data.mouseX = Input.GetAxis("Mouse X");
-        data.mouseY = Input.GetAxis("Mouse Y");
+        data.mouseX = Input.GetAxis("Mouse X") * sensitivityy;
+        data.mouseY = Input.GetAxis("Mouse Y") * sensitivityy;
         data.pause = Input.GetAxis("Pause") > 0;
         data.jump = Input.GetAxis("Jump") > 0;
         data.useAbilities = new bool[ABILITY_INPUTS];

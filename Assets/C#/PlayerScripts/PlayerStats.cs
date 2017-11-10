@@ -16,13 +16,21 @@ public class PlayerStats : PlayerComponent, IHittable {
     [SyncVar]
     public bool death;
     private bool hasDeath;
+    [SyncVar]
+    public int teamIndex = -1;
+    [SyncVar]
+    public string playerName;
+    [SyncVar]
+    public int classIndex = -1;
     public GameObject[] deathSounds;
-    public AudioSource hitSound;
-    public Animator hitAnimator;
+	public AudioSource hitSound;
+	[HideInInspector]
+    public Animator hitAnimator; // Assigned in playerGUI
 
     public override void PlayerComponent_Start() {
         if (!isLocalPlayer) {
             magicBar.SetActive(false);
+            healthBar.SetActive(false);
         } else {
             // once we have a GUI
             healthBar.SetActive(false);
@@ -104,7 +112,7 @@ public class PlayerStats : PlayerComponent, IHittable {
     }
     [ClientRpc]
     public void RpcConfirmHit(float damage) {
-        if (isLocalPlayer) {
+		if (isLocalPlayer && !myBase.myInput.isBot()) {
             hitSound.Play();
             hitAnimator.SetTrigger("Hit");
         }
