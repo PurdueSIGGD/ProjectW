@@ -3245,7 +3245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5706400b0cc9d8042bd09b031ef980c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 3}
   trackType: 1
 --- !u!114 &114607037948189518
 MonoBehaviour:

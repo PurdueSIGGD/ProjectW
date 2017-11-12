@@ -11,9 +11,15 @@ public class HitArguments {
     public DamageType damageType;
     public PlayerEffects.Effects effect;
     public float effectDuration;
+	public float effectDamage;
 
-    public HitArguments()
+	public HitArguments() {
+		//Debug.LogError ("HitArguments require a target and a source player");
+	}
+    public HitArguments(GameObject target, GameObject sourcePlayer)
     {
+        this.target = target;
+        this.sourcePlayer = sourcePlayer;
         effect = PlayerEffects.Effects.none;
         damageType = DamageType.Neutral;
     }
@@ -48,4 +54,8 @@ public class HitArguments {
         this.effectDuration = effectDuration;
         return this;
     }
+	public HitArguments withEffectDamage(float effectDamage) {
+		this.effectDamage = effectDamage;
+		return this;
+	}	
 }

@@ -31,10 +31,12 @@ public class Hazard : MonoBehaviour {
     public IEnumerator DamagingBehavior(IHittable h) {
         do {
             // Local damage only
-            h.Hit(new HitArguments()
-                .withDamage(damage)
-                .withDamageType(type));
-            yield return new WaitForSeconds(rate);
+			if (((Component)h).gameObject != null) {
+				h.Hit(new HitArguments(this.gameObject, ((Component)h).gameObject)
+					.withDamage(damage)
+					.withDamageType(type));
+				yield return new WaitForSeconds(rate);
+			}
         } while (h != null && toDamage.Contains(h));
     }
 }

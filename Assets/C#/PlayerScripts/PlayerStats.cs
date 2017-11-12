@@ -41,7 +41,7 @@ public class PlayerStats : PlayerComponent, IHittable {
     public void Hit(HitArguments hit) {
         changeHealth(-1 * hit.damage);
         if (hit.effect != PlayerEffects.Effects.none) {
-            myBase.myEffects.AddEffect(hit.effect, hit.effectDuration);
+            myBase.myEffects.AddEffect(hit);
         }
     }
     public float changeHealth(float f) {

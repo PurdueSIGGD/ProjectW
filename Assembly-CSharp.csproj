@@ -76,6 +76,7 @@
      <Compile Include="Assets\C#\PlayerScripts\PlayerAbility.cs" />
      <Compile Include="Assets\C#\PlayerScripts\PlayerComponent.cs" />
      <Compile Include="Assets\C#\PlayerScripts\PlayerEffects.cs" />
+     <Compile Include="Assets\C#\PlayerScripts\PlayerEffects\Effect_ChangeHealth.cs" />
      <Compile Include="Assets\C#\PlayerScripts\PlayerEffects\Effect_MagicRegen.cs" />
      <Compile Include="Assets\C#\PlayerScripts\PlayerEffects\Effect_SlowTime.cs" />
      <Compile Include="Assets\C#\PlayerScripts\PlayerEffects\Effect_SpeedBoost.cs" />
