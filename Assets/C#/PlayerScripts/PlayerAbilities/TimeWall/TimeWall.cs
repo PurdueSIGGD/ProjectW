@@ -41,4 +41,15 @@ public class TimeWall : MonoBehaviour {
                 r.AddForce(-((Vector3) velocities[i]), ForceMode.VelocityChange);
         }
     }
+
+    void Update()
+    {
+        for(int i=0; i<hitByThese.Count; i++)
+        {
+            Rigidbody r;
+            if((r = (Rigidbody)hitByThese[i]).velocity != Vector3.zero){
+                r.AddForce(-r.velocity, ForceMode.VelocityChange);
+            }
+        }
+    }
 }
