@@ -33,7 +33,7 @@ public class Ability_ObjectSpawner : CooldownAbility {
         Vector3 spawnAngle = data.vectorList[0];
         Vector3 spawnPosition = data.vectorList[1];
 
-        Debug.DrawRay(spawnPoint.position + spawnOffset, spawnAngle, Color.green, 10);
+        
         // Spawn our spell in the place the server told us
         // However if we are the client, we don't wait for that luxury.
         GameObject spawn = GameObject.Instantiate(itemToSpawn, spawnPosition + transform.TransformDirection(spawnOffset), transform.rotation);
@@ -59,7 +59,24 @@ public class Ability_ObjectSpawner : CooldownAbility {
         // Since we send another message to get things done, we shouldn't bother with anyone who isn't local
         // Because we take care of all the networking
         if (isLocalPlayer || myBase.myInput.isBot()) {
-            Vector3 localAngle = aimAngle.forward;
+			// Find the first object colliding in front of us, aim at that if necessary
+            Vector3 localAngle = aimAngle.forward; // aim forward by default
+			RaycastHit[] hits = Physics.RaycastAll (aimAngle.position, aimAngle.forward * 100);
+			Debug.DrawRay(aimAngle.position, aimAngle.forward * 100, Color.green, 10);
+			foreach (RaycastHit h in hits) {
+				PlayerStats tmpSts;
+				if (tmpSts = h.transform.GetComponentInParent<PlayerStats> ()) {
+					if (tmpSts.gameObject == this.gameObject)
+						continue;
+				}
+				if (h.transform.GetComponent<Collider> ().isTrigger) {
+					continue;
+				}
+				//print ("overriding with object: " + h.transform);
+				localAngle = Vector3.Normalize(h.point - spawnPoint.position);
+				break;
+			}
+			Debug.DrawRay(spawnPoint.position, localAngle * 100, Color.red, 10);
             Vector3 localPosition = spawnPoint.position;
             Buf buf = new Buf();
             buf.methodName = OBJECT_SPAWN_METHOD_NAME;

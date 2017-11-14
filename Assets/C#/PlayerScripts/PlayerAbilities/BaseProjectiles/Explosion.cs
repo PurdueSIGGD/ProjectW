@@ -25,6 +25,8 @@ public class Explosion : MonoBehaviour {
         // Hits returns an array of everything in the sphere length, however we are just looking at the start
         foreach (RaycastHit hit in hits) {
             bool isSourcePlayer = false;
+            if (!inLOS(hit)) continue;
+
             PlayerStats ps;
             if ((ps = hit.transform.GetComponentInParent<PlayerStats>())) {
                 //print(ps);
@@ -51,9 +53,7 @@ public class Explosion : MonoBehaviour {
                     if (ps) {
                         target = ps.transform;
                     }
-                    HitManager.HitClientside(new HitArguments()
-                        .withTarget(((Component)hit.transform.gameObject.GetComponentInParent<IHittable>()).gameObject)
-                        .withSourcePlayer(sourcePlayer.GetComponentInParent<PlayerStats>().gameObject)
+                    HitManager.HitClientside(new HitArguments(((Component)hit.transform.gameObject.GetComponentInParent<IHittable>()).gameObject, sourcePlayer.GetComponentInParent<PlayerStats>().gameObject)
                         .withDamage( (isSourcePlayer ? sourcePlayerDamageMultiplier : 1) * ((maxDamage/Vector3.Distance(target.position, transform.position)) + minDamage))
                         .withDamageType(damageType)
                         .withEffect(effect)
@@ -64,4 +64,25 @@ public class Explosion : MonoBehaviour {
             }
         }
 	}
+
+    public bool inLOS(RaycastHit hit)
+    {
+        RaycastHit[] hits = Physics.RaycastAll(transform.position, hit.transform.position - transform.position, Vector3.Distance(transform.position, hit.transform.position));
+        // Hits returns an array of everything in the sphere length, however we are just looking at the start
+
+		//print(hits.size);
+        foreach (RaycastHit hitBetween in hits)
+        {
+			if (hitBetween.transform == hit.transform)
+				continue;
+			if (hitBetween.transform.GetComponent<Collider> ().isTrigger)
+				continue;
+			if (hitBetween.transform.GetComponentInParent<PlayerStats> ()) 
+				continue;
+				Debug.DrawLine(transform.position, hitBetween.point, Color.red, 10);
+			//print (hitBetween.transform);
+			return false;
+        }
+        return true; 
+    }
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 public abstract class Effect : MonoBehaviour {
 
     PlayerEffects target;
+	public GameObject sourcePlayer;
     float endTime = -1;
     public float duration;
     bool started;
@@ -24,6 +25,7 @@ public abstract class Effect : MonoBehaviour {
                 Debug.LogWarning("Effect was not spawned as a child of a target, destroying effects");
             }
         }
+		Effect_Update ();
     
         if (endTime != -1 && Time.time >= endTime) {
             Effect_End(target);

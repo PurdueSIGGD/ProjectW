@@ -12,7 +12,7 @@ public class PlayerEffects : PlayerComponent {
     // 0 for time slow, 1 for time fast, 2 for run speed, 3 for magic regen slow, 4 for magic regen fast, 5 for stunning 
     public PrefabHolder effectPrefabHolder;
     public GameObject[] effectTypes;
-    public enum Effects { none, timeSlow, timeFast, runSpeed, magicRegenSlow, magicRegenFast, stun };
+    public enum Effects { none, timeSlow, timeFast, runSpeed, magicRegenSlow, magicRegenFast, changeHealth };
     // Time and speed
     public float timeModifier = 1;
     public float runSpeedModifier = 1;
@@ -25,16 +25,22 @@ public class PlayerEffects : PlayerComponent {
     public override void PlayerComponent_Start() {
         effectTypes = effectPrefabHolder.prefabs;
     }
-    public void AddEffect(PlayerEffects.Effects effect, float duration) {
-        if (effect != Effects.none) {
-            RpcAddEffect(effect, duration);
+    public void AddEffect(HitArguments hit) {
+        if (hit.effect != Effects.none) {
+            RpcAddEffect(hit);
         }
         
     }
     [ClientRpc]
-    public void RpcAddEffect(Effects effect, float duration) {
-        GameObject eff = GameObject.Instantiate(effectTypes[(int)effect - 1], transform);
-        eff.GetComponent<Effect>().duration = duration;
+    public void RpcAddEffect(HitArguments hit) {
+        GameObject eff = GameObject.Instantiate(effectTypes[(int)hit.effect - 1], transform);
+		Effect effect = eff.GetComponent<Effect> ();
+		effect.duration = hit.effectDuration;
+		effect.sourcePlayer = hit.sourcePlayer;
+		if (effect is Effect_ChangeHealth) {
+			Effect_ChangeHealth e = (Effect_ChangeHealth)effect;
+			e.damage = hit.effectDamage;
+		}
     }
 
     public override void PlayerComponent_Update() {

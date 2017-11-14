@@ -32,7 +32,7 @@ public class ProjectWGameManager : NetworkBehaviour {
 		PlayerStats oldP;
         PlayerGUI oldPG;
 		// if it is -1, they want to be a spectator, so no respawn
-		if ((oldP = player.GetComponent<PlayerStats>()) != null && (oldPG = player.GetComponent<PlayerGUI>()) != null && oldP.teamIndex != -1) {
+		if ((oldP = player.GetComponent<PlayerStats>()) != null && (oldPG = player.GetComponent<PlayerGUI>()) != null && oldPG.desiredTeamIndex != -1) {
 			NetworkConnection connection = oldP.connectionToClient;
 			Transform startPosition = GetStartPosition();
             GameObject newPlayer = Instantiate(classPrefabs[oldP.classIndex], startPosition.position, startPosition.rotation);
@@ -128,7 +128,9 @@ public class ProjectWGameManager : NetworkBehaviour {
 		NetworkServer.Spawn(newPlayer);
 
 		NetworkServer.ReplacePlayerForConnection(connection, newPlayer, 0);
-		//GameObject.Destroy(source);
-	}
+        source.SendMessage("CmdDeath");
+        source.SendMessage("StopGUI");
+        //GameObject.Destroy(source);
+    }
 
 }
