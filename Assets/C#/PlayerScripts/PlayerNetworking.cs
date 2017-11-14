@@ -22,16 +22,24 @@ public class PlayerNetworking : PlayerComponent {
         }
     }
     public void initializeCameras(bool shouldI) {
-		if (!shouldI) {
-			foreach (Camera c in playerCameras) {
-				GameObject.Destroy (c.gameObject);
-			}
-		} else {
-			foreach (Camera c in playerCameras) {
-				c.enabled = true;
-			}
-			playerListener.enabled = true;
-		}
+        if (myBase.isLocalPlayer)
+        {
+            if (!shouldI)
+            {
+                foreach (Camera c in playerCameras)
+                {
+                    GameObject.Destroy(c.gameObject);
+                }
+            }
+            else
+            {
+                foreach (Camera c in playerCameras)
+                {
+                    c.enabled = true;
+                }
+                playerListener.enabled = true;
+            }
+        }
         
     }
     public override void PlayerComponent_Update() {
