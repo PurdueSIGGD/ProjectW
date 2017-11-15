@@ -25,6 +25,11 @@ public class Ability_ObjectSpawner : CooldownAbility {
 
     public override void cooldown_Start() {
         this.ResgisterDelegate(OBJECT_SPAWN_METHOD_NAME, SpawnSpell);
+        ObjectSpawner_Start();
+    }
+    public virtual void ObjectSpawner_Start()
+    {
+
     }
     public override void cooldown_Update() {
         
