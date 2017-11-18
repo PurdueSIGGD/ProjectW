@@ -33,7 +33,7 @@ public class Explosion : MonoBehaviour {
                 if (ps.gameObject == sourcePlayer.gameObject) isSourcePlayer = true;
             }
             Rigidbody r;
-            if ((r = hit.transform.GetComponent<Rigidbody>()) != null) {
+            if ((r = hit.transform.GetComponent<Rigidbody>()) != null && !r.GetComponent<Projectile>()) {
                 if (ps) {
                     // Do something different, not as harsh hit forces
                     if (!ps.death) r.AddForce(Vector3.up * verticalPushForce * (isSourcePlayer ? (pushForce * sourcePlayerForceMultiplier):pushForce) * 2);
@@ -75,7 +75,8 @@ public class Explosion : MonoBehaviour {
         {
 			if (hitBetween.transform == hit.transform)
 				continue;
-			if (hitBetween.transform.GetComponent<Collider> ().isTrigger)
+            Collider c;
+			if ((c = hitBetween.transform.GetComponent<Collider> ()) && c.isTrigger)
 				continue;
 			if (hitBetween.transform.GetComponentInParent<PlayerStats> ()) 
 				continue;

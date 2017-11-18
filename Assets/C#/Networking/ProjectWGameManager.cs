@@ -8,12 +8,15 @@ public class ProjectWGameManager : NetworkBehaviour {
     public float respawnTime = 5;
     public float timeLimit = 20 * 60 * 60; // 20 minutes
     public Transform[] startPositions;
-    public GameObject[] classPrefabs;
+    private GameObject[] classPrefabs;
 	public GameObject spectatorPrefab;
     public int botCount = 0;
 	public Team[] teams;
 
-	[System.Serializable]
+    public PrefabHolder classPrefabHolder;
+
+
+    [System.Serializable]
 	public struct Team
 	{
 		public string teamName;
@@ -35,7 +38,7 @@ public class ProjectWGameManager : NetworkBehaviour {
 		if ((oldP = player.GetComponent<PlayerStats>()) != null && (oldPG = player.GetComponent<PlayerGUI>()) != null && oldPG.desiredTeamIndex != -1) {
 			NetworkConnection connection = oldP.connectionToClient;
 			Transform startPosition = GetStartPosition();
-            GameObject newPlayer = Instantiate(classPrefabs[oldP.classIndex], startPosition.position, startPosition.rotation);
+            GameObject newPlayer = Instantiate(classPrefabs[oldPG.desiredPlayerClass], startPosition.position, startPosition.rotation);
             newPlayer.name = oldP.playerName;
             PlayerStats newP = newPlayer.GetComponent<PlayerStats> ();
             newP.playerName = oldPG.desiredPlayerName;
@@ -58,8 +61,7 @@ public class ProjectWGameManager : NetworkBehaviour {
         Destroy(player.gameObject);
     }
     void Start() {
-		GameObject.FindObjectOfType<SpectatorUIController> ().playerPrefabs = classPrefabs;
-		GameObject.FindObjectOfType<SpectatorUIController> ().teams = teams;
+        classPrefabs = classPrefabHolder.prefabs;
 
         if (isServer) {
 

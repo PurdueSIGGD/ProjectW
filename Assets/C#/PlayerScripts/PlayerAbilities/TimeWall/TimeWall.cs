@@ -31,7 +31,7 @@ public class TimeWall : MonoBehaviour {
                 r.AddForce(-(r.velocity), ForceMode.VelocityChange);
             }
             Projectile p;
-            if (p = r.transform.GetComponent<Projectile>())
+            if (p = col.transform.GetComponent<Projectile>())
             {
                 p.sourcePlayer = ability.gameObject;
             }

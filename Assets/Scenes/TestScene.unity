@@ -2473,15 +2473,13 @@ MonoBehaviour:
   - {fileID: 1236162090}
   - {fileID: 965796855}
   - {fileID: 2109960027}
-  classPrefabs:
-  - {fileID: 1178322756519792, guid: ec4c44f5e4d2f424a876680f5671399d, type: 2}
-  - {fileID: 1063181966065962, guid: f804b1090b443784fb88ce2f19a28406, type: 2}
-  - {fileID: 1860666892717170, guid: 30eb4c1a1bd224c44a0d4ac296483ba9, type: 2}
   spectatorPrefab: {fileID: 1259769144471876, guid: 4f7e7255ee95adf4d852a3d29f9dd46e,
     type: 2}
-  botCount: 3
+  botCount: 0
   teams:
   - teamName: FFA
+  classPrefabHolder: {fileID: 114975933727972506, guid: 1b835cf9884ce1b428c88869c7ccaea6,
+    type: 2}
 --- !u!114 &574942620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6064,10 +6062,6 @@ MonoBehaviour:
   classPickAnimator: {fileID: 155839945}
   gameManager: {fileID: 0}
   player: {fileID: 0}
-  playerPrefabs:
-  - {fileID: 1178322756519792, guid: ec4c44f5e4d2f424a876680f5671399d, type: 2}
-  - {fileID: 1063181966065962, guid: f804b1090b443784fb88ce2f19a28406, type: 2}
-  - {fileID: 1860666892717170, guid: 30eb4c1a1bd224c44a0d4ac296483ba9, type: 2}
   gridPrefab: {fileID: 1029216560978950, guid: 8ffe25017cde4c64196442330e5cf6e6, type: 2}
   gridParent: {fileID: 455730372}
   teamPrefab: {fileID: 1203100433560050, guid: 508bc56ed8ceb3a409fdd24c4e551bbb, type: 2}
@@ -6075,6 +6069,8 @@ MonoBehaviour:
   selectClassButton: {fileID: 1714486706}
   teams: []
   itemTracker: {fileID: 415338888}
+  classPrefabHolder: {fileID: 114975933727972506, guid: 1b835cf9884ce1b428c88869c7ccaea6,
+    type: 2}
   className: {fileID: 1478023121}
   classDescription: {fileID: 2133141752}
   playerName: {fileID: 477038626}

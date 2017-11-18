@@ -352,7 +352,8 @@ MonoBehaviour:
     type: 2}
   trailParticles: {fileID: 198363307782350574}
   lifetime: 10
-  effect: {fileID: 0}
+  effect: 0
+  effectDuration: 3
 --- !u!135 &135731410289461372
 SphereCollider:
   m_ObjectHideFlags: 1

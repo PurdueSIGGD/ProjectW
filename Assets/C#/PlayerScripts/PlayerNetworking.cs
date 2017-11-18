@@ -22,6 +22,13 @@ public class PlayerNetworking : PlayerComponent {
         }
     }
     public void initializeCameras(bool shouldI) {
+        if (playerCameras == null) {
+            return;
+        } else if (playerCameras.Length == 0)
+        {
+            return;
+        }
+
         if (!shouldI)
         {
             foreach (Camera c in playerCameras)

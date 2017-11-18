@@ -31,7 +31,7 @@ public class Hazard : MonoBehaviour {
     public IEnumerator DamagingBehavior(IHittable h) {
         do {
             // Local damage only
-			if (((Component)h).gameObject != null) {
+			if ((Component)h != null && ((Component)h).gameObject != null) {
 				h.Hit(new HitArguments(this.gameObject, ((Component)h).gameObject)
 					.withDamage(damage)
 					.withDamageType(type));

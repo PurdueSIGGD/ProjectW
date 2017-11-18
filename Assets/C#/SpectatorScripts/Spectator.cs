@@ -15,25 +15,18 @@ public class Spectator : NetworkBehaviour {
     public float pauseCooldown = 1; // Cooldown, in seconds
     private float lastUse = -100; // Last time we used it, in seconds;
     private bool shouldBeLocked;
-	[SyncVar]
-	private bool shouldJoinServer;
 
     // Use this for initialization
     void Start () {
         myRigid = this.GetComponent<Rigidbody>();
         uiController = GameObject.FindObjectOfType<SpectatorUIController>();
        
-        shouldBeLocked = false;
-        isPaused = true;
       
         if (isLocalPlayer)
         {
             myParticles.Pause();
 			uiController.AssignOwner(this.gameObject, UnPauseGameWithoutUI, myCamera.GetComponent<Camera>());
-			RefreshTeams ();
-
-			if (shouldJoinServer)
-				uiController.JoinServer ();
+            
 			shouldBeLocked = uiController.screenIndex == -1;
 			isPaused = !shouldBeLocked;
 
@@ -159,25 +152,19 @@ public class Spectator : NetworkBehaviour {
         }
      
     }
-	public void RefreshTeams() {
-		CmdRefreshTeams ();
-	}
-	[Command]
-	public void CmdRefreshTeams() {
-		ProjectWGameManager manager = GameObject.FindObjectOfType<ProjectWGameManager> ();
-		RpcRefreshTeams(manager.teams);
-	}
-	[ClientRpc]
-	public void RpcRefreshTeams(ProjectWGameManager.Team[] teams) {
-		GameObject.FindObjectOfType<SpectatorUIController> ().RefreshTeams (teams);
-
-	}
+	
 	public void JoinServer() {
-		// Called by the network manager when we join a server
-		shouldJoinServer = true;
-
+        // Called by the network manager when we join a server, only happens on the server side
+        RpcJoinServer(GameObject.FindObjectOfType<ProjectWGameManager>().teams);
 	}
-	public void Spectate() {
+    [ClientRpc]
+    public void RpcJoinServer(ProjectWGameManager.Team[] teams)
+    {
+        shouldBeLocked = false; // We enable the mouse since the UI pops up
+        isPaused = true;
+        GameObject.FindObjectOfType<SpectatorUIController>().JoinServer(teams);
+    }
+    public void Spectate() {
 		// Nothing
 	}
 }
