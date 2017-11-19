@@ -57,8 +57,9 @@ public class ProjectWGameManager : NetworkBehaviour {
             }
         }
        
-        yield return new WaitForSeconds(15);
-        Destroy(player.gameObject);
+        yield return new WaitForSeconds(5);
+        print("destroying corpse");
+        player.SetActive(false);
     }
     void Start() {
         classPrefabs = classPrefabHolder.prefabs;
