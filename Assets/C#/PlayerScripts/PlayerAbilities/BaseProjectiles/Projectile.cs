@@ -24,7 +24,12 @@ public class Projectile : MonoBehaviour {
     //private GameObject hitPlayer;
 
     void Start() {
-        Destroy(this.gameObject, 10);
+        Invoke("DestroyMe", lifetime);
+    }
+
+    void DestroyMe()
+    {
+        Destroy(this.gameObject);
     }
 
 	void OnTriggerEnter(Collider col) {

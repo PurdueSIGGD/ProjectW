@@ -8,15 +8,14 @@ public class Ability_TimeWallSpawner : Ability_ObjectSpawner{
 
     private static string GET_ROTATION_ANGLE_METHOD_NAME = "GetRotationAngle";
     private ArrayList hitByThese;
-    private ArrayList velocities;
-    private PlayerComponent.Buf recData;
+    private ArrayList magnitudes;
 
     public override void ObjectSpawner_Start()
     {
         this.ResgisterDelegate(GET_ROTATION_ANGLE_METHOD_NAME, Callback_GetRotationAngle);
 
         hitByThese = new ArrayList();
-        velocities = new ArrayList();
+        magnitudes = new ArrayList();
     }
     public override void OnSpellSpawned(GameObject spawn)
     {
@@ -26,10 +25,10 @@ public class Ability_TimeWallSpawner : Ability_ObjectSpawner{
             t.StartTimeWall(this, this.wallLifetime);
         }
     }
-    public void TimeWallFinished(ArrayList hitByThese, ArrayList velocities) 
+    public void TimeWallFinished(ArrayList hitByThese, ArrayList magnitudes) 
     {
         this.hitByThese = hitByThese;
-        this.velocities = velocities;
+        this.magnitudes = magnitudes;
         if (myBase.isLocalPlayer || (myBase.myInput.isBot() && myBase.isServer))
         {
             Vector3 localAngle = aimAngle.position + aimAngle.forward * 100;
@@ -58,43 +57,25 @@ public class Ability_TimeWallSpawner : Ability_ObjectSpawner{
             buf.vectorList = new Vector3[] { localAngle };
             this.NotifyAllClientDelegates(buf);
         }
-
-        if (recData.vectorList != null && recData.vectorList.Length > 0)
-        {
-            ProcessData();
-        }
        
     }
     private void Callback_GetRotationAngle(PlayerComponent.Buf data)
     {
-        recData = data;
-        if (hitByThese != null && hitByThese.Count > 0)
-        {
-            ProcessData();
-        }
-    } 
+        Vector3 target = data.vectorList[0];
+        for (int i = 0; i < hitByThese.Count; i++) { 
 
-    private void ProcessData()
-    {
-
-        Vector3 target = recData.vectorList[0];
-        print("Time wall finished" + " " + target);
-        for (int i = 0; i < hitByThese.Count; i++)
-        {
-            print("hit by" + hitByThese[i]);
             Rigidbody r = (Rigidbody)hitByThese[i];
             if (r != null && r.gameObject != null)
             {
-                float mag = Vector3.Magnitude((Vector3)velocities[i]);
+                Projectile p;
+                if (p = r.transform.GetComponent<Projectile>())
+                {
+                    p.sourcePlayer = this.gameObject;
+                }
                 Vector3 newDirection = Vector3.Normalize(target - r.transform.position);
-                print(newDirection);
-                r.AddForce(mag * newDirection * returnSpeed);
+                r.AddForce((float)magnitudes[i] * newDirection * returnSpeed);
 
             }
         }
-        hitByThese = null;
-        velocities = null;
-        recData.vectorList = null;
-    }
-    
+    } 
 }

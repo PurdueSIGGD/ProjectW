@@ -7,14 +7,14 @@ public class TimeWall : MonoBehaviour {
     private Ability_TimeWallSpawner ability;
 
     private ArrayList hitByThese;
-    private ArrayList velocities;
+    private ArrayList magnitudes;
 	public void StartTimeWall (Ability_TimeWallSpawner ability, float cooldown) {
         
         this.ability = ability;
        
         Destroy(this.gameObject, cooldown);
         hitByThese = new ArrayList();
-        velocities = new ArrayList();
+        magnitudes = new ArrayList();
 	}
 
     private void OnTriggerEnter(Collider col)
@@ -27,13 +27,15 @@ public class TimeWall : MonoBehaviour {
             if((r = col.GetComponent<Rigidbody>()) != null)
             {
                 hitByThese.Add(r);
-                velocities.Add(r.velocity);
+                magnitudes.Add(Vector3.Magnitude(r.velocity));
                 r.AddForce(-(r.velocity), ForceMode.VelocityChange);
             }
             Projectile p;
-            if (p = col.transform.GetComponent<Projectile>())
+            if (p = r.transform.GetComponent<Projectile>())
             {
                 p.sourcePlayer = ability.gameObject;
+                p.CancelInvoke("DestroyMe");
+                p.Invoke("DestroyMe", p.lifetime);
             }
             return;
         }
@@ -41,7 +43,7 @@ public class TimeWall : MonoBehaviour {
 
     void OnDestroy()
     {
-        ability.TimeWallFinished(hitByThese, velocities);
+        ability.TimeWallFinished(hitByThese, magnitudes);
     }
 
     void Update()
@@ -49,7 +51,16 @@ public class TimeWall : MonoBehaviour {
         for(int i=0; i<hitByThese.Count; i++)
         {
             Rigidbody r;
-            if((Rigidbody) hitByThese[i] != null && (r = (Rigidbody)hitByThese[i]).velocity != Vector3.zero){
+            if((Rigidbody) hitByThese[i] == null)
+            {
+                hitByThese.RemoveAt(i);
+                magnitudes.RemoveAt(i);
+            }
+            else if((r = (Rigidbody)hitByThese[i]).velocity != Vector3.zero){
+                if((float)magnitudes[i] < Vector3.Magnitude(r.velocity))
+                {
+                    magnitudes[i] = (float)magnitudes[i] + Vector3.Magnitude(r.velocity);
+                }
                 r.AddForce(-r.velocity, ForceMode.VelocityChange);
             }
         }
