@@ -15,6 +15,7 @@ public class Spectator : NetworkBehaviour {
     public float pauseCooldown = 1; // Cooldown, in seconds
     private float lastUse = -100; // Last time we used it, in seconds;
     private bool shouldBeLocked;
+    private bool hasJoined;
 
     // Use this for initialization
     void Start () {
@@ -160,9 +161,12 @@ public class Spectator : NetworkBehaviour {
     [ClientRpc]
     public void RpcJoinServer(ProjectWGameManager.Team[] teams)
     {
-        shouldBeLocked = false; // We enable the mouse since the UI pops up
-        isPaused = true;
-        GameObject.FindObjectOfType<SpectatorUIController>().JoinServer(teams);
+        if (isLocalPlayer)
+        {
+            shouldBeLocked = false; // We enable the mouse since the UI pops up
+            isPaused = true;
+            GameObject.FindObjectOfType<SpectatorUIController>().JoinServer(teams);
+        }
     }
     public void Spectate() {
 		// Nothing
