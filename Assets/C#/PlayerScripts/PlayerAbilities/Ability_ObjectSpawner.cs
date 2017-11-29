@@ -25,6 +25,11 @@ public class Ability_ObjectSpawner : CooldownAbility {
 
     public override void cooldown_Start() {
         this.ResgisterDelegate(OBJECT_SPAWN_METHOD_NAME, SpawnSpell);
+        ObjectSpawner_Start();
+    }
+    public virtual void ObjectSpawner_Start()
+    {
+
     }
     public override void cooldown_Update() {
         
@@ -36,7 +41,7 @@ public class Ability_ObjectSpawner : CooldownAbility {
         
         // Spawn our spell in the place the server told us
         // However if we are the client, we don't wait for that luxury.
-        GameObject spawn = GameObject.Instantiate(itemToSpawn, spawnPosition + transform.TransformDirection(spawnOffset), Quaternion.identity);
+        GameObject spawn = GameObject.Instantiate(itemToSpawn, spawnPosition + transform.TransformDirection(spawnOffset), transform.rotation);
         Rigidbody r;
         if (r = spawn.GetComponent<Rigidbody>())
         {

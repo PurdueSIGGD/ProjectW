@@ -11,7 +11,7 @@ public abstract class PlayerInput : PlayerComponent {
     private bool bot; // Default false
 
     public static float MAX_CAMERA_DISTANCE = -1.63f;
-    public static int ABILITY_INPUTS = 3;
+    public static int ABILITY_INPUTS = 4;
 	public class InputData {
         // Class to store all input data
         public float mouseX;

@@ -124,17 +124,6 @@ public class PlayerGUI : PlayerComponent {
             NetworkServer.RemoveExternalConnection(this.connectionToServer.connectionId);
         }
     }
-	public void RefreshTeams() {
-		CmdRefreshTeams ();
-	}
-	[Command]
-	public void CmdRefreshTeams() {
-		RpcRefreshTeams(GameObject.FindObjectOfType<ProjectWGameManager> ().teams);
-	}
-	[ClientRpc]
-	public void RpcRefreshTeams(ProjectWGameManager.Team[] teams) {
-		GameObject.FindObjectOfType<SpectatorUIController> ().teams = teams;
-	}
 	public void Spectate() {
 		// Force our player to die and move to spectators
 		CmdSpectate();

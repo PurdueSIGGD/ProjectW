@@ -113,10 +113,15 @@ public abstract class PlayerComponent : NetworkBehaviour {
     [ClientRpc]
     void RpcAddBuf(BufWrapper data) {
         //Debug.Log("adding buf at index " + data.index + " which is " + myComponents[data.index]);
-        for (int i = 0; i < myComponents.Length; i++) {
-            if (i == data.index) {
-                myComponents[i].bufData = data.buf;
-                myComponents[i].BufChanged();
+        if (myBase != null)
+        {
+            for (int i = 0; i < myComponents.Length; i++)
+            {
+                if (i == data.index)
+                {
+                    myComponents[i].bufData = data.buf;
+                    myComponents[i].BufChanged();
+                }
             }
         }
     }

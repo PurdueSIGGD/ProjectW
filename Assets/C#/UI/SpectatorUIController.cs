@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -22,7 +23,7 @@ public class SpectatorUIController : MonoBehaviour {
 
 	[HideInInspector]
     public GameObject player; // EIther spectator or actual player
-	public GameObject[] playerPrefabs;
+    private GameObject[] playerPrefabs;
 	public GameObject gridPrefab;
 	public RectTransform gridParent;
 	public GameObject teamPrefab;
@@ -32,20 +33,24 @@ public class SpectatorUIController : MonoBehaviour {
 	public ProjectWGameManager.Team[] teams;
 	public TrackedItemController itemTracker;
 
+    public PrefabHolder classPrefabHolder;
+
     // Use this for initialization
     void Start () {
+
 	}
 	void Update() {
 		selectClassButton.interactable = teamIndex != -1;
 	}
-	public void JoinServer() {
+   
+    public void JoinServer(ProjectWGameManager.Team[] teams) {
         SetScreenIndex(1);
         gameManager = GameObject.FindObjectOfType<ProjectWGameManager>();
+        RefreshTeams(teams);
 		foreach (Transform child in gridParent) {
 			GameObject.Destroy (child.gameObject);
 		}
-
-
+        playerPrefabs = classPrefabHolder.prefabs;
 		for (int i = 0; i < playerPrefabs.Length; i++) {
 			GameObject createdGridItem = GameObject.Instantiate (gridPrefab, gridParent);
 			createdGridItem.GetComponentInChildren<Text> ().text = playerPrefabs [i].name;
@@ -54,8 +59,8 @@ public class SpectatorUIController : MonoBehaviour {
 			createdGridItem.GetComponent<Button>().onClick.AddListener(() => { SelectClass(captured); });
 		}
     }
-
-	public void RefreshTeams(ProjectWGameManager.Team[] teams) {
+    
+    public void RefreshTeams(ProjectWGameManager.Team[] teams) {
 		foreach (Transform child in teamParent) {
 			GameObject.Destroy (child.gameObject);
 		}
