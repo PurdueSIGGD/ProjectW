@@ -102,7 +102,7 @@ public class PlayerStats : PlayerComponent, IHittable {
     [Command]
     public void CmdApplyDamage(HitManager.HitVerificationMethod ver, HitArguments hit) {
         //print("applying damage");
-        if (HitManager.VerifyHit(ver, hit))
+		if (HitManager.VerifyHit(ver, hit) && hit.target != null && hit.target.GetComponentInParent<IHittable>() != null)
         {
             hit.target.GetComponentInParent<IHittable>().Hit(hit);
             if (hit.target.GetComponentInParent<PlayerStats>() && hit.target != this.gameObject) {
@@ -156,5 +156,12 @@ public class PlayerStats : PlayerComponent, IHittable {
             MoveToLayer(child, layer);
         }
     }
+	public void despawnCorpse() {
+		RpcDespawnCorpse ();
+	}
+	[ClientRpc]
+	public void RpcDespawnCorpse() {
+		this.gameObject.SetActive (false);
+	}
     
 }

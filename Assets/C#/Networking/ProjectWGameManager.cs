@@ -59,7 +59,7 @@ public class ProjectWGameManager : NetworkBehaviour {
        
         yield return new WaitForSeconds(5);
         print("destroying corpse");
-        player.SetActive(false);
+		oldP.despawnCorpse ();
     }
     void Start() {
         classPrefabs = classPrefabHolder.prefabs;
