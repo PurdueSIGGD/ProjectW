@@ -134,6 +134,8 @@ GameObject:
   - component: {fileID: 114071815810301062}
   - component: {fileID: 114243021831766576}
   - component: {fileID: 114944165981954688}
+  - component: {fileID: 114438658321443894}
+  - component: {fileID: 114316446807974130}
   m_Layer: 8
   m_Name: Flame Player
   m_TagString: Untagged
@@ -3188,6 +3190,28 @@ MonoBehaviour:
   spawnOffset: {x: 0, y: 0, z: -3}
   aimAngle: {fileID: 4421330956186678}
   spawnSpeed: 0
+--- !u!114 &114316446807974130
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1063181966065962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fd18e44f7e3c744c9c34270969fff7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magicDraw: 70
+  cooldown: 3
+  itemToSpawn: {fileID: 1817249387651284, guid: 291968355faab8848af88615cabf21f4,
+    type: 2}
+  spawnPoint: {fileID: 4738656710400100}
+  spawnOffset: {x: 0, y: 0, z: 0}
+  aimAngle: {fileID: 4421330956186678}
+  spawnSpeed: 0
+  spawnRange: 20
+  numSpawns: 5
+  delay: 0.5
 --- !u!114 &114347386704580538
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3202,6 +3226,26 @@ MonoBehaviour:
   playerCameras:
   - {fileID: 20965489431237814}
   playerListener: {fileID: 81921070716458134}
+--- !u!114 &114438658321443894
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1063181966065962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9865a68ccb60784080f263aac2eb9f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magicDraw: 45
+  cooldown: 2
+  itemToSpawn: {fileID: 1817249387651284, guid: 291968355faab8848af88615cabf21f4,
+    type: 2}
+  spawnPoint: {fileID: 4738656710400100}
+  spawnOffset: {x: 0, y: 0, z: 0}
+  aimAngle: {fileID: 4421330956186678}
+  spawnSpeed: 0
+  spawnRange: 10
 --- !u!114 &114539094655183288
 MonoBehaviour:
   m_ObjectHideFlags: 1
