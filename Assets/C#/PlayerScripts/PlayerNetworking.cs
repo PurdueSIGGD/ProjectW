@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class PlayerNetworking : PlayerComponent {
     public Camera[] playerCameras;
@@ -49,6 +50,13 @@ public class PlayerNetworking : PlayerComponent {
     }
     public override void PlayerComponent_Update() {
 
+    }
+    [ClientRpc]
+    public void RpcGameOver(ProjectWGameManager.Winner winner)
+    {
+        Time.timeScale = 0.3f;
+        if (myBase.myGUI.spectatorUIController) myBase.myGUI.spectatorUIController.GameOver(winner);
+        myBase.myInput.disabled = true;
     }
 
 

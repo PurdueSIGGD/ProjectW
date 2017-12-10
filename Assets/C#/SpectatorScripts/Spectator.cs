@@ -169,6 +169,12 @@ public class Spectator : NetworkBehaviour {
         }
     }
     public void Spectate() {
-		// Nothing
-	}
+        // Nothing
+    }
+    [ClientRpc]
+    public void RpcGameOver(ProjectWGameManager.Winner winner)
+    {
+        Time.timeScale = 0.3f;
+        uiController.GameOver(winner);
+    }
 }

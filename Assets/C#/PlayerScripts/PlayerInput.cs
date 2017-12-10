@@ -7,6 +7,7 @@ public abstract class PlayerInput : PlayerComponent {
     public Transform cameraSlider;
     public Transform deathTarget;
     public Transform rotator;
+    public bool disabled;
 
     private bool bot; // Default false
 
@@ -29,8 +30,11 @@ public abstract class PlayerInput : PlayerComponent {
     public abstract InputData getData();
     public override void PlayerComponent_Start() {
     }
-	public override void PlayerComponent_Update() {
-        if (isLocalPlayer) {
+    public override void PlayerComponent_Update() {
+    }
+    public void FixedUpdate()
+    {
+        if (isLocalPlayer && !disabled) {
             InputData myData = getData();
             if (myData.pause && !isBot()) {
                 myBase.myGUI.TogglePause();

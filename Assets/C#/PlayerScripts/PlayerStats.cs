@@ -19,6 +19,8 @@ public class PlayerStats : PlayerComponent, IHittable {
     [SyncVar]
     public int teamIndex = -1;
     [SyncVar]
+    public Color teamColor = Color.red;
+    [SyncVar]
     public string playerName;
     [SyncVar]
     public int classIndex = -1;
@@ -102,6 +104,15 @@ public class PlayerStats : PlayerComponent, IHittable {
     [Command]
     public void CmdApplyDamage(HitManager.HitVerificationMethod ver, HitArguments hit) {
         //print("applying damage");
+        PlayerStats targetStats;
+        if (hit.sourcePlayerTeam != -1 && (targetStats = hit.target.GetComponentInParent<PlayerStats>()))
+        {
+            if (targetStats.teamIndex == this.teamIndex && !hit.hitSameTeam)
+            {
+                print("Same team, not registering hit");
+                return;
+            }
+        }
 		if (HitManager.VerifyHit(ver, hit) && hit.target != null && hit.target.GetComponentInParent<IHittable>() != null)
         {
             hit.target.GetComponentInParent<IHittable>().Hit(hit);
@@ -163,5 +174,7 @@ public class PlayerStats : PlayerComponent, IHittable {
 	public void RpcDespawnCorpse() {
 		this.gameObject.SetActive (false);
 	}
-    
+  
+
+
 }

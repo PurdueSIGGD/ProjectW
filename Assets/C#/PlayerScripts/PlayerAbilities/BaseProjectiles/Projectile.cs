@@ -18,6 +18,7 @@ public class Projectile : MonoBehaviour {
     public float lifetime = 10;
     public PlayerEffects.Effects effect;
     public float effectDuration = 3;
+    public bool hitSameTeam = false;
 
     private bool hasHit;
 
@@ -40,6 +41,7 @@ public class Projectile : MonoBehaviour {
         if (!sourcePlayer) return; // Shouldn't collide with anything that isn't a source player
         if ((ps = col.GetComponentInParent<PlayerStats>())) {
             if (ps.gameObject == sourcePlayer.gameObject) return;
+            if (!hitSameTeam && ps.teamIndex == sourcePlayer.GetComponent<PlayerStats>().teamIndex) return; // dont hit players on same team
         }
         /* ACTIONS TO TAKE POST-HIT */
 
@@ -49,7 +51,8 @@ public class Projectile : MonoBehaviour {
                 .withDamage(damage)
                 .withDamageType(damageType)
                 .withEffect(effect)
-                .withEffectDuration(effectDuration));
+                .withEffectDuration(effectDuration)
+                .withHitSameTeam(hitSameTeam));
         }
 
         if (dieOnHit) {

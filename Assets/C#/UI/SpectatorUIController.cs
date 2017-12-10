@@ -17,6 +17,7 @@ public class SpectatorUIController : MonoBehaviour {
     public Animator welcomeAnimator;
     public Animator teamPickAnimator;
     public Animator classPickAnimator;
+    public Animator gameOverAnimator;
 
     [HideInInspector]
     public ProjectWGameManager gameManager;
@@ -61,15 +62,18 @@ public class SpectatorUIController : MonoBehaviour {
     }
     
     public void RefreshTeams(ProjectWGameManager.Team[] teams) {
+        print("refreshing teams");
 		foreach (Transform child in teamParent) {
 			GameObject.Destroy (child.gameObject);
 		}
 		this.teams = teams;
 		for (int i = 0; i < teams.Length; i++) {
 			GameObject createdGridItem = GameObject.Instantiate (teamPrefab, teamParent);
-			createdGridItem.GetComponentInChildren<Text> ().text = teams [i].teamName;
-			//createdGridItem.GetComponentInChildren<Image>().sprite = 
-			int captured = i;
+            //print("team stuff " + teams[i].teamColor);
+            createdGridItem.GetComponentInChildren<Text>().text = teams [i].teamName;
+            createdGridItem.GetComponentInChildren<Text>().color = teams[i].teamColor;
+            // TODO createdGridItem.GetComponentInChildren<Image>().sprite = teams[i].teamSprite;
+            int captured = i;
 			createdGridItem.GetComponentInChildren<Button>().onClick.AddListener(() => { PickTeam(captured); });
 		}
 	}
@@ -165,6 +169,16 @@ public class SpectatorUIController : MonoBehaviour {
 		args.playerName = playerName.text;
 		player.SendMessage("HandlePickingClass", args);
         SetScreenIndex(-1);
+    }
+    public void GameOver(ProjectWGameManager.Winner winner)
+    {
+        gameOverAnimator.SetBool("Showing", true);
+        pauseAnimator.SetBool("Showing", false);
+        welcomeAnimator.SetBool("Showing", false);
+        teamPickAnimator.SetBool("Showing", false);
+        classPickAnimator.SetBool("Showing", false);
+        // TODO set game over winner and score
+
     }
 
 

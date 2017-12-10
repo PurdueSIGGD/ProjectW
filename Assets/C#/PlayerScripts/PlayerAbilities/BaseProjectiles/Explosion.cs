@@ -15,6 +15,8 @@ public class Explosion : MonoBehaviour {
     public float sourcePlayerDamageMultiplier;
     public float sourcePlayerForceMultiplier;
 
+    public bool hitSameTeam = false;
+
     private ArrayList hitHittables;
 
     // Use this for initialization
@@ -31,6 +33,7 @@ public class Explosion : MonoBehaviour {
             if ((ps = hit.transform.GetComponentInParent<PlayerStats>())) {
                 //print(ps);
                 if (ps.gameObject == sourcePlayer.gameObject) isSourcePlayer = true;
+                if (!isSourcePlayer && !hitSameTeam && ps.teamIndex == sourcePlayer.GetComponent<PlayerStats>().teamIndex) return; // dont hit players on same team
             }
             Rigidbody r;
             if ((r = hit.transform.GetComponent<Rigidbody>()) != null && !r.GetComponent<Projectile>()) {
@@ -57,7 +60,8 @@ public class Explosion : MonoBehaviour {
                         .withDamage( (isSourcePlayer ? sourcePlayerDamageMultiplier : 1) * ((maxDamage/Vector3.Distance(target.position, transform.position)) + minDamage))
                         .withDamageType(damageType)
                         .withEffect(effect)
-                        .withEffectDuration(effectDuration));
+                        .withEffectDuration(effectDuration)
+                        .withHitSameTeam(hitSameTeam));
                     hitHittables.Add(h);
                 }
 

@@ -17,7 +17,6 @@ public class PlayerGUI : PlayerComponent {
     public string desiredPlayerName;
     [SyncVar]
     public int desiredTeamIndex;
-
 	public GameObject hudPrefab;
 	private GameObject hudRoot;
 	private GameHudController gameHud;
@@ -36,6 +35,10 @@ public class PlayerGUI : PlayerComponent {
 			myBase.myStats.hitAnimator = gameHud.hitMarker;
             spectatorUIController = GameObject.FindObjectOfType<SpectatorUIController>();
 			spectatorUIController.AssignOwner(this.gameObject, UnPauseGameWithoutUI, myBase.myNetworking.playerCameras[0]);
+            foreach (Image i in gameHud.teamColoredImages)
+            {
+                i.color = myBase.myStats.teamColor;
+            }
             UnPauseGame();
         } else {
 			
