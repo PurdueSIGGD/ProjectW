@@ -177,4 +177,9 @@ public class Spectator : NetworkBehaviour {
         Time.timeScale = 0.3f;
         uiController.GameOver(winner);
     }
+    [ClientRpc]
+    public void RpcGameReset()
+    {
+        Time.timeScale = 1;
+    }
 }

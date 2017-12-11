@@ -28,8 +28,12 @@ public class PlayerStats : PlayerComponent, IHittable {
 	public AudioSource hitSound;
 	[HideInInspector]
     public Animator hitAnimator; // Assigned in playerGUI
+    [HideInInspector]
+    public int lastHitPlayerId;
+    private float lastHitTime;
 
     public override void PlayerComponent_Start() {
+        
         if (!isLocalPlayer) {
             magicBar.SetActive(false);
             healthBar.SetActive(false);
@@ -41,6 +45,11 @@ public class PlayerStats : PlayerComponent, IHittable {
     }
     
     public void Hit(HitArguments hit) {
+        if (hit.sourcePlayerTeam != teamIndex || teamIndex == -1)
+        {
+            lastHitPlayerId = hit.sourcePlayer.GetComponent<PlayerInput>().GetPlayerId();
+            lastHitTime = Time.time;
+        }
         changeHealth(-1 * hit.damage);
         if (hit.effect != PlayerEffects.Effects.none) {
             myBase.myEffects.AddEffect(hit);
@@ -91,12 +100,20 @@ public class PlayerStats : PlayerComponent, IHittable {
             this.BroadcastMessage("Death");
             hasDeath = true;
         }
+
+        if (Time.time - lastHitTime > 5 && lastHitPlayerId != 0)
+        {
+            // Reset last hit
+            lastHitPlayerId = 0;
+        }
         
         if (death && !hasDeath) {
             // Other players have to react to the death
             this.BroadcastMessage("Death");
             hasDeath = true;
         }
+
+
     }
     /**
      * You can only tell the server to do a command inside of the root player control, so this will allow the server to do damage

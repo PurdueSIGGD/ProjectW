@@ -9,15 +9,18 @@ public class ProjectWGameManager : NetworkBehaviour {
     public float timeLimit = 20 * 60 * 60; // 20 minutes
     public float gameTime;
     public Transform[] startPositions;
-    private GameObject[] classPrefabs;
 	public GameObject spectatorPrefab;
     public int botCount = 0;
     public bool friendlyFire;
 	public Team[] teams;
+    public Scoreboard scoreBoard;
+    private GameMode gameMode;
+    private GameObject[] classPrefabs;
     private bool isGameOver;
+    public string[] scenesToLoad;
 
     public PrefabHolder classPrefabHolder;
-
+    
 
     [System.Serializable]
 	public struct Team
@@ -26,9 +29,9 @@ public class ProjectWGameManager : NetworkBehaviour {
         public int teamIndex;
         public Color teamColor;
 	}
-    [System.Serializable]
-    public struct Winner
+    public class Winner
     {
+        public bool exists = true;
         public string winnerName;
         public string winnerScore;
         public Color winnerColor;
@@ -36,6 +39,19 @@ public class ProjectWGameManager : NetworkBehaviour {
     
     public void AddDeath(GameObject player, string playerid) {
         if (!isServer) return;
+        int lastHitPlayer = player.GetComponent<PlayerStats>().lastHitPlayerId;
+        int playerId = player.GetComponent<PlayerInput>().GetPlayerId();
+
+        // Update deaths
+        scoreBoard.UpdateScore(playerId, 0, 0, 1);
+
+        if (lastHitPlayer != playerId && lastHitPlayer != 0)
+        { // 0 means no hit, dont want to kill ourselves
+            // Update kills
+            scoreBoard.UpdateScore(lastHitPlayer, 1, 0, 0);
+        }
+
+
         //print("Adding death as player: " + playerid);
         //table.Add(playerid, true);
         StartCoroutine(cRespawnPlayer(player));
@@ -56,15 +72,16 @@ public class ProjectWGameManager : NetworkBehaviour {
             newP.playerName = oldPG.desiredPlayerName;
             newP.classIndex = oldPG.desiredPlayerClass;
             newP.teamIndex = oldPG.desiredTeamIndex;
-            newP.teamColor = teams[newP.teamIndex].teamColor;
+            newP.teamColor = teams[teams.Length > 1?newP.teamIndex:0].teamColor;
             PlayerGUI newPG = newPlayer.GetComponent<PlayerGUI>();
             newPG.desiredPlayerName = oldPG.desiredPlayerName;
             newPG.desiredPlayerClass = oldPG.desiredPlayerClass;
             newPG.desiredTeamIndex = oldPG.desiredTeamIndex;
             NetworkServer.Spawn(newPlayer);
             // If not a bot, move connection to a new thing
-            if (player.GetComponent<PlayerInput>().isBot()) {
-				newPlayer.GetComponent<PlayerInput>().SendMessage("setBot");
+            int botId;
+            if ((botId = player.GetComponent<PlayerInput>().getBot()) != -1) {
+				newPlayer.GetComponent<PlayerInput>().SendMessage("setBot", botId);
 			} else {
 				NetworkServer.ReplacePlayerForConnection(connection, newPlayer, 0);
             }
@@ -77,6 +94,10 @@ public class ProjectWGameManager : NetworkBehaviour {
     void Start() {
         classPrefabs = classPrefabHolder.prefabs;
         gameTime = timeLimit;
+        if (!(gameMode = this.GetComponent<GameMode>()))
+        {
+            Debug.LogWarning("Unable to find a gamemode. This game will only end from timing out");
+        }
         if (isServer) {
             for (int i = 0; i > teams.Length; i++)
             {
@@ -87,13 +108,12 @@ public class ProjectWGameManager : NetworkBehaviour {
                 Transform startPosition = GetStartPosition();
                 int classIndex = Random.Range(0, classPrefabs.Length - 1);
                 GameObject spawn = Instantiate(classPrefabs[classIndex], startPosition.position, startPosition.rotation);
-                spawn.SendMessage("setBot");
+                spawn.SendMessage("setBot", i + 1);
                 NetworkServer.Spawn(spawn);
                 PlayerStats stats = spawn.GetComponent<PlayerStats>();
                 int teamIndex = Random.Range(0, teams.Length);
-                print(teams.Length + " team index: " + teamIndex);
-                stats.teamIndex = teamIndex;
-                stats.teamColor = teams[teamIndex].teamColor;
+                stats.teamIndex = teams.Length > 1 ? teamIndex : -1;
+                stats.teamColor = teams[teams.Length > 1 ? teamIndex : 0].teamColor;
                 stats.classIndex = classIndex;
                 stats.playerName = classPrefabs[classIndex].name + " " + i;
 
@@ -112,27 +132,27 @@ public class ProjectWGameManager : NetworkBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (gameTime - Time.deltaTime <= 0) {
-            if (isGameOver)
+        gameTime -= Time.deltaTime;
+        if (isGameOver)
+        {
+            if (gameTime < -3.5f)
             {
-                gameTime -= Time.deltaTime;
-                if (gameTime < -5)
-                {
-                    // TODO new map
-                }
-            } else
+                GameReset();
+                networkManager.ServerChangeScene(scenesToLoad[Random.Range(0, scenesToLoad.Length - 1)]);
+            }
+            
+        } else
+        {
+            Winner winner = CheckWinCondition();
+            if (winner.exists)
             {
+                GameOver(winner);
                 gameTime = 0;
-                Winner timeWinner = new Winner();
-                // Timeout
-                timeWinner.winnerName = "Nobody";
-                GameOver(timeWinner);
                 isGameOver = true;
             }
-           
-        } else {
-            gameTime -= Time.deltaTime;
+            
         }
+        
     }
     Transform GetStartPosition() {
         return startPositions[UnityEngine.Random.Range(0, startPositions.Length - 1)];
@@ -145,7 +165,7 @@ public class ProjectWGameManager : NetworkBehaviour {
 		newPlayer.name = playerName;
 		PlayerStats p = newPlayer.GetComponent<PlayerStats> ();
 		p.teamIndex = teamIndex;
-        p.teamColor = teams[teamIndex].teamColor;
+        p.teamColor = teams[teams.Length > 1 ? teamIndex : 0].teamColor;
         p.playerName = playerName;
         p.classIndex = classIndex;
         PlayerGUI newPG = newPlayer.GetComponent<PlayerGUI>();
@@ -173,20 +193,57 @@ public class ProjectWGameManager : NetworkBehaviour {
     }
     public void GameOver(Winner winner)
     {
-        ArrayList players = new ArrayList();
-        foreach (PlayerStats p in GameObject.FindObjectsOfType<PlayerStats>())
+        foreach (PlayerNetworking p in GameObject.FindObjectsOfType<PlayerNetworking>())
         {
-            players.Add(p.gameObject);
+            p.RpcGameOver(winner);
         }
         foreach (Spectator p in GameObject.FindObjectsOfType<Spectator>())
         {
-            players.Add(p.gameObject);
+            p.RpcGameOver(winner);
+        }
+    }
+    public void GameReset()
+    {
+        Time.timeScale = 1;
+        foreach (PlayerNetworking p in GameObject.FindObjectsOfType<PlayerNetworking>())
+        {
+            p.RpcGameReset();
+        }
+        foreach (Spectator p in GameObject.FindObjectsOfType<Spectator>())
+        {
+            p.RpcGameReset();
+        }
+    }
+    /**
+     * Checks to see if the game is over
+     * If it is not over, winner is returned null
+     * Otherwise, we return the winner with the data about who won
+     * 
+     */
+    public Winner CheckWinCondition()
+    {
+        // Timeout condition
+        if (gameTime - Time.deltaTime <= 0)
+        {
+            gameTime = 0;
+            Winner timeWinner = new Winner
+            {
+                exists = true
+            };
+            timeWinner.winnerName = "Nobody";
+            return timeWinner;
+        }
+        if (gameMode != null)
+        {
+            return gameMode.checkWinCondition();
         }
 
-        foreach (Object o in players.ToArray())
+        // Otheriwise, nobody win
+        Winner notWon = new Winner
         {
-            ((GameObject)o).SendMessage("RpcGameOver", winner);
-        }
+            exists = false
+        };
+        return notWon;
     }
 
 }

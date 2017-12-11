@@ -58,7 +58,10 @@ public class PlayerNetworking : PlayerComponent {
         if (myBase.myGUI.spectatorUIController) myBase.myGUI.spectatorUIController.GameOver(winner);
         myBase.myInput.disabled = true;
     }
-
-
-
+    [ClientRpc]
+    public void RpcGameReset()
+    {
+        Time.timeScale = 1;
+    }
+    
 }

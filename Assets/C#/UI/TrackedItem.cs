@@ -19,7 +19,6 @@ public class TrackedItem : MonoBehaviour {
 		hasStarted = true;
         sprite.sprite = target.GetComponent<ItemToTrack>().sprite;
         myAnim = this.GetComponent<Animator>();
-        myAnim.SetBool("Showing", true);
 		Start_Extended(target);
 	}
 

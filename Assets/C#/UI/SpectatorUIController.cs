@@ -34,6 +34,10 @@ public class SpectatorUIController : MonoBehaviour {
 	public ProjectWGameManager.Team[] teams;
 	public TrackedItemController itemTracker;
 
+    public Image[] winnerColors;
+    public Text winnerText;
+    public Text winnerScore;
+
     public PrefabHolder classPrefabHolder;
 
     // Use this for initialization
@@ -62,7 +66,7 @@ public class SpectatorUIController : MonoBehaviour {
     }
     
     public void RefreshTeams(ProjectWGameManager.Team[] teams) {
-        print("refreshing teams");
+        //print("refreshing teams");
 		foreach (Transform child in teamParent) {
 			GameObject.Destroy (child.gameObject);
 		}
@@ -178,7 +182,12 @@ public class SpectatorUIController : MonoBehaviour {
         teamPickAnimator.SetBool("Showing", false);
         classPickAnimator.SetBool("Showing", false);
         // TODO set game over winner and score
-
+        winnerText.text = "Winner: " + winner.winnerName;
+        winnerScore.text = "Score: " + winner.winnerScore;
+        foreach (Image i in winnerColors)
+        {
+            i.color = winner.winnerColor;
+        }
     }
 
 

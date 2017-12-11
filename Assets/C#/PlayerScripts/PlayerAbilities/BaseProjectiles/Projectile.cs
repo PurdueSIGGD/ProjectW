@@ -41,7 +41,7 @@ public class Projectile : MonoBehaviour {
         if (!sourcePlayer) return; // Shouldn't collide with anything that isn't a source player
         if ((ps = col.GetComponentInParent<PlayerStats>())) {
             if (ps.gameObject == sourcePlayer.gameObject) return;
-            if (!hitSameTeam && ps.teamIndex == sourcePlayer.GetComponent<PlayerStats>().teamIndex) return; // dont hit players on same team
+            if (!hitSameTeam && ps.teamIndex == sourcePlayer.GetComponent<PlayerStats>().teamIndex && ps.teamIndex != -1) return; // dont hit players on same team
         }
         /* ACTIONS TO TAKE POST-HIT */
 

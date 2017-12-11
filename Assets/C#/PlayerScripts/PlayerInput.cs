@@ -9,7 +9,7 @@ public abstract class PlayerInput : PlayerComponent {
     public Transform rotator;
     public bool disabled;
 
-    private bool bot; // Default false
+    private int bot = -1; // Default -1 for player
 
     public static float MAX_CAMERA_DISTANCE = -1.63f;
     public static int ABILITY_INPUTS = 4;
@@ -29,6 +29,7 @@ public abstract class PlayerInput : PlayerComponent {
      */
     public abstract InputData getData();
     public override void PlayerComponent_Start() {
+
     }
     public override void PlayerComponent_Update() {
     }
@@ -73,8 +74,8 @@ public abstract class PlayerInput : PlayerComponent {
         }
         
 	}
-    void setBot() {
-        bot = true;
+    void setBot(int botId) {
+        bot = botId;
     }
     /**
      * Returns true if and only if called on the server, and this player is a bot with no player attached to it
@@ -83,10 +84,24 @@ public abstract class PlayerInput : PlayerComponent {
      * But if it is loaded with the scene, it says it is both the server and the client.
      */
     public bool isBot() {
+        return bot > 0;
+    }
+    public int getBot()
+    {
         return bot;
     }
     void Death() {
 		
+    }
+    public int GetPlayerId()
+    {
+        if (isBot())
+        {
+            return -1 * bot;
+        } else
+        {
+            return this.connectionToClient.connectionId + 1;
+        }
     }
 
     

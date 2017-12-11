@@ -33,7 +33,7 @@ public class Explosion : MonoBehaviour {
             if ((ps = hit.transform.GetComponentInParent<PlayerStats>())) {
                 //print(ps);
                 if (ps.gameObject == sourcePlayer.gameObject) isSourcePlayer = true;
-                if (!isSourcePlayer && !hitSameTeam && ps.teamIndex == sourcePlayer.GetComponent<PlayerStats>().teamIndex) return; // dont hit players on same team
+                if (!isSourcePlayer && !hitSameTeam && ps.teamIndex == sourcePlayer.GetComponent<PlayerStats>().teamIndex && ps.teamIndex != -1) continue; // dont hit players on same team
             }
             Rigidbody r;
             if ((r = hit.transform.GetComponent<Rigidbody>()) != null && !r.GetComponent<Projectile>()) {

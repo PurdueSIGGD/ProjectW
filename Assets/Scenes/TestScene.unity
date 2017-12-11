@@ -289,6 +289,79 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 35184901}
+--- !u!1 &43898261
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 43898262}
+  - component: {fileID: 43898264}
+  - component: {fileID: 43898263}
+  m_Layer: 0
+  m_Name: Scoreboard
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &43898262
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 43898261}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -963.6195, y: -537.23663, z: 3.1076982}
+  m_LocalScale: {x: 1.7006199, y: 1.7006199, z: 1.7006199}
+  m_Children: []
+  m_Father: {fileID: 1596421048}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &43898263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 43898261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f1360fae5748664c92a8e1a2f38a406, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &43898264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 43898261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!1 &75250567
 GameObject:
   m_ObjectHideFlags: 0
@@ -2213,6 +2286,7 @@ GameObject:
   - component: {fileID: 574942617}
   - component: {fileID: 574942619}
   - component: {fileID: 574942620}
+  - component: {fileID: 574942621}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2297,6 +2371,9 @@ MonoBehaviour:
   - teamName: Wizards
     teamIndex: 0
     teamColor: {r: 0, g: 0, b: 1, a: 1}
+  scoreBoard: {fileID: 43898263}
+  scenesToLoad:
+  - TestScene
   classPrefabHolder: {fileID: 114975933727972506, guid: 1b835cf9884ce1b428c88869c7ccaea6,
     type: 2}
 --- !u!114 &574942620
@@ -2310,6 +2387,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3e8f34829d726a438412903c47a9130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &574942621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 574942616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2efcd165ad9160d448465ae02ed65af4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  KillCount: 5
 --- !u!1 &596029759
 GameObject:
   m_ObjectHideFlags: 0
@@ -5663,8 +5752,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1596421047}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 566.62836, y: 315.90634, z: -1.8273914}
-  m_LocalScale: {x: 0.58802086, y: 0.58802086, z: 0.58802086}
+  m_LocalPosition: {x: 567.62836, y: 316.40634, z: -1.8273914}
+  m_LocalScale: {x: 0.5890625, y: 0.5890625, z: 0.5890625}
   m_Children:
   - {fileID: 415338887}
   - {fileID: 1894864469}
@@ -5672,6 +5761,7 @@ RectTransform:
   - {fileID: 476870812}
   - {fileID: 155839941}
   - {fileID: 477605759}
+  - {fileID: 43898262}
   m_Father: {fileID: 2034687809}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5767,6 +5857,10 @@ MonoBehaviour:
   selectClassButton: {fileID: 1714486706}
   teams: []
   itemTracker: {fileID: 415338888}
+  winnerColors:
+  - {fileID: 2091504884}
+  winnerText: {fileID: 865164722}
+  winnerScore: {fileID: 2113382018}
   classPrefabHolder: {fileID: 114975933727972506, guid: 1b835cf9884ce1b428c88869c7ccaea6,
     type: 2}
   className: {fileID: 1478023121}
