@@ -56,12 +56,13 @@ public class PlayerNetworking : PlayerComponent {
     {
         Time.timeScale = 0.3f;
         if (myBase.myGUI.spectatorUIController) myBase.myGUI.spectatorUIController.GameOver(winner);
-        myBase.myInput.disabled = true;
+        myBase.myInput.GameOver(); 
     }
     [ClientRpc]
     public void RpcGameReset()
     {
         Time.timeScale = 1;
+        myBase.myInput.Reset_GameOver();
     }
     
 }

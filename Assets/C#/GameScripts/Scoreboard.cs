@@ -99,6 +99,9 @@ public class Scoreboard : NetworkBehaviour {
     public void UpdateScore(int id, int diffKills, int diffAssists, int diffDeaths)
     {
         //print("updating scores " + id + " " + diffKills);
+        // TODO update ping on a timer, not just through here
+        string ping = getPing(id);
+
         int foundPlayerIndex = FindPlayerIndex(id);
         if (foundPlayerIndex != -1)
         {
@@ -107,6 +110,7 @@ public class Scoreboard : NetworkBehaviour {
             foundPlayer.kills += diffKills;
             foundPlayer.assists += diffAssists;
             foundPlayer.deaths += diffDeaths;
+            foundPlayer.ping = ping;
             scores[foundPlayerIndex] = foundPlayer;
 
         }
@@ -115,16 +119,22 @@ public class Scoreboard : NetworkBehaviour {
 	// Use this for initialization
 	void Start () {
         scores.Callback = OnScoreboardUpdated;
+        RefreshScoreboard();
     }
 
     private void OnScoreboardUpdated(SyncListScoreboardPlayer.Operation op, int index)
+    {
+        RefreshScoreboard();
+        
+    }
+    private void RefreshScoreboard()
     {
         ScoreboardPlayer[] tmp = scores.ToArray();
         Array.Sort(tmp, (IComparer)new SyncListScoreboardPlayer.ScoreboardPlayerComparer());
         // Sort, then put up
 
         //foreach (ScoreboardPlayer scoreboardPlayer in tmp)
-        for (int i = 0; i < scores.Count; i++) 
+        for (int i = 0; i < scores.Count; i++)
         {
             ScoreboardPlayer scoreboardPlayer = tmp[i];
             Transform foundItem;
@@ -162,7 +172,7 @@ public class Scoreboard : NetworkBehaviour {
                         scoreboardItem.nameText.color = Color.black;
                     }
                 }
-                
+
             }
             foreach (Image image in scoreboardItem.teamImages)
             {
@@ -178,7 +188,6 @@ public class Scoreboard : NetworkBehaviour {
                 GameObject.Destroy(scoreboardItem.gameObject);
             }
         }
-        
     }
 
     // Update is called once per frame
@@ -191,6 +200,11 @@ public class Scoreboard : NetworkBehaviour {
         
         foreach (PlayerInput p in GameObject.FindObjectsOfType<PlayerInput>())
         {
+            if (p.GetPlayerId() == 0)
+            {
+                // Unassigned, we can't do anything here
+                continue;
+            }
             int foundIndex = FindPlayerIndex(p.GetPlayerId());
             PlayerStats ps = p.GetComponent<PlayerStats>();
             if (foundIndex != -1)
@@ -212,6 +226,7 @@ public class Scoreboard : NetworkBehaviour {
                     deaths = 0,
                     assists = 0,
                     id = p.GetPlayerId(),
+                    ping = getPing(p.GetPlayerId()),
                     found = true
                 });
             }
@@ -251,5 +266,16 @@ public class Scoreboard : NetworkBehaviour {
         //print("not found");
         return -1;
     }
-
+    string getPing(int id)
+    {
+        string ping = "BOT";
+        if (id == 1) ping = "0";
+        else if (id > 0)
+        {
+            print(NetworkServer.connections.Count + " ");
+            ping = "0";
+            //ping = (NetworkServer.connections[id - 2]).00;
+        }
+        return ping;
+    }
 }

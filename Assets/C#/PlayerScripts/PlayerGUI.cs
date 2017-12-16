@@ -70,7 +70,13 @@ public class PlayerGUI : PlayerComponent {
 
     }
     public void Death() {
-		// GUI Death state
+        // GUI Death state
+        if (this.isLocalPlayer)
+        {
+            UnPauseGame();
+            gameHud.gameObject.SetActive(false);
+        }
+            
     }
 
     public void TogglePause() {
@@ -100,7 +106,7 @@ public class PlayerGUI : PlayerComponent {
     }
     private void UnPauseGame() {
         shouldBeLocked = true;
-        spectatorUIController.UnPause();
+        if (this.isLocalPlayer) spectatorUIController.UnPause();
     }
     private void UnPauseGameWithoutUI() {
         shouldBeLocked = true;

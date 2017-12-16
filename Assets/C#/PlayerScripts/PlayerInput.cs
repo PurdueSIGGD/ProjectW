@@ -10,7 +10,10 @@ public abstract class PlayerInput : PlayerComponent {
     private Animator scoreboard;
     public bool disabled;
 
-    private int bot = -1; // Default -1 for player
+    [SyncVar]
+    public int bot = -1; // Default -1 for player
+    [SyncVar]
+    public int playerId;
 
     public static float MAX_CAMERA_DISTANCE = -1.63f;
     public static int ABILITY_INPUTS = 4;
@@ -37,21 +40,22 @@ public abstract class PlayerInput : PlayerComponent {
     }
     public void FixedUpdate()
     {
-        if (isLocalPlayer && !disabled) {
+        if (isLocalPlayer) {
             InputData myData = getData();
-            if (myData.pause && !isBot()) {
+            if (myData.pause && !isBot() && !disabled) {
                 myBase.myGUI.TogglePause();
             }
             scoreboard.SetBool("Showing", myData.scoreboard);
+            if (myBase.myStats.death)
+            {
+                // take care of camera
+                cameraSlider.LookAt(deathTarget);
+            }
             if (myBase.myGUI.isPaused) {
                 // Empty inputs
                 myBase.myMovement.processMovement(new InputData());
             } else {
-                if (myBase.myStats.death) {
-                    // take care of camera
-                    cameraSlider.LookAt(deathTarget);
-                    
-                } else {
+                if (!myBase.myStats.death && !disabled) {
                     // Have camera move closer if up against a wall
                     // This raycast is returning nothing for some reason
                     /*RaycastHit[] hits = Physics.RaycastAll(new Ray(rotator.position, rotator.forward * -1), MAX_CAMERA_DISTANCE * 100, ~0);
@@ -77,8 +81,30 @@ public abstract class PlayerInput : PlayerComponent {
         }
         
 	}
+
+    public void GameOver()
+    {
+        this.disabled = true;
+        this.scoreboard.SetBool("Showing", true);
+    }
+    public void Reset_GameOver()
+    {
+
+        this.disabled = false;
+    }
+
     void setBot(int botId) {
+        //print(botId);
         bot = botId;
+        if (isBot())
+        {
+            playerId = -1 * bot;
+        }
+        
+    }
+    public void setPlayerId(int newPlayerId)
+    {
+        playerId = newPlayerId;
     }
     /**
      * Returns true if and only if called on the server, and this player is a bot with no player attached to it
@@ -98,14 +124,8 @@ public abstract class PlayerInput : PlayerComponent {
     }
     public int GetPlayerId()
     {
-        if (isBot())
-        {
-            return -1 * bot;
-        } else
-        {
-            return this.connectionToClient.connectionId + 1;
-        }
+        return playerId;
     }
-
+   
     
 }

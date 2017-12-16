@@ -93,7 +93,7 @@ public class PlayerStats : PlayerComponent, IHittable {
             if (isLocalPlayer) {
                 // Player has to handle their own death
                 CmdDeath();
-            } else if (myBase.myInput.isBot()) {
+            } else if (isServer && myBase.myInput.isBot()) {
                 // Specific message for non-cmd things
                 ServerDeath();
             }

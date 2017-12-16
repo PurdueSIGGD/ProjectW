@@ -77,13 +77,17 @@ public class ProjectWGameManager : NetworkBehaviour {
             newPG.desiredPlayerName = oldPG.desiredPlayerName;
             newPG.desiredPlayerClass = oldPG.desiredPlayerClass;
             newPG.desiredTeamIndex = oldPG.desiredTeamIndex;
-            NetworkServer.Spawn(newPlayer);
             // If not a bot, move connection to a new thing
             int botId;
-            if ((botId = player.GetComponent<PlayerInput>().getBot()) != -1) {
-				newPlayer.GetComponent<PlayerInput>().SendMessage("setBot", botId);
-			} else {
-				NetworkServer.ReplacePlayerForConnection(connection, newPlayer, 0);
+            if ((botId = player.GetComponent<PlayerInput>().getBot()) != -1)
+            {
+                newPlayer.GetComponent<PlayerInput>().SendMessage("setBot", botId);
+                NetworkServer.Spawn(newPlayer);
+            } else
+            {
+                NetworkServer.Spawn(newPlayer);
+                NetworkServer.ReplacePlayerForConnection(connection, newPlayer, 0);
+                AssignPlayerId(newPlayer);
             }
         }
        
@@ -109,7 +113,6 @@ public class ProjectWGameManager : NetworkBehaviour {
                 int classIndex = Random.Range(0, classPrefabs.Length - 1);
                 GameObject spawn = Instantiate(classPrefabs[classIndex], startPosition.position, startPosition.rotation);
                 spawn.SendMessage("setBot", i + 1);
-                NetworkServer.Spawn(spawn);
                 PlayerStats stats = spawn.GetComponent<PlayerStats>();
                 int teamIndex = Random.Range(0, teams.Length);
                 stats.teamIndex = teams.Length > 1 ? teamIndex : -1;
@@ -122,6 +125,8 @@ public class ProjectWGameManager : NetworkBehaviour {
                 newPG.desiredPlayerClass = stats.classIndex;
                 newPG.desiredTeamIndex = stats.teamIndex;
                 spawn.name = stats.playerName;
+
+                NetworkServer.Spawn(spawn);
             }
         } else {
             // this should not do anything, but should still display values such as time remaining and teams
@@ -175,6 +180,7 @@ public class ProjectWGameManager : NetworkBehaviour {
         NetworkServer.Spawn(newPlayer);
         // If not a bot, move connection to a new thing
         NetworkServer.ReplacePlayerForConnection(connection, newPlayer, 0);
+        AssignPlayerId(newPlayer);
         GameObject.Destroy(source);
     }
 	public void SpawnSpectator(GameObject source) {
@@ -244,6 +250,16 @@ public class ProjectWGameManager : NetworkBehaviour {
             exists = false
         };
         return notWon;
+    }
+
+
+    public void AssignPlayerId(GameObject target)
+    {
+        NetworkConnection connectionToClient = target.GetComponent<NetworkBehaviour>().connectionToClient;
+        //print(connectionToClient.connectionId);
+
+        target.GetComponent<PlayerInput>().setPlayerId(connectionToClient.connectionId + 1);
+
     }
 
 }
