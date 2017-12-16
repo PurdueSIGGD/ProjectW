@@ -7,6 +7,7 @@ public abstract class PlayerInput : PlayerComponent {
     public Transform cameraSlider;
     public Transform deathTarget;
     public Transform rotator;
+    private Animator scoreboard;
     public bool disabled;
 
     private int bot = -1; // Default -1 for player
@@ -23,13 +24,14 @@ public abstract class PlayerInput : PlayerComponent {
         public bool[] useAbilities;
         public bool melee;
         public bool pause;
+        public bool scoreboard;
     }
     /**
      * To be implemented by the different sort of player inputs
      */
     public abstract InputData getData();
     public override void PlayerComponent_Start() {
-
+        scoreboard = GameObject.FindObjectOfType<Scoreboard>().GetComponent<Animator>();
     }
     public override void PlayerComponent_Update() {
     }
@@ -40,6 +42,7 @@ public abstract class PlayerInput : PlayerComponent {
             if (myData.pause && !isBot()) {
                 myBase.myGUI.TogglePause();
             }
+            scoreboard.SetBool("Showing", myData.scoreboard);
             if (myBase.myGUI.isPaused) {
                 // Empty inputs
                 myBase.myMovement.processMovement(new InputData());

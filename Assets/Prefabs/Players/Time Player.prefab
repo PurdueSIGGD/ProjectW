@@ -1068,7 +1068,7 @@ GameObject:
   - component: {fileID: 114413950209045444}
   m_Layer: 8
   m_Name: Time Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3112,6 +3112,7 @@ MonoBehaviour:
   cameraSlider: {fileID: 4075321283354404}
   deathTarget: {fileID: 4693968342571442}
   rotator: {fileID: 4760257634039490}
+  disabled: 0
   sensitivityy: 0.05
 --- !u!114 &114140311681210888
 MonoBehaviour:
@@ -3381,6 +3382,7 @@ MonoBehaviour:
   - {fileID: 1229230672039204, guid: fefeeacd706d9564ea14ded6bc6b3b1a, type: 2}
   hitSound: {fileID: 82203854523179262}
   hitAnimator: {fileID: 0}
+  lastHitPlayerId: 0
 --- !u!114 &114923324115175394
 MonoBehaviour:
   m_ObjectHideFlags: 1

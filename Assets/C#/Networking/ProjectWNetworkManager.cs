@@ -45,7 +45,25 @@ public class ProjectWNetworkManager : NetworkManager {
     public override void OnServerError(NetworkConnection conn, int errorCode) {
 
     }
-    
 
-    
+
+    public IEnumerator TrackPing(Scoreboard scoreBoard, GameObject player, int playerId)
+    {
+        yield return new WaitForSeconds(5);
+        if (playerId > 0)
+        {
+
+            string ping = "TODO"; //TODO
+            scoreBoard.UpdatePing(playerId, ping);
+            // repeat
+        }
+        else
+        {
+            string ping = "BOT";
+            scoreBoard.UpdatePing(playerId, ping);
+            //Dont repeat, this is a bot
+        }
+    }
+
+
 }

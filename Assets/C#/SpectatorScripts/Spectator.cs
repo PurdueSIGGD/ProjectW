@@ -9,6 +9,7 @@ public class Spectator : NetworkBehaviour {
     public float moveSpeed = 1;
     private Rigidbody myRigid;
     private SpectatorUIController uiController;
+    private Animator scoreboardAnimator;
 
     // UI Stuff
     public bool isPaused;
@@ -21,8 +22,9 @@ public class Spectator : NetworkBehaviour {
     void Start () {
         myRigid = this.GetComponent<Rigidbody>();
         uiController = GameObject.FindObjectOfType<SpectatorUIController>();
-       
-      
+        scoreboardAnimator = GameObject.FindObjectOfType<Scoreboard>().GetComponent<Animator>();
+
+
         if (isLocalPlayer)
         {
             myParticles.Pause();
@@ -61,6 +63,8 @@ public class Spectator : NetworkBehaviour {
             if (pause) {
                 TogglePause();
             }
+            bool scoreboard = Input.GetAxis("Scoreboard") > 0;
+            scoreboardAnimator.SetBool("Showing", scoreboard);
 
             if (isPaused) {
 
@@ -71,7 +75,7 @@ public class Spectator : NetworkBehaviour {
                 float mouseY = Input.GetAxis("Mouse Y");
                 float up = Input.GetAxis("Jump");
                 float down = Input.GetAxis("Crouch");
-
+               
 
                 float newX = transform.rotation.eulerAngles.x + (mouseY * Time.deltaTime);
                 //We do some fancy math to ensure 0 < newX < 360, nothing more
