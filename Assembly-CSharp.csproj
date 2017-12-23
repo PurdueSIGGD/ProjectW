@@ -69,6 +69,7 @@
      <Compile Include="Assets\C#\PlayerScripts\PlayerAbilities\Ability_ObjectSpawner.cs" />
      <Compile Include="Assets\C#\PlayerScripts\PlayerAbilities\Ability_PointSpawner.cs" />
      <Compile Include="Assets\C#\PlayerScripts\PlayerAbilities\Ability_ProjectileSpawner.cs" />
+     <Compile Include="Assets\C#\PlayerScripts\PlayerAbilities\Ability_RecursiveSpawner.cs" />
      <Compile Include="Assets\C#\PlayerScripts\PlayerAbilities\BaseProjectiles\Explosion.cs" />
      <Compile Include="Assets\C#\PlayerScripts\PlayerAbilities\BaseProjectiles\Projectile.cs" />
      <Compile Include="Assets\C#\PlayerScripts\PlayerAbilities\BaseProjectiles\Projectile_Accelerating.cs" />

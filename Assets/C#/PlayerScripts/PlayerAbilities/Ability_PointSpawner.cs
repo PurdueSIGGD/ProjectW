@@ -15,7 +15,6 @@ public class Ability_PointSpawner : Ability_ObjectSpawner {
 	public void SpawnSpell(PlayerComponent.Buf data, float rangeVaried, Ray ray) {
 		Vector3 spawnAngle = data.vectorList[0];
 		Vector3 spawnPosition = data.vectorList[1];
-		Debug.Log("varied " + rangeVaried);
 
 		RaycastHit hit;
 		GameObject spawn;
