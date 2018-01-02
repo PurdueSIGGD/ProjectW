@@ -8,6 +8,7 @@ public class Ability_RecursiveSpawner : Ability_ObjectSpawner {
 	public float delay;
 	private float offset;
 	private int check;
+	private int layer;
 
 	public override void SpawnSpell(PlayerComponent.Buf data)
 	{
@@ -15,6 +16,7 @@ public class Ability_RecursiveSpawner : Ability_ObjectSpawner {
 		ray1 = new Ray(ray1.origin, new Vector3(ray1.direction.x, 0, ray1.direction.z));
 		Ray ray2 = new Ray(ray1.origin, new Vector3(0, -1, 0));
 		check = 0;
+		layer = 1 << 11;
 		SpawnSpell (data, 0, ray1, ray2);
 	}
 
@@ -42,8 +44,7 @@ public class Ability_RecursiveSpawner : Ability_ObjectSpawner {
 	{
 		GameObject spawn;
 		RaycastHit hit;
-		if (Physics.Raycast (ray1, out hit, offset)) {
-			
+		if (Physics.Raycast (ray1, out hit, offset, layer)) {
 
 			Ray temp = ray1;
 			ray1 = new Ray (ray1.origin, -ray2.direction);
@@ -65,7 +66,7 @@ public class Ability_RecursiveSpawner : Ability_ObjectSpawner {
 	
 
 		ray2 = new Ray (ray1.origin + ray1.direction * offset, ray2.direction);
-		if (Physics.Raycast (ray2, out hit, offset)) {
+		if (Physics.Raycast (ray2, out hit, offset, layer)) {
 			spawn = GameObject.Instantiate (itemToSpawn, hit.point, Quaternion.identity);
 			check = 0;
 		} 
@@ -79,7 +80,7 @@ public class Ability_RecursiveSpawner : Ability_ObjectSpawner {
 				spawn = castOne (data, ref ray1, ref ray2, ref it);
 				check = 0;
 			} else {
-				if (Physics.Raycast (ray2, out hit, spawnRange)) {
+				if (Physics.Raycast (ray2, out hit, spawnRange, layer)) {
 					spawn = GameObject.Instantiate (itemToSpawn, hit.point, Quaternion.identity);
 					ray1 = new Ray (ray1.origin + ray2.direction * (hit.distance - offset * .5f), ray1.direction);
 				} else {
