@@ -3209,7 +3209,7 @@ MonoBehaviour:
   spawnOffset: {x: 0, y: 0, z: 0}
   aimAngle: {fileID: 4421330956186678}
   spawnSpeed: 0
-  numSpawns: 10
+  numSpawns: 7
   spawnRange: 10
   delay: 0.2
 --- !u!114 &114347386704580538

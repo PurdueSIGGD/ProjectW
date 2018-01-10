@@ -115,8 +115,8 @@ MonoBehaviour:
   pushForce: 4000
   range: 2
   verticalPushForce: 0.1
-  minDamage: 10
-  maxDamage: 20
+  minDamage: 5
+  maxDamage: 10
   sourcePlayerDamageMultiplier: 0
   sourcePlayerForceMultiplier: 0
 --- !u!136 &136758202439794038
@@ -634,7 +634,7 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 5
     enabled: 1
-    type: 4
+    type: 0
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
@@ -3413,7 +3413,7 @@ ParticleSystemRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: f649b32caddc90840a32a0459d5c45de, type: 2}
+  - {fileID: 2100000, guid: a4e35a92420283f46be12932c71449e3, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0

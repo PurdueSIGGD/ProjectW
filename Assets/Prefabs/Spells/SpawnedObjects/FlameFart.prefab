@@ -181,6 +181,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sourcePlayer: {fileID: 0}
   damageType: 1
+  effect: 0
+  effectDuration: 3
   pushForce: 3000
   range: 5
   verticalPushForce: 0.2
