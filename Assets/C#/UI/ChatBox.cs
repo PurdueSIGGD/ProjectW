@@ -7,53 +7,33 @@ using UnityEngine.UI;
 
 public class ChatBox : NetworkBehaviour {
 
-    NetworkClient client;
-    const short chatMsgId = 1000;
-
     [SerializeField]
     private SyncListString chatList = new SyncListString(); // list of chat so far
 
     public InputField inputText;    // input Text for chatbox
     public Text chatLog;        // display of chat log
 
-    public override void OnStartClient()
-    {
-        // make chatList aware when there is update
-        chatList.Callback = OnChatUpdated;
-    }
 
     // Use this for initialization
     void Start () {
-
-        // get current client
-        client = NetworkManager.singleton.client;
-
-        // make server respond to chatMsg
-        NetworkServer.RegisterHandler(chatMsgId, OnServerPostChatMessage);
-
+            
         // handle when user finish editing
-        inputText.onEndEdit.AddListener(delegate { PostChatMessage(inputText.text); });
+        inputText.onEndEdit.AddListener(delegate { CmdPostChatMessage(inputText.text); });
 	}
 	
 	
     /**
      * Call when user finish typing
+     * Tell server to update chatlog
      */ 
-    [Client]
-    public void PostChatMessage(string message)
+    [Command]
+    public void CmdPostChatMessage(string message)
     {
         // make a network message
         if (message.Length == 0) return;
-        var msg = new StringMessage(message);
-
-        // send to server, msg Type: chatMsg
-        if (client == null)
-        {
-            Debug.Log("Client: null");
-            return;
-        }
-        client.Send(chatMsgId, msg);
-        Debug.Log(message);
+        
+        // tell server: post this msg
+        RpcServerPostChatMsg(message);
 
         // reset input
         inputText.text = "";
@@ -62,20 +42,13 @@ public class ChatBox : NetworkBehaviour {
     }
 
     /**
-     * Call when server receive msg
-     */
-    void OnServerPostChatMessage(NetworkMessage netMsg)
-    {
-        string message = netMsg.ReadMessage<StringMessage>().value;
-        chatList.Add(message);
-    }
-
-    /**
-     * Call when server update chat
-     * Helps to update chat log display
+     * Called by server, make every client to update their chat log
      */ 
-    private void OnChatUpdated(SyncListString.Operation op, int index)
+    [ClientRpc]
+    void RpcServerPostChatMsg(string message)
     {
-        chatLog.text += chatList[chatList.Count - 1] + "\n";
+        Debug.Log("Server: " + message);
+        chatLog.text += "\n" + message;
     }
+  
 }
