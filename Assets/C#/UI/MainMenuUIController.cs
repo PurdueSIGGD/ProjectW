@@ -22,6 +22,8 @@ public class MainMenuUIController : MonoBehaviour {
     public Dropdown mapDropdown;
     public Dropdown gamemodeDropdown;
 
+    public Transform teamList;
+
     private Text[] gamemodeOptions; // Populate when changing gamemode dropdown
 
     void Start() {
@@ -69,10 +71,17 @@ public class MainMenuUIController : MonoBehaviour {
         string ip = serverIP.text;
         PlayerPrefs.SetString(PlayerPrefStrings.IP_TO_CONNECT, ip);
         print("Joining server");
+        Network.Connect(ip, 7777);
+        // TODO verify this works
     }
 
     public void StartHost() {
         print("Starting host");
+        foreach (ServerOptionsTeamItem item in teamList.GetComponentsInChildren<ServerOptionsTeamItem>()) {
+            string teamName = item.getTeamName();
+            int teamColor = item.getTeamColor();
+            // TODO save to prefabs
+        }
     }
 
 
