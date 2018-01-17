@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class GameMode_Deathmatch : GameMode
 {
-    public int KillCount;
     private ProjectWGameManager manager;
     private Scoreboard scoreboard;
-    public void Start()
+	private int killCount;
+
+	public override void GameMode_Start()
     {
         manager = GameObject.FindObjectOfType<ProjectWGameManager>();
         scoreboard = GameObject.FindObjectOfType<Scoreboard>();
+		killCount = getGameOption ("Max Kills");
     }
     public override ProjectWGameManager.Winner checkWinCondition()
     {
@@ -22,7 +24,7 @@ public class GameMode_Deathmatch : GameMode
                 // If one team, check per individual player
                 foreach (Scoreboard.ScoreboardPlayer s in scoreboard.scores)
                 {
-                    if (s.kills >= KillCount)
+                    if (s.kills >= killCount)
                     {
                         return new ProjectWGameManager.Winner
                         {
@@ -44,7 +46,7 @@ public class GameMode_Deathmatch : GameMode
                 for (int t = 0; t < teamScores.Length; t++)
                 {
                     //print("team " + manager.teams[t].teamName + " score: " + teamScores[t]);
-                    if (teamScores[t] >= KillCount)
+                    if (teamScores[t] >= killCount)
                     {
                         return new ProjectWGameManager.Winner
                         {
@@ -54,13 +56,8 @@ public class GameMode_Deathmatch : GameMode
                         };
                     }
                 }
-             
             }
         }
-       
-
-
-
         // Otheriwise, nobody win
         ProjectWGameManager.Winner notWon = new ProjectWGameManager.Winner
         {
@@ -68,4 +65,6 @@ public class GameMode_Deathmatch : GameMode
         };
         return notWon;
     }
+
+
 }
