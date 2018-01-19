@@ -21,10 +21,10 @@ public class MainMenuUIController : MonoBehaviour {
     public Text serverIP;
     public Dropdown mapDropdown;
     public Dropdown gamemodeDropdown;
+    public Transform gameModeOptionsParent;
 
     public Transform teamList;
 
-    private Text[] gamemodeOptions; // Populate when changing gamemode dropdown
 
     void Start() {
         SetScreenIndex(0);
@@ -82,6 +82,15 @@ public class MainMenuUIController : MonoBehaviour {
             int teamColor = item.getTeamColor();
             // TODO save to prefabs
         }
+        int mapSelect = mapDropdown.value;
+        int gameModeSelect = gamemodeDropdown.value;
+        int index = 0;
+        foreach (GameModeUIOption option in gameModeOptionsParent.GetComponentsInChildren<GameModeUIOption>()) {
+            string optionValue = option.editText.text;
+            // TODO save to prefabs
+            index++;
+        }
+
     }
 
 

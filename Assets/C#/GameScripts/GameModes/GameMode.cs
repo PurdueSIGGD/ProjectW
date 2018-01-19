@@ -6,6 +6,7 @@ public abstract class GameMode : MonoBehaviour {
 	public GameOption[] gameOptions;
     // Base class for gamemode types
     public abstract ProjectWGameManager.Winner checkWinCondition();
+    public abstract string getDisplayName();
 
 	// Every gamemode must define the options and settings for the gamemode
 

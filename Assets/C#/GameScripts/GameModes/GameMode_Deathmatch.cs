@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameMode_Deathmatch : GameMode
 {
+    private const string DISPLAY_NAME = "Deathmatch";
+
     private ProjectWGameManager manager;
     private Scoreboard scoreboard;
 	private int killCount;
@@ -13,6 +15,9 @@ public class GameMode_Deathmatch : GameMode
         manager = GameObject.FindObjectOfType<ProjectWGameManager>();
         scoreboard = GameObject.FindObjectOfType<Scoreboard>();
 		killCount = getGameOption ("Max Kills");
+    }
+    public override string getDisplayName() {
+        return DISPLAY_NAME;
     }
     public override ProjectWGameManager.Winner checkWinCondition()
     {
