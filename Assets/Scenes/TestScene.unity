@@ -108,6 +108,29 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &5265425 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1185770464893064, guid: b92a8520e1f19674ab149f9e792325cf,
+    type: 2}
+  m_PrefabInternal: {fileID: 534384824}
+--- !u!114 &5265442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5265425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84d0bb171ff7f4444af6aa5145e4ff2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magicDraw: 0
+  cooldown: 1
+  itemToSpawn: {fileID: 0}
+  spawnPoint: {fileID: 0}
+  spawnOffset: {x: 0, y: 0, z: 0}
+  aimAngle: {fileID: 0}
+  spawnSpeed: 0
 --- !u!1 &27335370
 GameObject:
   m_ObjectHideFlags: 0
@@ -5419,6 +5442,48 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!1001 &1418147075
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4720954331688562, guid: 1c8ae18a6f737cf4c9a9b7183335aa19, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4720954331688562, guid: 1c8ae18a6f737cf4c9a9b7183335aa19, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 4720954331688562, guid: 1c8ae18a6f737cf4c9a9b7183335aa19, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 4.7495046
+      objectReference: {fileID: 0}
+    - target: {fileID: 4720954331688562, guid: 1c8ae18a6f737cf4c9a9b7183335aa19, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4720954331688562, guid: 1c8ae18a6f737cf4c9a9b7183335aa19, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4720954331688562, guid: 1c8ae18a6f737cf4c9a9b7183335aa19, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4720954331688562, guid: 1c8ae18a6f737cf4c9a9b7183335aa19, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4720954331688562, guid: 1c8ae18a6f737cf4c9a9b7183335aa19, type: 2}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 1c8ae18a6f737cf4c9a9b7183335aa19, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1434902406
 GameObject:
   m_ObjectHideFlags: 0
