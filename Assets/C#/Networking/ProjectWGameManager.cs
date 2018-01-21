@@ -12,14 +12,17 @@ public class ProjectWGameManager : NetworkBehaviour {
 	public GameObject spectatorPrefab;
     public int botCount = 0;
     public bool friendlyFire;
+	public bool useSettingsOverride;
 	public Team[] teams;
     public Scoreboard scoreBoard;
+    public string[] scenesToLoad;
+	public ColorHolder teamColors;
     private GameMode gameMode;
     private GameObject[] classPrefabs;
     private bool isGameOver;
-    public string[] scenesToLoad;
 
     public PrefabHolder classPrefabHolder;
+	public PrefabHolder gamemodePrefabHolder;
     
 
     [System.Serializable]
@@ -96,12 +99,55 @@ public class ProjectWGameManager : NetworkBehaviour {
 		oldP.despawnCorpse ();
     }
     void Start() {
+		if (networkManager == null) {
+			networkManager = GameObject.FindObjectOfType<ProjectWNetworkManager> ();
+		}
+
+		// If we created the game ourselves
+		if (networkManager.teamItems.Length > 0 && !useSettingsOverride) {
+			int teamCount = networkManager.teamItems.Length;
+			print ("got team count: " + teamCount);
+			teams = networkManager.teamItems;
+			// TODO GameMode & options
+			int gamemodeType = networkManager.gameModeSelect;
+			// People may forget the time limit in their games
+			if (networkManager.gamemodeOptions[0].optionName == "Time Limit") {
+				gameTime = networkManager.gamemodeOptions [0].value;
+			} else {
+				gameTime = timeLimit; // TODO should we just make this infinite?
+			}
+
+			switch (gamemodeType) {
+				// README if you want to add a gamemode, you MUST update this method with the specific gamemode class
+			case 0: 
+				gameMode = this.gameObject.AddComponent<GameMode_Deathmatch> ();
+				GameMode_Deathmatch dm = (GameMode_Deathmatch)gameMode;
+				dm.gameOptions = networkManager.gamemodeOptions;
+				break;
+			default:
+				gameMode = null;
+				break;
+			}
+
+			// TODO start lan host
+			//networkManager.StartHost();
+
+		} else {
+			if (!(gameMode = this.GetComponent<GameMode>()))
+			{
+				Debug.LogWarning("Unable to find a gamemode. This game will only end from timing out");
+			}
+			gameTime = timeLimit;
+
+			networkManager.gameObject.GetComponent<NetworkManagerHUD> ().gameObject.SetActive (true);
+		}
+
+
+		
+
         classPrefabs = classPrefabHolder.prefabs;
-        gameTime = timeLimit;
-        if (!(gameMode = this.GetComponent<GameMode>()))
-        {
-            Debug.LogWarning("Unable to find a gamemode. This game will only end from timing out");
-        }
+        
+       
         if (isServer) {
             for (int i = 0; i > teams.Length; i++)
             {
@@ -261,5 +307,16 @@ public class ProjectWGameManager : NetworkBehaviour {
         target.GetComponent<PlayerInput>().setPlayerId(connectionToClient.connectionId + 1);
 
     }
+
+	private T CopyComponent<T>(Team original, GameObject destination) where T : Component
+	{
+		System.Type type = original.GetType ();
+		Component copy = destination.AddComponent (type);
+		System.Reflection.FieldInfo[] fields = type.GetFields ();
+		foreach (System.Reflection.FieldInfo field in fields) {
+			field.SetValue (copy, field.GetValue (original));
+		}
+		return copy as T;
+	}
 
 }

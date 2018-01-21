@@ -2908,7 +2908,6 @@ GameObject:
   - component: {fileID: 574942617}
   - component: {fileID: 574942619}
   - component: {fileID: 574942620}
-  - component: {fileID: 574942621}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2986,6 +2985,7 @@ MonoBehaviour:
     type: 2}
   botCount: 3
   friendlyFire: 0
+  useSettingsOverride: 0
   teams:
   - teamName: Mages
     teamIndex: 0
@@ -2996,7 +2996,11 @@ MonoBehaviour:
   scoreBoard: {fileID: 43898263}
   scenesToLoad:
   - TestScene
+  teamColors: {fileID: 114229565269278196, guid: bed536c80eea6cd4a995b5c63aba2a8c,
+    type: 2}
   classPrefabHolder: {fileID: 114975933727972506, guid: 1b835cf9884ce1b428c88869c7ccaea6,
+    type: 2}
+  gamemodePrefabHolder: {fileID: 114975933727972506, guid: 90209b860a71620439e41290360aab3b,
     type: 2}
 --- !u!114 &574942620
 MonoBehaviour:
@@ -3009,18 +3013,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3e8f34829d726a438412903c47a9130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &574942621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 574942616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2efcd165ad9160d448465ae02ed65af4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  KillCount: 5
 --- !u!1 &596029759
 GameObject:
   m_ObjectHideFlags: 0
@@ -5206,6 +5198,16 @@ Prefab:
       propertyPath: lobbyCamera
       value: 
       objectReference: {fileID: 1936016638}
+    - target: {fileID: 114989715467682310, guid: 7dd9680bcf19de34abfca57195c154b8,
+        type: 2}
+      propertyPath: m_OfflineScene
+      value: MainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 114989715467682310, guid: 7dd9680bcf19de34abfca57195c154b8,
+        type: 2}
+      propertyPath: m_OnlineScene
+      value: TestScene
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7dd9680bcf19de34abfca57195c154b8, type: 2}
   m_IsPrefabParent: 0

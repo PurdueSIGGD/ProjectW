@@ -6,6 +6,15 @@ using UnityEngine.Networking;
 public class ProjectWNetworkManager : NetworkManager {
     public GameObject lobbyCamera;
 
+	// START GAME SERVER SETTINGS
+	public ProjectWGameManager.Team[] teamItems;
+	public int mapSelect;
+	public int gameModeSelect;
+	public GameMode.GameOption[] gamemodeOptions;
+	// END GAME SERVER SETTINGS
+
+
+
     public void Start() {
         if (lobbyCamera != null) {
             lobbyCamera.SetActive(true);

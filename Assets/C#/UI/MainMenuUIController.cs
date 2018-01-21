@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -18,12 +19,20 @@ public class MainMenuUIController : MonoBehaviour {
     public Animator newGameAnimator;
     public Animator serverOptions;
 
+	public Animator invalidOptionAnimator;
+
     public Text serverIP;
     public Dropdown mapDropdown;
     public Dropdown gamemodeDropdown;
     public Transform gameModeOptionsParent;
 
     public Transform teamList;
+
+	public ProjectWNetworkManager networkManager;
+
+	public GameObject teamColors;
+
+	public string[] mapList;
 
 
     void Start() {
@@ -77,19 +86,45 @@ public class MainMenuUIController : MonoBehaviour {
 
     public void StartHost() {
         print("Starting host");
-        foreach (ServerOptionsTeamItem item in teamList.GetComponentsInChildren<ServerOptionsTeamItem>()) {
-            string teamName = item.getTeamName();
-            int teamColor = item.getTeamColor();
-            // TODO save to prefabs
-        }
+
+		ServerOptionsTeamItem[] teamItems = teamList.GetComponentsInChildren<ServerOptionsTeamItem>();
+	
         int mapSelect = mapDropdown.value;
         int gameModeSelect = gamemodeDropdown.value;
-        int index = 0;
-        foreach (GameModeUIOption option in gameModeOptionsParent.GetComponentsInChildren<GameModeUIOption>()) {
-            string optionValue = option.editText.text;
-            // TODO save to prefabs
-            index++;
-        }
+
+		networkManager.teamItems = new ProjectWGameManager.Team[teamItems.Length];
+		int index = 0;
+		foreach (ServerOptionsTeamItem teamItem in teamItems) {
+			networkManager.teamItems[index] = new ProjectWGameManager.Team ();
+			networkManager.teamItems[index].teamIndex = index;
+			networkManager.teamItems[index].teamColor = teamColors.GetComponent<ColorHolder>().colors [teamItem.colorDropdown.value];
+			networkManager.teamItems[index].teamName = teamItem.nameText.text;
+		}
+		networkManager.mapSelect = mapSelect;
+		networkManager.gameModeSelect = gameModeSelect;
+
+		GameModeUIOption[] options = gameModeOptionsParent.GetComponentsInChildren<GameModeUIOption> ();
+
+		networkManager.gamemodeOptions = new GameMode.GameOption[options.Length];
+		index = 0;
+		foreach (GameModeUIOption option in options) {
+			string optionValue = option.editText.text;
+			int parsedValue;
+			if (int.TryParse (optionValue, out parsedValue)) {
+				networkManager.gamemodeOptions [index].optionName = option.displayText.text;
+				networkManager.gamemodeOptions [index].value = parsedValue;
+			} else {
+				// display warning
+				invalidOptionAnimator.SetTrigger("Error");
+				return;
+			}
+			// TODO save to playerprefs
+			index++;
+		}
+
+
+		networkManager.StartHost();
+		//SceneManager.LoadScene (mapList [mapSelect], LoadSceneMode.Single);
 
     }
 
