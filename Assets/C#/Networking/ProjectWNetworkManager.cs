@@ -5,11 +5,15 @@ using UnityEngine.Networking;
 
 public class ProjectWNetworkManager : NetworkManager {
     public GameObject lobbyCamera;
+	public GameObject playerPrefabs;
 
     public void Start() {
         if (lobbyCamera != null) {
             lobbyCamera.SetActive(true);
         }
+		foreach (GameObject playerPrefab in playerPrefabs.GetComponent<PrefabHolder>().prefabs) {
+			ClientScene.RegisterPrefab (playerPrefab);
+		}
     }
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId) {
