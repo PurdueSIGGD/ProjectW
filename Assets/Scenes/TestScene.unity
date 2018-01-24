@@ -2581,7 +2581,7 @@ Prefab:
     - target: {fileID: 224794632678446552, guid: 31cb16ba04d656e45b02bb1de0f470b0,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -34
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224794632678446552, guid: 31cb16ba04d656e45b02bb1de0f470b0,
         type: 2}
@@ -2666,12 +2666,12 @@ Prefab:
     - target: {fileID: 224694321590204754, guid: 31cb16ba04d656e45b02bb1de0f470b0,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224454684659039040, guid: 31cb16ba04d656e45b02bb1de0f470b0,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224454684659039040, guid: 31cb16ba04d656e45b02bb1de0f470b0,
         type: 2}
@@ -2726,7 +2726,7 @@ Prefab:
     - target: {fileID: 224412787437683562, guid: 31cb16ba04d656e45b02bb1de0f470b0,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224248025599460878, guid: 31cb16ba04d656e45b02bb1de0f470b0,
         type: 2}
@@ -2756,7 +2756,7 @@ Prefab:
     - target: {fileID: 224248025599460878, guid: 31cb16ba04d656e45b02bb1de0f470b0,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224540410587002214, guid: 31cb16ba04d656e45b02bb1de0f470b0,
         type: 2}
@@ -2786,7 +2786,7 @@ Prefab:
     - target: {fileID: 224540410587002214, guid: 31cb16ba04d656e45b02bb1de0f470b0,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224188153819692182, guid: 31cb16ba04d656e45b02bb1de0f470b0,
         type: 2}
@@ -2816,7 +2816,7 @@ Prefab:
     - target: {fileID: 224188153819692182, guid: 31cb16ba04d656e45b02bb1de0f470b0,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224694321590204754, guid: 31cb16ba04d656e45b02bb1de0f470b0,
         type: 2}
@@ -2986,16 +2986,10 @@ MonoBehaviour:
   botCount: 3
   friendlyFire: 0
   useSettingsOverride: 0
-  teams:
-  - teamName: Mages
-    teamIndex: 0
-    teamColor: {r: 1, g: 1, b: 0, a: 1}
-  - teamName: Wizards
-    teamIndex: 0
-    teamColor: {r: 0, g: 0, b: 1, a: 1}
+  teams: []
   scoreBoard: {fileID: 43898263}
-  scenesToLoad:
-  - TestScene
+  scenesToLoad: {fileID: 114986398184245588, guid: 70364ba56a6fdb248808eb52b9ad1d53,
+    type: 2}
   teamColors: {fileID: 114229565269278196, guid: bed536c80eea6cd4a995b5c63aba2a8c,
     type: 2}
   classPrefabHolder: {fileID: 114975933727972506, guid: 1b835cf9884ce1b428c88869c7ccaea6,
@@ -5207,6 +5201,10 @@ Prefab:
         type: 2}
       propertyPath: m_OnlineScene
       value: TestScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 1551764676947552, guid: 7dd9680bcf19de34abfca57195c154b8, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7dd9680bcf19de34abfca57195c154b8, type: 2}

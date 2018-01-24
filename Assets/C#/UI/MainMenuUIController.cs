@@ -9,6 +9,16 @@ using UnityEditor;
 #endif
 
 public class MainMenuUIController : MonoBehaviour {
+	/**
+	 * 
+	 * TODO:
+	 * 
+	 * Server welcome message
+	 * Server max players
+	 * Server bots & difficulty (per team)
+	*/
+
+
 
     // 0 for main page, 1 for join server, 2 for map select, 3 for map settings
     [HideInInspector]
@@ -20,6 +30,7 @@ public class MainMenuUIController : MonoBehaviour {
     public Animator serverOptions;
 
 	public Animator invalidOptionAnimator;
+	public Text invalidAnimatorText;
 
     public Text serverIP;
     public Dropdown mapDropdown;
@@ -33,6 +44,9 @@ public class MainMenuUIController : MonoBehaviour {
 	public GameObject teamColors;
 
 	public string[] mapList;
+
+	private const string ERROR_NONUMBER = "PLEASE ENTER A NUMBER FOR GAMEMODE OPTIONS";
+	private const string ERROR_UNIQUETEAMS = "PLEASE ENSURE TEAMS ARE UNIQUE";
 
 
     void Start() {
@@ -99,6 +113,15 @@ public class MainMenuUIController : MonoBehaviour {
 			networkManager.teamItems[index].teamIndex = index;
 			networkManager.teamItems[index].teamColor = teamColors.GetComponent<ColorHolder>().colors [teamItem.colorDropdown.value];
 			networkManager.teamItems[index].teamName = teamItem.nameText.text;
+			for (int i = index - 1; i >= 0; i--) {
+				// Go back, ensure uniqueness
+				if (networkManager.teamItems [i].teamColor == networkManager.teamItems [index].teamColor ||
+					networkManager.teamItems [i].teamName == networkManager.teamItems [index].teamName) {
+					SetError (ERROR_UNIQUETEAMS);
+					return;
+				}
+			}
+			index++;
 		}
 		networkManager.mapSelect = mapSelect;
 		networkManager.gameModeSelect = gameModeSelect;
@@ -111,14 +134,12 @@ public class MainMenuUIController : MonoBehaviour {
 			string optionValue = option.editText.text;
 			int parsedValue;
 			if (int.TryParse (optionValue, out parsedValue)) {
-				networkManager.gamemodeOptions [index].optionName = option.displayText.text;
-				networkManager.gamemodeOptions [index].value = parsedValue;
+				networkManager.gamemodeOptions [index] = new GameMode.GameOption (option.displayText.text, parsedValue);
 			} else {
 				// display warning
-				invalidOptionAnimator.SetTrigger("Error");
+				SetError(ERROR_NONUMBER);
 				return;
 			}
-			// TODO save to playerprefs
 			index++;
 		}
 
@@ -127,6 +148,9 @@ public class MainMenuUIController : MonoBehaviour {
 		//SceneManager.LoadScene (mapList [mapSelect], LoadSceneMode.Single);
 
     }
-
+	private void SetError(string errorMessage) {
+		invalidAnimatorText.text = errorMessage;
+		invalidOptionAnimator.SetTrigger("Error");
+	}
 
 }

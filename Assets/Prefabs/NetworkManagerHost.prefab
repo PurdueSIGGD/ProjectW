@@ -142,3 +142,7 @@ MonoBehaviour:
   isNetworkActive: 0
   matchMaker: {fileID: 0}
   lobbyCamera: {fileID: 0}
+  teamItems: []
+  mapSelect: 0
+  gameModeSelect: 0
+  gamemodeOptions: []

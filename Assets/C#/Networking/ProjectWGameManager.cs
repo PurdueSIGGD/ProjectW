@@ -15,7 +15,7 @@ public class ProjectWGameManager : NetworkBehaviour {
 	public bool useSettingsOverride;
 	public Team[] teams;
     public Scoreboard scoreBoard;
-    public string[] scenesToLoad;
+	public SceneHolder scenesToLoad;
 	public ColorHolder teamColors;
     private GameMode gameMode;
     private GameObject[] classPrefabs;
@@ -99,16 +99,13 @@ public class ProjectWGameManager : NetworkBehaviour {
 		oldP.despawnCorpse ();
     }
     void Start() {
-		if (networkManager == null) {
-			networkManager = GameObject.FindObjectOfType<ProjectWNetworkManager> ();
-		}
+		networkManager = GameObject.FindObjectOfType<ProjectWNetworkManager> ();
 
 		// If we created the game ourselves
 		if (networkManager.teamItems.Length > 0 && !useSettingsOverride) {
 			int teamCount = networkManager.teamItems.Length;
-			print ("got team count: " + teamCount);
 			teams = networkManager.teamItems;
-			// TODO GameMode & options
+			// GameMode & options
 			int gamemodeType = networkManager.gameModeSelect;
 			// People may forget the time limit in their games
 			if (networkManager.gamemodeOptions[0].optionName == "Time Limit") {
@@ -129,8 +126,6 @@ public class ProjectWGameManager : NetworkBehaviour {
 				break;
 			}
 
-			// TODO start lan host
-			//networkManager.StartHost();
 
 		} else {
 			if (!(gameMode = this.GetComponent<GameMode>()))
@@ -189,7 +184,7 @@ public class ProjectWGameManager : NetworkBehaviour {
             if (gameTime < -3.5f)
             {
                 GameReset();
-                networkManager.ServerChangeScene(scenesToLoad[Random.Range(0, scenesToLoad.Length - 1)]);
+                networkManager.ServerChangeScene(scenesToLoad.scenes[Random.Range(0, scenesToLoad.scenes.Length - 1)].name);
             }
             
         } else

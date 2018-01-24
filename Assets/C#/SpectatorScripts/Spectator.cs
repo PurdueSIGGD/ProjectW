@@ -160,7 +160,16 @@ public class Spectator : NetworkBehaviour {
 	
 	public void JoinServer() {
         // Called by the network manager when we join a server, only happens on the server side
-        RpcJoinServer(GameObject.FindObjectOfType<ProjectWGameManager>().teams);
+		StartCoroutine(JoinServerAttempt());
+	}
+	public IEnumerator JoinServerAttempt() {
+		ProjectWGameManager gameManager = GameObject.FindObjectOfType<ProjectWGameManager>();
+		if (gameManager.teams.Length == 0) {
+			yield return new WaitForSeconds (0.5f);
+			StartCoroutine (JoinServerAttempt ());
+		} else {
+			RpcJoinServer(gameManager.teams);
+		}
 	}
     [ClientRpc]
     public void RpcJoinServer(ProjectWGameManager.Team[] teams)
