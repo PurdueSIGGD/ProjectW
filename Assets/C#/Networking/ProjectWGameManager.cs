@@ -74,7 +74,7 @@ public class ProjectWGameManager : NetworkBehaviour {
             PlayerStats newP = newPlayer.GetComponent<PlayerStats> ();
             newP.playerName = oldPG.desiredPlayerName;
             newP.classIndex = oldPG.desiredPlayerClass;
-            newP.teamIndex = oldPG.desiredTeamIndex;
+			newP.teamIndex = teams.Length > 1 ? oldPG.desiredTeamIndex : -1;
             newP.teamColor = teams[teams.Length > 1?newP.teamIndex:0].teamColor;
             PlayerGUI newPG = newPlayer.GetComponent<PlayerGUI>();
             newPG.desiredPlayerName = oldPG.desiredPlayerName;
@@ -109,7 +109,7 @@ public class ProjectWGameManager : NetworkBehaviour {
 			int gamemodeType = networkManager.gameModeSelect;
 			// People may forget the time limit in their games
 			if (networkManager.gamemodeOptions[0].optionName == "Time Limit") {
-				gameTime = networkManager.gamemodeOptions [0].value;
+				gameTime = networkManager.gamemodeOptions [0].value * 60; // Time is passed in minutes, we use seconds here
 			} else {
 				gameTime = timeLimit; // TODO should we just make this infinite?
 			}
@@ -210,7 +210,7 @@ public class ProjectWGameManager : NetworkBehaviour {
         GameObject newPlayer = Instantiate(classPrefabs[classIndex], startPosition.position, startPosition.rotation);
 		newPlayer.name = playerName;
 		PlayerStats p = newPlayer.GetComponent<PlayerStats> ();
-		p.teamIndex = teamIndex;
+		p.teamIndex = teams.Length > 1 ? teamIndex : -1;
         p.teamColor = teams[teams.Length > 1 ? teamIndex : 0].teamColor;
         p.playerName = playerName;
         p.classIndex = classIndex;

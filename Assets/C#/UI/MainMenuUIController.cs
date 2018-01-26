@@ -50,7 +50,9 @@ public class MainMenuUIController : MonoBehaviour {
 
 
     void Start() {
-        SetScreenIndex(0);
+		SetScreenIndex(0);
+		ResetCursor ();
+		networkManager = GameObject.FindObjectOfType<ProjectWNetworkManager> ();
     }
     public void ExitGame() {
 #if UNITY_EDITOR
@@ -94,7 +96,9 @@ public class MainMenuUIController : MonoBehaviour {
         string ip = serverIP.text;
         PlayerPrefs.SetString(PlayerPrefStrings.IP_TO_CONNECT, ip);
         print("Joining server");
-        Network.Connect(ip, 7777);
+		networkManager.networkAddress = ip;
+		networkManager.networkPort = 4718;
+		networkManager.StartClient ();
         // TODO verify this works
     }
 
@@ -152,5 +156,9 @@ public class MainMenuUIController : MonoBehaviour {
 		invalidAnimatorText.text = errorMessage;
 		invalidOptionAnimator.SetTrigger("Error");
 	}
-
+	public void ResetCursor() {
+		// Make sure we can still click and see our cursor
+		Cursor.lockState = CursorLockMode.None;
+		Cursor.visible = true;
+	}
 }

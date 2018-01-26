@@ -125,13 +125,12 @@ public class PlayerGUI : PlayerComponent {
         desiredPlayerName = playerName;
     }
     public void ExitServer() {
-        if (isServer) {
-            NetworkServer.DisconnectAll();
-        } else {
-            Network.Disconnect();
-            MasterServer.UnregisterHost();
-            NetworkServer.RemoveExternalConnection(this.connectionToServer.connectionId);
-        }
+		if (isServer) {
+			NetworkServer.DisconnectAll();
+			GameObject.FindObjectOfType<ProjectWNetworkManager> ().StopServer ();
+		} else {
+			GameObject.FindObjectOfType<ProjectWNetworkManager> ().StopClient ();
+		}
     }
 	public void Spectate() {
 		// Force our player to die and move to spectators

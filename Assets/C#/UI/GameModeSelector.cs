@@ -25,7 +25,7 @@ public class GameModeSelector : MonoBehaviour {
         foreach (GameMode.GameOption o in gameModePrefabHolder.prefabs[newVal].GetComponent<GameMode>().gameOptions) {
             GameModeUIOption option = GameObject.Instantiate(optionTemplate, transform).GetComponent<GameModeUIOption>();
             option.displayText.text = o.optionName;
-            option.editText.text = o.value + "";
+			option.editText.GetComponent<InputField>().text = o.value + "";
         }
         
 	}

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ServerOptions : MonoBehaviour {
     public GameObject teamPrefab;
@@ -11,14 +12,15 @@ public class ServerOptions : MonoBehaviour {
     public void addTeam() {
         // Spawn new prefab into thing
         if (teamList.childCount < maxTeams) {
-            GameObject.Instantiate(teamPrefab, teamList);
+			ServerOptionsTeamItem spawnedItem = GameObject.Instantiate(teamPrefab, teamList).GetComponent<ServerOptionsTeamItem>();
+			spawnedItem.nameText.GetComponent<InputField> ().text = "Team " + teamList.childCount;
         }
     }
 
 
 	// Use this for initialization
 	void Start () {
-		
+		addTeam ();
 	}
 	
 	// Update is called once per frame

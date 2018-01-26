@@ -15,6 +15,7 @@ public class ProjectWNetworkManager : NetworkManager {
 
 
 
+
     public void Start() {
         if (lobbyCamera != null) {
             lobbyCamera.SetActive(true);
@@ -46,12 +47,12 @@ public class ProjectWNetworkManager : NetworkManager {
         NetworkServer.SetClientReady(conn);
     }
     
-    public override void OnServerRemovePlayer(NetworkConnection conn, PlayerController player) {
+	public override void OnServerRemovePlayer(NetworkConnection conn, PlayerController player) {
         base.OnServerRemovePlayer(conn, player);
     }
     
     // called when a network error occurs
-    public override void OnServerError(NetworkConnection conn, int errorCode) {
+	public override void OnServerError(NetworkConnection conn, int errorCode) {
 
     }
 
@@ -73,6 +74,12 @@ public class ProjectWNetworkManager : NetworkManager {
             //Dont repeat, this is a bot
         }
     }
+
+	public void ResetCursor() {
+		// Make sure we can still click and see our cursor
+		Cursor.lockState = CursorLockMode.None;
+		Cursor.visible = true;
+	}
 
 
 }

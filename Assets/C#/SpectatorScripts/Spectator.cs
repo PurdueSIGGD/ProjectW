@@ -150,10 +150,9 @@ public class Spectator : NetworkBehaviour {
     public void ExitServer() {
         if (isServer) {
             NetworkServer.DisconnectAll();
-        } else {
-            Network.Disconnect();
-            MasterServer.UnregisterHost();
-            NetworkServer.RemoveExternalConnection(this.connectionToServer.connectionId);
+			GameObject.FindObjectOfType<ProjectWNetworkManager> ().StopServer ();
+		} else {
+			GameObject.FindObjectOfType<ProjectWNetworkManager> ().StopClient ();
         }
      
     }

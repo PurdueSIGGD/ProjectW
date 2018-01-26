@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOptions:
-  - optionName: Time Limit (s)
-    value: 5
+  - optionName: Time Limit (m)
+    value: 10
   - optionName: Max Kills
     value: 25
