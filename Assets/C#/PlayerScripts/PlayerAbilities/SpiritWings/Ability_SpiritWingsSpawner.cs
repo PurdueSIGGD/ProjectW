@@ -6,6 +6,8 @@ public class Ability_SpiritWingsSpawner : Ability_ObjectSpawner {
 
     public float spellDuration = 2;
     public float boostMultiplier = 1f;
+	public float maxVelocity = 30;
+	public float endVelocity = 8;
 
     public override void OnSpellSpawned(GameObject spawn)
     {
@@ -19,6 +21,16 @@ public class Ability_SpiritWingsSpawner : Ability_ObjectSpawner {
     }
     public void boost()
     {
-        this.gameObject.GetComponent<Rigidbody>().AddForce(aimAngle.rotation * new Vector3(0,0,boostMultiplier), ForceMode.VelocityChange);
+		Rigidbody r = this.gameObject.GetComponent<Rigidbody> ();
+		if (r.velocity.magnitude <= maxVelocity) {
+			r.AddForce (aimAngle.rotation * new Vector3 (0, 0, boostMultiplier), ForceMode.VelocityChange);
+		} else {
+			r.AddForce (((maxVelocity-r.velocity.magnitude)/r.velocity.magnitude)*r.velocity, ForceMode.VelocityChange);
+		}
     }
+	public void slowToStop(){
+		Rigidbody r = this.gameObject.GetComponent<Rigidbody> ();
+		if(r.velocity.magnitude > endVelocity)
+			r.AddForce (((endVelocity-r.velocity.magnitude)/r.velocity.magnitude)*r.velocity, ForceMode.VelocityChange);
+	}
 }

@@ -3194,14 +3194,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicDraw: 40
-  cooldown: 5
+  cooldown: 2
   itemToSpawn: {fileID: 1701492281652076, guid: a32cdbd2205575a42a442cb0343ff1c4,
     type: 2}
   spawnPoint: {fileID: 4099688575343354}
   spawnOffset: {x: 0, y: 0.2, z: 0}
   aimAngle: {fileID: 4338967783843814}
   spawnSpeed: 0
-  spellDuration: 3
+  spellDuration: 1.5
+  boostMultiplier: 1
+  maxVelocity: 30
+  endVelocity: 8
 --- !u!114 &114874414058555186
 MonoBehaviour:
   m_ObjectHideFlags: 1

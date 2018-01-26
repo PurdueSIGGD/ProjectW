@@ -8,6 +8,7 @@ public class SpiritWings : MonoBehaviour {
     public HitArguments.DamageType damageType;
     private float previousBoost;
     private float coolDown = .02f;
+	private float pushForce = 1000, radius = 10;
     private Ability_SpiritWingsSpawner ability;
 
     public void StartSpiritWings(Ability_SpiritWingsSpawner ability, float spellDuration) {
@@ -18,18 +19,22 @@ public class SpiritWings : MonoBehaviour {
 
     private void OnTriggerEnter(Collider col)
     {
-        if (col.GetComponentInParent<IHittable>() != null)
+        if (col.GetComponentInParent<IHittable>() == null)
             return;
-        if (col.isTrigger)
-        {
+		PlayerStats ps;
+		if ((ps = col.GetComponentInParent<PlayerStats> ()) != null && ps.gameObject == sourcePlayer.gameObject) {
+			return;
+		} else {
             Rigidbody r;
-            if ((r = col.GetComponent<Rigidbody>()) != null)
+			if ((r = col.transform.GetComponent<Rigidbody>()) != null)
             {
-                
-                //r.AddForce(-(r.velocity), ForceMode.VelocityChange);
+				if (ps)
+					r.GetComponentInParent<BasePlayer> ().myRigid.AddExplosionForce (pushForce, transform.position, radius);
+				else
+					r.AddExplosionForce(pushForce, transform.position, radius);
             }
         }
-    }
+    }//TODO: add continuous upward force
 
     void Update()
     {
@@ -39,4 +44,7 @@ public class SpiritWings : MonoBehaviour {
             ability.boost();
         }
     }
+	void OnDestroy(){
+		ability.slowToStop ();
+	}
 }
