@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 82176907266229218}
   - component: {fileID: 114927812004734752}
   m_Layer: 13
-  m_Name: GroundPound
+  m_Name: GroundPoundDirect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -184,10 +184,10 @@ MonoBehaviour:
   effect: 0
   effectDuration: 3
   pushForce: 3000
-  range: 5
+  range: 2
   verticalPushForce: 0.2
-  minDamage: 10
-  maxDamage: 20
+  minDamage: 15
+  maxDamage: 25
   sourcePlayerDamageMultiplier: 0
   sourcePlayerForceMultiplier: 0
 --- !u!114 &114981460985902070
@@ -204,22 +204,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 234
-    i1: 40
-    i2: 161
-    i3: 123
-    i4: 155
-    i5: 39
-    i6: 133
-    i7: 36
-    i8: 43
-    i9: 108
-    i10: 88
-    i11: 136
-    i12: 62
-    i13: 144
-    i14: 235
-    i15: 30
+    i0: 104
+    i1: 15
+    i2: 65
+    i3: 64
+    i4: 249
+    i5: 232
+    i6: 243
+    i7: 68
+    i8: 187
+    i9: 31
+    i10: 159
+    i11: 154
+    i12: 140
+    i13: 161
+    i14: 28
+    i15: 153
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
 --- !u!198 &198375184613993654

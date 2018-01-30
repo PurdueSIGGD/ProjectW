@@ -9,11 +9,15 @@ public class Ability_RockLeap : CooldownAbility {
 	private bool landing = false;
 
 	public GameObject itemToSpawn;
+	public GameObject itemToSpawnAlt;
 	public Transform spawnPoint;
 	public Vector3 spawnOffset;
 	public Transform aimAngle;
 	public float spawnSpeed;
 	private float delay = .001f;
+
+	const float checkGroundDistance = .5f;
+	const float checkGroundWidth = .5f;
 
 	private static string OBJECT_SPAWN_METHOD_NAME = "ObjectSpawn";
 
@@ -54,15 +58,19 @@ public class Ability_RockLeap : CooldownAbility {
 		}
 		OnSpellSpawned(spawn);
 
+		if (data.intList [0] == 1) {// called if grounded
 
-
-
+		} else {// called if player hit or not grounded
+			spawn = GameObject.Instantiate(itemToSpawnAlt, spawnPosition + transform.TransformDirection(spawnOffset), transform.rotation);
+			OnSpellSpawned(spawn);
+			Debug.Log("Not grounded");
+		}
 	}
 
 	public IEnumerator spawnDelay()
 	{
 		Rigidbody rp = myBase.myRigid;
-		if (active && Mathf.Abs(rp.velocity.y) < 2) {
+		if (active && rp.velocity.y < 0) {
 			Ray ray1 = Camera.main.ScreenPointToRay(Input.mousePosition);
 
 
@@ -74,17 +82,61 @@ public class Ability_RockLeap : CooldownAbility {
 			vec.y = -2 * jHeight;
 
 			rp.velocity = vec;
-			Debug.Log ("peaked");
 			active = false;
 			landing = true;
 		}
-		if (landing && Mathf.Abs(rp.velocity.y) < 2) {
-			Debug.Log ("landed");
+		if (landing /*&& Mathf.Abs(rp.velocity.y) < 2*/) {
+			/*int layer = 1 << 11;
+			if (Physics.Raycast (rp.position, -Vector3.up, rp.GetComponent<Collider>().bounds.size.y + .1f, layer)) {
+				sendSpawnData (true);
+			} else {
+				sendSpawnData (false);
+				Debug.Log("Not grounded");
 
-			rp.velocity = new Vector3 (0, 0, 0);
-			sendSpawnData();
+			}*/
+			RaycastHit hitInfo;
+			Vector3 root = transform.position + Vector3.up * 0.3f;
+			int groundLayer = 1 << 11;
+			int playerLayer = 1 << 9;
+			//Check if on ground
+			if (Physics.Raycast (root, Vector3.down, out hitInfo, checkGroundDistance) ||
+				Physics.Raycast (root + Vector3.forward * checkGroundWidth, Vector3.down, out hitInfo, checkGroundDistance, groundLayer) ||
+				Physics.Raycast (root + Vector3.left * checkGroundWidth, Vector3.down, out hitInfo, checkGroundDistance, groundLayer) ||
+				Physics.Raycast (root + Vector3.right * checkGroundWidth, Vector3.down, out hitInfo, checkGroundDistance, groundLayer) ||
+				Physics.Raycast (root + Vector3.back * checkGroundWidth, Vector3.down, out hitInfo, checkGroundDistance, groundLayer)) {
+				//if (!System.Array.Find(collidersToIgnore, c => c == hitInfo.collider)) {
 
-			landing = false;
+				int dataNum = 1;
+
+				if (Physics.SphereCast (root, checkGroundWidth, Vector3.down, out hitInfo, checkGroundDistance, playerLayer))
+				{
+					dataNum++;
+				}
+
+				sendSpawnData (1);
+				//}
+				rp.velocity = new Vector3 (0, 0, 0);
+				landing = false;
+			//check if on player
+			} else if (Physics.SphereCast (root, checkGroundWidth, Vector3.down, out hitInfo, checkGroundDistance, playerLayer) )
+			{
+				sendSpawnData (2);
+				Debug.Log("Player hit");
+
+				rp.velocity = new Vector3 (-rp.velocity.x, 2, -rp.velocity.z);
+				landing = false;
+
+			}
+			else if (Mathf.Abs(rp.velocity.y) < 2) {
+				sendSpawnData (0);
+
+
+				rp.velocity = new Vector3 (0, 0, 0);
+				landing = false;
+			}
+
+
+			//sendSpawnData (false);
 		}
 
 		if (active || landing) {
@@ -110,7 +162,7 @@ public class Ability_RockLeap : CooldownAbility {
      * Called by the input controller. 
      */
 
-	public void sendSpawnData()
+	public void sendSpawnData(int grounded)
 	{
 		// PlayerAbility puts input for each player around here. 
 		// Since we send another message to get things done, we shouldn't bother with anyone who isn't local
@@ -138,6 +190,10 @@ public class Ability_RockLeap : CooldownAbility {
 			Buf buf = new Buf();
 			buf.methodName = OBJECT_SPAWN_METHOD_NAME;
 			buf.vectorList = new Vector3[] { localAngle, localPosition };
+
+			buf.intList = new int[] { grounded };
+			
+
 			this.NotifyAllClientDelegates(buf);
 		}
 	}

@@ -80,11 +80,11 @@ public class Ability_RecursiveSpawner : Ability_ObjectSpawner {
 				spawn = castOne (data, ref ray1, ref ray2, ref it);
 				check = 0;
 			} else {
-				if (Physics.Raycast (ray2, out hit, spawnRange, layer)) {
+				if (Physics.Raycast (ray2, out hit, 2 * spawnRange, layer)) {
 					spawn = GameObject.Instantiate (itemToSpawn, hit.point, Quaternion.identity);
 					ray1 = new Ray (ray1.origin + ray2.direction * (hit.distance - offset * .5f), ray1.direction);
 				} else {
-					spawn = GameObject.Instantiate (itemToSpawn, ray2.origin + ray2.direction * spawnRange, Quaternion.identity);
+					spawn = GameObject.Instantiate (itemToSpawn, ray2.origin + ray2.direction * 2 * spawnRange, Quaternion.identity);
 					it = numSpawns;
 				}
 			}

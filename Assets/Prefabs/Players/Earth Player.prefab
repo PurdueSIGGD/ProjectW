@@ -3206,9 +3206,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magicDraw: 45
   cooldown: 3
-  jHeight: 15
+  jHeight: 10
   jForward: 4
   itemToSpawn: {fileID: 1817249387651284, guid: ea28a17b9b2785242b6c58883e90eb1e,
+    type: 2}
+  itemToSpawnAlt: {fileID: 1817249387651284, guid: 680f4140f9e8f344bb1f9f9a8ca11c99,
     type: 2}
   spawnPoint: {fileID: 4738656710400100}
   spawnOffset: {x: 0, y: 0, z: 0}
@@ -3239,8 +3241,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9865a68ccb60784080f263aac2eb9f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magicDraw: 45
-  cooldown: 2
+  magicDraw: 35
+  cooldown: 3
   itemToSpawn: {fileID: 1817249387651284, guid: 291968355faab8848af88615cabf21f4,
     type: 2}
   spawnPoint: {fileID: 4738656710400100}
