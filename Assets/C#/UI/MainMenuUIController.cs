@@ -39,7 +39,8 @@ public class MainMenuUIController : MonoBehaviour {
 
     public Transform teamList;
 
-	public ProjectWNetworkManager networkManager;
+	public GameObject networkManagerPrefab;
+	private ProjectWNetworkManager networkManager;
 
 	public GameObject teamColors;
 
@@ -52,7 +53,9 @@ public class MainMenuUIController : MonoBehaviour {
     void Start() {
 		SetScreenIndex(0);
 		ResetCursor ();
-		networkManager = GameObject.FindObjectOfType<ProjectWNetworkManager> ();
+		if (!(networkManager = GameObject.FindObjectOfType<ProjectWNetworkManager> ())) {
+			networkManager = GameObject.Instantiate (networkManagerPrefab).GetComponent<ProjectWNetworkManager> ();
+		}
     }
     public void ExitGame() {
 #if UNITY_EDITOR
@@ -104,6 +107,7 @@ public class MainMenuUIController : MonoBehaviour {
 
     public void StartHost() {
         print("Starting host");
+		networkManager.gameObject.SetActive (true);
 
 		ServerOptionsTeamItem[] teamItems = teamList.GetComponentsInChildren<ServerOptionsTeamItem>();
 	

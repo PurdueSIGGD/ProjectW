@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.Networking.NetworkSystem;
 
 public class ProjectWNetworkManager : NetworkManager {
     public GameObject lobbyCamera;
@@ -31,6 +32,15 @@ public class ProjectWNetworkManager : NetworkManager {
         }
 		player.SendMessage("JoinServer");
     }
+
+	public override void OnClientConnect(NetworkConnection conn) {
+		/*if (string.IsNullOrEmpty (this.onlineScene) || this.onlineScene == this.offlineScene) {
+			ClientScene.Ready (conn);
+			ClientScene.AddPlayer (conn, 0, new StringMessage("Welcome I guess"));
+
+		}*/
+		//ClientScene.AddPlayer (conn, 0, new StringMessage("Welcome I guess"));
+	}
 
     // called when a client connects 
     public override void OnServerConnect(NetworkConnection conn) {

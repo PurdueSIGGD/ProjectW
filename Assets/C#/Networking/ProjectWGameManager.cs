@@ -64,35 +64,35 @@ public class ProjectWGameManager : NetworkBehaviour {
         yield return new WaitForSeconds(respawnTime);
 		print("Now respawning player");
 		PlayerStats oldP;
-        PlayerGUI oldPG;
+		PlayerGUI oldPG = null;
 		// if it is -1, they want to be a spectator, so no respawn
-		if ((oldP = player.GetComponent<PlayerStats>()) != null && (oldPG = player.GetComponent<PlayerGUI>()) != null && oldPG.desiredTeamIndex != -1) {
+		if ((oldP = player.GetComponent<PlayerStats> ()) != null && (oldPG = player.GetComponent<PlayerGUI> ()) != null && (teams.Length == 1 || oldPG.desiredTeamIndex != -1)) {
 			NetworkConnection connection = oldP.connectionToClient;
-			Transform startPosition = GetStartPosition();
-            GameObject newPlayer = Instantiate(classPrefabs[oldPG.desiredPlayerClass], startPosition.position, startPosition.rotation);
-            newPlayer.name = oldP.playerName;
-            PlayerStats newP = newPlayer.GetComponent<PlayerStats> ();
-            newP.playerName = oldPG.desiredPlayerName;
-            newP.classIndex = oldPG.desiredPlayerClass;
+			Transform startPosition = GetStartPosition ();
+			GameObject newPlayer = Instantiate (classPrefabs [oldPG.desiredPlayerClass], startPosition.position, startPosition.rotation);
+			newPlayer.name = oldP.playerName;
+			PlayerStats newP = newPlayer.GetComponent<PlayerStats> ();
+			newP.playerName = oldPG.desiredPlayerName;
+			newP.classIndex = oldPG.desiredPlayerClass;
 			newP.teamIndex = teams.Length > 1 ? oldPG.desiredTeamIndex : -1;
-            newP.teamColor = teams[teams.Length > 1?newP.teamIndex:0].teamColor;
-            PlayerGUI newPG = newPlayer.GetComponent<PlayerGUI>();
-            newPG.desiredPlayerName = oldPG.desiredPlayerName;
-            newPG.desiredPlayerClass = oldPG.desiredPlayerClass;
-            newPG.desiredTeamIndex = oldPG.desiredTeamIndex;
-            // If not a bot, move connection to a new thing
-            int botId;
-            if ((botId = player.GetComponent<PlayerInput>().getBot()) != -1)
-            {
-                newPlayer.GetComponent<PlayerInput>().SendMessage("setBot", botId);
-                NetworkServer.Spawn(newPlayer);
-            } else
-            {
-                NetworkServer.Spawn(newPlayer);
-                NetworkServer.ReplacePlayerForConnection(connection, newPlayer, 0);
-                AssignPlayerId(newPlayer);
-            }
-        }
+			newP.teamColor = teams [teams.Length > 1 ? newP.teamIndex : 0].teamColor;
+			PlayerGUI newPG = newPlayer.GetComponent<PlayerGUI> ();
+			newPG.desiredPlayerName = oldPG.desiredPlayerName;
+			newPG.desiredPlayerClass = oldPG.desiredPlayerClass;
+			newPG.desiredTeamIndex = oldPG.desiredTeamIndex;
+			// If not a bot, move connection to a new thing
+			int botId;
+			if ((botId = player.GetComponent<PlayerInput> ().getBot ()) != -1) {
+				newPlayer.GetComponent<PlayerInput> ().SendMessage ("setBot", botId);
+				NetworkServer.Spawn (newPlayer);
+			} else {
+				NetworkServer.Spawn (newPlayer);
+				NetworkServer.ReplacePlayerForConnection (connection, newPlayer, 0);
+				AssignPlayerId (newPlayer);
+			}
+		} else {
+			//print (oldPG.desiredTeamIndex + " desired team index");
+		}
        
         yield return new WaitForSeconds(5);
         //print("destroying corpse");

@@ -124,12 +124,14 @@ public class PlayerGUI : PlayerComponent {
         desiredTeamIndex = teamIndex;
         desiredPlayerName = playerName;
     }
-    public void ExitServer() {
+	public void ExitServer() {
+		ProjectWNetworkManager networkManager = GameObject.FindObjectOfType<ProjectWNetworkManager> ();
 		if (isServer) {
-			NetworkServer.DisconnectAll();
-			GameObject.FindObjectOfType<ProjectWNetworkManager> ().StopServer ();
+			//NetworkServer.DisconnectAll();
+			networkManager.StopClient ();
+			networkManager.StopServer ();
 		} else {
-			GameObject.FindObjectOfType<ProjectWNetworkManager> ().StopClient ();
+			networkManager.StopClient ();
 		}
     }
 	public void Spectate() {
