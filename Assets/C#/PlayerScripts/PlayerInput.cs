@@ -57,12 +57,17 @@ public abstract class PlayerInput : PlayerComponent {
                    
                     myBase.myMovement.processMovement(myData);
 
+                    // if stunned, don't allow play to use abilities
+                    if (this.myBase.myEffects.stunned)
+                        return;
+
                     for (int i = 0; i < myBase.myAbilities.Length; i++) {
                         if (myData.useAbilities[i]) {
                             //print(myBase.myAbilities[i] is Ability_SpeedBoost);
                             myBase.myAbilities[i].ClientsUse();
                         }
                     }
+
                 }
             }
            
