@@ -19,6 +19,7 @@ public class Projectile : MonoBehaviour {
     public PlayerEffects.Effects effect;
     public float effectDuration = 3;
     public bool hitSameTeam = false;
+    public float currentVelocity = 0;
 
     private bool hasHit;
 
@@ -26,6 +27,7 @@ public class Projectile : MonoBehaviour {
 
     void Start() {
         Invoke("DestroyMe", lifetime);
+        currentVelocity = this.GetComponent<Rigidbody>().velocity.magnitude;
     }
 
     void DestroyMe()
