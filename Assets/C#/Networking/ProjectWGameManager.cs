@@ -65,8 +65,9 @@ public class ProjectWGameManager : NetworkBehaviour {
 		print("Now respawning player");
 		PlayerStats oldP;
 		PlayerGUI oldPG = null;
-		// if it is -1, they want to be a spectator, so no respawn
-		if ((oldP = player.GetComponent<PlayerStats> ()) != null && (oldPG = player.GetComponent<PlayerGUI> ()) != null && (teams.Length == 1 || oldPG.desiredTeamIndex != -1)) {
+		// if it is -1, they are joining the ffa team
+        // if it is -2, they want to be a spectator, so no respawn
+		if ((oldP = player.GetComponent<PlayerStats> ()) != null && (oldPG = player.GetComponent<PlayerGUI> ()) != null && oldPG.desiredTeamIndex != -2) {
 			NetworkConnection connection = oldP.connectionToClient;
 			Transform startPosition = GetStartPosition ();
 			GameObject newPlayer = Instantiate (classPrefabs [oldPG.desiredPlayerClass], startPosition.position, startPosition.rotation);

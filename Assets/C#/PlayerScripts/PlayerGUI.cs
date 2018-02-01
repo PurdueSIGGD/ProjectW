@@ -140,7 +140,8 @@ public class PlayerGUI : PlayerComponent {
 	}
 	[Command]
 	public void CmdSpectate() {
-		this.desiredTeamIndex = -1;
+        // Desired team index is denoted at -2 when wanting to become a spectator, -1 for the ffa team
+		this.desiredTeamIndex = -2;
 		GameObject.FindObjectOfType<ProjectWGameManager>().SpawnSpectator(this.gameObject);
 	}
     public void StopGUI()

@@ -80,3 +80,9 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# Metadata that always causes merge conflicts
+Library/metadata/*
+
+# Solution problems
+*.sln
