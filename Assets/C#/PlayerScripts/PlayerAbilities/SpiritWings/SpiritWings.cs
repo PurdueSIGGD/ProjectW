@@ -29,10 +29,13 @@ public class SpiritWings : MonoBehaviour {
             Rigidbody r;
 			if ((r = col.transform.GetComponent<Rigidbody>()) != null)
             {
-				if (ps)
-					r.GetComponentInParent<BasePlayer> ().myRigid.AddExplosionForce (ability.pushForce, transform.position, radius);
-				else
-					r.AddExplosionForce(ability.pushForce, transform.position, radius);
+                if (ps)
+                {
+                    r.GetComponentInParent<BasePlayer>().myRigid.AddExplosionForce(ability.pushForce, transform.position, radius);
+                    HitManager.HitClientside(new HitArguments(r.GetComponentInParent<BasePlayer>().gameObject, sourcePlayer).withDamage(ability.damage));
+                }
+                else
+                    r.AddExplosionForce(ability.pushForce, transform.position, radius);
             }
         }
     }//TODO: add continuous upward force

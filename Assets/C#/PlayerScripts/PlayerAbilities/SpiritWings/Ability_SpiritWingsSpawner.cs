@@ -11,6 +11,7 @@ public class Ability_SpiritWingsSpawner : Ability_ObjectSpawner {
     public float verticalForce = .5f;
     public float initialUpwardVelocity = 4;
     public float pushForce = 1000;
+    public float damage = 5;
 
     public override void OnSpellSpawned(GameObject spawn)
     {

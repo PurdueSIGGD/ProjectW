@@ -3208,6 +3208,7 @@ MonoBehaviour:
   verticalForce: 0.32
   initialUpwardVelocity: 4
   pushForce: 2000
+  damage: 3
 --- !u!114 &114874414058555186
 MonoBehaviour:
   m_ObjectHideFlags: 1
