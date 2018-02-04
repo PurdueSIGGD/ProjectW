@@ -156,6 +156,7 @@ public class Scoreboard : NetworkBehaviour {
             scoreboardItem.classIcon.sprite = classSpritePrefabHolder[scoreboardPlayer.classId];
 
             Color teamColor = Color.white;
+			// All players are added, including spectators, who are not colored 
             foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
             {
                 //print(player.name + " " + player.GetComponent<NetworkBehaviour>().isLocalPlayer);

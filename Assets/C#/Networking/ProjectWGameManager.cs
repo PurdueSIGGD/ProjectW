@@ -185,7 +185,9 @@ public class ProjectWGameManager : NetworkBehaviour {
             if (gameTime < -3.5f)
             {
                 GameReset();
-                networkManager.ServerChangeScene(scenesToLoad.scenes[Random.Range(0, scenesToLoad.scenes.Length - 1)].name);
+				int randomRange = Random.Range (0, scenesToLoad.scenes.Length - 1);
+				print ("Changing scene to scene: " + randomRange + " out of " + scenesToLoad.scenes.Length);
+                networkManager.ServerChangeScene(scenesToLoad.scenes[randomRange].name);
             }
             
         } else

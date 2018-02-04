@@ -90,15 +90,19 @@ public class PlayerStats : PlayerComponent, IHittable {
         //print(this.gameObject.name + " " + this.playerControllerId + " " + isServer + " " + isClient);
         // Spawned enemies can 
         if (health == 0 && !hasDeath) {
-            if (isLocalPlayer) {
-                // Player has to handle their own death
-                CmdDeath();
-            } else if (isServer && myBase.myInput.isBot()) {
-                // Specific message for non-cmd things
-                ServerDeath();
-            }
-            this.BroadcastMessage("Death");
-            hasDeath = true;
+			if (isLocalPlayer) {
+				// Player has to handle their own death
+				CmdDeath ();
+				this.BroadcastMessage ("Death");
+				hasDeath = true;
+			} else if (isServer && myBase.myInput.isBot ()) {
+				// Specific message for non-cmd things
+				ServerDeath ();
+				this.BroadcastMessage ("Death");
+				hasDeath = true;
+			} else {
+				// Only the server/client should be handling their death
+			}
         }
 
         if (Time.time - lastHitTime > 5 && lastHitPlayerId != 0)

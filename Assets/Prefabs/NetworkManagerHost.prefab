@@ -146,3 +146,5 @@ MonoBehaviour:
   mapSelect: 0
   gameModeSelect: 0
   gamemodeOptions: []
+  scenesToLoad: {fileID: 114986398184245588, guid: 70364ba56a6fdb248808eb52b9ad1d53,
+    type: 2}

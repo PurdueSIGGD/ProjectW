@@ -43,8 +43,8 @@ public class MainMenuUIController : MonoBehaviour {
 	private ProjectWNetworkManager networkManager;
 
 	public GameObject teamColors;
+	public SceneHolder sceneHolder;
 
-	public string[] mapList;
 
 	private const string ERROR_NONUMBER = "PLEASE ENTER A NUMBER FOR GAMEMODE OPTIONS";
 	private const string ERROR_UNIQUETEAMS = "PLEASE ENSURE TEAMS ARE UNIQUE";
@@ -111,7 +111,7 @@ public class MainMenuUIController : MonoBehaviour {
 
 		ServerOptionsTeamItem[] teamItems = teamList.GetComponentsInChildren<ServerOptionsTeamItem>();
 	
-        int mapSelect = mapDropdown.value;
+		string mapSelect = sceneHolder.scenes[mapDropdown.value].name;
         int gameModeSelect = gamemodeDropdown.value;
 
 		networkManager.teamItems = new ProjectWGameManager.Team[teamItems.Length];
@@ -151,9 +151,8 @@ public class MainMenuUIController : MonoBehaviour {
 			index++;
 		}
 
-
+		networkManager.onlineScene = mapSelect;
 		networkManager.StartHost();
-		//SceneManager.LoadScene (mapList [mapSelect], LoadSceneMode.Single);
 
     }
 	private void SetError(string errorMessage) {

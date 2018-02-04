@@ -9,9 +9,10 @@ public class ProjectWNetworkManager : NetworkManager {
 
 	// START GAME SERVER SETTINGS
 	public ProjectWGameManager.Team[] teamItems;
-	public int mapSelect;
+	public string mapSelect;
 	public int gameModeSelect;
 	public GameMode.GameOption[] gamemodeOptions;
+	public SceneHolder scenesToLoad;
 	// END GAME SERVER SETTINGS
 
 
@@ -22,6 +23,11 @@ public class ProjectWNetworkManager : NetworkManager {
             lobbyCamera.SetActive(true);
         }
     }
+
+	// Called when a host is started
+	public override void OnStartHost() {
+		
+	}
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId) {
         Transform start = GetStartPosition();

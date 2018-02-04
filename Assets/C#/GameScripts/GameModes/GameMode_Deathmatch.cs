@@ -35,7 +35,7 @@ public class GameMode_Deathmatch : GameMode
                         {
                             winnerName = s.name,
                             winnerScore = s.kills + " Kills",
-                            winnerColor = manager.teams[s.teamIndex].teamColor
+                            winnerColor = manager.teams[0].teamColor
                         };
                     }
                 }
