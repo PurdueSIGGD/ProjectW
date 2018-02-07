@@ -39,6 +39,7 @@ public class SpectatorUIController : MonoBehaviour {
     public Text winnerScore;
 
     public PrefabHolder classPrefabHolder;
+    public SpriteHolder teamSpriteHolder;
 
     // Use this for initialization
     void Start () {
@@ -76,7 +77,7 @@ public class SpectatorUIController : MonoBehaviour {
             //print("team stuff " + teams[i].teamColor);
             createdGridItem.GetComponentInChildren<Text>().text = teams [i].teamName;
             createdGridItem.GetComponentInChildren<Text>().color = teams[i].teamColor;
-            // TODO createdGridItem.GetComponentInChildren<Image>().sprite = teams[i].teamSprite;
+            createdGridItem.GetComponentInChildren<Image>().sprite = teamSpriteHolder.sprites[teams[i].teamSprite];
             int captured = i;
 			createdGridItem.GetComponentInChildren<Button>().onClick.AddListener(() => { PickTeam(captured); });
 		}

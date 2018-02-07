@@ -31,6 +31,7 @@ public class ProjectWGameManager : NetworkBehaviour {
 		public string teamName;
         public int teamIndex;
         public Color teamColor;
+        public int teamSprite;
 	}
     public class Winner
     {

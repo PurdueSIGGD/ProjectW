@@ -121,6 +121,7 @@ public class MainMenuUIController : MonoBehaviour {
 			networkManager.teamItems[index].teamIndex = index;
 			networkManager.teamItems[index].teamColor = teamColors.GetComponent<ColorHolder>().colors [teamItem.colorDropdown.value];
 			networkManager.teamItems[index].teamName = teamItem.nameText.text;
+            networkManager.teamItems[index].teamSprite = teamItem.colorDropdown.value;
 			for (int i = index - 1; i >= 0; i--) {
 				// Go back, ensure uniqueness
 				if (networkManager.teamItems [i].teamColor == networkManager.teamItems [index].teamColor ||
