@@ -74,7 +74,7 @@ public class Ability_ObjectSpawner : CooldownAbility {
 					if (tmpSts.gameObject == this.gameObject)
 						continue;
 				}
-				if (h.transform.GetComponent<Collider> ().isTrigger) {
+				if (h.collider.isTrigger) {
 					continue;
 				}
 				//print ("overriding with object: " + h.transform);

@@ -56,6 +56,8 @@ public class PlayerStats : PlayerComponent, IHittable {
         }
     }
     public float changeHealth(float f) {
+		if (!isServer && !isLocalPlayer)
+			return 0;
         //print("took hit " + f);
         float returnVal = 0;
         health += f;
@@ -84,8 +86,8 @@ public class PlayerStats : PlayerComponent, IHittable {
         return returnVal;
     }
     public override void PlayerComponent_Update() {
-        healthBar.transform.localScale = new Vector3(health, health>0?1:0, health > 0 ? 1 : 0);
-        magicBar.transform.localScale = new Vector3(magic, magic > 0 ? 1 : 0, magic > 0 ? 1 : 0);
+        //healthBar.transform.localScale = new Vector3(health, health>0?1:0, health > 0 ? 1 : 0);
+        //magicBar.transform.localScale = new Vector3(magic, magic > 0 ? 1 : 0, magic > 0 ? 1 : 0);
         changeMagic(Time.deltaTime * 30 * myBase.myEffects.magicRegenModifier); // Update magic at our regen rate
         //print(this.gameObject.name + " " + this.playerControllerId + " " + isServer + " " + isClient);
         // Spawned enemies can 
@@ -130,7 +132,7 @@ public class PlayerStats : PlayerComponent, IHittable {
         {
             if (targetStats.teamIndex == this.teamIndex && !hit.hitSameTeam)
             {
-                print("Same team, not registering hit");
+				Debug.LogWarning("Same team, not registering hit on target " + hit.target);
                 return;
             }
         }
