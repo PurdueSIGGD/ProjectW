@@ -56,14 +56,15 @@
      <Compile Include="Assets\C#\GameScripts\GameModes\GameMode_Deathmatch.cs" />
      <Compile Include="Assets\C#\GameScripts\Scoreboard.cs" />
      <Compile Include="Assets\C#\GameScripts\ScoreboardItem.cs" />
-     <Compile Include="Assets\C#\Helpers\ColorHolder.cs" />
      <Compile Include="Assets\C#\Helpers\DestroyAfterParticlesEnd.cs" />
      <Compile Include="Assets\C#\Helpers\DestroyAfterSoundEnds.cs" />
      <Compile Include="Assets\C#\Helpers\Effect.cs" />
+     <Compile Include="Assets\C#\Helpers\Holders\ColorHolder.cs" />
+     <Compile Include="Assets\C#\Helpers\Holders\PrefabHolder.cs" />
+     <Compile Include="Assets\C#\Helpers\Holders\SceneHolder.cs" />
+     <Compile Include="Assets\C#\Helpers\Holders\SpriteHolder.cs" />
      <Compile Include="Assets\C#\Helpers\MaterialScaling.cs" />
      <Compile Include="Assets\C#\Helpers\PlayerPrefStrings.cs" />
-     <Compile Include="Assets\C#\Helpers\PrefabHolder.cs" />
-     <Compile Include="Assets\C#\Helpers\SceneHolder.cs" />
      <Compile Include="Assets\C#\Helpers\VectorExt.cs" />
      <Compile Include="Assets\C#\HitArguments.cs" />
      <Compile Include="Assets\C#\HitManager.cs" />
@@ -177,6 +178,9 @@
  </Reference>
  <Reference Include="UnityEditor.WindowsStandalone.Extensions">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
+ <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/2015/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>C:/Users/alonswa/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>

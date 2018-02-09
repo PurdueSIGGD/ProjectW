@@ -51,11 +51,17 @@ public class MainMenuUIController : MonoBehaviour {
 
 
     void Start() {
+		
 		SetScreenIndex(0);
 		ResetCursor ();
 		if (!(networkManager = GameObject.FindObjectOfType<ProjectWNetworkManager> ())) {
 			networkManager = GameObject.Instantiate (networkManagerPrefab).GetComponent<ProjectWNetworkManager> ();
 		}
+		// Dropdown workaround refreshes
+		mapDropdown.value = 1;
+		gamemodeDropdown.value = 1;
+		mapDropdown.value = 0;
+		gamemodeDropdown.value = 0;
     }
     public void ExitGame() {
 #if UNITY_EDITOR

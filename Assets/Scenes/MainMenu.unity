@@ -1943,7 +1943,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 393641262}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9913824
+  m_Size: 0.99099183
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2388,9 +2388,7 @@ MonoBehaviour:
   m_ItemImage: {fileID: 0}
   m_Value: 0
   m_Options:
-    m_Options:
-    - m_Text: Deathmatch
-      m_Image: {fileID: 0}
+    m_Options: []
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -3323,7 +3321,7 @@ Prefab:
     - target: {fileID: 224390476018070140, guid: 2a4a8f50ae5494e4e92a56e810b36207,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 300.6908
+      value: 301.12476
       objectReference: {fileID: 0}
     - target: {fileID: 224390476018070140, guid: 2a4a8f50ae5494e4e92a56e810b36207,
         type: 2}
@@ -3333,7 +3331,7 @@ Prefab:
     - target: {fileID: 224390476018070140, guid: 2a4a8f50ae5494e4e92a56e810b36207,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 541.3816
+      value: 542.2495
       objectReference: {fileID: 0}
     - target: {fileID: 224554008692170746, guid: 2a4a8f50ae5494e4e92a56e810b36207,
         type: 2}
@@ -3348,7 +3346,7 @@ Prefab:
     - target: {fileID: 224554008692170746, guid: 2a4a8f50ae5494e4e92a56e810b36207,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 442.54083
+      value: 442.9748
       objectReference: {fileID: 0}
     - target: {fileID: 224554008692170746, guid: 2a4a8f50ae5494e4e92a56e810b36207,
         type: 2}
@@ -3358,7 +3356,7 @@ Prefab:
     - target: {fileID: 224554008692170746, guid: 2a4a8f50ae5494e4e92a56e810b36207,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 321.31848
+      value: 320.45053
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2a4a8f50ae5494e4e92a56e810b36207, type: 2}
@@ -3598,7 +3596,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0000076293945}
+  m_AnchoredPosition: {x: 0, y: 0.00017547607}
   m_SizeDelta: {x: 0, y: 75}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1135548080
@@ -3828,8 +3826,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 159163735}
   m_HandleRect: {fileID: 159163734}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.9999996
+  m_Value: 0
+  m_Size: 0.9999991
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4996,7 +4994,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Deathmatch
+  m_Text: 
 --- !u!222 &1613343959
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6381,7 +6379,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0000622688, y: 0.00018874575}
+  m_AnchoredPosition: {x: -0.0000622688, y: 0.8585103}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2103171750

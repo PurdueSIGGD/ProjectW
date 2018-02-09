@@ -72,7 +72,7 @@ public class ProjectWGameManager : NetworkBehaviour {
 			NetworkConnection connection = oldP.connectionToClient;
 			Transform startPosition = GetStartPosition ();
 			GameObject newPlayer = Instantiate (classPrefabs [oldPG.desiredPlayerClass], startPosition.position, startPosition.rotation);
-			newPlayer.name = oldP.playerName;
+			newPlayer.name = oldPG.desiredPlayerName;
 			PlayerStats newP = newPlayer.GetComponent<PlayerStats> ();
 			newP.playerName = oldPG.desiredPlayerName;
 			newP.classIndex = oldPG.desiredPlayerClass;

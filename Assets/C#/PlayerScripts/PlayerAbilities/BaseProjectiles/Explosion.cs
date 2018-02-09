@@ -56,12 +56,15 @@ public class Explosion : MonoBehaviour {
                     if (ps) {
                         target = ps.transform;
                     }
+
                     HitManager.HitClientside(new HitArguments(((Component)hit.transform.gameObject.GetComponentInParent<IHittable>()).gameObject, sourcePlayer.GetComponentInParent<PlayerStats>().gameObject)
-                        .withDamage( (isSourcePlayer ? sourcePlayerDamageMultiplier : 1) * ((maxDamage/Vector3.Distance(target.position, transform.position)) + minDamage))
+						.withDamage( (isSourcePlayer ? sourcePlayerDamageMultiplier : 1) * ((maxDamage/Vector3.Distance(hit.transform.position, transform.position) + 1) + minDamage))
                         .withDamageType(damageType)
                         .withEffect(effect)
                         .withEffectDuration(effectDuration)
-                        .withHitSameTeam(hitSameTeam));
+						.withHitSameTeam(hitSameTeam));
+					//Debug.DrawLine (hit.transform.position, transform.position, Color.red, 10);
+					//print ("Hitting the player " + target + ", and the object " + hit.transform + " with damage " + ((maxDamage/Vector3.Distance(hit.transform.position, transform.position) + 1) + minDamage));
                     hitHittables.Add(h);
                 }
 
@@ -77,14 +80,21 @@ public class Explosion : MonoBehaviour {
 		//print(hits.size);
         foreach (RaycastHit hitBetween in hits)
         {
+			// All exceptions for explosions
+			// If the object is what we are targeting
 			if (hitBetween.transform == hit.transform)
 				continue;
             Collider c;
+			// If the object is a trigger
 			if ((c = hitBetween.transform.GetComponent<Collider> ()) && c.isTrigger)
 				continue;
-			if (hitBetween.transform.GetComponentInParent<PlayerStats> ()) 
+			if (hitBetween.transform.GetComponentInParent<PlayerStats> ()) {
 				continue;
-				Debug.DrawLine(transform.position, hitBetween.point, Color.red, 10);
+				//Debug.DrawLine (transform.position, hitBetween.point, Color.red, 10);
+			}
+			// If the object is in the nocollide layer
+			if (hitBetween.transform.gameObject.layer == 12)
+				continue;
 			//print (hitBetween.transform);
 			return false;
         }

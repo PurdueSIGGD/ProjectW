@@ -21,7 +21,11 @@ public class TrackedPlayer : TrackedItem {
 	 * When extending this class, you can override whatever code you want here to update information about this object to track
 	 */
 	public override void Update_Extended() {
-		health.localScale = new Vector3(trackedPlayerStats.health / trackedPlayerStats.healthMax, 1, 1);
+		float width = 0;
+		if (trackedPlayerStats.healthMax != 0) {
+			width = trackedPlayerStats.health / trackedPlayerStats.healthMax;
+		}
+		health.localScale = new Vector3(width, 1, 1);
         health.GetComponent<Image>().color = trackedPlayerStats.teamColor;
         itemName.text = trackedPlayerStats.playerName;
         if (trackedPlayerStats.death) {
