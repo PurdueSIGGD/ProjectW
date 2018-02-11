@@ -9,6 +9,7 @@ public class ProjectWNetworkManager : NetworkManager {
 
 	// START GAME SERVER SETTINGS
 	public ProjectWGameManager.Team[] teamItems;
+	public ProjectWGameManager.Bot[] botItems;
 	public string mapSelect;
 	public int gameModeSelect;
 	public GameMode.GameOption[] gamemodeOptions;

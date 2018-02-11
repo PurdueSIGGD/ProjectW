@@ -1943,7 +1943,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 393641262}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99099183
+  m_Size: 0.9999998
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2743,6 +2743,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114989715467682310, guid: 7dd9680bcf19de34abfca57195c154b8,
+        type: 2}
+      propertyPath: botItems.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4115677730837770, guid: 7dd9680bcf19de34abfca57195c154b8, type: 2}
       propertyPath: m_LocalPosition.x
       value: -5.6481943
@@ -2774,6 +2779,41 @@ Prefab:
     - target: {fileID: 4115677730837770, guid: 7dd9680bcf19de34abfca57195c154b8, type: 2}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114989715467682310, guid: 7dd9680bcf19de34abfca57195c154b8,
+        type: 2}
+      propertyPath: botItems.Array.data[0].botName
+      value: (Bot) Frank
+      objectReference: {fileID: 0}
+    - target: {fileID: 114989715467682310, guid: 7dd9680bcf19de34abfca57195c154b8,
+        type: 2}
+      propertyPath: botItems.Array.data[0].botTeam
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114989715467682310, guid: 7dd9680bcf19de34abfca57195c154b8,
+        type: 2}
+      propertyPath: botItems.Array.data[0].botDifficulty
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114989715467682310, guid: 7dd9680bcf19de34abfca57195c154b8,
+        type: 2}
+      propertyPath: botItems.Array.data[0].botType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114989715467682310, guid: 7dd9680bcf19de34abfca57195c154b8,
+        type: 2}
+      propertyPath: botItems.Array.data[1].botName
+      value: (Bot) Josh
+      objectReference: {fileID: 0}
+    - target: {fileID: 114989715467682310, guid: 7dd9680bcf19de34abfca57195c154b8,
+        type: 2}
+      propertyPath: botItems.Array.data[1].botTeam
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114989715467682310, guid: 7dd9680bcf19de34abfca57195c154b8,
+        type: 2}
+      propertyPath: botItems.Array.data[1].botDifficulty
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7dd9680bcf19de34abfca57195c154b8, type: 2}
@@ -3596,7 +3636,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00017547607}
+  m_AnchoredPosition: {x: 0, y: 0.00011444092}
   m_SizeDelta: {x: 0, y: 75}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1135548080
@@ -6379,7 +6419,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0000622688, y: 0.8585103}
+  m_AnchoredPosition: {x: -0.000052487085, y: 0.000032565356}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2103171750

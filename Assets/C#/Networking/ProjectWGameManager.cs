@@ -8,7 +8,8 @@ public class ProjectWGameManager : NetworkBehaviour {
     public float respawnTime = 5;
     public float timeLimit = 20 * 60 * 60; // 20 minutes
     public float gameTime;
-    public Transform[] startPositions;
+	public Transform startPositionParent;
+    private Transform[] startPositions;
 	public GameObject spectatorPrefab;
     public int botCount = 0;
     public bool friendlyFire;
@@ -32,6 +33,14 @@ public class ProjectWGameManager : NetworkBehaviour {
         public int teamIndex;
         public Color teamColor;
         public int teamSprite;
+	}
+	[System.Serializable]
+	public struct Bot
+	{
+		public string botName; 			// If blank, will be "Flame Player 1" etc
+		public int botTeam; 			// -1 for auto assign
+		public int botDifficulty; 		// TODO
+		public int botType;				// -1 for random
 	}
     public class Winner
     {
@@ -103,6 +112,9 @@ public class ProjectWGameManager : NetworkBehaviour {
     void Start() {
 		networkManager = GameObject.FindObjectOfType<ProjectWNetworkManager> ();
 
+		startPositions = startPositionParent.GetComponentsInChildren<Transform>();
+		classPrefabs = classPrefabHolder.prefabs;
+
 		// If we created the game ourselves
 		if (networkManager.teamItems.Length > 0 && !useSettingsOverride) {
 			int teamCount = networkManager.teamItems.Length;
@@ -128,7 +140,6 @@ public class ProjectWGameManager : NetworkBehaviour {
 				break;
 			}
 
-
 		} else {
 			if (!(gameMode = this.GetComponent<GameMode>()))
 			{
@@ -142,7 +153,6 @@ public class ProjectWGameManager : NetworkBehaviour {
 
 		
 
-        classPrefabs = classPrefabHolder.prefabs;
         
        
         if (isServer) {
@@ -150,27 +160,32 @@ public class ProjectWGameManager : NetworkBehaviour {
             {
                 teams[i].teamIndex = i;
             }
+			int botCount = 0; 
+			foreach (Bot bot in networkManager.botItems) {
+				Transform startPosition = GetStartPosition();
+				int classIndex = ((bot.botType == -1) ? Random.Range(0, classPrefabs.Length - 1) : bot.botType);
+				//print (classIndex + " " + classPrefabs.Length);
+				int teamIndex = bot.botTeam != -1 ? bot.botTeam : Random.Range(0, teams.Length);
+				string spawnName = bot.botName == "" ? classPrefabs [classIndex].name + " " + (botCount + 1) : bot.botName;
+				//print (startPosition.position + " " + startPosition.rotation);
+				GameObject spawn = GameObject.Instantiate(classPrefabs[classIndex], startPosition.position, startPosition.rotation);
+				spawn.SendMessage("setBot", botCount + 1);
+				PlayerStats stats = spawn.GetComponent<PlayerStats>();
+				stats.teamIndex = teams.Length > 1 ? teamIndex : -1;
+				stats.teamColor = teams[teams.Length > 1 ? teamIndex : 0].teamColor;
+				stats.classIndex = classIndex;
+				stats.playerName = spawnName;
 
-            for (int i = 0; i < botCount; i++) {
-                Transform startPosition = GetStartPosition();
-                int classIndex = Random.Range(0, classPrefabs.Length - 1);
-                GameObject spawn = Instantiate(classPrefabs[classIndex], startPosition.position, startPosition.rotation);
-                spawn.SendMessage("setBot", i + 1);
-                PlayerStats stats = spawn.GetComponent<PlayerStats>();
-                int teamIndex = Random.Range(0, teams.Length);
-                stats.teamIndex = teams.Length > 1 ? teamIndex : -1;
-                stats.teamColor = teams[teams.Length > 1 ? teamIndex : 0].teamColor;
-                stats.classIndex = classIndex;
-                stats.playerName = classPrefabs[classIndex].name + " " + i;
+				PlayerGUI newPG = spawn.GetComponent<PlayerGUI>();
+				newPG.desiredPlayerName = stats.playerName;
+				newPG.desiredPlayerClass = stats.classIndex;
+				newPG.desiredTeamIndex = stats.teamIndex;
+				spawn.name = stats.playerName;
 
-                PlayerGUI newPG = spawn.GetComponent<PlayerGUI>();
-                newPG.desiredPlayerName = stats.playerName;
-                newPG.desiredPlayerClass = stats.classIndex;
-                newPG.desiredTeamIndex = stats.teamIndex;
-                spawn.name = stats.playerName;
+				NetworkServer.Spawn(spawn);
 
-                NetworkServer.Spawn(spawn);
-            }
+				botCount++;
+			}
         } else {
             // this should not do anything, but should still display values such as time remaining and teams
             this.gameObject.SetActive(false);

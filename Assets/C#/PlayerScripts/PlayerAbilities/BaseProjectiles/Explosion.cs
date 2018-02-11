@@ -56,9 +56,11 @@ public class Explosion : MonoBehaviour {
                     if (ps) {
                         target = ps.transform;
                     }
-
+					// If distance is 0, damage factor is 1. If distance is r, damage factor is 0.
+					float damageFactor = (-1 * Vector3.Distance(hit.transform.position, transform.position) / range) + 1;
+					print ("Damage Factor " + damageFactor);
                     HitManager.HitClientside(new HitArguments(((Component)hit.transform.gameObject.GetComponentInParent<IHittable>()).gameObject, sourcePlayer.GetComponentInParent<PlayerStats>().gameObject)
-						.withDamage( (isSourcePlayer ? sourcePlayerDamageMultiplier : 1) * ((maxDamage/Vector3.Distance(hit.transform.position, transform.position) + 1) + minDamage))
+						.withDamage( (isSourcePlayer ? sourcePlayerDamageMultiplier : 1) * ((maxDamage - minDamage)*damageFactor) + minDamage)
                         .withDamageType(damageType)
                         .withEffect(effect)
                         .withEffectDuration(effectDuration)

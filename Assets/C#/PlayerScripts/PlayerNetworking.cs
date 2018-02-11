@@ -34,7 +34,7 @@ public class PlayerNetworking : PlayerComponent {
         {
             foreach (Camera c in playerCameras)
             {
-                GameObject.Destroy(c.gameObject);
+				c.gameObject.SetActive(false);//GameObject.Destroy();
             }
             playerCameras = null;
         }

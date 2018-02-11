@@ -2457,6 +2457,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -3087,7 +3088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b91a0a0674f3c14f8416a158944a208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magicDraw: 40
+  magicDraw: 35
   cooldown: 0.3
   itemToSpawn: {fileID: 1506924135921468, guid: 42688b82f5e230a4f936b2b8817fed7e,
     type: 2}
@@ -3155,6 +3156,8 @@ MonoBehaviour:
   deathTarget: {fileID: 4101970800040188}
   rotator: {fileID: 4272697417821866}
   disabled: 0
+  bot: -1
+  playerId: 0
   sensitivityy: 0.05
 --- !u!114 &114215353596440494
 MonoBehaviour:

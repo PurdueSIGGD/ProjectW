@@ -34,7 +34,7 @@ public class Spectator : NetworkBehaviour {
 			isPaused = !shouldBeLocked;
 
         } else {
-            GameObject.Destroy(myCamera);
+			myCamera.SetActive (false);
         }
         
 	}

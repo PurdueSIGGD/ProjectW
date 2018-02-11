@@ -26,7 +26,7 @@ public class Projectile : MonoBehaviour {
     //private GameObject hitPlayer;
 
     void Start() {
-        Invoke("DestroyMe", lifetime);
+		Invoke("DestroyMe", lifetime);
         currentVelocity = this.GetComponent<Rigidbody>().velocity.magnitude;
     }
 
