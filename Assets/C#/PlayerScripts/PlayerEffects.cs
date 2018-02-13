@@ -20,6 +20,7 @@ public class PlayerEffects : PlayerComponent {
     public float magicRegenModifier = 1;
     // Blocking effects
     public bool stunned = false;
+    public bool immobilized = false;
     
 
     public override void PlayerComponent_Start() {
@@ -49,6 +50,7 @@ public class PlayerEffects : PlayerComponent {
         magicRegenModifier = 1;
         runSpeedModifier = 1;
         stunned = false;
+        immobilized = false;
     }
     public void Death() {
         ClearModifiers();

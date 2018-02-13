@@ -7,11 +7,14 @@ public class Bamboo : MonoBehaviour {
     public GameObject sourcePlayer;
     Ability_BambooSpawner ability;
     public PlayerEffects.Effects effect;
+    public float effectDuration = 3;
+    private ArrayList hasHit;
 
     public void StartBamboo(Ability_BambooSpawner ability, float cooldown, GameObject sourcePlayer)
     {
         this.ability = ability;
         this.sourcePlayer = sourcePlayer;
+        hasHit = new ArrayList();
         Invoke("DestroyMe", cooldown);
     }
 
@@ -34,9 +37,10 @@ public class Bamboo : MonoBehaviour {
             Rigidbody r;
             if ((r = col.transform.GetComponent<Rigidbody>()) != null)
             {
-                if (ps)
+                if (ps && !hasHit.Contains(ps))
                 {
-                    HitManager.HitClientside(new HitArguments(r.GetComponentInParent<BasePlayer>().gameObject, sourcePlayer).withDamage(ability.damage).withEffect(effect));
+                    hasHit.Add(ps);
+                    HitManager.HitClientside(new HitArguments(r.GetComponentInParent<BasePlayer>().gameObject, sourcePlayer).withDamage(ability.damage).withEffect(effect).withEffectDuration(effectDuration));
                 }
             }
         }

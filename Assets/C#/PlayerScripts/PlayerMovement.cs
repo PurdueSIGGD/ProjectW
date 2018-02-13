@@ -60,6 +60,12 @@ public class PlayerMovement : PlayerComponent {
 
     public void processMovement(PlayerInput.InputData data) {
       
+        if (myBase.myEffects.immobilized)
+        {
+            data.vertical = 0;
+            data.horizontal = 0;
+            data.jump = false;
+        }
         if (data.vertical < 0) {
             // If moving backwards, move a wee bit slower
             data.horizontal /= 2;
