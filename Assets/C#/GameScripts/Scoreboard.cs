@@ -103,18 +103,34 @@ public class Scoreboard : NetworkBehaviour {
         string ping = getPing(id);
 
         int foundPlayerIndex = FindPlayerIndex(id);
-        if (foundPlayerIndex != -1)
-        {
+		if (foundPlayerIndex != -1) {
 
-            ScoreboardPlayer foundPlayer = scores.GetItem(foundPlayerIndex);
-            foundPlayer.kills += diffKills;
-            foundPlayer.assists += diffAssists;
-            foundPlayer.deaths += diffDeaths;
-            foundPlayer.ping = ping;
-            scores[foundPlayerIndex] = foundPlayer;
+			ScoreboardPlayer foundPlayer = scores.GetItem (foundPlayerIndex);
+			foundPlayer.kills += diffKills;
+			foundPlayer.assists += diffAssists;
+			foundPlayer.deaths += diffDeaths;
+			foundPlayer.ping = ping;
+			scores [foundPlayerIndex] = foundPlayer;
 
-        }
+		} 
     }
+	public void RemovePlayer(int id) {
+		// Called when player disconnects under any circumstances
+		ScoreboardPlayer findResult = scores.Find(id);
+		print ("removing player: " + findResult.name);
+		bool removeResult = scores.Remove(findResult);
+		if (removeResult) {
+			RpcRefreshScoreboard();
+		} else {
+			print ("Could not find player to disconnect, sorry");
+		}
+
+	}
+
+	[ClientRpc]
+	public void RpcRefreshScoreboard() {
+		RefreshScoreboard();
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -129,6 +145,9 @@ public class Scoreboard : NetworkBehaviour {
     }
     private void RefreshScoreboard()
     {
+
+
+
         ScoreboardPlayer[] tmp = scores.ToArray();
         Array.Sort(tmp, (IComparer)new SyncListScoreboardPlayer.ScoreboardPlayerComparer());
         // Sort, then put up
@@ -136,6 +155,7 @@ public class Scoreboard : NetworkBehaviour {
         //foreach (ScoreboardPlayer scoreboardPlayer in tmp)
         for (int i = 0; i < scores.Count; i++)
         {
+			
             ScoreboardPlayer scoreboardPlayer = tmp[i];
             Transform foundItem;
             if ((foundItem = parentGroup.Find(scoreboardPlayer.id.ToString())) == null)
@@ -164,6 +184,7 @@ public class Scoreboard : NetworkBehaviour {
                 int playerId = basePlayer.GetComponent<PlayerInput>().GetPlayerId();
                 if (playerId == scoreboardPlayer.id)
                 {
+					scoreboardItem.referredItem = player;
                     teamColor = basePlayer.GetComponent<PlayerStats>().teamColor;
                     if (player.GetComponent<NetworkBehaviour>().isLocalPlayer)
                     {
@@ -180,22 +201,22 @@ public class Scoreboard : NetworkBehaviour {
                 image.color = teamColor;
             }
         }
+		foreach (ScoreboardItem scoreboardItem in parentGroup.GetComponentsInChildren<ScoreboardItem>()) {
+			if (!scores.Find (scoreboardItem.id).found) {
+				// Delete if not found
+				GameObject.Destroy(scoreboardItem.gameObject);
+			}
+		}
 
-        foreach (ScoreboardItem scoreboardItem in parentGroup.GetComponentsInChildren<ScoreboardItem>())
-        {
-            if (!scores.Find(scoreboardItem.id).found)
-            {
-                // Delete if not found
-                GameObject.Destroy(scoreboardItem.gameObject);
-            }
-        }
+		//print ("Score synclist size: " + scores.Count);
+        
     }
 
     // Update is called once per frame
     void Update () {
         for (int i = 0; i < Network.connections.Length; i++)
         {
-            print("Player " + i + " " + Network.GetAveragePing(Network.connections[i]));
+            //print("Player " + i + " " + Network.GetAveragePing(Network.connections[i]));
         }
         if (!isServer) return; // All scoreboard processing is handled server side
         
@@ -208,16 +229,15 @@ public class Scoreboard : NetworkBehaviour {
             }
             int foundIndex = FindPlayerIndex(p.GetPlayerId());
             PlayerStats ps = p.GetComponent<PlayerStats>();
-            if (foundIndex != -1)
+			if (foundIndex != -1)
             {
                 ScoreboardPlayer foundPlayer = scores.GetItem(foundIndex);
                 foundPlayer.name = ps.gameObject.name;
-                foundPlayer.teamIndex = ps.teamIndex;
+				foundPlayer.teamIndex = ps.teamIndex;
                 scores[foundIndex] = foundPlayer;
-
             } else
             {
-                //print("Adding player with id " + p.GetPlayerId());
+                print("Adding player with id " + p.GetPlayerId());
                 scores.Add(new ScoreboardPlayer
                 {
                     name = ps.gameObject.name,
@@ -228,10 +248,24 @@ public class Scoreboard : NetworkBehaviour {
                     assists = 0,
                     id = p.GetPlayerId(),
                     ping = getPing(p.GetPlayerId()),
-                    found = true
+					found = true
                 });
             }
         }
+		// If any have not been checked, then kill and try again
+		// TODO OMG FUCKING KILL ME
+		bool refresh = false;
+		foreach (ScoreboardItem items in parentGroup.GetComponentsInChildren<ScoreboardItem>()) {
+			if (items.referredItem == null) {
+				scores.Remove (scores.Find(items.id));
+				refresh = true;
+			}
+		}
+		if (refresh) {
+			
+			RpcRefreshScoreboard ();
+		}
+
 	}
     ScoreboardPlayer FindPlayer(int id)
     {

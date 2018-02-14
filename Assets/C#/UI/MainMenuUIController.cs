@@ -33,6 +33,7 @@ public class MainMenuUIController : MonoBehaviour {
 	public Text invalidAnimatorText;
 
     public Text serverIP;
+	public InputField serverIPInput;
     public Dropdown mapDropdown;
     public Dropdown gamemodeDropdown;
     public Transform gameModeOptionsParent;
@@ -51,7 +52,11 @@ public class MainMenuUIController : MonoBehaviour {
 
 
     void Start() {
-		
+		if (PlayerPrefs.HasKey (PlayerPrefStrings.SAVED_IP_TO_CONNECT)) {
+			serverIPInput.text = PlayerPrefs.GetString (PlayerPrefStrings.SAVED_IP_TO_CONNECT);
+		} else {
+			print ("No player pref server found");
+		}
 		SetScreenIndex(0);
 		ResetCursor ();
 		if (!(networkManager = GameObject.FindObjectOfType<ProjectWNetworkManager> ())) {
@@ -103,7 +108,7 @@ public class MainMenuUIController : MonoBehaviour {
     
     public void JoinServer() {
         string ip = serverIP.text;
-        PlayerPrefs.SetString(PlayerPrefStrings.IP_TO_CONNECT, ip);
+        PlayerPrefs.SetString(PlayerPrefStrings.SAVED_IP_TO_CONNECT, ip);
         print("Joining server");
 		networkManager.networkAddress = ip;
 		networkManager.networkPort = 4718;

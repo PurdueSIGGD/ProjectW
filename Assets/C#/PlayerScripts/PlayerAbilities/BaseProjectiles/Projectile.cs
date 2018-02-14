@@ -59,6 +59,7 @@ public class Projectile : MonoBehaviour {
 
         if (dieOnHit) {
             if (explodeParticles) {
+				trailParticles.Stop ();
                 ParticleSystem.MainModule m = trailParticles.main;
                 m.loop = false;
                 trailParticles.transform.parent = null;

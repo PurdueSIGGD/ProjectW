@@ -15,6 +15,7 @@ public class ProjectWNetworkManager : NetworkManager {
 	public GameMode.GameOption[] gamemodeOptions;
 	public SceneHolder scenesToLoad;
 	// END GAME SERVER SETTINGS
+	private Scoreboard scoreBoard;
 
 
 
@@ -23,6 +24,7 @@ public class ProjectWNetworkManager : NetworkManager {
         if (lobbyCamera != null) {
             lobbyCamera.SetActive(true);
         }
+
     }
 
 	// Called when a host is started
@@ -41,21 +43,21 @@ public class ProjectWNetworkManager : NetworkManager {
     }
 
 	public override void OnClientConnect(NetworkConnection conn) {
-		/*if (string.IsNullOrEmpty (this.onlineScene) || this.onlineScene == this.offlineScene) {
-			ClientScene.Ready (conn);
-			ClientScene.AddPlayer (conn, 0, new StringMessage("Welcome I guess"));
+		
+	}
+	public override void OnClientDisconnect(NetworkConnection conn) {
 
-		}*/
-		//ClientScene.AddPlayer (conn, 0, new StringMessage("Welcome I guess"));
+
 	}
 
     // called when a client connects 
     public override void OnServerConnect(NetworkConnection conn) {
-
+		
     }
 
     // called when a client disconnects
     public override void OnServerDisconnect(NetworkConnection conn) {
+		//base.OnClientDisconnect(conn);
         NetworkServer.DestroyPlayersForConnection(conn);
     }
 
@@ -67,11 +69,20 @@ public class ProjectWNetworkManager : NetworkManager {
 	public override void OnServerRemovePlayer(NetworkConnection conn, PlayerController player) {
         base.OnServerRemovePlayer(conn, player);
     }
+
+
     
     // called when a network error occurs
 	public override void OnServerError(NetworkConnection conn, int errorCode) {
-
+		//RemovePlayerScoreboard (conn.connectionId);
     }
+	public void RemovePlayerScoreboard(int connectionId) {
+		print ("Client disconnected: " + connectionId);
+		if (scoreBoard == null) {
+			scoreBoard = GameObject.FindObjectOfType<ProjectWGameManager> ().scoreBoard;
+		}
+		scoreBoard.RemovePlayer (connectionId);
+	}
 
 
     public IEnumerator TrackPing(Scoreboard scoreBoard, GameObject player, int playerId)

@@ -3048,6 +3048,7 @@ MonoBehaviour:
   className: {fileID: 114687919879201376}
   classDescription: {fileID: 114411248824060954}
   playerName: {fileID: 114661338347262520}
+  playerNameInputField: {fileID: 114830391573177928}
 --- !u!114 &114623754979422914
 MonoBehaviour:
   m_ObjectHideFlags: 1

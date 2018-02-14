@@ -58,7 +58,11 @@ public class PlayerStats : PlayerComponent, IHittable {
     public float changeHealth(float f) {
 		if (!isServer && !isLocalPlayer)
 			return 0;
-        //print("took hit " + f);
+		if (float.IsNaN (health)) {
+			health = 0;
+			// Something causes health to be NaN. no idea what it comes from.
+			// I see no instant issues whenever health is NaN, so this should fix some of those issues.
+		}
         float returnVal = 0;
         health += f;
         if (health > healthMax) {

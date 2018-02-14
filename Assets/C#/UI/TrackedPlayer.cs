@@ -22,6 +22,7 @@ public class TrackedPlayer : TrackedItem {
 	 */
 	public override void Update_Extended() {
 		float width = 0;
+
 		if (trackedPlayerStats.healthMax != 0) {
 			width = trackedPlayerStats.health / trackedPlayerStats.healthMax;
 		}

@@ -43,7 +43,8 @@ public class SpectatorUIController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-
+		if (PlayerPrefs.HasKey(PlayerPrefStrings.SAVED_NAME)) 
+			playerNameInputField.text = PlayerPrefs.GetString (PlayerPrefStrings.SAVED_NAME);
 	}
 	void Update() {
 		selectClassButton.interactable = teamIndex != -1;
@@ -154,6 +155,7 @@ public class SpectatorUIController : MonoBehaviour {
 	public Text className;
 	public Text classDescription;
 	public Text playerName;
+	public InputField playerNameInputField;
 	public struct ClassSelectionArgs {
 		public int classIndex;
 		public int teamIndex;
@@ -172,6 +174,7 @@ public class SpectatorUIController : MonoBehaviour {
 		args.classIndex = classIndex;
 		args.teamIndex = teamIndex;
 		args.playerName = playerName.text;
+		PlayerPrefs.SetString (PlayerPrefStrings.SAVED_NAME, playerName.text);
 		player.SendMessage("HandlePickingClass", args);
         SetScreenIndex(-1);
     }

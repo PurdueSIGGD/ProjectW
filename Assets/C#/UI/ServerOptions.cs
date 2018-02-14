@@ -14,6 +14,8 @@ public class ServerOptions : MonoBehaviour {
         if (teamList.childCount < maxTeams) {
 			ServerOptionsTeamItem spawnedItem = GameObject.Instantiate(teamPrefab, teamList).GetComponent<ServerOptionsTeamItem>();
 			spawnedItem.nameText.GetComponent<InputField> ().text = "Team " + teamList.childCount;
+			spawnedItem.colorDropdown.value = 0;
+			spawnedItem.colorDropdown.value = Random.Range (0, maxTeams - 1);
         }
     }
 

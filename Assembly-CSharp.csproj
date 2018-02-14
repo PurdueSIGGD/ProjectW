@@ -113,6 +113,7 @@
      <Compile Include="Assets\C#\World\DestructibleItem.cs" />
      <Compile Include="Assets\C#\World\Hazard.cs" />
      <Compile Include="Assets\C#\World\Noisy.cs" />
+     <None Include="Assets\Materials\Fireball.shader" />
      <None Include="Assets\FBX\Mixamo\IMPORT STYLE.txt" />
      <None Include="Assets\Shaders\Water.shader" />
      <None Include="Assets\Shaders\TimeBubble.shader" />
