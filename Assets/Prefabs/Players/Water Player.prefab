@@ -346,6 +346,7 @@ GameObject:
   - component: {fileID: 114784747083177884}
   - component: {fileID: 114569654491593078}
   - component: {fileID: 114099228589186052}
+  - component: {fileID: 114453485441763386}
   m_Layer: 8
   m_Name: Water Player
   m_TagString: Untagged
@@ -3173,6 +3174,25 @@ MonoBehaviour:
   param3: 
   param4: 
   param5: 
+--- !u!114 &114453485441763386
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1185770464893064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02cfde3e1348c3c438704ee268711ee0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magicDraw: 0
+  cooldown: 1
+  itemToSpawn: {fileID: 1452471349948982, guid: 755ac48c002183d4388d6642284865eb,
+    type: 2}
+  spawnPoint: {fileID: 4331470135178488}
+  spawnOffset: {x: 0, y: 0, z: 5}
+  aimAngle: {fileID: 4912864852820086}
+  spawnSpeed: 0
 --- !u!114 &114455380443206196
 MonoBehaviour:
   m_ObjectHideFlags: 1
