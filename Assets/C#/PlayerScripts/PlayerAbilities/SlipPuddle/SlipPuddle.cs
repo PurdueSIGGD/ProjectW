@@ -22,7 +22,7 @@ public class SlipPuddle : MonoBehaviour {
         if (!sourcePlayer) return; // Shouldn't collide with anything that isn't a source player
         if ((ps = col.GetComponentInParent<PlayerStats>()))
         {
-            if (ps.gameObject == sourcePlayer.gameObject) return;
+            //if (ps.gameObject == sourcePlayer.gameObject) return;
         }
 
         /* ACTIONS TO TAKE POST-HIT */
@@ -38,6 +38,7 @@ public class SlipPuddle : MonoBehaviour {
               .withEffect(effect)
               .withEffectDuration(effectDuration));
         }
+
        
 
     }
