@@ -9,7 +9,6 @@ public class Ability_SlipPuddleSpawner : Ability_ObjectSpawner {
         SlipPuddle p;
         if (p = spawn.GetComponentInChildren<SlipPuddle>())
         {
-            Debug.Log("SlipPuddle: apply sourceplayer");
             p.sourcePlayer = this.gameObject;
         }
     }

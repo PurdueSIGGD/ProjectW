@@ -9,7 +9,7 @@ using UnityEngine;
 public class Effect_Slip : Effect
 {
 
-    public float slipForce;
+   public float slipForce; 
 
     public override void Effect_End(PlayerEffects target)
     {
@@ -24,8 +24,8 @@ public class Effect_Slip : Effect
         Rigidbody tRigidBody = target.GetComponent<Rigidbody>();
 
         // push target in their own forward direction
-        tRigidBody.AddForce(tTransform.forward * slipForce);
-
+        tRigidBody.AddForce(tTransform.forward * slipForce, ForceMode.Acceleration);
+       
     }
 
     public override void Effect_Update()

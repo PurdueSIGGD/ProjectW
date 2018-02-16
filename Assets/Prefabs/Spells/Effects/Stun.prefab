@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sourcePlayer: {fileID: 0}
-  duration: 10
+  duration: 3
 --- !u!198 &198737671664913850
 ParticleSystem:
   m_ObjectHideFlags: 1
