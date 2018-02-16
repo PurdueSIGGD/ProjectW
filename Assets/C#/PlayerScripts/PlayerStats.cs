@@ -48,8 +48,8 @@ public class PlayerStats : PlayerComponent, IHittable {
         if (hit.sourcePlayerTeam != teamIndex || teamIndex == -1)
         {
             lastHitPlayerId = hit.sourcePlayer.GetComponent<PlayerInput>().GetPlayerId();
-            lastHitTime = Time.time;
-        }
+		}
+		lastHitTime = Time.time;
         changeHealth(-1 * hit.damage);
         if (hit.effect != PlayerEffects.Effects.none) {
             myBase.myEffects.AddEffect(hit);

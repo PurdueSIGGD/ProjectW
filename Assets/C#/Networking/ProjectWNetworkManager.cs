@@ -27,10 +27,7 @@ public class ProjectWNetworkManager : NetworkManager {
 
     }
 
-	// Called when a host is started
-	public override void OnStartHost() {
-		
-	}
+
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId) {
         Transform start = GetStartPosition();
@@ -41,20 +38,7 @@ public class ProjectWNetworkManager : NetworkManager {
         }
 		player.SendMessage("JoinServer");
     }
-
-	public override void OnClientConnect(NetworkConnection conn) {
-		
-	}
-	public override void OnClientDisconnect(NetworkConnection conn) {
-
-
-	}
-
-    // called when a client connects 
-    public override void OnServerConnect(NetworkConnection conn) {
-		
-    }
-
+	/*
     // called when a client disconnects
     public override void OnServerDisconnect(NetworkConnection conn) {
 		//base.OnClientDisconnect(conn);
@@ -76,6 +60,11 @@ public class ProjectWNetworkManager : NetworkManager {
 	public override void OnServerError(NetworkConnection conn, int errorCode) {
 		//RemovePlayerScoreboard (conn.connectionId);
     }
+
+	*/
+
+
+
 	public void RemovePlayerScoreboard(int connectionId) {
 		print ("Client disconnected: " + connectionId);
 		if (scoreBoard == null) {

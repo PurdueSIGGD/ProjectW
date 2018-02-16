@@ -149,9 +149,13 @@ public class Spectator : NetworkBehaviour {
     }
     public void ExitServer() {
         if (isServer) {
-			NetworkServer.DisconnectAll();
-			GameObject.FindObjectOfType<ProjectWNetworkManager> ().StopClient ();
-			GameObject.FindObjectOfType<ProjectWNetworkManager> ().StopServer ();
+			//NetworkServer.DisconnectAll();
+			ProjectWNetworkManager networkManager = GameObject.FindObjectOfType<ProjectWNetworkManager> ();
+			networkManager.StopClient ();
+			NetworkManager.Shutdown ();
+			//networkManager.StopServer ();
+
+
 		} else {
 			GameObject.FindObjectOfType<ProjectWNetworkManager> ().StopClient ();
         }

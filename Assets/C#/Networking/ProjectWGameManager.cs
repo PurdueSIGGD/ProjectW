@@ -242,6 +242,11 @@ public class ProjectWGameManager : NetworkBehaviour {
         NetworkServer.ReplacePlayerForConnection(connection, newPlayer, 0);
         AssignPlayerId(newPlayer);
         GameObject.Destroy(source);
+
+		// TODO find a better workaround
+		// We damage the player for 0 here because there's a bug where the server crashes if they aren't
+		// I don't really understand what the hell it means, but this should fix it
+		p.Hit(new HitArguments(p.gameObject, p.gameObject));
     }
 	public void SpawnSpectator(GameObject source) {
 		source.GetComponent<PlayerNetworking> ().initializeCameras (false);

@@ -129,7 +129,8 @@ public class PlayerGUI : PlayerComponent {
 		if (isServer) {
 			//NetworkServer.DisconnectAll();
 			networkManager.StopClient ();
-			networkManager.StopServer ();
+			NetworkManager.Shutdown ();
+			//networkManager.StopServer ();
 		} else {
 			networkManager.StopClient ();
 		}
