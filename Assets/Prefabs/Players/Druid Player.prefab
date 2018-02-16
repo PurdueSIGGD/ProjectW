@@ -1178,6 +1178,7 @@ GameObject:
   - component: {fileID: 114332602364004438}
   - component: {fileID: 114798001436588076}
   - component: {fileID: 114306454195832164}
+  - component: {fileID: 114830021550735674}
   - component: {fileID: 114526925126521440}
   m_Layer: 8
   m_Name: Druid Player
@@ -1821,7 +1822,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1913674038268762}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.7475672, y: 0.099274635, z: 17.404182}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4463521363231756}
@@ -3068,7 +3069,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b1d6418b001b3d4fbdca22e87ba219c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magicDraw: 10
+  magicDraw: 30
   cooldown: 5
   itemToSpawn: {fileID: 1510283606606064, guid: 8816f01ea04c0e94ea11dca540fc2eeb,
     type: 2}
@@ -3174,6 +3175,7 @@ MonoBehaviour:
   runSpeedModifier: 1
   magicRegenModifier: 1
   stunned: 0
+  immobilized: 0
 --- !u!114 &114526925126521440
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3235,6 +3237,28 @@ MonoBehaviour:
   initialUpwardVelocity: 4
   pushForce: 2000
   damage: 3
+--- !u!114 &114830021550735674
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1913674038268762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48ff38d2bed145d46ab8ab4fe4a95e75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magicDraw: 30
+  cooldown: 6
+  itemToSpawn: {fileID: 1024281220643012, guid: d6712bbba1f842b48b59492845b9301a,
+    type: 2}
+  spawnPoint: {fileID: 4463521363231756}
+  spawnOffset: {x: 0, y: 0, z: 0}
+  aimAngle: {fileID: 4338967783843814}
+  spawnSpeed: 0
+  effectDuration: 3
+  trapLifetime: 6
+  damage: 10
 --- !u!114 &114874414058555186
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3781,7 +3805,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.000000037713335, y: -0.44370535, z: 0.0028615491}
+  m_ConnectedAnchor: {x: 0.000000037713335, y: -0.44370535, z: 0.0028625028}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -3957,7 +3981,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.00000012370526, y: 0.20265043, z: -0.008692916}
+  m_ConnectedAnchor: {x: -0.00000012370529, y: 0.20265043, z: -0.008691962}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
