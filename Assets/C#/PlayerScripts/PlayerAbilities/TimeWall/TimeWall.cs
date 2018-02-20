@@ -27,16 +27,20 @@ public class TimeWall : MonoBehaviour {
             if((r = col.GetComponent<Rigidbody>()) != null)
             {
                 hitByThese.Add(r);
-                magnitudes.Add(Vector3.Magnitude(r.velocity));
                 r.AddForce(-(r.velocity), ForceMode.VelocityChange);
             }
             Projectile p;
             if (p = r.transform.GetComponent<Projectile>())
             {
+                magnitudes.Add(p.currentVelocity);
                 p.sourcePlayer = ability.gameObject;
                 p.CancelInvoke("DestroyMe");
                 p.Invoke("DestroyMe", p.lifetime);
+            }else
+            {
+                magnitudes.Add(Vector3.Magnitude(r.velocity));
             }
+
             return;
         }
     }
