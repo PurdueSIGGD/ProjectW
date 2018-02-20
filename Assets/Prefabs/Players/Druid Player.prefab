@@ -3074,7 +3074,7 @@ MonoBehaviour:
   itemToSpawn: {fileID: 1510283606606064, guid: 8816f01ea04c0e94ea11dca540fc2eeb,
     type: 2}
   spawnPoint: {fileID: 4088713445305804}
-  spawnOffset: {x: 0, y: 0, z: 1}
+  spawnOffset: {x: 0, y: -0.1, z: 1}
   aimAngle: {fileID: 4338967783843814}
   spawnSpeed: 0
   bambooLifetime: 4
@@ -3253,7 +3253,7 @@ MonoBehaviour:
   itemToSpawn: {fileID: 1024281220643012, guid: d6712bbba1f842b48b59492845b9301a,
     type: 2}
   spawnPoint: {fileID: 4463521363231756}
-  spawnOffset: {x: 0, y: 0, z: 0}
+  spawnOffset: {x: 0, y: 0, z: 2}
   aimAngle: {fileID: 4338967783843814}
   spawnSpeed: 0
   effectDuration: 3
