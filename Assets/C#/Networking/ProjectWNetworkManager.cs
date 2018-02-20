@@ -38,23 +38,29 @@ public class ProjectWNetworkManager : NetworkManager {
         }
 		player.SendMessage("JoinServer");
     }
-	/*
+	
     // called when a client disconnects
     public override void OnServerDisconnect(NetworkConnection conn) {
-		//base.OnClientDisconnect(conn);
-        NetworkServer.DestroyPlayersForConnection(conn);
+        // We don't destroy these guys... we just disable them cause it crashes the game 
+        foreach (PlayerController p in conn.playerControllers) {
+            p.gameObject.SetActive(false);
+        }
+        if (scoreBoard == null) {
+            scoreBoard = GameObject.FindObjectOfType<ProjectWGameManager>().scoreBoard;
+        }
+        scoreBoard.RpcRefreshScoreboard();
+        //NetworkServer.DestroyPlayersForConnection(conn);
     }
-
+    public override void OnServerRemovePlayer(NetworkConnection conn, PlayerController player) {
+        // We don't destroy these guys... we just disable them cause it crashes the game 
+        player.gameObject.SetActive(false);
+        //base.OnServerRemovePlayer(conn, player);
+    }
+    /*
     // called when a client is ready
     public override void OnServerReady(NetworkConnection conn) {
         NetworkServer.SetClientReady(conn);
     }
-    
-	public override void OnServerRemovePlayer(NetworkConnection conn, PlayerController player) {
-        base.OnServerRemovePlayer(conn, player);
-    }
-
-
     
     // called when a network error occurs
 	public override void OnServerError(NetworkConnection conn, int errorCode) {
@@ -65,13 +71,13 @@ public class ProjectWNetworkManager : NetworkManager {
 
 
 
-	public void RemovePlayerScoreboard(int connectionId) {
+    /*public void RemovePlayerScoreboard(int connectionId) {
 		print ("Client disconnected: " + connectionId);
 		if (scoreBoard == null) {
 			scoreBoard = GameObject.FindObjectOfType<ProjectWGameManager> ().scoreBoard;
 		}
 		scoreBoard.RemovePlayer (connectionId);
-	}
+	}*/
 
 
     public IEnumerator TrackPing(Scoreboard scoreBoard, GameObject player, int playerId)

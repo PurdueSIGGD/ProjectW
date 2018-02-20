@@ -61,6 +61,7 @@ public class MainMenuUIController : MonoBehaviour {
 		ResetCursor ();
 		if ((networkManager = GameObject.FindObjectOfType<ProjectWNetworkManager> ())) {
 			NetworkManager.Shutdown ();
+            Destroy(networkManager.gameObject);
 		}
 		networkManager = GameObject.Instantiate (networkManagerPrefab).GetComponent<ProjectWNetworkManager> ();
 		// Dropdown workaround refreshes

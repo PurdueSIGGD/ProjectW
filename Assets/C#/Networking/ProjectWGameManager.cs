@@ -105,7 +105,7 @@ public class ProjectWGameManager : NetworkBehaviour {
 			//print (oldPG.desiredTeamIndex + " desired team index");
 		}
        
-        yield return new WaitForSeconds(5);
+        //yield return new WaitForSeconds(5);
         //print("destroying corpse");
 		oldP.despawnCorpse ();
     }

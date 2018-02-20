@@ -202,7 +202,7 @@ public class Scoreboard : NetworkBehaviour {
             }
         }
 		foreach (ScoreboardItem scoreboardItem in parentGroup.GetComponentsInChildren<ScoreboardItem>()) {
-			if (!scores.Find (scoreboardItem.id).found) {
+			if (!scores.Find (scoreboardItem.id).found || (scoreboardItem.referredItem != null && !scoreboardItem.referredItem.activeInHierarchy)) {
 				// Delete if not found
 				GameObject.Destroy(scoreboardItem.gameObject);
 			}

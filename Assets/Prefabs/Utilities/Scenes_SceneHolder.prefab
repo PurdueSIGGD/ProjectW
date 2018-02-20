@@ -52,9 +52,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scenes:
-  - image: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-    icon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  - image: {fileID: 21300000, guid: 1e517d936548d254fae0e22d42f694c2, type: 3}
+    icon: {fileID: 21300000, guid: 1e517d936548d254fae0e22d42f694c2, type: 3}
     name: TestScene
-  - image: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-    icon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  - image: {fileID: 21300000, guid: 8485c56514cf72147b709f99b0b9f9be, type: 3}
+    icon: {fileID: 21300000, guid: 8485c56514cf72147b709f99b0b9f9be, type: 3}
     name: TestSceneBig

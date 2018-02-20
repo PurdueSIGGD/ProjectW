@@ -125,15 +125,20 @@ public class PlayerGUI : PlayerComponent {
         desiredPlayerName = playerName;
     }
 	public void ExitServer() {
-		ProjectWNetworkManager networkManager = GameObject.FindObjectOfType<ProjectWNetworkManager> ();
+		//ProjectWNetworkManager networkManager = GameObject.FindObjectOfType<ProjectWNetworkManager> ();
 		if (isServer) {
-			//NetworkServer.DisconnectAll();
-			networkManager.StopClient ();
-			NetworkManager.Shutdown ();
-			//networkManager.StopServer ();
-		} else {
-			networkManager.StopClient ();
-		}
+            //NetworkServer.DisconnectAll();
+            Debug.Log("exit server - server - 1");
+            NetworkManager.singleton.StopClient ();
+            Debug.Log("exit server - server - 2");
+            NetworkManager.Shutdown ();
+            Debug.Log("exit server - server - 3");
+            //networkManager.StopServer ();
+        } else {
+            Debug.Log("exit server - client - 1");
+            NetworkManager.singleton.StopClient ();
+            Debug.Log("exit server - client - 2");
+        }
     }
 	public void Spectate() {
 		// Force our player to die and move to spectators

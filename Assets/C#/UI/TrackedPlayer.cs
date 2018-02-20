@@ -29,7 +29,7 @@ public class TrackedPlayer : TrackedItem {
 		health.localScale = new Vector3(width, 1, 1);
         health.GetComponent<Image>().color = trackedPlayerStats.teamColor;
         itemName.text = trackedPlayerStats.playerName;
-        if (trackedPlayerStats.death) {
+        if (trackedPlayerStats.death || !trackedPlayerStats.gameObject.activeInHierarchy) {
 			GameObject.Destroy(this.gameObject);
 		}
 
