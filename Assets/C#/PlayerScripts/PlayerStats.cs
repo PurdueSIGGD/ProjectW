@@ -196,14 +196,15 @@ public class PlayerStats : PlayerComponent, IHittable {
     }
 	public void despawnCorpse() {
         //Destroy(this.gameObject);
-        this.gameObject.SetActive(false);
-        this.transform.position = Vector3.zero;
+        //this.gameObject.SetActive(false);
+        //this.transform.position = Vector3.zero;
         //Destroy(this.gameObject, 0.1f);
-        //RpcDespawnCorpse ();
+        RpcDespawnCorpse ();
 	}
 	[ClientRpc]
 	public void RpcDespawnCorpse() {
 		this.gameObject.SetActive (false);
+		this.transform.position = Vector3.zero;
 	}
   
 
