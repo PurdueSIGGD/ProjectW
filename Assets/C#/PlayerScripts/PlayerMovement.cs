@@ -32,7 +32,11 @@ public class PlayerMovement : PlayerComponent {
     }
 
     public override void PlayerComponent_Update() {
-
+        if (myBase.myInput.disabled)
+        {
+            horizontal = vertical = 0;
+            jump = false;
+        }
     }
     public void FixedUpdate() {
         if (isLocalPlayer) {
@@ -80,7 +84,7 @@ public class PlayerMovement : PlayerComponent {
             data.jump = false;
         }
         
-        transform.Rotate(0, data.mouseX, 0);
+        myBase.myRigid.MoveRotation(Quaternion.Euler(new Vector3(0, myBase.transform.rotation.eulerAngles.y + data.mouseX, 0)));
 
         float newX = cameraRotator.rotation.eulerAngles.x + data.mouseY;
         //We do some fancy math to ensure 0 < newX < 360, nothing more

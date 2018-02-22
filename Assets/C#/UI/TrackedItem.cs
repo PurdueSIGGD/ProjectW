@@ -11,7 +11,7 @@ public class TrackedItem : MonoBehaviour {
     public Image sprite;
 	private bool hasStarted = false;
     public bool seeThrough = true;
-    private Animator myAnim;
+    public Animator myAnim;
 
 	public void StartTracker (Transform target, Camera myCamera) {
 		this.myCamera = myCamera;
@@ -19,7 +19,6 @@ public class TrackedItem : MonoBehaviour {
 		hasStarted = true;
         sprite.sprite = target.GetComponent<ItemToTrack>().sprite;
         myAnim = this.GetComponent<Animator>();
-        myAnim.SetBool("Showing", true);
 		Start_Extended(target);
 	}
 
@@ -29,7 +28,23 @@ public class TrackedItem : MonoBehaviour {
 				GameObject.Destroy(this.gameObject);
 		} else {
 			if (myCamera != null) {
-				Vector3 targetPosition = myCamera.WorldToScreenPoint(locationToTrack.position + worldOffset) + hudOffset;
+                RaycastHit[] hits = Physics.RaycastAll(new Ray(myCamera.transform.position, (locationToTrack.position + Vector3.up) - myCamera.transform.position), Vector3.Distance((locationToTrack.position + Vector3.up),  myCamera.transform.position));
+                //Debug.DrawRay(myCamera.transform.position, (locationToTrack.position + Vector3.up) - myCamera.transform.position);
+                bool hit = false;
+                foreach (RaycastHit h in hits)
+                {
+                    if (!h.transform.GetComponentInParent<PlayerStats>())
+                    {
+                        myAnim.SetBool("Showing", false);
+                        hit = true;
+                    }
+                }
+                if (!hit)
+                {
+                    myAnim.SetBool("Showing", true);
+                }
+
+                Vector3 targetPosition = myCamera.WorldToScreenPoint(locationToTrack.position + worldOffset) + hudOffset;
 				// If it is being annoying and updating in negative space, hide it
 				if (targetPosition.z > 0) {
 					transform.position = targetPosition;
