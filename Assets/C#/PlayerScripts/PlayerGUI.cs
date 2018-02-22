@@ -17,7 +17,6 @@ public class PlayerGUI : PlayerComponent {
     public string desiredPlayerName;
     [SyncVar]
     public int desiredTeamIndex;
-
 	public GameObject hudPrefab;
 	private GameObject hudRoot;
 	private GameHudController gameHud;
@@ -36,6 +35,10 @@ public class PlayerGUI : PlayerComponent {
 			myBase.myStats.hitAnimator = gameHud.hitMarker;
             spectatorUIController = GameObject.FindObjectOfType<SpectatorUIController>();
 			spectatorUIController.AssignOwner(this.gameObject, UnPauseGameWithoutUI, myBase.myNetworking.playerCameras[0]);
+            foreach (Image i in gameHud.teamColoredImages)
+            {
+                i.color = myBase.myStats.teamColor;
+            }
             UnPauseGame();
         } else {
 			
@@ -67,7 +70,13 @@ public class PlayerGUI : PlayerComponent {
 
     }
     public void Death() {
-		// GUI Death state
+        // GUI Death state
+        if (this.isLocalPlayer)
+        {
+            UnPauseGame();
+            gameHud.gameObject.SetActive(false);
+        }
+            
     }
 
     public void TogglePause() {
@@ -97,7 +106,7 @@ public class PlayerGUI : PlayerComponent {
     }
     private void UnPauseGame() {
         shouldBeLocked = true;
-        spectatorUIController.UnPause();
+        if (this.isLocalPlayer) spectatorUIController.UnPause();
     }
     private void UnPauseGameWithoutUI() {
         shouldBeLocked = true;
@@ -115,13 +124,20 @@ public class PlayerGUI : PlayerComponent {
         desiredTeamIndex = teamIndex;
         desiredPlayerName = playerName;
     }
-    public void ExitServer() {
-        if (isServer) {
-            NetworkServer.DisconnectAll();
+	public void ExitServer() {
+		//ProjectWNetworkManager networkManager = GameObject.FindObjectOfType<ProjectWNetworkManager> ();
+		if (isServer) {
+            //NetworkServer.DisconnectAll();
+            Debug.Log("exit server - server - 1");
+            NetworkManager.singleton.StopClient ();
+            Debug.Log("exit server - server - 2");
+            NetworkManager.Shutdown ();
+            Debug.Log("exit server - server - 3");
+            //networkManager.StopServer ();
         } else {
-            Network.Disconnect();
-            MasterServer.UnregisterHost();
-            NetworkServer.RemoveExternalConnection(this.connectionToServer.connectionId);
+            Debug.Log("exit server - client - 1");
+            NetworkManager.singleton.StopClient ();
+            Debug.Log("exit server - client - 2");
         }
     }
 	public void Spectate() {
@@ -130,7 +146,8 @@ public class PlayerGUI : PlayerComponent {
 	}
 	[Command]
 	public void CmdSpectate() {
-		this.desiredTeamIndex = -1;
+        // Desired team index is denoted at -2 when wanting to become a spectator, -1 for the ffa team
+		this.desiredTeamIndex = -2;
 		GameObject.FindObjectOfType<ProjectWGameManager>().SpawnSpectator(this.gameObject);
 	}
     public void StopGUI()

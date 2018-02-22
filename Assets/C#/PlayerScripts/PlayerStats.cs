@@ -19,6 +19,8 @@ public class PlayerStats : PlayerComponent, IHittable {
     [SyncVar]
     public int teamIndex = -1;
     [SyncVar]
+    public Color teamColor = Color.red;
+    [SyncVar]
     public string playerName;
     [SyncVar]
     public int classIndex = -1;
@@ -26,8 +28,12 @@ public class PlayerStats : PlayerComponent, IHittable {
 	public AudioSource hitSound;
 	[HideInInspector]
     public Animator hitAnimator; // Assigned in playerGUI
+    [HideInInspector]
+    public int lastHitPlayerId;
+    private float lastHitTime;
 
     public override void PlayerComponent_Start() {
+        
         if (!isLocalPlayer) {
             magicBar.SetActive(false);
             healthBar.SetActive(false);
@@ -39,13 +45,24 @@ public class PlayerStats : PlayerComponent, IHittable {
     }
     
     public void Hit(HitArguments hit) {
+        if (hit.sourcePlayerTeam != teamIndex || teamIndex == -1)
+        {
+            lastHitPlayerId = hit.sourcePlayer.GetComponent<PlayerInput>().GetPlayerId();
+		}
+		lastHitTime = Time.time;
         changeHealth(-1 * hit.damage);
         if (hit.effect != PlayerEffects.Effects.none) {
             myBase.myEffects.AddEffect(hit);
         }
     }
     public float changeHealth(float f) {
-        //print("took hit " + f);
+		if (!isServer && !isLocalPlayer)
+			return 0;
+		if (float.IsNaN (health)) {
+			health = 0;
+			// Something causes health to be NaN. no idea what it comes from.
+			// I see no instant issues whenever health is NaN, so this should fix some of those issues.
+		}
         float returnVal = 0;
         health += f;
         if (health > healthMax) {
@@ -73,21 +90,31 @@ public class PlayerStats : PlayerComponent, IHittable {
         return returnVal;
     }
     public override void PlayerComponent_Update() {
-        healthBar.transform.localScale = new Vector3(health, health>0?1:0, health > 0 ? 1 : 0);
-        magicBar.transform.localScale = new Vector3(magic, magic > 0 ? 1 : 0, magic > 0 ? 1 : 0);
+        //healthBar.transform.localScale = new Vector3(health, health>0?1:0, health > 0 ? 1 : 0);
+        //magicBar.transform.localScale = new Vector3(magic, magic > 0 ? 1 : 0, magic > 0 ? 1 : 0);
         changeMagic(Time.deltaTime * 30 * myBase.myEffects.magicRegenModifier); // Update magic at our regen rate
         //print(this.gameObject.name + " " + this.playerControllerId + " " + isServer + " " + isClient);
         // Spawned enemies can 
         if (health == 0 && !hasDeath) {
-            if (isLocalPlayer) {
-                // Player has to handle their own death
-                CmdDeath();
-            } else if (myBase.myInput.isBot()) {
-                // Specific message for non-cmd things
-                ServerDeath();
-            }
-            this.BroadcastMessage("Death");
-            hasDeath = true;
+			if (isLocalPlayer) {
+				// Player has to handle their own death
+				CmdDeath ();
+				this.BroadcastMessage ("Death");
+				hasDeath = true;
+			} else if (isServer && myBase.myInput.isBot ()) {
+				// Specific message for non-cmd things
+				ServerDeath ();
+				this.BroadcastMessage ("Death");
+				hasDeath = true;
+			} else {
+				// Only the server/client should be handling their death
+			}
+        }
+
+        if (Time.time - lastHitTime > 5 && lastHitPlayerId != 0)
+        {
+            // Reset last hit
+            lastHitPlayerId = 0;
         }
         
         if (death && !hasDeath) {
@@ -95,6 +122,8 @@ public class PlayerStats : PlayerComponent, IHittable {
             this.BroadcastMessage("Death");
             hasDeath = true;
         }
+
+
     }
     /**
      * You can only tell the server to do a command inside of the root player control, so this will allow the server to do damage
@@ -102,6 +131,15 @@ public class PlayerStats : PlayerComponent, IHittable {
     [Command]
     public void CmdApplyDamage(HitManager.HitVerificationMethod ver, HitArguments hit) {
         //print("applying damage");
+        PlayerStats targetStats;
+        if (hit.sourcePlayerTeam != -1 && (targetStats = hit.target.GetComponentInParent<PlayerStats>()))
+        {
+            if (targetStats.teamIndex == this.teamIndex && !hit.hitSameTeam)
+            {
+				Debug.LogWarning("Same team, not registering hit on target " + hit.target);
+                return;
+            }
+        }
 		if (HitManager.VerifyHit(ver, hit) && hit.target != null && hit.target.GetComponentInParent<IHittable>() != null)
         {
             hit.target.GetComponentInParent<IHittable>().Hit(hit);
@@ -157,11 +195,18 @@ public class PlayerStats : PlayerComponent, IHittable {
         }
     }
 	public void despawnCorpse() {
-		RpcDespawnCorpse ();
+        //Destroy(this.gameObject);
+        //this.gameObject.SetActive(false);
+        //this.transform.position = Vector3.zero;
+        //Destroy(this.gameObject, 0.1f);
+        RpcDespawnCorpse ();
 	}
 	[ClientRpc]
 	public void RpcDespawnCorpse() {
 		this.gameObject.SetActive (false);
+		this.transform.position = Vector3.zero;
 	}
-    
+  
+
+
 }
