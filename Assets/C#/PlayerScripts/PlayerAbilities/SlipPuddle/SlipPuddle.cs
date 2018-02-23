@@ -39,7 +39,8 @@ public class SlipPuddle : MonoBehaviour {
 
            
 
-            HitManager.HitClientside(HitManager.HitVerificationMethod.projectile, new HitArguments(((Component)col.gameObject.GetComponentInParent<IHittable>()).gameObject, sourcePlayer.GetComponentInParent<PlayerStats>().gameObject)
+            HitManager.HitClientside(HitManager.HitVerificationMethod.projectile, 
+                new HitArguments(((Component)col.gameObject.GetComponentInParent<IHittable>()).gameObject, sourcePlayer.GetComponentInParent<PlayerStats>().gameObject)
               .withDamage(damage)
               .withDamageType(damageType)
               .withEffect(effect)
