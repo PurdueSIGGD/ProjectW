@@ -3096,12 +3096,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magicDraw: 20
   cooldown: 1
-  itemToSpawn: {fileID: 1781820597983668, guid: bb4ec6019c54a094c8644db9959f77fa,
+  itemToSpawn: {fileID: 1144779132522916, guid: 885f2b4b242c61f4cb2e08d8aa841683,
     type: 2}
   spawnPoint: {fileID: 4088713445305804}
   spawnOffset: {x: 0, y: 0, z: 0}
   aimAngle: {fileID: 4338967783843814}
-  spawnSpeed: 400
+  spawnSpeed: 1000
 --- !u!114 &114348581302883722
 MonoBehaviour:
   m_ObjectHideFlags: 1
