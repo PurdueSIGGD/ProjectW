@@ -1938,7 +1938,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 393641262}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.98640275
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2736,16 +2736,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114989715467682310, guid: 7dd9680bcf19de34abfca57195c154b8,
-        type: 2}
-      propertyPath: botItems.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114989715467682310, guid: 7dd9680bcf19de34abfca57195c154b8,
-        type: 2}
-      propertyPath: m_SpawnPrefabs.Array.size
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 4115677730837770, guid: 7dd9680bcf19de34abfca57195c154b8, type: 2}
       propertyPath: m_LocalPosition.x
       value: -5.6481943
@@ -2778,57 +2768,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 114989715467682310, guid: 7dd9680bcf19de34abfca57195c154b8,
-        type: 2}
-      propertyPath: botItems.Array.data[0].botName
-      value: (Bot) Frank
-      objectReference: {fileID: 0}
-    - target: {fileID: 114989715467682310, guid: 7dd9680bcf19de34abfca57195c154b8,
-        type: 2}
-      propertyPath: botItems.Array.data[0].botTeam
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114989715467682310, guid: 7dd9680bcf19de34abfca57195c154b8,
-        type: 2}
-      propertyPath: botItems.Array.data[0].botDifficulty
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114989715467682310, guid: 7dd9680bcf19de34abfca57195c154b8,
-        type: 2}
-      propertyPath: botItems.Array.data[0].botType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114989715467682310, guid: 7dd9680bcf19de34abfca57195c154b8,
-        type: 2}
-      propertyPath: botItems.Array.data[1].botName
-      value: (Bot) Josh
-      objectReference: {fileID: 0}
-    - target: {fileID: 114989715467682310, guid: 7dd9680bcf19de34abfca57195c154b8,
-        type: 2}
-      propertyPath: botItems.Array.data[1].botTeam
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114989715467682310, guid: 7dd9680bcf19de34abfca57195c154b8,
-        type: 2}
-      propertyPath: botItems.Array.data[1].botDifficulty
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114318236525976650, guid: 7dd9680bcf19de34abfca57195c154b8,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114318236525976650, guid: 7dd9680bcf19de34abfca57195c154b8,
-        type: 2}
-      propertyPath: offsetY
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114989715467682310, guid: 7dd9680bcf19de34abfca57195c154b8,
-        type: 2}
-      propertyPath: m_SpawnPrefabs.Array.data[3]
-      value: 
-      objectReference: {fileID: 1185770464893064, guid: b92a8520e1f19674ab149f9e792325cf,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7dd9680bcf19de34abfca57195c154b8, type: 2}
   m_IsPrefabParent: 0
@@ -3315,7 +3254,7 @@ Prefab:
     - target: {fileID: 224918477120116454, guid: 2a4a8f50ae5494e4e92a56e810b36207,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -64
       objectReference: {fileID: 0}
     - target: {fileID: 224918477120116454, guid: 2a4a8f50ae5494e4e92a56e810b36207,
         type: 2}
@@ -3375,17 +3314,17 @@ Prefab:
     - target: {fileID: 224390476018070140, guid: 2a4a8f50ae5494e4e92a56e810b36207,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 301.675
+      value: 302.0912
       objectReference: {fileID: 0}
     - target: {fileID: 224390476018070140, guid: 2a4a8f50ae5494e4e92a56e810b36207,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -37.5
       objectReference: {fileID: 0}
     - target: {fileID: 224390476018070140, guid: 2a4a8f50ae5494e4e92a56e810b36207,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 543.35
+      value: 544.1824
       objectReference: {fileID: 0}
     - target: {fileID: 224554008692170746, guid: 2a4a8f50ae5494e4e92a56e810b36207,
         type: 2}
@@ -3400,17 +3339,17 @@ Prefab:
     - target: {fileID: 224554008692170746, guid: 2a4a8f50ae5494e4e92a56e810b36207,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 443.52496
+      value: 443.9412
       objectReference: {fileID: 0}
     - target: {fileID: 224554008692170746, guid: 2a4a8f50ae5494e4e92a56e810b36207,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -37.5
       objectReference: {fileID: 0}
     - target: {fileID: 224554008692170746, guid: 2a4a8f50ae5494e4e92a56e810b36207,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 319.35
+      value: 318.51764
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2a4a8f50ae5494e4e92a56e810b36207, type: 2}
@@ -6447,7 +6386,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000024956333, y: 0.05365002}
+  m_AnchoredPosition: {x: -0.000023085375, y: -0.00003723055}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2103171750

@@ -38,6 +38,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4837727769518298}
+  - component: {fileID: 114463264372801540}
   m_Layer: 0
   m_Name: SlipPuddle
   m_TagString: Untagged
@@ -139,3 +140,35 @@ MonoBehaviour:
   damageType: 0
   effects: 0700000008000000
   effectDuration: 3
+--- !u!114 &114463264372801540
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1452471349948982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 117
+    i1: 90
+    i2: 196
+    i3: 140
+    i4: 0
+    i5: 33
+    i6: 131
+    i7: 212
+    i8: 56
+    i9: 141
+    i10: 102
+    i11: 66
+    i12: 40
+    i13: 72
+    i14: 101
+    i15: 235
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0

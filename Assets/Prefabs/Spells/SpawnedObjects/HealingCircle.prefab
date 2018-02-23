@@ -57,6 +57,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4720954331688562}
   - component: {fileID: 114053853133053984}
+  - component: {fileID: 114484961369501600}
   m_Layer: 0
   m_Name: HealingCircle
   m_TagString: Untagged
@@ -197,6 +198,38 @@ MonoBehaviour:
   type: 0
   damage: -1
   rate: 1
+--- !u!114 &114484961369501600
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1989367334055510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 28
+    i1: 138
+    i2: 225
+    i3: 138
+    i4: 111
+    i5: 115
+    i6: 124
+    i7: 244
+    i8: 201
+    i9: 169
+    i10: 183
+    i11: 24
+    i12: 51
+    i13: 53
+    i14: 170
+    i15: 25
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!198 &198586610329458288
 ParticleSystem:
   m_ObjectHideFlags: 1

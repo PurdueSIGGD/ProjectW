@@ -20,6 +20,10 @@ public class RainCloud : MagicObject{
     private void Start()
     {
         // get team number
+        if (sourcePlayer == null)
+        {
+            Debug.LogWarning(gameObject.name + ": sourcePlayer is null.");
+        }
         teamIndex = sourcePlayer.GetComponent<PlayerStats>().teamIndex;
         toAffect = new ArrayList();
     }

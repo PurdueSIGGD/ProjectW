@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4539142821784248}
   - component: {fileID: 114292516075764502}
+  - component: {fileID: 114583663150018644}
   m_Layer: 0
   m_Name: RainCloud
   m_TagString: Untagged
@@ -356,6 +357,38 @@ MonoBehaviour:
   dmgRate: 0.3
   healRate: 0.3
   damageType: 0
+--- !u!114 &114583663150018644
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1156680482735194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 120
+    i1: 69
+    i2: 227
+    i3: 228
+    i4: 148
+    i5: 222
+    i6: 73
+    i7: 164
+    i8: 11
+    i9: 92
+    i10: 105
+    i11: 207
+    i12: 20
+    i13: 239
+    i14: 224
+    i15: 27
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!136 &136490896786577498
 CapsuleCollider:
   m_ObjectHideFlags: 1
