@@ -7,9 +7,10 @@ public class Ability_MagicObjSpawner : Ability_ObjectSpawner {
     public override void OnSpellSpawned(GameObject spawn)
     {
         MagicObject p;
-        if (p = spawn.GetComponent<MagicObject>())
+        if ( p = spawn.GetComponent<MagicObject>())
         {
             p.sourcePlayer = this.gameObject;
+            
         }
     }
 }

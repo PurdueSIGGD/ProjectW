@@ -24,10 +24,14 @@ public class RainCloud : MagicObject{
         {
             Debug.LogWarning(gameObject.name + ": sourcePlayer is null.");
         }
-        teamIndex = sourcePlayer.GetComponent<PlayerStats>().teamIndex;
+        
         toAffect = new ArrayList();
     }
 
+    /**
+     * add player to heal list
+     * then heal them
+     */ 
     private void OnTriggerEnter(Collider col)
     {
         if (col.isTrigger) return;
@@ -35,6 +39,9 @@ public class RainCloud : MagicObject{
         // if can be hit
         IHittable h;
         int colTeam;
+        teamIndex = sourcePlayer.GetComponent<PlayerStats>().teamIndex;
+
+
         if ( (h = col.GetComponent<IHittable>()) != null)
         {
             // get col Team
@@ -52,6 +59,18 @@ public class RainCloud : MagicObject{
 
     }
 
+    /**
+     * Remove player from heal list
+     */ 
+    private void OnTriggerExit(Collider col)
+    {
+        if (col.isTrigger) return;
+        IHittable h;
+        if ((h = col.GetComponent<IHittable>()) != null)
+        {
+            toAffect.Remove(h);
+        }
+    }
 
     private IEnumerator RoutineDamage(IHittable h)
     {

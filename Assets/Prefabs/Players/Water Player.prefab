@@ -345,9 +345,9 @@ GameObject:
   - component: {fileID: 114272855627814130}
   - component: {fileID: 114784747083177884}
   - component: {fileID: 114569654491593078}
-  - component: {fileID: 114099228589186052}
   - component: {fileID: 114453485441763386}
   - component: {fileID: 114777217990805192}
+  - component: {fileID: 114930827434695302}
   m_Layer: 8
   m_Name: Water Player
   m_TagString: Player
@@ -3104,25 +3104,6 @@ MonoBehaviour:
   playerCameras:
   - {fileID: 20898065333991908}
   playerListener: {fileID: 81850302650050912}
---- !u!114 &114099228589186052
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1185770464893064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84d0bb171ff7f4444af6aa5145e4ff2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  magicDraw: 0
-  cooldown: 1
-  itemToSpawn: {fileID: 1989367334055510, guid: 1c8ae18a6f737cf4c9a9b7183335aa19,
-    type: 2}
-  spawnPoint: {fileID: 4331470135178488}
-  spawnOffset: {x: 0, y: 0.5, z: 5}
-  aimAngle: {fileID: 4912864852820086}
-  spawnSpeed: 0
 --- !u!114 &114202392788044290
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3399,6 +3380,27 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8cbb38dd908fcd84da9081acc01f1f27, type: 3}
   - {fileID: 8300000, guid: 2db93970d219f214d92cb6052c2fe7b7, type: 3}
   - {fileID: 8300000, guid: 39bb373d079908443ab2d0bec0f6752d, type: 3}
+--- !u!114 &114930827434695302
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1185770464893064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 130a28f25163f5f4ea8baea852dc8628, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magicDraw: 0
+  cooldown: 1
+  itemToSpawn: {fileID: 1188098880044138, guid: 03799fe6c5c782e43b1f37878473e14a,
+    type: 2}
+  spawnPoint: {fileID: 4359170975647424}
+  spawnOffset: {x: 0, y: 0, z: 0}
+  aimAngle: {fileID: 4912864852820086}
+  spawnSpeed: 400
+  amountToSpawn: 30
+  spreadMultiplier: 0.5
 --- !u!124 &124025349507364424
 Behaviour:
   m_ObjectHideFlags: 1
