@@ -36,6 +36,7 @@ public class TrackedItemController : MonoBehaviour {
         }
         foreach (TrackedItem it in trackedPlayerParent.GetComponentsInChildren<TrackedItem>())
         {
+            // Raycast and hide if not in current view
             it.myCamera = myCamera;
             PlayerStats stats;
             if ((stats = it.locationToTrack.GetComponentInParent<PlayerStats>()) && stats.gameObject == player)
@@ -55,7 +56,8 @@ public class TrackedItemController : MonoBehaviour {
 			}
 		}
 		foreach (ItemToTrack item in GameObject.FindObjectsOfType<ItemToTrack>()) {
-			if (trackedItems.Contains(item) || item.gameObject == player) {
+      
+            if (trackedItems.Contains(item) || item.gameObject == player) {
 				// Ignore
 			} else {
 				// Add to list

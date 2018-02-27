@@ -12,6 +12,7 @@ public class HumanInput : PlayerInput {
         data.mouseY = Input.GetAxis("Mouse Y") * sensitivityy;
         data.pause = Input.GetAxis("Pause") > 0;
         data.jump = Input.GetAxis("Jump") > 0;
+        data.scoreboard = Input.GetAxis("Scoreboard") > 0;
         data.useAbilities = new bool[ABILITY_INPUTS];
         // ability list starts at 1
         for (int i = 1; i <= PlayerInput.ABILITY_INPUTS; i++) {
