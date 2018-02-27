@@ -3094,6 +3094,8 @@ MonoBehaviour:
   spawnOffset: {x: 0, y: 0, z: 0}
   aimAngle: {fileID: 4421330956186678}
   spawnSpeed: 300
+  horizontalRotationOffset: 0
+  verticalRotationOffset: 20
 --- !u!114 &114093100155554272
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3242,14 +3244,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicDraw: 35
-  cooldown: 3
-  itemToSpawn: {fileID: 1817249387651284, guid: 291968355faab8848af88615cabf21f4,
-    type: 2}
-  spawnPoint: {fileID: 4738656710400100}
-  spawnOffset: {x: 0, y: 0, z: 0}
-  aimAngle: {fileID: 4421330956186678}
-  spawnSpeed: 0
+  cooldown: 2
   spawnRange: 10
+  itemToSpawn: {fileID: 1496745958171024, guid: 148b285af3ed05d459af00a04bea71c8,
+    type: 2}
+  spawnOffset: {x: 0, y: 0, z: 0}
+  spawnSpeed: 0
+  groundSpawn: 1
 --- !u!114 &114539094655183288
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ability_RecursiveSpawner : Ability_ObjectSpawner {
+public class Ability_RecursiveSpawner : Ability_ObjectSpawner {// spawns a line of objects in front of the caster
 	public int numSpawns;
 	public float spawnRange;
 	public float delay;
-	private float offset;
-	private int check;
-	private int layer;
+	protected float offset;
+	protected int check;
+	protected int layer;
 
 	public override void SpawnSpell(PlayerComponent.Buf data)
 	{
-		Ray ray1 = Camera.main.ScreenPointToRay(Input.mousePosition);
+		Vector3 spawnAngle = data.vectorList[0];
+		Vector3 spawnPosition = data.vectorList[1];
+		Ray ray1 = new Ray (spawnPosition, spawnAngle);
 		ray1 = new Ray(ray1.origin, new Vector3(ray1.direction.x, 0, ray1.direction.z));
 		Ray ray2 = new Ray(ray1.origin, new Vector3(0, -1, 0));
 		check = 0;
@@ -22,8 +24,7 @@ public class Ability_RecursiveSpawner : Ability_ObjectSpawner {
 
 	public void SpawnSpell(PlayerComponent.Buf data, int it, Ray ray1, Ray ray2)
 	{
-		Vector3 spawnAngle = data.vectorList[0];
-		Vector3 spawnPosition = data.vectorList[1];
+		
 
 		offset = spawnRange/numSpawns;
 
@@ -31,10 +32,11 @@ public class Ability_RecursiveSpawner : Ability_ObjectSpawner {
 		spawn = castOne (data, ref ray1, ref ray2, ref it);
 
 		Rigidbody r;
-		if (r = spawn.GetComponent<Rigidbody>())
+		r = spawn.GetComponent<Rigidbody> ();
+		/*if (r = spawn.GetComponent<Rigidbody>())
 		{
 			r.AddForce(spawnAngle * spawnSpeed);
-		}
+		}*/
 		OnSpellSpawned(spawn);
 		StartCoroutine(spawnDelay(data, it, ray1, ray2));
 

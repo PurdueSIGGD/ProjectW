@@ -63,7 +63,6 @@ public class Ability_RockLeap : CooldownAbility {
 		} else {// called if player hit or not grounded
 			spawn = GameObject.Instantiate(itemToSpawnAlt, spawnPosition + transform.TransformDirection(spawnOffset), transform.rotation);
 			OnSpellSpawned(spawn);
-			Debug.Log("Not grounded");
 		}
 	}
 
@@ -121,7 +120,6 @@ public class Ability_RockLeap : CooldownAbility {
 			} else if (Physics.SphereCast (root, checkGroundWidth, Vector3.down, out hitInfo, checkGroundDistance, playerLayer) )
 			{
 				sendSpawnData (2);
-				Debug.Log("Player hit");
 
 				rp.velocity = new Vector3 (-rp.velocity.x, 2, -rp.velocity.z);
 				landing = false;
