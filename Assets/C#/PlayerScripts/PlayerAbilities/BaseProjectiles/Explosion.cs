@@ -15,6 +15,8 @@ public class Explosion : MonoBehaviour {
     public float sourcePlayerDamageMultiplier;
     public float sourcePlayerForceMultiplier;
 
+    public bool hitSameTeam = false;
+
     private ArrayList hitHittables;
 
     // Use this for initialization
@@ -31,6 +33,7 @@ public class Explosion : MonoBehaviour {
             if ((ps = hit.transform.GetComponentInParent<PlayerStats>())) {
                 //print(ps);
                 if (ps.gameObject == sourcePlayer.gameObject) isSourcePlayer = true;
+                if (!isSourcePlayer && !hitSameTeam && ps.teamIndex == sourcePlayer.GetComponent<PlayerStats>().teamIndex && ps.teamIndex != -1) continue; // dont hit players on same team
             }
             Rigidbody r;
             if ((r = hit.transform.GetComponent<Rigidbody>()) != null && !r.GetComponent<Projectile>()) {
@@ -53,11 +56,17 @@ public class Explosion : MonoBehaviour {
                     if (ps) {
                         target = ps.transform;
                     }
+					// If distance is 0, damage factor is 1. If distance is r, damage factor is 0.
+					float damageFactor = (-1 * Vector3.Distance(hit.transform.position, transform.position) / range) + 1;
+					//print ("Damage Factor " + damageFactor);
                     HitManager.HitClientside(new HitArguments(((Component)hit.transform.gameObject.GetComponentInParent<IHittable>()).gameObject, sourcePlayer.GetComponentInParent<PlayerStats>().gameObject)
-                        .withDamage( (isSourcePlayer ? sourcePlayerDamageMultiplier : 1) * ((maxDamage/Vector3.Distance(target.position, transform.position)) + minDamage))
+						.withDamage( (isSourcePlayer ? sourcePlayerDamageMultiplier : 1) * (((maxDamage - minDamage)*damageFactor) + minDamage))
                         .withDamageType(damageType)
                         .withEffect(effect)
-                        .withEffectDuration(effectDuration));
+                        .withEffectDuration(effectDuration)
+						.withHitSameTeam(hitSameTeam));
+					//Debug.DrawLine (hit.transform.position, transform.position, Color.red, 10);
+					//print ("Hitting the player " + target + ", and the object " + hit.transform + " with damage " + ((maxDamage/Vector3.Distance(hit.transform.position, transform.position) + 1) + minDamage));
                     hitHittables.Add(h);
                 }
 
@@ -73,14 +82,21 @@ public class Explosion : MonoBehaviour {
 		//print(hits.size);
         foreach (RaycastHit hitBetween in hits)
         {
+			// All exceptions for explosions
+			// If the object is what we are targeting
 			if (hitBetween.transform == hit.transform)
 				continue;
             Collider c;
+			// If the object is a trigger
 			if ((c = hitBetween.transform.GetComponent<Collider> ()) && c.isTrigger)
 				continue;
-			if (hitBetween.transform.GetComponentInParent<PlayerStats> ()) 
+			if (hitBetween.transform.GetComponentInParent<PlayerStats> ()) {
 				continue;
-				Debug.DrawLine(transform.position, hitBetween.point, Color.red, 10);
+				//Debug.DrawLine (transform.position, hitBetween.point, Color.red, 10);
+			}
+			// If the object is in the nocollide layer
+			if (hitBetween.transform.gameObject.layer == 12)
+				continue;
 			//print (hitBetween.transform);
 			return false;
         }

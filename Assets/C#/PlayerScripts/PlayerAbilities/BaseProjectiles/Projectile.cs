@@ -18,6 +18,7 @@ public class Projectile : MonoBehaviour {
     public float lifetime = 10;
     public PlayerEffects.Effects effect;
     public float effectDuration = 3;
+    public bool hitSameTeam = false;
     public float currentVelocity = 0;
 
     private bool hasHit;
@@ -25,7 +26,7 @@ public class Projectile : MonoBehaviour {
     //private GameObject hitPlayer;
 
     void Start() {
-        Invoke("DestroyMe", lifetime);
+		Invoke("DestroyMe", lifetime);
         currentVelocity = this.GetComponent<Rigidbody>().velocity.magnitude;
     }
 
@@ -42,6 +43,7 @@ public class Projectile : MonoBehaviour {
         if (!sourcePlayer) return; // Shouldn't collide with anything that isn't a source player
         if ((ps = col.GetComponentInParent<PlayerStats>())) {
             if (ps.gameObject == sourcePlayer.gameObject) return;
+            if (!hitSameTeam && ps.teamIndex == sourcePlayer.GetComponent<PlayerStats>().teamIndex && ps.teamIndex != -1) return; // dont hit players on same team
         }
         /* ACTIONS TO TAKE POST-HIT */
 
@@ -51,11 +53,13 @@ public class Projectile : MonoBehaviour {
                 .withDamage(damage)
                 .withDamageType(damageType)
                 .withEffect(effect)
-                .withEffectDuration(effectDuration));
+                .withEffectDuration(effectDuration)
+                .withHitSameTeam(hitSameTeam));
         }
 
         if (dieOnHit) {
             if (explodeParticles) {
+				trailParticles.Stop ();
                 ParticleSystem.MainModule m = trailParticles.main;
                 m.loop = false;
                 trailParticles.transform.parent = null;
