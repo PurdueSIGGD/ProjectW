@@ -27,6 +27,8 @@ public class Ability_ProjectileSpawner : Ability_ObjectSpawner
         {
             r.AddForce(spawnAngle * spawnSpeed);
         }
+        Quaternion up = (Quaternion.Euler(r.GetComponent<Rigidbody>().velocity));
+        r.transform.LookAt(r.transform.position + r.GetComponent<Rigidbody>().velocity, up.eulerAngles);
         OnSpellSpawned(spawn);
     }
 }
