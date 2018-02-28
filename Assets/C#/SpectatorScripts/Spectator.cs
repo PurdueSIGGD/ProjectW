@@ -9,6 +9,7 @@ public class Spectator : NetworkBehaviour {
     public float moveSpeed = 1;
     private Rigidbody myRigid;
     private SpectatorUIController uiController;
+    private Animator scoreboardAnimator;
 
     // UI Stuff
     public bool isPaused;
@@ -21,8 +22,9 @@ public class Spectator : NetworkBehaviour {
     void Start () {
         myRigid = this.GetComponent<Rigidbody>();
         uiController = GameObject.FindObjectOfType<SpectatorUIController>();
-       
-      
+        scoreboardAnimator = GameObject.FindObjectOfType<Scoreboard>().GetComponent<Animator>();
+
+
         if (isLocalPlayer)
         {
             myParticles.Pause();
@@ -32,7 +34,7 @@ public class Spectator : NetworkBehaviour {
 			isPaused = !shouldBeLocked;
 
         } else {
-            GameObject.Destroy(myCamera);
+			myCamera.SetActive (false);
         }
         
 	}
@@ -61,6 +63,8 @@ public class Spectator : NetworkBehaviour {
             if (pause) {
                 TogglePause();
             }
+            bool scoreboard = Input.GetAxis("Scoreboard") > 0;
+            scoreboardAnimator.SetBool("Showing", scoreboard);
 
             if (isPaused) {
 
@@ -71,7 +75,7 @@ public class Spectator : NetworkBehaviour {
                 float mouseY = Input.GetAxis("Mouse Y");
                 float up = Input.GetAxis("Jump");
                 float down = Input.GetAxis("Crouch");
-
+               
 
                 float newX = transform.rotation.eulerAngles.x + (mouseY * Time.deltaTime);
                 //We do some fancy math to ensure 0 < newX < 360, nothing more
@@ -145,18 +149,31 @@ public class Spectator : NetworkBehaviour {
     }
     public void ExitServer() {
         if (isServer) {
-            NetworkServer.DisconnectAll();
-        } else {
-            Network.Disconnect();
-            MasterServer.UnregisterHost();
-            NetworkServer.RemoveExternalConnection(this.connectionToServer.connectionId);
+			//NetworkServer.DisconnectAll();
+			ProjectWNetworkManager networkManager = GameObject.FindObjectOfType<ProjectWNetworkManager> ();
+			networkManager.StopClient ();
+			NetworkManager.Shutdown ();
+			//networkManager.StopServer ();
+
+
+		} else {
+			GameObject.FindObjectOfType<ProjectWNetworkManager> ().StopClient ();
         }
      
     }
 	
 	public void JoinServer() {
         // Called by the network manager when we join a server, only happens on the server side
-        RpcJoinServer(GameObject.FindObjectOfType<ProjectWGameManager>().teams);
+		StartCoroutine(JoinServerAttempt());
+	}
+	public IEnumerator JoinServerAttempt() {
+		ProjectWGameManager gameManager = GameObject.FindObjectOfType<ProjectWGameManager>();
+		if (gameManager.teams.Length == 0) {
+			yield return new WaitForSeconds (0.5f);
+			StartCoroutine (JoinServerAttempt ());
+		} else {
+			RpcJoinServer(gameManager.teams);
+		}
 	}
     [ClientRpc]
     public void RpcJoinServer(ProjectWGameManager.Team[] teams)
@@ -169,6 +186,17 @@ public class Spectator : NetworkBehaviour {
         }
     }
     public void Spectate() {
-		// Nothing
-	}
+        // Nothing
+    }
+    [ClientRpc]
+    public void RpcGameOver(ProjectWGameManager.Winner winner)
+    {
+        Time.timeScale = 0.3f;
+        uiController.GameOver(winner);
+    }
+    [ClientRpc]
+    public void RpcGameReset()
+    {
+        Time.timeScale = 1;
+    }
 }
