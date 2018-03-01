@@ -5,32 +5,22 @@ using UnityEngine;
 
 public class Ability_ProjectileSpawner : Ability_ObjectSpawner
 {
-	public float horizontalRotationOffset; //Degree rotation of aim angle in horizontal plane, Right is positive
 	public float verticalRotationOffset; //Degree rotation of aim angle in the y direction
 
 	public override void SpawnSpell(PlayerComponent.Buf data) {
 		Vector3 spawnAngle = data.vectorList[0];
 		Vector3 spawnPosition = data.vectorList[1];
 
-		float nPhi, nZ, nX, theta, nTheta;
+		float nPhi;
 
 		nPhi = Mathf.Max(Mathf.Acos (spawnAngle.y) + (90 - verticalRotationOffset) * Mathf.PI / 180, Mathf.PI / 2);
 
 		Vector3 rotated = new Vector3(spawnAngle.x , 0, spawnAngle.z);
 		rotated = Vector3.Normalize (rotated);
 
-		theta = Mathf.Acos (spawnAngle.x) * Mathf.Sign(Mathf.Asin(spawnAngle.z));
-		nTheta = theta + (-horizontalRotationOffset) * Mathf.PI / 180;
-
-		nX = Mathf.Cos (nTheta);
-		nZ = Mathf.Sin (nTheta);
-
-
-		rotated = new Vector3(nX , 0, nZ);
 		rotated = Vector3.Normalize (rotated) * -Mathf.Cos(nPhi);
 
 		rotated.y = Mathf.Sin (nPhi);
-
 		// Spawn our spell in the place the server told us
 		// However if we are the client, we don't wait for that luxury.
 		GameObject spawn = GameObject.Instantiate(itemToSpawn, spawnPosition + transform.TransformDirection(spawnOffset), transform.rotation);
