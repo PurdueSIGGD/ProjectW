@@ -2459,11 +2459,11 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
-  m_StereoMirrorMode: 0
 --- !u!23 &23511060587991462
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -2473,6 +2473,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2488,6 +2489,7 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -2505,6 +2507,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2520,6 +2523,7 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -3093,7 +3097,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 4738656710400100}
   spawnOffset: {x: 0, y: 0, z: 0}
   aimAngle: {fileID: 4421330956186678}
-  spawnSpeed: 300
+  spawnSpeed: 450
   horizontalRotationOffset: 0
   verticalRotationOffset: 20
 --- !u!114 &114093100155554272
@@ -3155,6 +3159,9 @@ MonoBehaviour:
   cameraSlider: {fileID: 4441937693489626}
   deathTarget: {fileID: 4101970800040188}
   rotator: {fileID: 4272697417821866}
+  disabled: 0
+  bot: -1
+  playerId: 0
   sensitivityy: 0.05
 --- !u!114 &114215353596440494
 MonoBehaviour:
@@ -3186,7 +3193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magicDraw: 70
   cooldown: 3
-  itemToSpawn: {fileID: 1496745958171024, guid: 148b285af3ed05d459af00a04bea71c8,
+  itemToSpawn: {fileID: 1496745958171024, guid: c4f41121996a27e4eb36788f591f1dc4,
     type: 2}
   spawnPoint: {fileID: 4738656710400100}
   spawnOffset: {x: 0, y: 0, z: 0}
@@ -3194,7 +3201,7 @@ MonoBehaviour:
   spawnSpeed: 0
   numSpawns: 7
   spawnRange: 10
-  delay: 0.2
+  delay: 0.15
 --- !u!114 &114343825485260518
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3244,7 +3251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicDraw: 35
-  cooldown: 2
+  cooldown: 0.5
   spawnRange: 10
   itemToSpawn: {fileID: 1496745958171024, guid: 148b285af3ed05d459af00a04bea71c8,
     type: 2}
@@ -3380,6 +3387,7 @@ MonoBehaviour:
   magicMax: 100
   death: 0
   teamIndex: -1
+  teamColor: {r: 1, g: 0, b: 0, a: 1}
   playerName: 
   classIndex: -1
   deathSounds:
@@ -3388,6 +3396,7 @@ MonoBehaviour:
   - {fileID: 1229230672039204, guid: fefeeacd706d9564ea14ded6bc6b3b1a, type: 2}
   hitSound: {fileID: 82787702486171828}
   hitAnimator: {fileID: 0}
+  lastHitPlayerId: 0
 --- !u!114 &114944165981954688
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3559,6 +3568,7 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -3574,6 +3584,7 @@ SkinnedMeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -3655,6 +3666,7 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -3670,6 +3682,7 @@ SkinnedMeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
