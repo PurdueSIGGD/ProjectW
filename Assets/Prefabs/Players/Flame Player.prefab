@@ -3096,7 +3096,6 @@ MonoBehaviour:
   spawnOffset: {x: 0, y: 0, z: 0}
   aimAngle: {fileID: 4421330956186678}
   spawnSpeed: 300
-  horizontalRotationOffset: 0
   verticalRotationOffset: 0
 --- !u!114 &114093100155554272
 MonoBehaviour:
@@ -3334,7 +3333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 1432412828435146}
   magicBar: {fileID: 1047071788827470}
-  health: 100
+  health: 75
   healthMax: 100
   magic: 100
   magicMax: 100
