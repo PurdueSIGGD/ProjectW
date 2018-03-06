@@ -5,12 +5,12 @@ using UnityEngine;
 public class Flamethrower : Expanding_Projectile {
 
     private ArrayList hasHitThem = new ArrayList();
-    private bool hasHit;
+    private bool hitThem;
 
     void OnTriggerEnter(Collider col)
     {
         /* CHECKS FOR HIT VALIDIDTY */
-        if (hasHit && dieOnHit) return; // We only want to hit one object... for some reason it collides multiple times before destroying itself
+        if (hitThem && dieOnHit) return; // We only want to hit one object... for some reason it collides multiple times before destroying itself
         if (col.isTrigger) return; // Only want our own trigger effects
         PlayerStats ps;
         if (!sourcePlayer) return; // Shouldn't collide with anything that isn't a source player
@@ -21,7 +21,7 @@ public class Flamethrower : Expanding_Projectile {
         }
         /* ACTIONS TO TAKE POST-HIT */
 
-        hasHit = true;
+        hitThem = true;
         if (col.GetComponentInParent<IHittable>() != null && !hasHitThem.Contains(ps))
         {
             HitManager.HitClientside(HitManager.HitVerificationMethod.projectile, new HitArguments(((Component)col.gameObject.GetComponentInParent<IHittable>()).gameObject, sourcePlayer.GetComponentInParent<PlayerStats>().gameObject)
