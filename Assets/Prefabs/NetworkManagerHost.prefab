@@ -143,6 +143,7 @@ MonoBehaviour:
   matchMaker: {fileID: 0}
   lobbyCamera: {fileID: 0}
   teamItems: []
+  botItems: []
   mapSelect: 0
   gameModeSelect: 0
   gamemodeOptions: []
