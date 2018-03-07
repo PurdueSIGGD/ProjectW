@@ -3139,7 +3139,7 @@ MonoBehaviour:
   spawnSpeed: 80
   FlameThrowerEffect: {fileID: 1871423504282668, guid: 9d38a8de225786044b35013d6b41228b,
     type: 2}
-  lifetime: 0.9
+  lifetime: 0.7
 --- !u!114 &114127821173740640
 MonoBehaviour:
   m_ObjectHideFlags: 1
