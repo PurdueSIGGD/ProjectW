@@ -73,9 +73,9 @@ public abstract class PlayerInput : PlayerComponent {
 						if (myData.useAbilities [i]) {
 							//print(myBase.myAbilities[i] is Ability_SpeedBoost);
 							myBase.myAbilities [i].ClientsUse ();
-							if (myBase.myAbilities[i].abilityIcon != null) myBase.myAbilities [i].abilityIcon.myAnimator.SetBool ("Key", true);
+							if (myBase.myAbilities[i].abilityIcon != null && myBase.myAbilities[i].abilityIcon.myAnimator != null) myBase.myAbilities [i].abilityIcon.myAnimator.SetBool ("Key", true);
 						} else {
-							if (myBase.myAbilities[i].abilityIcon != null) myBase.myAbilities [i].abilityIcon.myAnimator.SetBool ("Key", false);
+							if (myBase.myAbilities[i].abilityIcon != null && myBase.myAbilities[i].abilityIcon.myAnimator != null) myBase.myAbilities [i].abilityIcon.myAnimator.SetBool ("Key", false);
 						}
                     }
                 }
