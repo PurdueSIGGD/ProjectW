@@ -55,7 +55,7 @@ MonoBehaviour:
   manager: {fileID: 0}
   showGUI: 1
   offsetX: 0
-  offsetY: 500
+  offsetY: 0
 --- !u!114 &114989715467682310
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -143,6 +143,7 @@ MonoBehaviour:
   matchMaker: {fileID: 0}
   lobbyCamera: {fileID: 0}
   teamItems: []
+  botItems: []
   mapSelect: 0
   gameModeSelect: 0
   gamemodeOptions: []
