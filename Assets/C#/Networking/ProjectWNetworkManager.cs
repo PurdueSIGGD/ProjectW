@@ -6,6 +6,7 @@ using UnityEngine.Networking.NetworkSystem;
 
 public class ProjectWNetworkManager : NetworkManager {
     public GameObject lobbyCamera;
+	public GameObject playerPrefabs;
 
 	// START GAME SERVER SETTINGS
 	public ProjectWGameManager.Team[] teamItems;
@@ -24,7 +25,9 @@ public class ProjectWNetworkManager : NetworkManager {
         if (lobbyCamera != null) {
             lobbyCamera.SetActive(true);
         }
-
+		foreach (GameObject playerPrefab in playerPrefabs.GetComponent<PrefabHolder>().prefabs) {
+			ClientScene.RegisterPrefab (playerPrefab);
+		}
     }
 
 
