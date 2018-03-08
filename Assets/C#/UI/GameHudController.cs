@@ -9,5 +9,7 @@ public class GameHudController : MonoBehaviour {
 	public RectTransform magicBar;
 	public Animator hitMarker;
     public Image[] teamColoredImages;
+	public GameObject abilityItemPrefab;
+	public RectTransform abilityHolder;
 
 }
