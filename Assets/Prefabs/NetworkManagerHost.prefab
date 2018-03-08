@@ -55,7 +55,7 @@ MonoBehaviour:
   manager: {fileID: 0}
   showGUI: 1
   offsetX: 0
-  offsetY: 500
+  offsetY: 0
 --- !u!114 &114989715467682310
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d90004cc7205ca840a23e2643548be8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_NetworkPort: 4718
+  m_NetworkPort: 4719
   m_ServerBindToIP: 0
   m_ServerBindAddress: 
   m_NetworkAddress: localhost
@@ -82,10 +82,7 @@ MonoBehaviour:
   m_PlayerSpawnMethod: 0
   m_OfflineScene: MainMenu
   m_OnlineScene: TestScene
-  m_SpawnPrefabs:
-  - {fileID: 1178322756519792, guid: ec4c44f5e4d2f424a876680f5671399d, type: 2}
-  - {fileID: 1063181966065962, guid: f804b1090b443784fb88ce2f19a28406, type: 2}
-  - {fileID: 1860666892717170, guid: 30eb4c1a1bd224c44a0d4ac296483ba9, type: 2}
+  m_SpawnPrefabs: []
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -142,7 +139,10 @@ MonoBehaviour:
   isNetworkActive: 0
   matchMaker: {fileID: 0}
   lobbyCamera: {fileID: 0}
+  playerPrefabs: {fileID: 1415988781203326, guid: 1b835cf9884ce1b428c88869c7ccaea6,
+    type: 2}
   teamItems: []
+  botItems: []
   mapSelect: 0
   gameModeSelect: 0
   gamemodeOptions: []
