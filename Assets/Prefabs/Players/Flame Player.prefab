@@ -3339,7 +3339,7 @@ MonoBehaviour:
   healthBar: {fileID: 1432412828435146}
   magicBar: {fileID: 1047071788827470}
   health: 75
-  healthMax: 100
+  healthMax: 75
   magic: 100
   magicMax: 100
   death: 0
