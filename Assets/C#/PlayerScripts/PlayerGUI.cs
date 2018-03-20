@@ -79,6 +79,8 @@ public class PlayerGUI : PlayerComponent {
             // Set health and magic in GUI
             healthBar.localScale = new Vector2(myBase.myStats.health / myBase.myStats.healthMax, 1);
             magicBar.localScale = new Vector2(myBase.myStats.magic / myBase.myStats.magicMax, 1);
+            gameHud.healthText.text = "" + Mathf.Ceil(myBase.myStats.health);
+            gameHud.magicText.text = "" + Mathf.Ceil(myBase.myStats.magic);
 
             // Update current abilities and their cooldowns
         }

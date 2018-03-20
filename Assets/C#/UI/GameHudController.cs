@@ -11,5 +11,7 @@ public class GameHudController : MonoBehaviour {
     public Image[] teamColoredImages;
 	public GameObject abilityItemPrefab;
 	public RectTransform abilityHolder;
+    public Text healthText;
+    public Text magicText;
 
 }

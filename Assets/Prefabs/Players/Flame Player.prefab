@@ -3088,7 +3088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b91a0a0674f3c14f8416a158944a208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magicDraw: 35
+  magicDraw: 20
   abilitySprite: {fileID: 21300000, guid: c2426558336128546859e6f79f80c895, type: 3}
   abilityIcon: {fileID: 0}
   cooldown: 0.3
@@ -3339,7 +3339,7 @@ MonoBehaviour:
   healthBar: {fileID: 1432412828435146}
   magicBar: {fileID: 1047071788827470}
   health: 75
-  healthMax: 100
+  healthMax: 75
   magic: 100
   magicMax: 100
   death: 0

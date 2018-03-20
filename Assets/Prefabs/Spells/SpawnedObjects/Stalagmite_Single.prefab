@@ -117,8 +117,8 @@ MonoBehaviour:
   pushForce: 4000
   range: 2
   verticalPushForce: 0.4
-  minDamage: 10
-  maxDamage: 20
+  minDamage: 30
+  maxDamage: 40
   sourcePlayerDamageMultiplier: 0
   sourcePlayerForceMultiplier: 0
   hitSameTeam: 0
@@ -130,7 +130,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1496745958171024}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 1
   m_Height: 2
   m_Direction: 1
