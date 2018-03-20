@@ -191,4 +191,5 @@ public class PlayerGUI : PlayerComponent {
     {
         if (gameHud) gameHud.gameObject.SetActive(false);
     }
+   
 }
