@@ -3255,11 +3255,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9865a68ccb60784080f263aac2eb9f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magicDraw: 35
+  magicDraw: 15
   abilitySprite: {fileID: 21300000, guid: 58a436188edadb84ab8a4c56a0844b0b, type: 3}
   abilityIcon: {fileID: 0}
-  cooldown: 0.5
-  spawnRange: 10
+  cooldown: 1.5
+  spawnRange: 8
   itemToSpawn: {fileID: 1496745958171024, guid: 148b285af3ed05d459af00a04bea71c8,
     type: 2}
   spawnOffset: {x: 0, y: 0, z: 0}
@@ -3389,8 +3389,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 1432412828435146}
   magicBar: {fileID: 1047071788827470}
-  health: 200
-  healthMax: 200
+  health: 160
+  healthMax: 160
   magic: 100
   magicMax: 100
   death: 0

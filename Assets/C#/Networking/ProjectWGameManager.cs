@@ -58,11 +58,13 @@ public class ProjectWGameManager : NetworkBehaviour {
         // Update deaths
         scoreBoard.UpdateScore(playerId, 0, 0, 1);
 
-        if (lastHitPlayer != playerId && lastHitPlayer != 0)
-        { // 0 means no hit, dont want to kill ourselves
-            // Update kills
-            scoreBoard.UpdateScore(lastHitPlayer, 1, 0, 0);
-        }
+		if (lastHitPlayer != playerId && lastHitPlayer != 0) { // 0 means no hit, dont want to kill ourselves
+			// Update kills
+			scoreBoard.UpdateScore (lastHitPlayer, 1, 0, 0);
+		} else {
+			// If you killed yourself, oopsie daysies you screwed up
+			scoreBoard.UpdateScore (playerId, -1, 0, 0);
+		}
 
 
         //print("Adding death as player: " + playerid);
