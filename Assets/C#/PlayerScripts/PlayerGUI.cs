@@ -24,6 +24,9 @@ public class PlayerGUI : PlayerComponent {
 	private RectTransform magicBar;
 	[HideInInspector]
     public SpectatorUIController spectatorUIController;
+	[HideInInspector]
+	public AbilityIcon[] abilityIcons;
+	private string[] abilityText = { "M1", "M2", "E", "Q" };
 
     public override void PlayerComponent_Start() {
         if (isLocalPlayer && !myBase.myInput.isBot()) {
@@ -39,6 +42,33 @@ public class PlayerGUI : PlayerComponent {
             {
                 i.color = myBase.myStats.teamColor;
             }
+			// Ability icon spawning
+			for (int i = 0; i < gameHud.abilityHolder.childCount; i++) {
+				GameObject.Destroy (gameHud.abilityHolder.GetChild (i).gameObject);
+			}
+			abilityIcons = new AbilityIcon[myBase.myAbilities.Length];
+			int abilityIndex = 0;
+			foreach (PlayerAbility ability in myBase.myAbilities) {
+				AbilityIcon icon = GameObject.Instantiate (gameHud.abilityItemPrefab, gameHud.abilityHolder).GetComponent<AbilityIcon>();
+				foreach (Image i in icon.teamColoredImages)
+				{
+					i.color = myBase.myStats.teamColor;
+				}
+				//print ("ability: " + ability + " icon: " + icon);
+				icon.keyText.text = abilityText [abilityIndex];
+				if (ability.abilitySprite != null) {
+					icon.abilityIcon.sprite = ability.abilitySprite;
+					icon.backgroundImage.sprite = ability.abilitySprite;
+				}
+				abilityIcons [abilityIndex] = icon;
+				ability.SetIcon (icon);
+				CooldownAbility cooldownAbility;
+				if (ability is CooldownAbility && (cooldownAbility = (CooldownAbility)ability)) {
+					cooldownAbility.SetIcon (icon);
+				}
+				abilityIndex++;
+			}
+
             UnPauseGame();
         } else {
 			
@@ -49,6 +79,8 @@ public class PlayerGUI : PlayerComponent {
             // Set health and magic in GUI
             healthBar.localScale = new Vector2(myBase.myStats.health / myBase.myStats.healthMax, 1);
             magicBar.localScale = new Vector2(myBase.myStats.magic / myBase.myStats.magicMax, 1);
+            gameHud.healthText.text = "" + Mathf.Ceil(myBase.myStats.health);
+            gameHud.magicText.text = "" + Mathf.Ceil(myBase.myStats.magic);
 
             // Update current abilities and their cooldowns
         }

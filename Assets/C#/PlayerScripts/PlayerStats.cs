@@ -158,8 +158,10 @@ public class PlayerStats : PlayerComponent, IHittable {
     [Command]
     public void CmdDeath() {
         //print("adding death");
-        GameObject.FindObjectOfType<ProjectWGameManager>().AddDeath(this.gameObject, Network.player.ToString());
-        death = true;
+		if (!death) {
+			GameObject.FindObjectOfType<ProjectWGameManager>().AddDeath(this.gameObject, Network.player.ToString());
+			death = true;
+		}
     }
     // Called to kill a bot, only by a server
     public void ServerDeath() {
