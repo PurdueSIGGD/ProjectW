@@ -199,4 +199,9 @@ public class Spectator : NetworkBehaviour {
     {
         Time.timeScale = 1;
     }
+    [ClientRpc]
+    public void RpcAddKillfeedItem(int killer, int weaponIndex, int victim) {
+        if (isLocalPlayer)
+            GameObject.FindObjectOfType<SpectatorUIController>().AddKillfeedItem(-1000, killer, weaponIndex, victim);
+    }
 }
