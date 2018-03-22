@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ability_GrassTrapSpawner : Ability_ObjectSpawner
+public class Ability_GrassTrapSpawner : Ability_PointSpawner
 {
 
     public float effectDuration = 3;
@@ -20,7 +20,7 @@ public class Ability_GrassTrapSpawner : Ability_ObjectSpawner
 
     public override void SpawnSpell(PlayerComponent.Buf data)
     {
-        Vector3 spawnPosition = data.vectorList[1];
+        Vector3 spawnPosition = data.vectorList[0];
 
         GameObject spawn = GameObject.Instantiate(itemToSpawn, spawnPosition + transform.TransformDirection(spawnOffset), transform.rotation);
         OnSpellSpawned(spawn);
