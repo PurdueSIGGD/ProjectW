@@ -133,8 +133,8 @@ GameObject:
   - component: {fileID: 114545205896067940}
   - component: {fileID: 114071815810301062}
   - component: {fileID: 114243021831766576}
-  - component: {fileID: 114489930009884718}
   - component: {fileID: 114109049076275788}
+  - component: {fileID: 114372201813387670}
   - component: {fileID: 114944165981954688}
   m_Layer: 8
   m_Name: Flame Player
@@ -3230,7 +3230,7 @@ MonoBehaviour:
   playerCameras:
   - {fileID: 20965489431237814}
   playerListener: {fileID: 81921070716458134}
---- !u!114 &114489930009884718
+--- !u!114 &114372201813387670
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -3238,19 +3238,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1063181966065962}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 130a28f25163f5f4ea8baea852dc8628, type: 3}
+  m_Script: {fileID: 11500000, guid: 8dfe34f6606d9634f93b50b578d7ad30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magicDraw: 50
-  cooldown: 2.5
-  itemToSpawn: {fileID: 1438183760616718, guid: 22be10b4d3f513342ac08c2400e9f926,
+  magicDraw: 30
+  cooldown: 6
+  spawnRange: 5
+  itemToSpawn: {fileID: 1202288753365156, guid: da055d081a0aad3409ee3cebce11dbba,
     type: 2}
-  spawnPoint: {fileID: 4821307134836208}
-  spawnOffset: {x: 0, y: 0, z: 0}
-  aimAngle: {fileID: 4421330956186678}
-  spawnSpeed: 100
-  amountToSpawn: 12
-  spreadMultiplier: 0.6
+  spawnOffset: {x: 0, y: 0.04, z: 0}
+  spawnSpeed: 0
+  groundSpawn: 1
+  mineLifetime: 6
+  damage: 20
 --- !u!114 &114539094655183288
 MonoBehaviour:
   m_ObjectHideFlags: 1
