@@ -5,8 +5,6 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class PlayerStats : PlayerComponent, IHittable {
-    public GameObject healthBar;
-    public GameObject magicBar;
     [SyncVar]
     public float health = 100;
     public float healthMax = 100;
@@ -35,12 +33,12 @@ public class PlayerStats : PlayerComponent, IHittable {
     public override void PlayerComponent_Start() {
         
         if (!isLocalPlayer) {
-            magicBar.SetActive(false);
-            healthBar.SetActive(false);
+            //magicBar.SetActive(false);
+            //healthBar.SetActive(false);
         } else {
             // once we have a GUI
-            healthBar.SetActive(false);
-            magicBar.SetActive(false);
+            //healthBar.SetActive(false);
+            //magicBar.SetActive(false);
         }
     }
     
@@ -169,8 +167,8 @@ public class PlayerStats : PlayerComponent, IHittable {
     public void Death() {
         // Take care of death on each client's end
 
-        healthBar.SetActive(false);
-        magicBar.SetActive(false);
+        //healthBar.SetActive(false);
+        //magicBar.SetActive(false);
 
         foreach (Rigidbody r in GetComponentsInChildren<Rigidbody>()) {
             r.isKinematic = false;

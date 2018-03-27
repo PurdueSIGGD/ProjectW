@@ -8,6 +8,8 @@ public abstract class CooldownAbility : PlayerAbility {
      * Abstract class for repeated instances of cooldowns.
      * You do not have to override the 'use' metod as a child of this, all you have to do is implement use_CooledDown
      */
+    private static string DEFAULT_CAST_STRING = "Cast";
+
     public float cooldown = 1; // Cooldown, in seconds
     private float lastUse = -100; // Last time we used it, in seconds;
 	private bool hasNotified;
@@ -25,11 +27,12 @@ public abstract class CooldownAbility : PlayerAbility {
 					this.abilityIcon.myAnimator.SetFloat ("CooldownSpeed", 1 / cooldown);
 					string extra = UnityEngine.Random.Range (0.0f, 1.0f) < 0.001 ? "1" : ""; // ;)
 					this.abilityIcon.myAnimator.SetTrigger ("Cooldown" + extra);
-				}
+                }
                 myBase.myStats.changeMagic(-1 * magicDraw);
                 lastUse = Time.time;
                 hasNotified = false;
                 use_UseAbility();
+                this.myBase.myAnimator.SetTrigger(GetCastAnimation());
             } else {
                 // Not enough magic
             }
@@ -44,6 +47,13 @@ public abstract class CooldownAbility : PlayerAbility {
         }
         cooldown_Update();
     }
+
+
+    // Override this if you want to have a different cast animation
+    public virtual String GetCastAnimation() {
+        return DEFAULT_CAST_STRING;
+    }
+
     /* these are the other methods you must implement. Can be empty, there for your own benefit */
     public abstract void use_UseAbility(); // Called when the input says to use this ability
     public abstract void cooldown_Start(); // Called when the object is alive
