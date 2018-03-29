@@ -3091,14 +3091,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicDraw: 40
-  cooldown: 0.3
+  abilitySprite: {fileID: 21300000, guid: 4028d3e3371e7784a8c3dc01399757a3, type: 3}
+  abilityIcon: {fileID: 0}
+  cooldown: 0.5
   itemToSpawn: {fileID: 1506924135921468, guid: ed40b7ff6a59b3546bac8095c756c0c9,
     type: 2}
   spawnPoint: {fileID: 4738656710400100}
   spawnOffset: {x: 0, y: 0, z: 0}
   aimAngle: {fileID: 4421330956186678}
-  spawnSpeed: 450
-  verticalRotationOffset: 20
+  spawnSpeed: 600
+  verticalRotationOffset: 10
 --- !u!114 &114093100155554272
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3191,6 +3193,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicDraw: 70
+  abilitySprite: {fileID: 21300000, guid: 4ed5e8ff97c6290409defcb3077cef2a, type: 3}
+  abilityIcon: {fileID: 0}
   cooldown: 3
   itemToSpawn: {fileID: 1496745958171024, guid: c4f41121996a27e4eb36788f591f1dc4,
     type: 2}
@@ -3213,6 +3217,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicDraw: 45
+  abilitySprite: {fileID: 21300000, guid: 8efdd9b8a149bfa43a79d7fd9b52a270, type: 3}
+  abilityIcon: {fileID: 0}
   cooldown: 3
   jHeight: 10
   jForward: 4
@@ -3249,9 +3255,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9865a68ccb60784080f263aac2eb9f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magicDraw: 35
-  cooldown: 0.5
-  spawnRange: 10
+  magicDraw: 15
+  abilitySprite: {fileID: 21300000, guid: 58a436188edadb84ab8a4c56a0844b0b, type: 3}
+  abilityIcon: {fileID: 0}
+  cooldown: 1.5
+  spawnRange: 8
   itemToSpawn: {fileID: 1496745958171024, guid: 148b285af3ed05d459af00a04bea71c8,
     type: 2}
   spawnOffset: {x: 0, y: 0, z: 0}
@@ -3367,6 +3375,7 @@ MonoBehaviour:
   desiredTeamIndex: 0
   hudPrefab: {fileID: 1262117317672522, guid: 37522bd2f314560428e5904851d78f03, type: 2}
   spectatorUIController: {fileID: 0}
+  abilityIcons: []
 --- !u!114 &114827118183941698
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3380,8 +3389,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 1432412828435146}
   magicBar: {fileID: 1047071788827470}
-  health: 200
-  healthMax: 100
+  health: 160
+  healthMax: 160
   magic: 100
   magicMax: 100
   death: 0

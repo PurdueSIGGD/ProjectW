@@ -64,5 +64,10 @@ public class PlayerNetworking : PlayerComponent {
         Time.timeScale = 1;
         myBase.myInput.Reset_GameOver();
     }
-    
+    [ClientRpc]
+    public void RpcAddKillfeedItem(int killer, int weaponIndex, int victim) {
+        if (isLocalPlayer)
+            GameObject.FindObjectOfType<SpectatorUIController>().AddKillfeedItem(myBase.myInput.GetPlayerId(), killer, weaponIndex, victim);
+    }
+
 }

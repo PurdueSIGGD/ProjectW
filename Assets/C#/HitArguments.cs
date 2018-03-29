@@ -14,6 +14,7 @@ public class HitArguments {
     public float effectDuration;
 	public float effectDamage;
     public bool hitSameTeam;
+    public int weaponType = 0;
 
 	public HitArguments() {
 		//Debug.LogError ("HitArguments require a target and a source player");
@@ -68,6 +69,11 @@ public class HitArguments {
     public HitArguments withHitSameTeam(bool hitSameTeam)
     {
         this.hitSameTeam = hitSameTeam;
+        return this;
+    }
+    public HitArguments withWeaponType(int weaponType) 
+    {
+        this.weaponType = weaponType;
         return this;
     }
 }

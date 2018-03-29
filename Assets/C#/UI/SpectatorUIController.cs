@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -40,6 +41,12 @@ public class SpectatorUIController : MonoBehaviour {
 
     public PrefabHolder classPrefabHolder;
     public SpriteHolder teamSpriteHolder;
+    public ColorHolder teamColorHolder;
+
+    public RectTransform killfeedHolder;
+    public GameObject killfeeditemPrefab;
+    public Sprite[] killfeedSprites;
+    
 
     // Use this for initialization
     void Start () {
@@ -191,6 +198,58 @@ public class SpectatorUIController : MonoBehaviour {
         foreach (Image i in winnerColors)
         {
             i.color = winner.winnerColor;
+        }
+    }
+    public void AddKillfeedItem(int sourcePlayer, int killer, int weaponIndex, int victim) {
+        string killerText = "";
+        string victimText = "";
+        int killerTeam = -100;
+        int victimTeam = -100;
+        foreach (PlayerInput p in GameObject.FindObjectsOfType<PlayerInput>()) {
+            if (p.GetPlayerId() == killer) {
+                killerText = p.GetComponent<PlayerStats>().playerName;
+                killerTeam = p.GetComponent<PlayerStats>().teamIndex;
+            } else if (p.GetPlayerId() == victim) {
+                victimText = p.GetComponent<PlayerStats>().playerName;
+                victimTeam = p.GetComponent<PlayerStats>().teamIndex;
+            }
+        }
+
+        if (killerTeam == -1) killerTeam = 0;
+        if (victimTeam == -1) victimTeam = 0;
+
+        KillfeedItem item = GameObject.Instantiate(killfeeditemPrefab, killfeedHolder).GetComponent<KillfeedItem>();
+        item.transform.SetSiblingIndex(0);
+        
+        if (killerText == "") {
+            GameObject.Destroy(item.killerText.transform.parent.gameObject);
+        } else {
+            if (sourcePlayer == killer) {
+                item.killerText.fontStyle = FontStyle.Bold;
+                //item.killerText.color = teams[killerTeam].teamColor;
+            }
+            item.killerText.text = killerText;
+            foreach (Image i in item.killerTeamColorImages) {
+                i.color = teams[killerTeam].teamColor;
+            }
+        }
+        if (weaponIndex > killfeedSprites.Length - 1) {
+            Debug.LogWarning("Killfeed item sprite was not found");
+            GameObject.Destroy(item.actionImage.gameObject);
+        } else {
+            item.actionImage.sprite = killfeedSprites[weaponIndex];
+        }
+        if (victimText == "") {
+            GameObject.Destroy(item.victimText.transform.parent.gameObject);
+        } else {
+            if (sourcePlayer == victim) {
+                item.victimText.fontStyle = FontStyle.Bold;
+                //item.victimText.color = teams[victimTeam].teamColor;
+            }
+            item.victimText.text = victimText;
+            foreach (Image i in item.victimTeamColorImages) {
+                i.color = teams[victimTeam].teamColor;
+            }
         }
     }
 

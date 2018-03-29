@@ -14,6 +14,9 @@ public abstract class PlayerAbility : PlayerComponent {
      * If a client notices used has changed, they execute the method and try again.
      */
     public float magicDraw; // Has to be handled in your player ability class. Can be total amt, can be magica per second, etc.
+	public Sprite abilitySprite;
+	[HideInInspector]
+	public AbilityIcon abilityIcon;
 
     private static string USE_METHOD_NAME = "Use";
     
@@ -45,5 +48,9 @@ public abstract class PlayerAbility : PlayerComponent {
     public abstract void ability_Start(); // Called when the object is alive
     public abstract void ability_Update(); // Called once every frame
     public abstract void use();  // Called when either your input or the server tells you to use these
+
+	public void SetIcon(AbilityIcon icon) {
+		abilityIcon = icon;
+	}		
 
 }
