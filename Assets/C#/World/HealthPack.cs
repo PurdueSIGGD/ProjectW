@@ -44,8 +44,8 @@ public class HealthPack : MonoBehaviour{
             // Local damage only
             if ((Component)h != null && ((Component)h).gameObject != null)
             {
-                //Test if health pack is there to give health
-                if (active)
+                //Test if health pack is there to give health and that the player isn't at full health
+                if (active && ((Component)h).GetComponentInParent<PlayerStats>().health != ((Component)h).GetComponentInParent<PlayerStats>().healthMax)
                 {
                     //Hit target with negative damage
                     h.Hit(new HitArguments(this.gameObject, ((Component)h).gameObject)
