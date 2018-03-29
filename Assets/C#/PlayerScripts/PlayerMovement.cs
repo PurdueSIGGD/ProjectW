@@ -27,6 +27,11 @@ public class PlayerMovement : PlayerComponent {
     bool airborne = false;
     bool jump = false;
 
+    public bool isInAir()
+    {
+        return !isGrounded;
+    }
+
     public override void PlayerComponent_Start() {
         startMass = myBase.myRigid.mass;
     }
