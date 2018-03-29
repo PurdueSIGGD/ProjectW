@@ -30,6 +30,8 @@ public class PlayerStats : PlayerComponent, IHittable {
     public Animator hitAnimator; // Assigned in playerGUI
     [HideInInspector]
     public int lastHitPlayerId;
+    [HideInInspector]
+    public int lastHitWeaponType;
     private float lastHitTime;
 
     public override void PlayerComponent_Start() {
@@ -48,8 +50,9 @@ public class PlayerStats : PlayerComponent, IHittable {
         if (hit.sourcePlayerTeam != teamIndex || teamIndex == -1)
         {
             lastHitPlayerId = hit.sourcePlayer.GetComponent<PlayerInput>().GetPlayerId();
-		}
-		lastHitTime = Time.time;
+        }
+        lastHitWeaponType = hit.weaponType;
+        lastHitTime = Time.time;
         changeHealth(-1 * hit.damage);
         if (hit.effect != PlayerEffects.Effects.none) {
             myBase.myEffects.AddEffect(hit);
@@ -158,8 +161,10 @@ public class PlayerStats : PlayerComponent, IHittable {
     [Command]
     public void CmdDeath() {
         //print("adding death");
-        GameObject.FindObjectOfType<ProjectWGameManager>().AddDeath(this.gameObject, Network.player.ToString());
-        death = true;
+		if (!death) {
+			GameObject.FindObjectOfType<ProjectWGameManager>().AddDeath(this.gameObject, Network.player.ToString());
+			death = true;
+		}
     }
     // Called to kill a bot, only by a server
     public void ServerDeath() {

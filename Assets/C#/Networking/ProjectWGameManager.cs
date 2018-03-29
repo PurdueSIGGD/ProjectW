@@ -53,17 +53,23 @@ public class ProjectWGameManager : NetworkBehaviour {
     public void AddDeath(GameObject player, string playerid) {
         if (!isServer) return;
         int lastHitPlayer = player.GetComponent<PlayerStats>().lastHitPlayerId;
+        int lastHitWeapon = player.GetComponent<PlayerStats>().lastHitWeaponType;
         int playerId = player.GetComponent<PlayerInput>().GetPlayerId();
-
+        string victimText = player.name;
+        int victimTeam = player.GetComponent<PlayerStats>().teamIndex;
         // Update deaths
         scoreBoard.UpdateScore(playerId, 0, 0, 1);
 
-        if (lastHitPlayer != playerId && lastHitPlayer != 0)
-        { // 0 means no hit, dont want to kill ourselves
-            // Update kills
-            scoreBoard.UpdateScore(lastHitPlayer, 1, 0, 0);
-        }
+		if (lastHitPlayer != playerId && lastHitPlayer != 0) { // 0 means no hit, dont want to kill ourselves
+			// Update kills
+			scoreBoard.UpdateScore (lastHitPlayer, 1, 0, 0);
+		} else {
+			// If you killed yourself, oopsie daysies you screwed up
+			scoreBoard.UpdateScore (playerId, -1, 0, 0);
+            		lastHitPlayer = -100; // Signify that nobody hit us, dying of natural causes
+		}
 
+        AddKillfeedItem(lastHitPlayer, lastHitWeapon, playerId);
 
         //print("Adding death as player: " + playerid);
         //table.Add(playerid, true);
@@ -261,6 +267,14 @@ public class ProjectWGameManager : NetworkBehaviour {
         source.SendMessage("CmdDeath");
         source.SendMessage("StopGUI");
         //GameObject.Destroy(source);
+    }
+    public void AddKillfeedItem(int killer, int weaponIndex, int victim) {
+        foreach (PlayerNetworking p in GameObject.FindObjectsOfType<PlayerNetworking>()) {
+            p.RpcAddKillfeedItem(killer, weaponIndex, victim);
+        }
+        foreach (Spectator p in GameObject.FindObjectsOfType<Spectator>()) {
+            p.RpcAddKillfeedItem(killer, weaponIndex, victim);
+        }
     }
     public void GameOver(Winner winner)
     {

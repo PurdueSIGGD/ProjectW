@@ -3086,7 +3086,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b91a0a0674f3c14f8416a158944a208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magicDraw: 35
+  magicDraw: 20
+  abilitySprite: {fileID: 21300000, guid: c2426558336128546859e6f79f80c895, type: 3}
+  abilityIcon: {fileID: 0}
   cooldown: 0.3
   itemToSpawn: {fileID: 1506924135921468, guid: 42688b82f5e230a4f936b2b8817fed7e,
     type: 2}
@@ -3209,6 +3211,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicDraw: 50
+  abilitySprite: {fileID: 21300000, guid: 2732df4f1da3b5d40be64c3a347a7ffb, type: 3}
+  abilityIcon: {fileID: 0}
   cooldown: 3
   itemToSpawn: {fileID: 1817249387651284, guid: 291968355faab8848af88615cabf21f4,
     type: 2}
@@ -3361,6 +3365,7 @@ MonoBehaviour:
   desiredTeamIndex: 0
   hudPrefab: {fileID: 1262117317672522, guid: 37522bd2f314560428e5904851d78f03, type: 2}
   spectatorUIController: {fileID: 0}
+  abilityIcons: []
 --- !u!114 &114827118183941698
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3375,7 +3380,7 @@ MonoBehaviour:
   healthBar: {fileID: 1432412828435146}
   magicBar: {fileID: 1047071788827470}
   health: 75
-  healthMax: 100
+  healthMax: 75
   magic: 100
   magicMax: 100
   death: 0
