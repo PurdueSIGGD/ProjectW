@@ -11,7 +11,7 @@ public class JumpPad : MonoBehaviour {
         PlayerMovement m;
         if ((m = col.GetComponentInParent<PlayerMovement>()) != null)
         {
-            m.jumpHeight *= jumpModifier;
+            m.jumpHeight += jumpModifier;
         }
     }
 
@@ -21,7 +21,7 @@ public class JumpPad : MonoBehaviour {
         PlayerMovement m;
         if ((m = col.GetComponentInParent<PlayerMovement>()) != null)
         {
-            m.jumpHeight /= jumpModifier;
+            m.jumpHeight -= jumpModifier;
         }
     }
 }
