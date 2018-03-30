@@ -43,15 +43,39 @@ public class PlayerStats : PlayerComponent, IHittable {
     }
     
     public void Hit(HitArguments hit) {
-        if (hit.sourcePlayerTeam != teamIndex || teamIndex == -1)
-        {
-            lastHitPlayerId = hit.sourcePlayer.GetComponent<PlayerInput>().GetPlayerId();
+		if (hasDeath)
+			return;
+		if (hit.sourcePlayerTeam != teamIndex || teamIndex == -1) {
+        
+			if (hit.sourcePlayer.GetComponent<BasePlayer> ()) {
+				lastHitPlayerId = hit.sourcePlayer.GetComponent<PlayerInput>().GetPlayerId();
+			} else {
+				// Hazard
+				//lastHitPlayerId = this.GetComponent<PlayerInput> ().GetPlayerId ();
+			}
 		}
 		lastHitTime = Time.time;
         changeHealth(-1 * hit.damage);
         if (hit.effect != PlayerEffects.Effects.none) {
             myBase.myEffects.AddEffect(hit);
-        }
+		} 
+		 
+		// Direction hit animations
+		//print(hit.sourcePlayer + " " + hit.hitSameTeam);
+		if (myBase == null || myBase.myAnimator == null || ((teamIndex == -1 ? hit.sourcePlayer == this.gameObject : hit.sourcePlayerTeam == teamIndex) && !hit.hitSameTeam)) {
+			// Ignore these animations
+		} else if (hit.sourcePosition.x == 0 && hit.sourcePosition.y == 0) {
+			// Default to forwards
+			myBase.myAnimator.SetFloat ("HurtDirection_X", 0f);
+			myBase.myAnimator.SetFloat ("HurtDirection_Y", -1f);
+			myBase.myAnimator.SetTrigger ("Hurt");
+		} else {
+			Vector3 diffPosition = Vector3.Normalize(transform.InverseTransformPoint (new Vector3 (hit.sourcePosition.x, transform.position.y, hit.sourcePosition.y)));
+			//print ("Position difference: " + diffPosition);
+			myBase.myAnimator.SetFloat ("HurtDirection_X", diffPosition.x);
+			myBase.myAnimator.SetFloat ("HurtDirection_Y", diffPosition.z * -1);
+			myBase.myAnimator.SetTrigger ("Hurt");
+		}
     }
     public float changeHealth(float f) {
 		if (!isServer && !isLocalPlayer)

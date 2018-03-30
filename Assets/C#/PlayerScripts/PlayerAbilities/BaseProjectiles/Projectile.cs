@@ -48,12 +48,14 @@ public class Projectile : MonoBehaviour {
         /* ACTIONS TO TAKE POST-HIT */
 
         hasHit = true;
+		Rigidbody myRigid = this.GetComponent<Rigidbody> ();
         if (col.GetComponentInParent<IHittable>() != null) {
             HitManager.HitClientside(HitManager.HitVerificationMethod.projectile, new HitArguments(((Component)col.gameObject.GetComponentInParent<IHittable>()).gameObject, sourcePlayer.GetComponentInParent<PlayerStats>().gameObject)
                 .withDamage(damage)
                 .withDamageType(damageType)
                 .withEffect(effect)
-                .withEffectDuration(effectDuration)
+				.withEffectDuration(effectDuration)
+				.withSourcePosition(new Vector3(transform.position.x, transform.position.z) - 3 * new Vector3(myRigid.velocity.x, myRigid.velocity.z))
                 .withHitSameTeam(hitSameTeam));
         }
 
