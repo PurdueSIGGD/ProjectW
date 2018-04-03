@@ -229,6 +229,10 @@ public class Scoreboard : NetworkBehaviour {
             }
             int foundIndex = FindPlayerIndex(p.GetPlayerId());
             PlayerStats ps = p.GetComponent<PlayerStats>();
+			if (p.gameObject.tag != "Player") {
+				Debug.LogWarning ("The player added to the scoreboard does not have the 'Player' tag. Please assign this tag.");
+			}
+
 			if (foundIndex != -1)
             {
                 ScoreboardPlayer foundPlayer = scores.GetItem(foundIndex);

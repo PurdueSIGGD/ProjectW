@@ -471,7 +471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sourcePlayer: {fileID: 0}
-  damage: 8
+  damage: 5
   damageType: 1
   dieOnHit: 1
   explodeParticles: {fileID: 1469220445907016, guid: 30ca49af444dc294fa8644f561470aec,

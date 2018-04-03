@@ -2459,6 +2459,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -3113,6 +3114,8 @@ MonoBehaviour:
   deathTarget: {fileID: 4693968342571442}
   rotator: {fileID: 4760257634039490}
   disabled: 0
+  bot: -1
+  playerId: 0
   sensitivityy: 0.05
 --- !u!114 &114140311681210888
 MonoBehaviour:
@@ -3149,6 +3152,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicDraw: 40
+  abilitySprite: {fileID: 21300000, guid: ecbdf35e05f667b48b92803dc27f31d4, type: 3}
+  abilityIcon: {fileID: 0}
   cooldown: 2
   itemToSpawn: {fileID: 1851383594523318, guid: e4def256446fd1e4d9a8baea3a554847,
     type: 2}
@@ -3168,6 +3173,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicDraw: 30
+  abilitySprite: {fileID: 21300000, guid: 8f1991f6c8ed10c439ea42936cb40917, type: 3}
+  abilityIcon: {fileID: 0}
   cooldown: 0.7
   itemToSpawn: {fileID: 1506924135921468, guid: a5feadc86e06e8049ba4615890a8a74a,
     type: 2}
@@ -3239,6 +3246,7 @@ MonoBehaviour:
   desiredTeamIndex: 0
   hudPrefab: {fileID: 1262117317672522, guid: 37522bd2f314560428e5904851d78f03, type: 2}
   spectatorUIController: {fileID: 0}
+  abilityIcons: []
 --- !u!114 &114413950209045444
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3264,6 +3272,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicDraw: 50
+  abilitySprite: {fileID: 21300000, guid: c7a7aa07575f6644693d59bab698d685, type: 3}
+  abilityIcon: {fileID: 0}
   cooldown: 5
   itemToSpawn: {fileID: 1360844552911466, guid: 0bef239f03de1854da1e03cbc8b9de30,
     type: 2}
@@ -3330,6 +3340,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicDraw: 40
+  abilitySprite: {fileID: 21300000, guid: 99d18c9b44304744a8a53a38aeafd015, type: 3}
+  abilityIcon: {fileID: 0}
   cooldown: 2
   itemToSpawn: {fileID: 1851383594523318, guid: 8aada5f21600d354689f0d39775c8708,
     type: 2}

@@ -113,7 +113,7 @@ public class MainMenuUIController : MonoBehaviour {
         PlayerPrefs.SetString(PlayerPrefStrings.SAVED_IP_TO_CONNECT, ip);
         print("Joining server");
 		networkManager.networkAddress = ip;
-		networkManager.networkPort = 4718;
+		networkManager.networkPort = 4719;
 		networkManager.StartClient ();
         // TODO verify this works
     }

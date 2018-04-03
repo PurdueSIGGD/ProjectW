@@ -56,5 +56,9 @@ public class PlayerEffects : PlayerComponent {
     }
     public void Death() {
         ClearModifiers();
+        // Delete all effects on us
+        foreach (Effect e in transform.GetComponentsInChildren<Effect>()) {
+            GameObject.Destroy(e.gameObject);
+        }
     }
 }
