@@ -30,6 +30,9 @@ public class PlayerStats : PlayerComponent, IHittable {
     public int lastHitPlayerId;
     private float lastHitTime;
 
+	public ParticleSystem aliveParticles;
+	public Rigidbody headMesh;
+
     public override void PlayerComponent_Start() {
         
         if (!isLocalPlayer) {
@@ -201,6 +204,16 @@ public class PlayerStats : PlayerComponent, IHittable {
         myBase.myAnimator.enabled = false;
         myBase.myCollider.enabled = false;
         myBase.myNoFrictionCollider.enabled = false;
+
+		if (this.aliveParticles) {
+			this.aliveParticles.Stop ();
+		}
+		if (this.headMesh) {
+			headMesh.isKinematic = false;
+			headMesh.GetComponent<Collider>().isTrigger = false;
+			headMesh.transform.parent = this.transform;
+			headMesh.AddForce(Vector3.up * 30 + UnityEngine.Random.insideUnitSphere * 30);
+		}
         // Move all parts to the ragdoll layer
         // So it interacts with the world, but not itself
         MoveToLayer(myBase.myAnimator.transform, 10);
