@@ -9,11 +9,13 @@ public class Bamboo : MonoBehaviour {
     public PlayerEffects.Effects effect;
     public float effectDuration = 3;
     private ArrayList hasHit;
+    private bool hitSameTeam;
 
-    public void StartBamboo(Ability_BambooSpawner ability, float cooldown, GameObject sourcePlayer)
+    public void StartBamboo(Ability_BambooSpawner ability, float cooldown, GameObject sourcePlayer, bool hitSameTeam)
     {
         this.ability = ability;
         this.sourcePlayer = sourcePlayer;
+        this.hitSameTeam = hitSameTeam;
         hasHit = new ArrayList();
         Invoke("DestroyMe", cooldown);
     }
@@ -39,8 +41,14 @@ public class Bamboo : MonoBehaviour {
             {
                 if (ps && !hasHit.Contains(ps))
                 {
+                    if (!hitSameTeam && ps.teamIndex == sourcePlayer.GetComponent<PlayerStats>().teamIndex && ps.teamIndex != -1) return; // dont hit players on same team
+
                     hasHit.Add(ps);
-                    HitManager.HitClientside(new HitArguments(r.GetComponentInParent<BasePlayer>().gameObject, sourcePlayer).withDamage(ability.damage).withEffect(effect).withEffectDuration(effectDuration));
+                    HitManager.HitClientside(new HitArguments(r.GetComponentInParent<BasePlayer>().gameObject, sourcePlayer)
+                        .withDamage(ability.damage)
+                        .withEffect(effect)
+                        .withEffectDuration(effectDuration)
+                        .withHitSameTeam(hitSameTeam));
                 }
             }
         }

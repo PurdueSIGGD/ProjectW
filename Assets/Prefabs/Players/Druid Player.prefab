@@ -1176,8 +1176,8 @@ GameObject:
   - component: {fileID: 95284739129859192}
   - component: {fileID: 114894354119719980}
   - component: {fileID: 114332602364004438}
-  - component: {fileID: 114798001436588076}
   - component: {fileID: 114306454195832164}
+  - component: {fileID: 114798001436588076}
   - component: {fileID: 114830021550735674}
   - component: {fileID: 114526925126521440}
   m_Layer: 8
@@ -3072,19 +3072,21 @@ MonoBehaviour:
   magicDraw: 30
   abilitySprite: {fileID: 0}
   abilityIcon: {fileID: 0}
-  cooldown: 5
+  cooldown: 1.5
   spawnRange: 2
   itemToSpawn: {fileID: 1510283606606064, guid: 8816f01ea04c0e94ea11dca540fc2eeb,
     type: 2}
   spawnOffset: {x: -0.65, y: 1, z: 0.2}
   spawnSpeed: 0
   groundSpawn: 1
-  bambooLifetime: 4
+  bambooLifetime: 1
   bambooShootsSpawned: 5
-  damage: 20
+  damage: 40
+  attackDuration: 0.1
   bambooShootToSpawn: {fileID: 1793901477549992, guid: 6efafed88fd1a4f44a6d0160d439aefd,
     type: 2}
   spreadMultiplier: 1
+  hitSameTeam: 0
 --- !u!114 &114332602364004438
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3096,7 +3098,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b91a0a0674f3c14f8416a158944a208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magicDraw: 20
+  magicDraw: 25
   abilitySprite: {fileID: 0}
   abilityIcon: {fileID: 0}
   cooldown: 0.5
@@ -3241,12 +3243,13 @@ MonoBehaviour:
   spawnSpeed: 0
   spellDuration: 1.5
   boostMultiplier: 1
-  maxVelocity: 15
+  maxVelocity: 10
   endVelocity: 8
   verticalForce: 0.32
   initialUpwardVelocity: 4
   pushForce: 2000
   damage: 3
+  hitSameTeam: 0
 --- !u!114 &114830021550735674
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3271,6 +3274,7 @@ MonoBehaviour:
   effectDuration: 3
   trapLifetime: 6
   damage: 10
+  hitSameTeam: 0
 --- !u!114 &114874414058555186
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3377,6 +3381,8 @@ MonoBehaviour:
   hitAnimator: {fileID: 0}
   lastHitPlayerId: 0
   lastHitWeaponType: 0
+  numberOfSummonedObjects: 0
+  poisonStacks: 0
 --- !u!114 &114923434273140994
 MonoBehaviour:
   m_ObjectHideFlags: 1

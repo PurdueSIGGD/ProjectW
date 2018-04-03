@@ -7,8 +7,10 @@ public class Ability_BambooSpawner : Ability_PointSpawner {
     public float bambooLifetime = 4;
     public float bambooShootsSpawned = 5;
     public float damage = 20;
+    public float attackDuration = .1f;
     public GameObject bambooShootToSpawn;
     public float spreadMultiplier;
+    public bool hitSameTeam = false;
 
     private float lastUsage = -100; // Last time we used it, in seconds;
     private bool hasBeenNotified;
@@ -18,7 +20,7 @@ public class Ability_BambooSpawner : Ability_PointSpawner {
         Bamboo b;
         if(b = spawn.GetComponent<Bamboo>())
         {
-            b.StartBamboo(this, this.bambooLifetime, this.GetComponentInParent<PlayerStats>().gameObject);
+            b.StartBamboo(this, this.attackDuration, this.GetComponentInParent<PlayerStats>().gameObject, hitSameTeam);
         }
     }
 

@@ -550,14 +550,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sourcePlayer: {fileID: 0}
-  damage: 10
+  damage: 25
   damageType: 0
   dieOnHit: 1
   explodeParticles: {fileID: 0}
   trailParticles: {fileID: 198424295221118812}
   lifetime: 10
   effect: 7
-  effectDuration: 5
+  effectDuration: 2.5
+  hitSameTeam: 0
   currentVelocity: 0
 --- !u!114 &114766314531054974
 MonoBehaviour:

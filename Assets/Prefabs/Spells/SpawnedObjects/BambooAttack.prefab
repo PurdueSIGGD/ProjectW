@@ -86,7 +86,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sourcePlayer: {fileID: 0}
-  effect: 8
+  effect: 0
+  effectDuration: 0
 --- !u!136 &136785790234161076
 CapsuleCollider:
   m_ObjectHideFlags: 1

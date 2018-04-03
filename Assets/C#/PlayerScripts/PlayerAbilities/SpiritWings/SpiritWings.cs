@@ -9,10 +9,12 @@ public class SpiritWings : MonoBehaviour {
     private float previousBoost;
     private float coolDown = .02f;
 	private float radius = 10;
+    private bool hitSameTeam;
     private Ability_SpiritWingsSpawner ability;
 
-    public void StartSpiritWings(Ability_SpiritWingsSpawner ability, float spellDuration) {
+    public void StartSpiritWings(Ability_SpiritWingsSpawner ability, float spellDuration, bool hitSameTeam) {
         this.ability = ability;
+        this.hitSameTeam = hitSameTeam;
         ability.boostUp();
         Destroy(this.gameObject, spellDuration);
         previousBoost = Time.time;
@@ -31,8 +33,10 @@ public class SpiritWings : MonoBehaviour {
             {
                 if (ps)
                 {
+                    if (!hitSameTeam && ps.teamIndex == sourcePlayer.GetComponent<PlayerStats>().teamIndex && ps.teamIndex != -1) return; // dont hit players on same team
+
                     r.GetComponentInParent<BasePlayer>().myRigid.AddExplosionForce(ability.pushForce, transform.position, radius);
-                    HitManager.HitClientside(new HitArguments(r.GetComponentInParent<BasePlayer>().gameObject, sourcePlayer).withDamage(ability.damage));
+                    HitManager.HitClientside(new HitArguments(r.GetComponentInParent<BasePlayer>().gameObject, sourcePlayer).withDamage(ability.damage).withHitSameTeam(hitSameTeam));
                 }
                 else
                     r.AddExplosionForce(ability.pushForce, transform.position, radius);
