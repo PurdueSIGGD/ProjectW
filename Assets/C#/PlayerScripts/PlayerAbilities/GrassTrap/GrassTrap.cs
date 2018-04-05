@@ -11,23 +11,32 @@ public class GrassTrap : MonoBehaviour {
     public PlayerEffects.Effects effect;
     private float effectDuration = 3;
     private ArrayList hasHit;
+    private bool justSpawned;
 
     public void StartGrassTrap(Ability_GrassTrapSpawner ability, float effectDuration, float cooldown, PlayerStats sourcePlayerStats, bool hitSameTeam)
     {
-        this.ability = ability;
         this.sourcePlayerStats = sourcePlayerStats;
         sourcePlayer = sourcePlayerStats.gameObject;
+        sourcePlayerStats.numberOfSummonedObjects++;
+        this.ability = ability;
         this.effectDuration = effectDuration;
         this.hitSameTeam = hitSameTeam;
         hasHit = new ArrayList();
-        sourcePlayerStats.numberOfSummonedObjects++;
+        justSpawned = true;
     }
 
     void Update()
     {
         if (sourcePlayerStats.numberOfSummonedObjects > 1 || sourcePlayerStats.death)
         {
-            Invoke("DestroyMe", 0);
+            if (!justSpawned)
+            {
+                Invoke("DestroyMe", 0);
+            }
+        }
+        if(justSpawned && sourcePlayerStats.numberOfSummonedObjects <= 1)
+        {
+            justSpawned = false;
         }
     }
 
