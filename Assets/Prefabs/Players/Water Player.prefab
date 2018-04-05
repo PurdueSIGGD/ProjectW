@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: 114569654491593078}
   - component: {fileID: 114453485441763386}
   - component: {fileID: 114777217990805192}
-  - component: {fileID: 114930827434695302}
+  - component: {fileID: 114712189699778492}
   m_Layer: 8
   m_Name: Water Player
   m_TagString: Player
@@ -3260,9 +3260,9 @@ MonoBehaviour:
   spawnPoint: {fileID: 4359170975647424}
   spawnOffset: {x: 0, y: 0, z: 1}
   aimAngle: {fileID: 4912864852820086}
-  spawnSpeed: 150
-  amountToSpawn: 10
-  spreadMultiplier: 5
+  spawnSpeed: 200
+  amountToSpawn: 30
+  spreadMultiplier: 0.2
 --- !u!114 &114607722684190618
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3284,6 +3284,25 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 0.5
   m_InterpolateMovement: 1
+--- !u!114 &114712189699778492
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1185770464893064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b91a0a0674f3c14f8416a158944a208, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magicDraw: 1
+  cooldown: 0.1
+  itemToSpawn: {fileID: 1188098880044138, guid: 03799fe6c5c782e43b1f37878473e14a,
+    type: 2}
+  spawnPoint: {fileID: 4359170975647424}
+  spawnOffset: {x: 0, y: 0, z: 0}
+  aimAngle: {fileID: 4912864852820086}
+  spawnSpeed: 300
 --- !u!114 &114734746205520968
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3380,27 +3399,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8cbb38dd908fcd84da9081acc01f1f27, type: 3}
   - {fileID: 8300000, guid: 2db93970d219f214d92cb6052c2fe7b7, type: 3}
   - {fileID: 8300000, guid: 39bb373d079908443ab2d0bec0f6752d, type: 3}
---- !u!114 &114930827434695302
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1185770464893064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 130a28f25163f5f4ea8baea852dc8628, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  magicDraw: 0
-  cooldown: 1
-  itemToSpawn: {fileID: 1188098880044138, guid: 03799fe6c5c782e43b1f37878473e14a,
-    type: 2}
-  spawnPoint: {fileID: 4359170975647424}
-  spawnOffset: {x: 0, y: 0, z: 0}
-  aimAngle: {fileID: 4912864852820086}
-  spawnSpeed: 400
-  amountToSpawn: 30
-  spreadMultiplier: 0.5
 --- !u!124 &124025349507364424
 Behaviour:
   m_ObjectHideFlags: 1
