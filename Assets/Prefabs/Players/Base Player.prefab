@@ -2990,6 +2990,8 @@ MonoBehaviour:
   hitSound: {fileID: 82697280918638424}
   hitAnimator: {fileID: 0}
   lastHitPlayerId: 0
+  aliveParticles: {fileID: 0}
+  headMesh: {fileID: 0}
 --- !u!114 &114797263445738462
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3098,7 +3100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraRotator: {fileID: 4194826140958816}
-  runSpeed: 7
+  runSpeed: 9
   jumpCooldown: 0.2
   jumpHeight: 300
   airborneSpeedMultiplier: 0.6

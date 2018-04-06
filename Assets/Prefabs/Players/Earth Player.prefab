@@ -2876,6 +2876,8 @@ MonoBehaviour:
   magicDraw: 40
   abilitySprite: {fileID: 21300000, guid: 4028d3e3371e7784a8c3dc01399757a3, type: 3}
   abilityIcon: {fileID: 0}
+  animationTriggerType: 0
+  CAST_STRING: Cast
   cooldown: 0.5
   itemToSpawn: {fileID: 1506924135921468, guid: ed40b7ff6a59b3546bac8095c756c0c9,
     type: 2}
@@ -2995,6 +2997,8 @@ MonoBehaviour:
   magicDraw: 70
   abilitySprite: {fileID: 21300000, guid: 4ed5e8ff97c6290409defcb3077cef2a, type: 3}
   abilityIcon: {fileID: 0}
+  animationTriggerType: 0
+  CAST_STRING: Cast_Down
   cooldown: 3
   itemToSpawn: {fileID: 1496745958171024, guid: c4f41121996a27e4eb36788f591f1dc4,
     type: 2}
@@ -3019,6 +3023,8 @@ MonoBehaviour:
   magicDraw: 45
   abilitySprite: {fileID: 21300000, guid: 8efdd9b8a149bfa43a79d7fd9b52a270, type: 3}
   abilityIcon: {fileID: 0}
+  animationTriggerType: 0
+  CAST_STRING: Cast_Down
   cooldown: 3
   jHeight: 10
   jForward: 4
@@ -3058,6 +3064,8 @@ MonoBehaviour:
   magicDraw: 35
   abilitySprite: {fileID: 21300000, guid: 58a436188edadb84ab8a4c56a0844b0b, type: 3}
   abilityIcon: {fileID: 0}
+  animationTriggerType: 0
+  CAST_STRING: Cast
   cooldown: 0.5
   spawnRange: 10
   itemToSpawn: {fileID: 1496745958171024, guid: 148b285af3ed05d459af00a04bea71c8,
@@ -3119,7 +3127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraRotator: {fileID: 4272697417821866}
-  runSpeed: 7
+  runSpeed: 9
   jumpCooldown: 0.2
   jumpHeight: 300
   airborneSpeedMultiplier: 0.6
