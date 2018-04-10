@@ -340,8 +340,8 @@ MonoBehaviour:
   pushForce: 1000
   range: 3
   verticalPushForce: 1
-  minDamage: 15
-  maxDamage: 30
+  minDamage: 10
+  maxDamage: 25
   sourcePlayerDamageMultiplier: 0
   sourcePlayerForceMultiplier: 1.5
   hitSameTeam: 0

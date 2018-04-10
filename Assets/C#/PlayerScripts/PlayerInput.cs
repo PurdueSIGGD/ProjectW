@@ -74,10 +74,13 @@ public abstract class PlayerInput : PlayerComponent {
                         return;
 
                     for (int i = 0; i < myBase.myAbilities.Length; i++) {
-                        if (myData.useAbilities[i]) {
-                            //print(myBase.myAbilities[i] is Ability_SpeedBoost);
-                            myBase.myAbilities[i].ClientsUse();
-                        }
+						if (myData.useAbilities [i]) {
+							//print(myBase.myAbilities[i] is Ability_SpeedBoost);
+							myBase.myAbilities [i].ClientsUse ();
+							if (myBase.myAbilities[i].abilityIcon != null && myBase.myAbilities[i].abilityIcon.myAnimator != null) myBase.myAbilities [i].abilityIcon.myAnimator.SetBool ("Key", true);
+						} else {
+							if (myBase.myAbilities[i].abilityIcon != null && myBase.myAbilities[i].abilityIcon.myAnimator != null) myBase.myAbilities [i].abilityIcon.myAnimator.SetBool ("Key", false);
+						}
                     }
 
                 }
