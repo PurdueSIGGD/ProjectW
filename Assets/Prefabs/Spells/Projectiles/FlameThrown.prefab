@@ -275,6 +275,11 @@ MonoBehaviour:
   hitSameTeam: 0
   currentVelocity: 0
   expansionRate: 1.4
+  particleEffectForWhenItHitsAWall: {fileID: 1247369035291222, guid: b93abcf64f6e9f84e93417187c915c5f,
+    type: 2}
+  endingParticleEffectLifetime: 1
+  maxEndParticleScale: 1.5
+  endParticleScaleDivisor: 3.5
 --- !u!114 &114969950061348682
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -5,14 +5,17 @@ using UnityEngine;
 public class Ability_FlamethrowerSpawner : Ability_ObjectSpawner {
 
     public GameObject FlameThrowerEffect;
+    private GameObject flameSpawned;
     public float lifetime = 1;
+    public PlayerEffects.Effects effect;
 
     public override void OnSpellSpawned(GameObject spawn)
     {
-        Projectile p;
-        if (p = spawn.GetComponent<Projectile>())
+        Flamethrower f;
+        if (f = spawn.GetComponent<Flamethrower>())
         {
-            p.sourcePlayer = this.gameObject;
+            f.sourcePlayer = this.gameObject;
+            f.initEffect(flameSpawned);
         }
 
     }
@@ -27,14 +30,17 @@ public class Ability_FlamethrowerSpawner : Ability_ObjectSpawner {
         // However if we are the client, we don't wait for that luxury.
         GameObject spawn = GameObject.Instantiate(itemToSpawn, spawnPosition + transform.TransformDirection(spawnOffset), transform.rotation);
         Rigidbody r;
+
+        Quaternion aimAngle = Quaternion.LookRotation(spawnAngle);
+        flameSpawned = GameObject.Instantiate(FlameThrowerEffect, spawnPosition + transform.TransformDirection(spawnOffset), aimAngle);
         if (r = spawn.GetComponent<Rigidbody>())
         {
             r.AddForce(spawnAngle * spawnSpeed);
         }
         OnSpellSpawned(spawn);
 
-        Quaternion aimAngle = Quaternion.LookRotation(spawnAngle);
-        GameObject flameSpawned = GameObject.Instantiate(FlameThrowerEffect, spawnPosition + transform.TransformDirection(spawnOffset), aimAngle);
         Destroy(flameSpawned, lifetime);
+        PlayerStats sourcePlayerStats = GetComponentInParent<PlayerStats>();
+        HitManager.HitClientside(new HitArguments(sourcePlayerStats.gameObject, sourcePlayerStats.gameObject).withEffect(effect).withEffectDuration(cooldown));
     }
 }

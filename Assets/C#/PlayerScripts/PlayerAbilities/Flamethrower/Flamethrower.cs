@@ -6,10 +6,22 @@ public class Flamethrower : Expanding_Projectile {
 
     private ArrayList hasHitThem = new ArrayList();
     private bool hitThem;
+    private GameObject particleEffect;
+    private bool done = false;
+    public GameObject particleEffectForWhenItHitsAWall;
+    public float endingParticleEffectLifetime;
+    public float maxEndParticleScale = 1.5f;
+    public float endParticleScaleDivisor = 3.5f;
+
+    public void initEffect(GameObject e)
+    {
+        particleEffect = e;
+    }
 
     void OnTriggerEnter(Collider col)
     {
         /* CHECKS FOR HIT VALIDIDTY */
+        if (done) return;
         if (hitThem && dieOnHit) return; // We only want to hit one object... for some reason it collides multiple times before destroying itself
         if (col.isTrigger) return; // Only want our own trigger effects
         PlayerStats ps;
@@ -31,6 +43,21 @@ public class Flamethrower : Expanding_Projectile {
                 .withEffectDuration(effectDuration)
                 .withHitSameTeam(hitSameTeam));
             hasHitThem.Insert(hasHitThem.Count, ps);
+        }else
+        {
+            done = true;
+            Destroy(this.particleEffect);
+            Destroy(this.GetComponentInChildren<ParticleSystem>().gameObject, .15f);
+            trailParticles.Stop();
+            GameObject endParticleEffect = GameObject.Instantiate(particleEffectForWhenItHitsAWall, this.transform.position, this.transform.rotation);
+            if (this.transform.localScale.x / endParticleScaleDivisor < maxEndParticleScale)
+            {
+                endParticleEffect.transform.localScale = this.transform.localScale / endParticleScaleDivisor;
+            }
+            else
+                endParticleEffect.transform.localScale = new Vector3(maxEndParticleScale, maxEndParticleScale, maxEndParticleScale);
+            Destroy(endParticleEffect, endingParticleEffectLifetime);
+            Destroy(this.gameObject, endingParticleEffectLifetime);
         }
 
         if (dieOnHit)

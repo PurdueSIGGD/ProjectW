@@ -3133,7 +3133,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicDraw: 7
-  cooldown: 0.15
+  abilitySprite: {fileID: 0}
+  abilityIcon: {fileID: 0}
+  cooldown: 0.12
   itemToSpawn: {fileID: 1185414952224894, guid: 92074bf5a37ba364d98e9d9a0153b3f8,
     type: 2}
   spawnPoint: {fileID: 4515173038685044}
@@ -3143,6 +3145,7 @@ MonoBehaviour:
   FlameThrowerEffect: {fileID: 1871423504282668, guid: 9d38a8de225786044b35013d6b41228b,
     type: 2}
   lifetime: 0.7
+  effect: 0
 --- !u!114 &114127821173740640
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3246,6 +3249,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicDraw: 30
+  abilitySprite: {fileID: 0}
+  abilityIcon: {fileID: 0}
   cooldown: 6
   spawnRange: 5
   itemToSpawn: {fileID: 1202288753365156, guid: da055d081a0aad3409ee3cebce11dbba,
@@ -3395,6 +3400,7 @@ MonoBehaviour:
   hitSound: {fileID: 82787702486171828}
   hitAnimator: {fileID: 0}
   lastHitPlayerId: 0
+  lastHitWeaponType: 0
 --- !u!114 &114944165981954688
 MonoBehaviour:
   m_ObjectHideFlags: 1
