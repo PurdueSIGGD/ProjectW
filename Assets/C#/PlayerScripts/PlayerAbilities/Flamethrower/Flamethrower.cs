@@ -10,8 +10,9 @@ public class Flamethrower : Expanding_Projectile {
     private bool done = false;
     public GameObject particleEffectForWhenItHitsAWall;
     public float endingParticleEffectLifetime;
-    public float maxEndParticleScale = 1.5f;
+    public float maxEndParticleScale = 1.6f;
     public float endParticleScaleDivisor = 3.5f;
+    public float maxDistanceToHaveEndParticleEffect = 7;
 
     public void initEffect(GameObject e)
     {
@@ -43,11 +44,11 @@ public class Flamethrower : Expanding_Projectile {
                 .withEffectDuration(effectDuration)
                 .withHitSameTeam(hitSameTeam));
             hasHitThem.Insert(hasHitThem.Count, ps);
-        }else
+        }else if(this.transform.localScale.x < maxDistanceToHaveEndParticleEffect)
         {
             done = true;
             Destroy(this.particleEffect);
-            Destroy(this.GetComponentInChildren<ParticleSystem>().gameObject, .15f);
+            Destroy(this.GetComponentInChildren<ParticleSystem>().gameObject, .2f);
             trailParticles.Stop();
             GameObject endParticleEffect = GameObject.Instantiate(particleEffectForWhenItHitsAWall, this.transform.position, this.transform.rotation);
             if (this.transform.localScale.x / endParticleScaleDivisor < maxEndParticleScale)
