@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114292516075764502}
   - component: {fileID: 114583663150018644}
   - component: {fileID: 114922577697334354}
-  - component: {fileID: 136008216519494432}
+  - component: {fileID: 65006141894431282}
   m_Layer: 0
   m_Name: RainCloud
   m_TagString: Untagged
@@ -193,7 +193,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1156680482735194}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.57849956, y: 12.46, z: 15.87}
+  m_LocalPosition: {x: 0.57849956, y: 12.76, z: 15.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4704905092108210}
@@ -258,6 +258,18 @@ Transform:
   m_Father: {fileID: 4539142821784248}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &65006141894431282
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1156680482735194}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 7, y: 0.5, z: 7}
+  m_Center: {x: 0, y: -12, z: 0}
 --- !u!114 &114292516075764502
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -319,19 +331,6 @@ MonoBehaviour:
   dmgRate: 0.3
   healRate: 0.3
   damageType: 0
---- !u!136 &136008216519494432
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1156680482735194}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 4
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: -12, z: 0}
 --- !u!198 &198134706746590292
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -391,7 +390,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -621776813
+  randomSeed: -1662745053
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3653,7 +3652,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 741573634
+  randomSeed: 579456875
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -6915,7 +6914,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -977924304
+  randomSeed: 5679359
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -10177,7 +10176,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 863726032
+  randomSeed: 947161939
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -13439,7 +13438,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1783884955
+  randomSeed: 830415195
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -16719,7 +16718,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1463928328
+  randomSeed: 1415118858
   InitialModule:
     serializedVersion: 3
     enabled: 1
