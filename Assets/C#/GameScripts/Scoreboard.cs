@@ -184,7 +184,8 @@ public class Scoreboard : NetworkBehaviour {
                 int playerId = basePlayer.GetComponent<PlayerInput>().GetPlayerId();
                 if (playerId == scoreboardPlayer.id)
                 {
-					scoreboardItem.referredItem = player;
+
+                    scoreboardItem.referredItem = player;
                     teamColor = basePlayer.GetComponent<PlayerStats>().teamColor;
                     if (player.GetComponent<NetworkBehaviour>().isLocalPlayer)
                     {
@@ -193,6 +194,9 @@ public class Scoreboard : NetworkBehaviour {
                         // TODO make it a different color, better
                         scoreboardItem.nameText.color = Color.black;
                     }
+                } else
+                {
+
                 }
 
             }
@@ -203,7 +207,9 @@ public class Scoreboard : NetworkBehaviour {
         }
 		foreach (ScoreboardItem scoreboardItem in parentGroup.GetComponentsInChildren<ScoreboardItem>()) {
 			if (!scores.Find (scoreboardItem.id).found || (scoreboardItem.referredItem != null && !scoreboardItem.referredItem.activeInHierarchy)) {
-				// Delete if not found
+                
+                // Delete if not found
+                print("Destroying scoreboard item " + scores.Find(scoreboardItem.id).found + " " + scoreboardItem.referredItem);
 				GameObject.Destroy(scoreboardItem.gameObject);
 			}
 		}

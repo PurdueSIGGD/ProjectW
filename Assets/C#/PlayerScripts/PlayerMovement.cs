@@ -63,7 +63,14 @@ public class PlayerMovement : PlayerComponent {
     
 
     public void processMovement(PlayerInput.InputData data) {
-      
+
+        // allow physics when stunned
+        airborne = !isGrounded;
+
+        // if stunned, don't allow movement
+        if (this.myBase.myEffects.stunned)
+            return;
+
         if (data.vertical < 0) {
             // If moving backwards, move a wee bit slower
             data.horizontal /= 2;
@@ -94,7 +101,7 @@ public class PlayerMovement : PlayerComponent {
         myBase.myRigid.MovePosition(transform.position + transform.TransformDirection(dirVector) * distanceMultiplier);
         vertical =  data.vertical * myBase.myEffects.runSpeedModifier * myBase.myEffects.timeModifier;
         horizontal = data.horizontal * myBase.myEffects.runSpeedModifier * myBase.myEffects.timeModifier;
-        airborne = !isGrounded;
+        
         jump = data.jump;
         
         

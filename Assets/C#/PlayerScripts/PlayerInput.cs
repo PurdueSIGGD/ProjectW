@@ -69,6 +69,10 @@ public abstract class PlayerInput : PlayerComponent {
                    
                     myBase.myMovement.processMovement(myData);
 
+                    // if stunned, don't allow play to use abilities
+                    if (this.myBase.myEffects.stunned)
+                        return;
+
                     for (int i = 0; i < myBase.myAbilities.Length; i++) {
 						if (myData.useAbilities [i]) {
 							//print(myBase.myAbilities[i] is Ability_SpeedBoost);
@@ -78,6 +82,7 @@ public abstract class PlayerInput : PlayerComponent {
 							if (myBase.myAbilities[i].abilityIcon != null && myBase.myAbilities[i].abilityIcon.myAnimator != null) myBase.myAbilities [i].abilityIcon.myAnimator.SetBool ("Key", false);
 						}
                     }
+
                 }
             }
            
