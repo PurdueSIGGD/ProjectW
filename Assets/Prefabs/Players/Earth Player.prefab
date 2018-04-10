@@ -519,9 +519,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4466192792101258}
   - component: {fileID: 33747502641459748}
-  - component: {fileID: 135480185694696094}
   - component: {fileID: 23610120262137374}
   - component: {fileID: 54053520789987812}
+  - component: {fileID: 64290281244731738}
   m_Layer: 10
   m_Name: Head
   m_TagString: Untagged
@@ -1713,8 +1713,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1472331578663070}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.014, z: 0}
-  m_LocalScale: {x: 0.08573391, y: 0.0857339, z: 0.0857339}
+  m_LocalPosition: {x: 0.005, y: -0.0187, z: 0.0022}
+  m_LocalScale: {x: 0.041331545, y: 0.04133153, z: 0.04133153}
   m_Children: []
   m_Father: {fileID: 4861843423865980}
   m_RootOrder: 1
@@ -2304,7 +2304,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: cce8cc253117a2b41a6ec98b51860fa4, type: 2}
+  - {fileID: 2100000, guid: ddf4b6fd8f73b5e4db0dbdf352ec0a3f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2330,7 +2330,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1472331578663070}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 63644ef4a3f02e14b97b4f714adac311, type: 3}
 --- !u!54 &54039896237616320
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -2526,6 +2526,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!64 &64290281244731738
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1472331578663070}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 63644ef4a3f02e14b97b4f714adac311, type: 3}
 --- !u!65 &65295729210383692
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -3203,6 +3217,7 @@ MonoBehaviour:
   hitSound: {fileID: 82787702486171828}
   hitAnimator: {fileID: 0}
   lastHitPlayerId: 0
+  lastHitWeaponType: 0
   aliveParticles: {fileID: 0}
   headMesh: {fileID: 54053520789987812}
 --- !u!114 &114944165981954688
@@ -3225,18 +3240,6 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1013549861610818}
   m_Enabled: 1
---- !u!135 &135480185694696094
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1472331578663070}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135660303764746160
 SphereCollider:
   m_ObjectHideFlags: 1
