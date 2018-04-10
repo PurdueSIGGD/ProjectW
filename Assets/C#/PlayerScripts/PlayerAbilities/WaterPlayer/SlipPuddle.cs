@@ -17,8 +17,6 @@ public class SlipPuddle : MonoBehaviour {
 
     private void OnTriggerEnter(Collider col)
     {
-        Debug.Log("Enter slip puddle");
-
         /* CHECKS FOR HIT VALIDIDTY */
        
         if (!sourcePlayer) return; // Shouldn't collide with anything that isn't a source player
