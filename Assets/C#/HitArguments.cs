@@ -15,6 +15,7 @@ public class HitArguments {
 	public float effectDamage;
     public bool hitSameTeam;
 	public Vector2 sourcePosition = new Vector2(0,0); // Used for where it comes from
+    public int weaponType = 0;
 
 	public HitArguments() {
 		//Debug.LogError ("HitArguments require a target and a source player");
@@ -75,4 +76,9 @@ public class HitArguments {
 		this.sourcePosition = sourcePosition;
 		return this;
 	}
+    public HitArguments withWeaponType(int weaponType) 
+    {
+        this.weaponType = weaponType;
+        return this;
+    }
 }

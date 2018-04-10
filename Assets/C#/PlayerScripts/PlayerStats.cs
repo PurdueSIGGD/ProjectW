@@ -28,6 +28,8 @@ public class PlayerStats : PlayerComponent, IHittable {
     public Animator hitAnimator; // Assigned in playerGUI
     [HideInInspector]
     public int lastHitPlayerId;
+    [HideInInspector]
+    public int lastHitWeaponType;
     private float lastHitTime;
 
 	public ParticleSystem aliveParticles;
@@ -58,7 +60,7 @@ public class PlayerStats : PlayerComponent, IHittable {
 			}
 		}
 		lastHitTime = Time.time;
-        changeHealth(-1 * hit.damage);
+       changeHealth(-1 * hit.damage);
         if (hit.effect != PlayerEffects.Effects.none) {
             myBase.myEffects.AddEffect(hit);
 		} 
