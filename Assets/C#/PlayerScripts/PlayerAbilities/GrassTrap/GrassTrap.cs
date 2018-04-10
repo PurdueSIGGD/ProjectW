@@ -74,4 +74,30 @@ public class GrassTrap : MonoBehaviour {
             }
         }
     }
+
+    private void OnTriggerExit(Collider col)
+    {
+        if (col.GetComponentInParent<IHittable>() == null)
+            return;
+        PlayerStats ps;
+        if ((ps = col.GetComponentInParent<PlayerStats>()) != null && ps.gameObject == sourcePlayer.gameObject)
+        {
+            return;
+        }
+        else
+        {
+            Rigidbody r;
+            if ((r = col.transform.GetComponent<Rigidbody>()) != null)
+            {
+                if (ps && hasHit.Contains(ps))
+                {
+                    Effect activeEffect;
+                    if((activeEffect = ps.GetComponentInChildren<Effect>()) && activeEffect.effectType == effect)
+                    {
+                        activeEffect.Effect_End(ps.GetComponent<PlayerEffects>());
+                    }
+                }
+            }
+        }
+    }
 }

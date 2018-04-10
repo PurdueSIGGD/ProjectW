@@ -84,5 +84,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5630deac4ecc60c4f9f97f3bbd9b19e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectType: 8
   sourcePlayer: {fileID: 0}
   duration: 10
