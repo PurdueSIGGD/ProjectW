@@ -8,7 +8,9 @@ public abstract class CooldownAbility : PlayerAbility {
      * Abstract class for repeated instances of cooldowns.
      * You do not have to override the 'use' metod as a child of this, all you have to do is implement use_CooledDown
      */
-    private static string DEFAULT_CAST_STRING = "Cast";
+    public enum AnimationType { Trigger, Bool, Float };
+    public AnimationType animationTriggerType = AnimationType.Trigger;
+    public string CAST_STRING = "Cast";
 
     public float cooldown = 1; // Cooldown, in seconds
     private float lastUse = -100; // Last time we used it, in seconds;
@@ -32,7 +34,16 @@ public abstract class CooldownAbility : PlayerAbility {
                 lastUse = Time.time;
                 hasNotified = false;
                 use_UseAbility();
-                this.myBase.myAnimator.SetTrigger(GetCastAnimation());
+                switch (animationTriggerType) {
+                    case AnimationType.Trigger:
+                        this.myBase.myAnimator.SetTrigger(CAST_STRING);
+                        break;
+                    case AnimationType.Bool:
+                        this.myBase.myAnimator.SetBool(CAST_STRING, true);
+                        break;
+                    default:
+                        break;
+                }
             } else {
                 // Not enough magic
             }
@@ -48,11 +59,6 @@ public abstract class CooldownAbility : PlayerAbility {
         cooldown_Update();
     }
 
-
-    // Override this if you want to have a different cast animation
-    public virtual String GetCastAnimation() {
-        return DEFAULT_CAST_STRING;
-    }
 
     /* these are the other methods you must implement. Can be empty, there for your own benefit */
     public abstract void use_UseAbility(); // Called when the input says to use this ability
