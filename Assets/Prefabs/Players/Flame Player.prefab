@@ -104,7 +104,6 @@ GameObject:
   - component: {fileID: 114071815810301062}
   - component: {fileID: 114243021831766576}
   - component: {fileID: 114944165981954688}
-  - component: {fileID: 114532847273338642}
   m_Layer: 8
   m_Name: Flame Player
   m_TagString: Player
@@ -3126,30 +3125,6 @@ MonoBehaviour:
   playerCameras:
   - {fileID: 20965489431237814}
   playerListener: {fileID: 81921070716458134}
---- !u!114 &114532847273338642
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1063181966065962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b91a0a0674f3c14f8416a158944a208, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  magicDraw: 5
-  abilitySprite: {fileID: 21300000, guid: c2426558336128546859e6f79f80c895, type: 3}
-  abilityIcon: {fileID: 0}
-  animationTriggerType: 1
-  CAST_STRING: Cast_Stream
-  cooldown: 0.05
-  itemToSpawn: {fileID: 1506924135921468, guid: 42688b82f5e230a4f936b2b8817fed7e,
-    type: 2}
-  spawnPoint: {fileID: 4177259470080404}
-  spawnOffset: {x: 0, y: 0, z: 0}
-  aimAngle: {fileID: 4421330956186678}
-  spawnSpeed: 300
-  verticalRotationOffset: 0
 --- !u!114 &114539094655183288
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3288,6 +3263,7 @@ MonoBehaviour:
   hitSound: {fileID: 82787702486171828}
   hitAnimator: {fileID: 0}
   lastHitPlayerId: 0
+  lastHitWeaponType: 0
   aliveParticles: {fileID: 198716169269300930}
   headMesh: {fileID: 54327593990337112}
 --- !u!114 &114944165981954688
