@@ -54,6 +54,7 @@ public class PlayerStats : PlayerComponent, IHittable {
         
 			if (hit.sourcePlayer.GetComponent<BasePlayer> ()) {
 				lastHitPlayerId = hit.sourcePlayer.GetComponent<PlayerInput>().GetPlayerId();
+                myBase.myInput.deathTarget = hit.sourcePlayer.GetComponent<PlayerInput>().deathTargetMe;
 			} else {
 				// Hazard
 				//lastHitPlayerId = this.GetComponent<PlayerInput> ().GetPlayerId ();
@@ -142,6 +143,7 @@ public class PlayerStats : PlayerComponent, IHittable {
         {
             // Reset last hit
             lastHitPlayerId = 0;
+            myBase.myInput.deathTarget = myBase.myInput.deathTargetMe;
         }
         
         if (death && !hasDeath) {

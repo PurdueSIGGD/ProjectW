@@ -5,7 +5,9 @@ using UnityEngine.Networking;
 
 public abstract class PlayerInput : PlayerComponent {
     public Transform cameraSlider;
-    public Transform deathTarget;
+    public Transform deathTarget; // the target we  will look at when we die
+    [HideInInspector]
+    public Transform deathTargetMe; // our own hips
     public Transform rotator;
     private Animator scoreboard;
     public bool disabled;
@@ -35,6 +37,7 @@ public abstract class PlayerInput : PlayerComponent {
     public abstract InputData getData();
     public override void PlayerComponent_Start() {
         scoreboard = GameObject.FindObjectOfType<Scoreboard>().GetComponent<Animator>();
+        deathTargetMe = deathTarget;
     }
     public override void PlayerComponent_Update() {
     }

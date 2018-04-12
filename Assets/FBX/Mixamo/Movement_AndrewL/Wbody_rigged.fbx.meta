@@ -72,6 +72,7 @@ ModelImporter:
     100128: mixamorig:Spine2
     100130: Wbody:RoadKillOut
     100132: //RootNode
+    100134: pSphere1
     400000: mixamorig:Head
     400002: mixamorig:HeadTop_End
     400004: mixamorig:Hips
@@ -139,8 +140,13 @@ ModelImporter:
     400128: mixamorig:Spine2
     400130: Wbody:RoadKillOut
     400132: //RootNode
+    400134: pSphere1
     2100000: lambert1
+    2100002: WizardBody
+    2300000: pSphere1
+    3300000: pSphere1
     4300000: Wbody:RoadKillOut
+    4300002: pSphere1
     7400000: Take 001
     9500000: //RootNode
     13700000: Wbody:RoadKillOut
