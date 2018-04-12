@@ -264,7 +264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sourcePlayer: {fileID: 0}
-  damage: 4
+  damage: 5
   damageType: 0
   dieOnHit: 0
   explodeParticles: {fileID: 0}
@@ -280,6 +280,7 @@ MonoBehaviour:
   endingParticleEffectLifetime: 1
   maxEndParticleScale: 1.5
   endParticleScaleDivisor: 3.5
+  maxDistanceToHaveEndParticleEffect: 7
 --- !u!114 &114969950061348682
 MonoBehaviour:
   m_ObjectHideFlags: 1
