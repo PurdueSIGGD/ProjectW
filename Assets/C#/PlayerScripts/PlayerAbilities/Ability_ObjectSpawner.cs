@@ -34,7 +34,7 @@ public class Ability_ObjectSpawner : CooldownAbility {
     public override void cooldown_Update() {
         
     }
-	public virtual void SpawnSpell(PlayerComponent.Buf data) {
+    public virtual void SpawnSpell(PlayerComponent.Buf data) {
         Vector3 spawnAngle = data.vectorList[0];
         Vector3 spawnPosition = data.vectorList[1];
 

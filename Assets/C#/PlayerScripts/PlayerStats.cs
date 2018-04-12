@@ -30,6 +30,8 @@ public class PlayerStats : PlayerComponent, IHittable {
     public int lastHitPlayerId;
     [HideInInspector]
     public int lastHitWeaponType;
+    public int numberOfSummonedObjects = 0;
+    public int poisonStacks = 0;
     private float lastHitTime;
 
 	public ParticleSystem aliveParticles;
