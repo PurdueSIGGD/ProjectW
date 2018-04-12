@@ -6,8 +6,10 @@ using UnityEngine;
 public abstract class Effect : MonoBehaviour {
 
     PlayerEffects target;
+    public PlayerEffects.Effects effectType;
 	public GameObject sourcePlayer;
     float endTime = -1;
+    [HideInInspector]
     public float duration;
     bool started;
     void Start() {
