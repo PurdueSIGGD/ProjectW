@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 114501238705085032}
   - component: {fileID: 23217428077913230}
   - component: {fileID: 33747946271545838}
+  - component: {fileID: 136635527217430674}
+  - component: {fileID: 114855869036210222}
   m_Layer: 0
   m_Name: BambooShoot
   m_TagString: Untagged
@@ -37,7 +39,7 @@ Transform:
   m_GameObject: {fileID: 1793901477549992}
   m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.05, y: 1, z: 0.05}
+  m_LocalScale: {x: 0.05, y: 1.2, z: 0.05}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -113,3 +115,30 @@ MonoBehaviour:
     i15: 253
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!114 &114855869036210222
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1793901477549992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5627d70113f54d4e8fa348e2d36f1ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourcePlayer: {fileID: 0}
+  effect: 0
+  effectDuration: 0
+--- !u!136 &136635527217430674
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1793901477549992}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 3
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}

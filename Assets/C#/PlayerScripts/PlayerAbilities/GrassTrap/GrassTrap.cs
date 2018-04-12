@@ -86,8 +86,7 @@ public class GrassTrap : MonoBehaviour {
         }
         else
         {
-            Rigidbody r;
-            if ((r = col.transform.GetComponent<Rigidbody>()) != null)
+            if ((col.transform.GetComponent<Rigidbody>()) != null)
             {
                 if (ps && hasHit.Contains(ps))
                 {
