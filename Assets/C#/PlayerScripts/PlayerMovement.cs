@@ -27,6 +27,11 @@ public class PlayerMovement : PlayerComponent {
     bool airborne = false;
     bool jump = false;
 
+    public bool isInAir()
+    {
+        return !isGrounded;
+    }
+
     public override void PlayerComponent_Start() {
         startMass = myBase.myRigid.mass;
     }
@@ -64,6 +69,12 @@ public class PlayerMovement : PlayerComponent {
 
     public void processMovement(PlayerInput.InputData data) {
       
+        if (myBase.myEffects.immobilized)
+        {
+            data.vertical = 0;
+            data.horizontal = 0;
+            data.jump = false;
+        }
         if (data.vertical < 0) {
             // If moving backwards, move a wee bit slower
             data.horizontal /= 2;
