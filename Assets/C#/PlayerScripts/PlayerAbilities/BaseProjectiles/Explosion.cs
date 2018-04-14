@@ -64,7 +64,8 @@ public class Explosion : MonoBehaviour {
                         .withDamageType(damageType)
                         .withEffect(effect)
                         .withEffectDuration(effectDuration)
-						.withHitSameTeam(hitSameTeam));
+						.withHitSameTeam(hitSameTeam)
+						.withSourcePosition(new Vector3(transform.position.x, transform.position.z)));
 					//Debug.DrawLine (hit.transform.position, transform.position, Color.red, 10);
 					//print ("Hitting the player " + target + ", and the object " + hit.transform + " with damage " + ((maxDamage/Vector3.Distance(hit.transform.position, transform.position) + 1) + minDamage));
                     hitHittables.Add(h);

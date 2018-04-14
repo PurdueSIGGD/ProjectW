@@ -51,6 +51,5 @@ public abstract class PlayerAbility : PlayerComponent {
 
 	public void SetIcon(AbilityIcon icon) {
 		abilityIcon = icon;
-	}		
-
+	}	
 }
