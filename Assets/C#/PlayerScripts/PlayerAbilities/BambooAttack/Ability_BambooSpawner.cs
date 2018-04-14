@@ -55,6 +55,16 @@ public class Ability_BambooSpawner : Ability_PointSpawner {
                     string extra = UnityEngine.Random.Range(0.0f, 1.0f) < 0.001 ? "1" : ""; // ;)
                     this.abilityIcon.myAnimator.SetTrigger("Cooldown" + extra);
                 }
+                switch (animationTriggerType) {
+                    case AnimationType.Trigger:
+                        this.myBase.myAnimator.SetTrigger(CAST_STRING);
+                        break;
+                    case AnimationType.Bool:
+                        this.myBase.myAnimator.SetBool(CAST_STRING, true);
+                        break;
+                    default:
+                        break;
+                }
                 myBase.myStats.changeMagic(-1 * magicDraw);
                 lastUsage = Time.time;
                 use_UseAbility();
