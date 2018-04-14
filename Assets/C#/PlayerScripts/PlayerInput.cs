@@ -5,10 +5,13 @@ using UnityEngine.Networking;
 
 public abstract class PlayerInput : PlayerComponent {
     public Transform cameraSlider;
-    public Transform deathTarget;
+    public Transform deathTarget; // the target we  will look at when we die
+    [HideInInspector]
+    public Transform deathTargetMe; // our own hips
     public Transform rotator;
     private Animator scoreboard;
     public bool disabled;
+    private bool lastDeath = false;
 
     [SyncVar]
     public int bot = -1; // Default -1 for player
@@ -35,6 +38,7 @@ public abstract class PlayerInput : PlayerComponent {
     public abstract InputData getData();
     public override void PlayerComponent_Start() {
         scoreboard = GameObject.FindObjectOfType<Scoreboard>().GetComponent<Animator>();
+        deathTargetMe = deathTarget;
     }
     public override void PlayerComponent_Update() {
     }
@@ -48,8 +52,16 @@ public abstract class PlayerInput : PlayerComponent {
             scoreboard.SetBool("Showing", myData.scoreboard);
             if (myBase.myStats.death)
             {
+                if (!lastDeath) cameraSlider.LookAt(deathTarget);
+                lastDeath = true;
                 // take care of camera
-                cameraSlider.LookAt(deathTarget);
+                Quaternion targetRotation = Quaternion.LookRotation(deathTarget.transform.position - cameraSlider.position);
+
+                // Smoothly rotate towards the target point.
+                cameraSlider.rotation = Quaternion.Slerp(cameraSlider.rotation, targetRotation, 5 * Time.deltaTime);
+            } else {
+                lastDeath = false;
+
             }
             if (myBase.myGUI.isPaused) {
                 // Empty inputs

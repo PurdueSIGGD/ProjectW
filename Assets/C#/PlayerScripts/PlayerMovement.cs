@@ -126,11 +126,11 @@ public class PlayerMovement : PlayerComponent {
         Vector3 root = transform.position + Vector3.up * 0.3f;
 #if UNITY_EDITOR
         // helper to visualise the ground check ray in the scene view
-        Debug.DrawLine(root, transform.position + (Vector3.down * checkGroundDistance));
-        Debug.DrawLine(root + Vector3.forward * checkGroundWidth, transform.position + (Vector3.down * checkGroundDistance));
-        Debug.DrawLine(root + Vector3.left * checkGroundWidth, transform.position + (Vector3.down * checkGroundDistance));
-        Debug.DrawLine(root + Vector3.right * checkGroundWidth, transform.position + (Vector3.down * checkGroundDistance));
-        Debug.DrawLine(root + Vector3.back * checkGroundWidth, transform.position + (Vector3.down * checkGroundDistance));
+        //Debug.DrawLine(root, transform.position + (Vector3.down * checkGroundDistance));
+        //Debug.DrawLine(root + Vector3.forward * checkGroundWidth, transform.position + (Vector3.down * checkGroundDistance));
+        //Debug.DrawLine(root + Vector3.left * checkGroundWidth, transform.position + (Vector3.down * checkGroundDistance));
+        //Debug.DrawLine(root + Vector3.right * checkGroundWidth, transform.position + (Vector3.down * checkGroundDistance));
+        //Debug.DrawLine(root + Vector3.back * checkGroundWidth, transform.position + (Vector3.down * checkGroundDistance));
 #endif
         // We check at all edges of the capsule, to verify we are in range, even at the edges
         if (Physics.Raycast(root, Vector3.down, out hitInfo, checkGroundDistance) ||

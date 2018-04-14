@@ -14,6 +14,7 @@ public class HitArguments {
     public float effectDuration;
 	public float effectDamage;
     public bool hitSameTeam;
+	public Vector2 sourcePosition = new Vector2(0,0); // Used for where it comes from
     public int weaponType = 0;
 
 	public HitArguments() {
@@ -71,6 +72,10 @@ public class HitArguments {
         this.hitSameTeam = hitSameTeam;
         return this;
     }
+	public HitArguments withSourcePosition(Vector2 sourcePosition) {
+		this.sourcePosition = sourcePosition;
+		return this;
+	}
     public HitArguments withWeaponType(int weaponType) 
     {
         this.weaponType = weaponType;
