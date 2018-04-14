@@ -11,6 +11,7 @@ public abstract class PlayerInput : PlayerComponent {
     public Transform rotator;
     private Animator scoreboard;
     public bool disabled;
+    private bool lastDeath = false;
 
     [SyncVar]
     public int bot = -1; // Default -1 for player
@@ -51,8 +52,16 @@ public abstract class PlayerInput : PlayerComponent {
             scoreboard.SetBool("Showing", myData.scoreboard);
             if (myBase.myStats.death)
             {
+                if (!lastDeath) cameraSlider.LookAt(deathTarget);
+                lastDeath = true;
                 // take care of camera
-                cameraSlider.LookAt(deathTarget);
+                Quaternion targetRotation = Quaternion.LookRotation(deathTarget.transform.position - cameraSlider.position);
+
+                // Smoothly rotate towards the target point.
+                cameraSlider.rotation = Quaternion.Slerp(cameraSlider.rotation, targetRotation, 5 * Time.deltaTime);
+            } else {
+                lastDeath = false;
+
             }
             if (myBase.myGUI.isPaused) {
                 // Empty inputs

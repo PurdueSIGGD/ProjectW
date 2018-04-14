@@ -2973,6 +2973,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraSlider: {fileID: 4912461126437930}
   deathTarget: {fileID: 4267486809222222}
+  deathTargetMe: {fileID: 0}
   rotator: {fileID: 4194826140958816}
   disabled: 0
   bot: -1
@@ -2990,7 +2991,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 95930156305070112}
-  m_ParameterSendBits: 2047
+  m_ParameterSendBits: 1023
   param0: 
   param1: 
   param2: 
@@ -3025,6 +3026,8 @@ MonoBehaviour:
   hitAnimator: {fileID: 0}
   lastHitPlayerId: 0
   lastHitWeaponType: 0
+  numberOfSummonedObjects: 0
+  poisonStacks: 0
   aliveParticles: {fileID: 0}
   headMesh: {fileID: 54750598140963626}
 --- !u!114 &114797263445738462
@@ -3050,6 +3053,7 @@ MonoBehaviour:
   runSpeedModifier: 1
   magicRegenModifier: 1
   stunned: 0
+  immobilized: 0
 --- !u!114 &114801520852274544
 MonoBehaviour:
   m_ObjectHideFlags: 1

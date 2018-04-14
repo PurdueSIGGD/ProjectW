@@ -33,8 +33,9 @@ public class PlayerStats : PlayerComponent, IHittable {
     public int numberOfSummonedObjects = 0;
     public int poisonStacks = 0;
     private float lastHitTime;
+    private float hurtCooldown;
 
-	public ParticleSystem aliveParticles;
+    public ParticleSystem aliveParticles;
 	public Rigidbody headMesh;
 
     public override void PlayerComponent_Start() {
@@ -48,15 +49,31 @@ public class PlayerStats : PlayerComponent, IHittable {
             //magicBar.SetActive(false);
         }
     }
-    
+    [ClientRpc]
+    public void RpcSetDeathTarget(int playerId) {
+        foreach (GameObject g in GameObject.FindGameObjectsWithTag("Player")) {
+            PlayerInput p = g.GetComponent<PlayerInput>();
+            if (p.GetPlayerId() == playerId) {
+                myBase.myInput.deathTarget = p.deathTargetMe;
+                return;
+            }
+        }
+        print("Could not find death target with id " + playerId);
+    }
+    [ClientRpc]
+    public void RpcClearDeathTarget() {
+        myBase.myInput.deathTarget = myBase.myInput.deathTargetMe;
+    }
     public void Hit(HitArguments hit) {
 		if (hasDeath)
 			return;
 		if (hit.sourcePlayerTeam != teamIndex || teamIndex == -1) {
         
 			if (hit.sourcePlayer.GetComponent<BasePlayer> ()) {
-				lastHitPlayerId = hit.sourcePlayer.GetComponent<PlayerInput>().GetPlayerId();
-                myBase.myInput.deathTarget = hit.sourcePlayer.GetComponent<PlayerInput>().deathTargetMe;
+                int playerId = hit.sourcePlayer.GetComponent<PlayerInput>().GetPlayerId();
+                lastHitPlayerId = playerId;
+                RpcSetDeathTarget(playerId);
+                //myBase.myInput.deathTarget = hit.sourcePlayer.GetComponent<PlayerInput>().deathTargetMe;
 			} else {
 				// Hazard
 				//lastHitPlayerId = this.GetComponent<PlayerInput> ().GetPlayerId ();
@@ -70,20 +87,20 @@ public class PlayerStats : PlayerComponent, IHittable {
 		 
 		// Direction hit animations
 		//print(hit.sourcePlayer + " " + hit.hitSameTeam);
-		if (myBase == null || myBase.myAnimator == null || ((teamIndex == -1 ? hit.sourcePlayer == this.gameObject : hit.sourcePlayerTeam == teamIndex) && !hit.hitSameTeam)) {
+        
+		if (myBase == null || myBase.myAnimator == null || ((teamIndex == -1 ? hit.sourcePlayer == this.gameObject : hit.sourcePlayerTeam == teamIndex) && !hit.hitSameTeam) || Time.time - hurtCooldown < 0.1f) {
 			// Ignore these animations
 		} else if (hit.sourcePosition.x == 0 && hit.sourcePosition.y == 0) {
-			// Default to forwards
-			myBase.myAnimator.SetFloat ("HurtDirection_X", 0f);
-			myBase.myAnimator.SetFloat ("HurtDirection_Y", -1f);
-			myBase.myAnimator.SetTrigger ("Hurt");
+            // Default to forwards
+            RpcHurtDirection(0, -1f);
+            hurtCooldown = Time.time;
 		} else {
 			Vector3 diffPosition = Vector3.Normalize(transform.InverseTransformPoint (new Vector3 (hit.sourcePosition.x, transform.position.y, hit.sourcePosition.y)));
-			//print ("Position difference: " + diffPosition);
-			myBase.myAnimator.SetFloat ("HurtDirection_X", diffPosition.x);
-			myBase.myAnimator.SetFloat ("HurtDirection_Y", diffPosition.z * -1);
-			myBase.myAnimator.SetTrigger ("Hurt");
-		}
+            //print ("Position difference: " + diffPosition);
+            //Debug.DrawLine(transform.position, transform.position + new Vector3(hit.sourcePosition.x, 0, hit.sourcePosition.y), Color.blue, 10f);
+            RpcHurtDirection(diffPosition.x, diffPosition.z * -1);
+            hurtCooldown = Time.time;
+        }
     }
     public float changeHealth(float f) {
 		if (!isServer && !isLocalPlayer)
@@ -145,7 +162,7 @@ public class PlayerStats : PlayerComponent, IHittable {
         {
             // Reset last hit
             lastHitPlayerId = 0;
-            myBase.myInput.deathTarget = myBase.myInput.deathTargetMe;
+            RpcClearDeathTarget();
         }
         
         if (death && !hasDeath) {
@@ -247,7 +264,12 @@ public class PlayerStats : PlayerComponent, IHittable {
 		this.gameObject.SetActive (false);
 		this.transform.position = Vector3.zero;
 	}
-  
+    [ClientRpc]
+    public void RpcHurtDirection(float x, float y) {
+        myBase.myAnimator.SetFloat("HurtDirection_X", x);
+        myBase.myAnimator.SetFloat("HurtDirection_Y", y);
+        myBase.myAnimator.SetTrigger("Hurt");
+    }
 
 
 }

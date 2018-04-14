@@ -3067,6 +3067,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraSlider: {fileID: 4441937693489626}
   deathTarget: {fileID: 4731058841655148}
+  deathTargetMe: {fileID: 0}
   rotator: {fileID: 4272697417821866}
   disabled: 0
   bot: -1
@@ -3132,6 +3133,7 @@ MonoBehaviour:
   runSpeedModifier: 1
   magicRegenModifier: 1
   stunned: 0
+  immobilized: 0
 --- !u!114 &114545205896067940
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3144,7 +3146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 95394880317659640}
-  m_ParameterSendBits: 2047
+  m_ParameterSendBits: 1023
   param0: 
   param1: 
   param2: 
@@ -3282,6 +3284,8 @@ MonoBehaviour:
   hitAnimator: {fileID: 0}
   lastHitPlayerId: 0
   lastHitWeaponType: 0
+  numberOfSummonedObjects: 0
+  poisonStacks: 0
   aliveParticles: {fileID: 198716169269300930}
   headMesh: {fileID: 54327593990337112}
 --- !u!114 &114944165981954688
@@ -3843,7 +3847,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.000000011001248, y: 0.08114636, z: -0.000000049360096}
+  m_ConnectedAnchor: {x: 0.0000000043655746, y: 0.081146404, z: 0.000000031664968}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: -1}
   m_TwistLimitSpring:
