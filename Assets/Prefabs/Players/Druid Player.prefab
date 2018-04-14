@@ -1819,7 +1819,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1037535817554126}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0.0211, z: 0.0017}
+  m_LocalPosition: {x: 0, y: 0.023, z: -0.018}
   m_LocalScale: {x: 0.1492384, y: 0.14923847, z: 0.14923847}
   m_Children: []
   m_Father: {fileID: 4183527737813308}
@@ -4080,14 +4080,14 @@ ParticleSystem:
   moveWithTransform: 2
   moveWithCustomTransform: {fileID: 4375846926239070}
   scalingMode: 0
-  randomSeed: 1262277915
+  randomSeed: -368240352
   InitialModule:
     serializedVersion: 3
     enabled: 1
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 4
+      scalar: 3
       minScalar: 0.5
       maxCurve:
         serializedVersion: 2
@@ -4640,7 +4640,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 500
+      scalar: 200
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -5692,7 +5692,7 @@ ParticleSystem:
     strength:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 0.05
       minScalar: 0.1
       maxCurve:
         serializedVersion: 2
@@ -5813,7 +5813,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 4
+    frequency: 5
     damping: 1
     octaves: 1
     octaveMultiplier: 0.5
@@ -6428,7 +6428,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 3
     type: 1
     collisionMode: 0
