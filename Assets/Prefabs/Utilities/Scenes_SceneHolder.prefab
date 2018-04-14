@@ -58,3 +58,6 @@ MonoBehaviour:
   - image: {fileID: 21300000, guid: 8485c56514cf72147b709f99b0b9f9be, type: 3}
     icon: {fileID: 21300000, guid: 8485c56514cf72147b709f99b0b9f9be, type: 3}
     name: TestSceneBig
+  - image: {fileID: 21300000, guid: 8485c56514cf72147b709f99b0b9f9be, type: 3}
+    icon: {fileID: 21300000, guid: 8485c56514cf72147b709f99b0b9f9be, type: 3}
+    name: WizardCity
