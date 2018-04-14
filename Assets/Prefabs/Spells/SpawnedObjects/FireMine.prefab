@@ -157,7 +157,7 @@ Transform:
   m_GameObject: {fileID: 1202288753365156}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.093988664, y: 0.09398866, z: 0.09398866}
+  m_LocalScale: {x: 0.15, y: 0.1, z: 0.15}
   m_Children:
   - {fileID: 4416535318646324}
   - {fileID: 4090312622167190}
@@ -280,7 +280,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c889ef4859288f646bad8202f14382f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sourcePlayer: {fileID: 0}
+  explodeParticles: {fileID: 1106648479823432, guid: 4f8bab1de2f5b1748863e8bed08ffbbc,
+    type: 2}
 --- !u!198 &198181397877297090
 ParticleSystem:
   m_ObjectHideFlags: 1
