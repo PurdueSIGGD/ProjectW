@@ -3286,7 +3286,7 @@ MonoBehaviour:
   lastHitWeaponType: 0
   numberOfSummonedObjects: 0
   poisonStacks: 0
-  aliveParticles: {fileID: 0}
+  aliveParticles: {fileID: 198823869290023014}
   headMesh: {fileID: 54779334380317682}
 --- !u!114 &114928822110810100
 MonoBehaviour:
