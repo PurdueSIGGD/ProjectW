@@ -3,17 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Ability_BambooSpawner : Ability_PointSpawner {
-
-    public float bambooLifetime = 4;
+    
     public float bambooShootsSpawned = 5;
     public float damage = 20;
     public float attackDuration = .1f;
-    public GameObject bambooShootToSpawn;
     public float spreadMultiplier;
     public bool hitSameTeam = false;
 
     private float lastUsage = -100; // Last time we used it, in seconds;
-    private bool hasBeenNotified;
 
     public override void OnSpellSpawned(GameObject spawn)
     {
@@ -34,11 +31,15 @@ public class Ability_BambooSpawner : Ability_PointSpawner {
             Vector3 t = new Vector3(0,0,0);
             t.x += (float)((Random.Range(0.0f, 1.0f) - .5) * spreadMultiplier);
             t.z += (float)((Random.Range(0.0f, 1.0f) - .5) * spreadMultiplier);
-            GameObject spawn = GameObject.Instantiate(bambooShootToSpawn, spawnPosition + transform.TransformDirection(spawnOffset) + t, transform.rotation);
-            Destroy(spawn, bambooLifetime);
+            if(t.magnitude > spreadMultiplier)
+            {
+                float mag = t.magnitude;
+                t.x /= mag;
+                t.z /= mag;
+            }
+            GameObject spawn = GameObject.Instantiate(itemToSpawn, spawnPosition + transform.TransformDirection(spawnOffset) + t, transform.rotation);
+            OnSpellSpawned(spawn);
         }
-        GameObject newSpawn = GameObject.Instantiate(itemToSpawn, spawnPosition + transform.TransformDirection(spawnOffset), transform.rotation);
-        OnSpellSpawned(newSpawn);
     }
 
     public override void use()
@@ -66,7 +67,6 @@ public class Ability_BambooSpawner : Ability_PointSpawner {
                 }
                 myBase.myStats.changeMagic(-1 * magicDraw);
                 lastUsage = Time.time;
-                hasBeenNotified = false;
                 use_UseAbility();
             }
             else
