@@ -34,7 +34,7 @@ public class Ability_ObjectSpawner : CooldownAbility {
     public override void cooldown_Update() {
         
     }
-	public virtual void SpawnSpell(PlayerComponent.Buf data) {
+    public virtual void SpawnSpell(PlayerComponent.Buf data) {
         Vector3 spawnAngle = data.vectorList[0];
         Vector3 spawnPosition = data.vectorList[1];
 
@@ -67,7 +67,7 @@ public class Ability_ObjectSpawner : CooldownAbility {
 			// Find the first object colliding in front of us, aim at that if necessary
             Vector3 localAngle = aimAngle.forward; // aim forward by default
 			RaycastHit[] hits = Physics.RaycastAll (aimAngle.position, aimAngle.forward * 100);
-			Debug.DrawRay(aimAngle.position, aimAngle.forward * 100, Color.green, 10);
+			//Debug.DrawRay(aimAngle.position, aimAngle.forward * 100, Color.green, 10);
 			foreach (RaycastHit h in hits) {
 				PlayerStats tmpSts;
 				if (tmpSts = h.transform.GetComponentInParent<PlayerStats> ()) {
@@ -81,7 +81,7 @@ public class Ability_ObjectSpawner : CooldownAbility {
 				localAngle = Vector3.Normalize(h.point - spawnPoint.position);
 				break;
 			}
-			Debug.DrawRay(spawnPoint.position, localAngle * 100, Color.red, 10);
+			//Debug.DrawRay(spawnPoint.position, localAngle * 100, Color.red, 10);
             Vector3 localPosition = spawnPoint.position;
             Buf buf = new Buf();
             buf.methodName = OBJECT_SPAWN_METHOD_NAME;
