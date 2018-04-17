@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sourcePlayer: {fileID: 0}
-  damage: 5
+  damage: 1
   damageType: 2
   dieOnHit: 1
   explodeParticles: {fileID: 0}
