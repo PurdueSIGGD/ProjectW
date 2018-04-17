@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sourcePlayer: {fileID: 0}
-  damage: -10
+  damage: -5
   damageType: 0
   dieOnHit: 1
   explodeParticles: {fileID: 1693323158208894, guid: e3e47dc42fa40f942876cbf1f9bf903d,

@@ -326,11 +326,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sourcePlayer: {fileID: 0}
-  damage: 10
-  heal: 10
+  damage: 5
+  heal: 5
   dmgRate: 0.3
   healRate: 0.3
-  damageType: 0
+  damageType: 2
 --- !u!198 &198134706746590292
 ParticleSystem:
   m_ObjectHideFlags: 1

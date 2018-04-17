@@ -4435,11 +4435,8 @@ MonoBehaviour:
   parentGroup: {fileID: 224592255082057904}
   scoreboardItemPrefab: {fileID: 1633393401083812, guid: 31cb16ba04d656e45b02bb1de0f470b0,
     type: 2}
-  classSpritePrefabHolder:
-  - {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  classSpritePrefabHolder: {fileID: 114163339834625012, guid: 1ef86634c01533f42a68baab3f35514a,
+    type: 2}
 --- !u!114 &114883996139564998
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class Scoreboard : NetworkBehaviour {
     public RectTransform parentGroup; // Scoreboard holder for each item
     public GameObject scoreboardItemPrefab; // Prefab for the scoreboard item we use
-    public Sprite[] classSpritePrefabHolder; // Has all sprites for each character 
+	public SpriteHolder classSpritePrefabHolder; // Has all sprites for each character 
     
     public SyncListScoreboardPlayer scores = new SyncListScoreboardPlayer();
 
@@ -173,7 +173,7 @@ public class Scoreboard : NetworkBehaviour {
             scoreboardItem.deaths.text = scoreboardPlayer.deaths.ToString();
             scoreboardItem.ping.text = scoreboardPlayer.ping;
             scoreboardItem.id = scoreboardPlayer.id;
-            scoreboardItem.classIcon.sprite = classSpritePrefabHolder[scoreboardPlayer.classId];
+			scoreboardItem.classIcon.sprite = classSpritePrefabHolder.sprites[scoreboardPlayer.classId];
 
             Color teamColor = Color.white;
 			// All players are added, including spectators, who are not colored 
