@@ -5,7 +5,6 @@ using UnityEngine;
 public class Ability_FireMineSpawner : Ability_PointSpawner {
 
     public float mineLifetime = 6;
-    public float damage = 20;
     public bool hitSameTeam = false;
 
     public override void OnSpellSpawned(GameObject spawn)
@@ -13,7 +12,7 @@ public class Ability_FireMineSpawner : Ability_PointSpawner {
         FireMine f;
         if (f = spawn.GetComponent<FireMine>())
         {
-            f.StartFireMine(this, this.mineLifetime, this.GetComponentInParent<PlayerStats>(), hitSameTeam);
+            f.StartFireMine(this.mineLifetime, this.GetComponentInParent<PlayerStats>(), hitSameTeam);
         }
     }
 

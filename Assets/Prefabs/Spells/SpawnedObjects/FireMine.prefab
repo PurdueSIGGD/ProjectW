@@ -20,9 +20,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4716939728992820}
   - component: {fileID: 33559871920326174}
-  - component: {fileID: 64693234385738992}
+  - component: {fileID: 114443114569353656}
   - component: {fileID: 23899875529244988}
   - component: {fileID: 114547050171795958}
+  - component: {fileID: 135857401018722450}
   m_Layer: 0
   m_Name: FireMine
   m_TagString: Untagged
@@ -205,20 +206,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1202288753365156}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!64 &64693234385738992
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1202288753365156}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 1
-  m_InflateMesh: 1
-  m_SkinWidth: 0.1
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!108 &108701488949780418
 Light:
   m_ObjectHideFlags: 1
@@ -269,6 +256,38 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114443114569353656
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1202288753365156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 218
+    i1: 5
+    i2: 93
+    i3: 8
+    i4: 26
+    i5: 10
+    i6: 173
+    i7: 52
+    i8: 9
+    i9: 238
+    i10: 60
+    i11: 235
+    i12: 206
+    i13: 17
+    i14: 219
+    i15: 186
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114547050171795958
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -282,6 +301,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explodeParticles: {fileID: 1106648479823432, guid: 4f8bab1de2f5b1748863e8bed08ffbbc,
     type: 2}
+--- !u!135 &135857401018722450
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1202288753365156}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &198181397877297090
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -7,12 +7,11 @@ public class FireMine : MonoBehaviour {
     public GameObject explodeParticles;
     private GameObject sourcePlayer;
     private PlayerStats sourcePlayerStats;
-    private Ability_FireMineSpawner ability;
     private bool justSpawned;
+    private bool hasHit;
 
-    public void StartFireMine(Ability_FireMineSpawner ability, float cooldown, PlayerStats sourcePlayerStats, bool hitSameTeam)
+    public void StartFireMine(float cooldown, PlayerStats sourcePlayerStats, bool hitSameTeam)
     {
-        this.ability = ability;
         this.sourcePlayerStats = sourcePlayerStats;
         this.sourcePlayer = sourcePlayerStats.gameObject;
         sourcePlayerStats.numberOfSummonedObjects++;
@@ -42,30 +41,26 @@ public class FireMine : MonoBehaviour {
 
     private void OnTriggerEnter(Collider col)
     {
-        if (col.GetComponentInParent<IHittable>() == null)
-            return;
+        if (hasHit) { return; }
         PlayerStats ps;
         if ((ps = col.GetComponentInParent<PlayerStats>()) != null && ps.gameObject == sourcePlayer.gameObject)
         {
             return;
         }
-        else
+        if (col.transform.GetComponent<Rigidbody>() != null && col.GetComponentInParent<IHittable>() != null)
         {
-            Rigidbody r;
-            if ((r = col.transform.GetComponent<Rigidbody>()) != null)
+            hasHit = true;
+            sourcePlayerStats.numberOfSummonedObjects--;
+            if (explodeParticles)
             {
-                HitManager.HitClientside(new HitArguments(r.GetComponentInParent<BasePlayer>().gameObject, sourcePlayer).withDamage(ability.damage));
-                if (explodeParticles)
+                GameObject spawn = GameObject.Instantiate(explodeParticles, transform.position, Quaternion.identity);
+                Explosion e;
+                if ((e = spawn.GetComponent<Explosion>()))
                 {
-                    GameObject spawn = GameObject.Instantiate(explodeParticles, transform.position, Quaternion.identity);
-                    Explosion e;
-                    if ((e = spawn.GetComponent<Explosion>()))
-                    {
-                        e.sourcePlayer = sourcePlayer;
-                    }
+                    e.sourcePlayer = sourcePlayer;
                 }
-                DestroyMe();
             }
+            Destroy(this.gameObject);
         }
     }
 }
