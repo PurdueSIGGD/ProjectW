@@ -48,12 +48,16 @@ public class Projectile : MonoBehaviour {
         /* ACTIONS TO TAKE POST-HIT */
 
         hasHit = true;
+		Rigidbody myRigid = this.GetComponent<Rigidbody> ();
         if (col.GetComponentInParent<IHittable>() != null) {
+            //Debug.DrawLine(transform.position, new Vector3((transform.position.x - col.transform.position.x) * -5 + col.transform.position.x, transform.position.y, (transform.position.z - col.transform.position.z) * -5 + col.transform.position.z), Color.blue, 10f);
+            //Debug.DrawLine(new Vector3(transform.position.x, transform.position.y, transform.position.z), new Vector3(transform.position.x, transform.position.y, transform.position.z) - myRigid.velocity, Color.red, 10f);
             HitManager.HitClientside(HitManager.HitVerificationMethod.projectile, new HitArguments(((Component)col.gameObject.GetComponentInParent<IHittable>()).gameObject, sourcePlayer.GetComponentInParent<PlayerStats>().gameObject)
                 .withDamage(damage)
                 .withDamageType(damageType)
                 .withEffect(effect)
-                .withEffectDuration(effectDuration)
+				.withEffectDuration(effectDuration)
+				.withSourcePosition(new Vector3((transform.position.x - col.transform.position.x) * -5 + col.transform.position.x, (transform.position.z - col.transform.position.z) * -5 + col.transform.position.z))
                 .withHitSameTeam(hitSameTeam));
         }
 

@@ -12,9 +12,11 @@ public class PlayerEffects : PlayerComponent {
     // 0 for time slow, 1 for time fast, 2 for run speed, 3 for magic regen slow, 4 for magic regen fast, 5 for stunning 
     public PrefabHolder effectPrefabHolder;
     public GameObject[] effectTypes;
+
     public enum Effects { none, timeSlow, timeFast, runSpeed,
         magicRegenSlow, magicRegenFast, changeHealth,
-        stun, slip };
+        stun, slip, poisonDamage, immobilize };
+
     // Time and speed
     public float timeModifier = 1;
     public float runSpeedModifier = 1;
@@ -22,6 +24,7 @@ public class PlayerEffects : PlayerComponent {
     public float magicRegenModifier = 1;
     // Blocking effects
     public bool stunned = false;
+    public bool immobilized = false;
     
 
     public override void PlayerComponent_Start() {
@@ -39,10 +42,6 @@ public class PlayerEffects : PlayerComponent {
 		Effect effect = eff.GetComponent<Effect> ();
 		effect.duration = hit.effectDuration;
 		effect.sourcePlayer = hit.sourcePlayer;
-		if (effect is Effect_ChangeHealth) {
-			Effect_ChangeHealth e = (Effect_ChangeHealth)effect;
-			e.damage = hit.effectDamage;
-		}
     }
 
     public override void PlayerComponent_Update() {
@@ -55,6 +54,7 @@ public class PlayerEffects : PlayerComponent {
         magicRegenModifier = 1;
         runSpeedModifier = 1;
         stunned = false;
+        immobilized = false;
     }
     public void Death() {
         ClearModifiers();

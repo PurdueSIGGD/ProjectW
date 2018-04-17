@@ -83,11 +83,12 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 115a4794ab65c1c4c9b79c48f605eb21, type: 2}
+  - {fileID: 2100000, guid: b5ec79ca2794a2a45b4d410e92b49ba9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98,6 +99,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -171,8 +173,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59ea0a43f54d96547bce52a28b07c2a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sourcePlayer: {fileID: 0}
-  cooldown: 0
 --- !u!135 &135769893891499690
 SphereCollider:
   m_ObjectHideFlags: 1
