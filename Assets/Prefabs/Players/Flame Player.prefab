@@ -2997,11 +2997,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicDraw: 35
-  abilitySprite: {fileID: 21300000, guid: c2426558336128546859e6f79f80c895, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 84e9a8b594a41a34d8b72aef4774f391, type: 3}
   abilityIcon: {fileID: 0}
   animationTriggerType: 0
   CAST_STRING: Cast
   cooldown: 0.3
+  hasNotified: 0
   itemToSpawn: {fileID: 1506924135921468, guid: 42688b82f5e230a4f936b2b8817fed7e,
     type: 2}
   spawnPoint: {fileID: 4670385806721074}
@@ -3085,11 +3086,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicDraw: 50
-  abilitySprite: {fileID: 21300000, guid: 2732df4f1da3b5d40be64c3a347a7ffb, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 33e82dbe23c73db488d3c1e5e57b6aa6, type: 3}
   abilityIcon: {fileID: 0}
   animationTriggerType: 0
   CAST_STRING: Cast_Down
   cooldown: 3
+  hasNotified: 0
   itemToSpawn: {fileID: 1817249387651284, guid: 291968355faab8848af88615cabf21f4,
     type: 2}
   spawnPoint: {fileID: 4670385806721074}
@@ -3108,11 +3110,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicDraw: 7
-  abilitySprite: {fileID: 0}
+  abilitySprite: {fileID: 21300000, guid: 6bd6f3f07ce7c5342bed2c66076659ef, type: 3}
   abilityIcon: {fileID: 0}
-  animationTriggerType: 0
-  CAST_STRING: Cast
-  cooldown: 0.12
+  animationTriggerType: 1
+  CAST_STRING: Cast_Stream
+  cooldown: 0.08
+  hasNotified: 0
   itemToSpawn: {fileID: 1185414952224894, guid: 92074bf5a37ba364d98e9d9a0153b3f8,
     type: 2}
   spawnPoint: {fileID: 4670385806721074}
@@ -3149,11 +3152,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicDraw: 30
-  abilitySprite: {fileID: 0}
+  abilitySprite: {fileID: 21300000, guid: b2ee1947870f606428748a3e626c9c82, type: 3}
   abilityIcon: {fileID: 0}
   animationTriggerType: 0
   CAST_STRING: Cast
   cooldown: 6
+  hasNotified: 0
   spawnRange: 5
   itemToSpawn: {fileID: 1202288753365156, guid: da055d081a0aad3409ee3cebce11dbba,
     type: 2}
@@ -3161,7 +3165,7 @@ MonoBehaviour:
   spawnSpeed: 0
   groundSpawn: 1
   mineLifetime: 6
-  damage: 20
+  hitSameTeam: 0
 --- !u!114 &114539094655183288
 MonoBehaviour:
   m_ObjectHideFlags: 1
