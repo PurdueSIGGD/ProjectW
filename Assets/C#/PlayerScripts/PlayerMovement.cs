@@ -27,6 +27,11 @@ public class PlayerMovement : PlayerComponent {
     bool airborne = false;
     bool jump = false;
 
+    public bool isInAir()
+    {
+        return !isGrounded;
+    }
+
     public override void PlayerComponent_Start() {
         startMass = myBase.myRigid.mass;
     }
@@ -64,6 +69,12 @@ public class PlayerMovement : PlayerComponent {
 
     public void processMovement(PlayerInput.InputData data) {
       
+        if (myBase.myEffects.immobilized)
+        {
+            data.vertical = 0;
+            data.horizontal = 0;
+            data.jump = false;
+        }
         if (data.vertical < 0) {
             // If moving backwards, move a wee bit slower
             data.horizontal /= 2;
@@ -115,11 +126,11 @@ public class PlayerMovement : PlayerComponent {
         Vector3 root = transform.position + Vector3.up * 0.3f;
 #if UNITY_EDITOR
         // helper to visualise the ground check ray in the scene view
-        Debug.DrawLine(root, transform.position + (Vector3.down * checkGroundDistance));
-        Debug.DrawLine(root + Vector3.forward * checkGroundWidth, transform.position + (Vector3.down * checkGroundDistance));
-        Debug.DrawLine(root + Vector3.left * checkGroundWidth, transform.position + (Vector3.down * checkGroundDistance));
-        Debug.DrawLine(root + Vector3.right * checkGroundWidth, transform.position + (Vector3.down * checkGroundDistance));
-        Debug.DrawLine(root + Vector3.back * checkGroundWidth, transform.position + (Vector3.down * checkGroundDistance));
+        //Debug.DrawLine(root, transform.position + (Vector3.down * checkGroundDistance));
+        //Debug.DrawLine(root + Vector3.forward * checkGroundWidth, transform.position + (Vector3.down * checkGroundDistance));
+        //Debug.DrawLine(root + Vector3.left * checkGroundWidth, transform.position + (Vector3.down * checkGroundDistance));
+        //Debug.DrawLine(root + Vector3.right * checkGroundWidth, transform.position + (Vector3.down * checkGroundDistance));
+        //Debug.DrawLine(root + Vector3.back * checkGroundWidth, transform.position + (Vector3.down * checkGroundDistance));
 #endif
         // We check at all edges of the capsule, to verify we are in range, even at the edges
         if (Physics.Raycast(root, Vector3.down, out hitInfo, checkGroundDistance) ||

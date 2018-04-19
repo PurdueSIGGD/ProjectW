@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class JumpPad : MonoBehaviour {
     public int jumpModifier;
-    private ArrayList onCooldown;
+    private ArrayList onCooldown = new ArrayList();
 
     void OnTriggerEnter(Collider col)
     {
         if (col.isTrigger) return;
         BasePlayer b;
-        if ((b = col.GetComponentInParent<BasePlayer>()) != null && !onCooldown.Contains(b))
+        if (col.GetComponentInParent<BasePlayer>() != null)
         {
-            b.myRigid.AddForce(Vector3.up * b.myRigid.mass * jumpModifier);
-            onCooldown.Add(b);
+            if (!onCooldown.Contains(col.GetComponentInParent<BasePlayer>()))
+            {
+                b = col.GetComponentInParent<BasePlayer>();
+                b.myRigid.AddForce(Vector3.up * b.myRigid.mass * jumpModifier);
+                onCooldown.Add(b);
+            }
         }
         
     }
@@ -22,8 +26,9 @@ public class JumpPad : MonoBehaviour {
     {
         if (col.isTrigger) return;
         BasePlayer b;
-        if ((b = col.GetComponentInParent<BasePlayer>()) != null && onCooldown.Contains(b))
+        if (col.GetComponentInParent<BasePlayer>() != null && onCooldown.Contains(col.GetComponentInParent<BasePlayer>()))
         {
+            b = col.GetComponentInParent<BasePlayer>();
             onCooldown.Remove(b);
         }
     }
