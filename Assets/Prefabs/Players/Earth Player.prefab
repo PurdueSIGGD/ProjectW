@@ -2942,6 +2942,26 @@ MonoBehaviour:
   myGUI: {fileID: 0}
   myEffects: {fileID: 0}
   playerId: 
+  playerDescription: 'Health: 200
+
+
+    Abilities:
+
+    1 - Rock Throw
+
+    Toss a rock and deal splash damage
+
+    2 - Rock Slam
+
+    Jump up and smash down into your foes!
+
+    3 - Slagmite Spawner
+
+    Spawn a slagmite where you are aiming, for massive damage!
+
+    4 - Rock Wall
+
+    Toss your enemies up in the air and deal plenty of damage!'
 --- !u!114 &114127821173740640
 MonoBehaviour:
   m_ObjectHideFlags: 1

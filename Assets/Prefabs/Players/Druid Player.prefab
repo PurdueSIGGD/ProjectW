@@ -3201,6 +3201,26 @@ MonoBehaviour:
   myGUI: {fileID: 0}
   myEffects: {fileID: 0}
   playerId: 
+  playerDescription: 'Health: 100
+
+
+    Abilities:
+
+    1 - Poison Dart
+
+    Damage your enemies with dangerous damage over time!
+
+    2 - Bamboo Spikes
+
+    A close range, deadly attack
+
+    3 - Spirit Wings
+
+    Fly freely for a few seconds, dealing collision damage
+
+    4 - Grass Trap
+
+    Traps an enemy for a few seconds. '
 --- !u!114 &114886886716875274
 MonoBehaviour:
   m_ObjectHideFlags: 1

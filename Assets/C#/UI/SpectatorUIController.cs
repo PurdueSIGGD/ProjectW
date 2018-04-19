@@ -172,7 +172,7 @@ public class SpectatorUIController : MonoBehaviour {
 		//print (classIndex);
         this.classIndex = classIndex;
 		className.text = playerPrefabs [classIndex].name;
-		classDescription.text = "";
+		classDescription.text = playerPrefabs[classIndex].GetComponent<BasePlayer>().playerDescription;
 		//classDescription.text = playerPrefabs [classIndex].description;
 
     }

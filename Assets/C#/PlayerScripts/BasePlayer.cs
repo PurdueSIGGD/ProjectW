@@ -40,6 +40,8 @@ public class BasePlayer : NetworkBehaviour {
     [HideInInspector]
     [SyncVar]
     public string playerId;
+	[TextArea(3,10)]
+	public string playerDescription = "TODO make a description for the player with abilities and playstyle";
 
     // Use this for initialization
     void Start () {

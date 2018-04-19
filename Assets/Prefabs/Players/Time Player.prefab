@@ -3187,6 +3187,26 @@ MonoBehaviour:
   myGUI: {fileID: 0}
   myEffects: {fileID: 0}
   playerId: 
+  playerDescription: 'Health: 100
+
+
+    Abilities:
+
+    1 - Time Ball
+
+    A strong attack, that speeds up over time!
+
+    2 - Speed Up Time
+
+    A ball that speeds up both enemies and teammates
+
+    3 - Slow Down Time
+
+    A ball that slows down both enemies and teammates
+
+    4 - Time Bubble
+
+    Freeze enemy projectiles in place, and launch them wherever you aim! '
 --- !u!114 &114849264696230426
 MonoBehaviour:
   m_ObjectHideFlags: 1

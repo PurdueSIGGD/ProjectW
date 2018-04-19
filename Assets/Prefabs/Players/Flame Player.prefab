@@ -3033,6 +3033,26 @@ MonoBehaviour:
   myGUI: {fileID: 0}
   myEffects: {fileID: 0}
   playerId: 
+  playerDescription: 'Health: 75
+
+
+    Abilities:
+
+    1 - Fireball
+
+    Toss a firey blast towards your enemies!
+
+    2 - Flame Fart
+
+    Launch yourself while doing damage to enemies nearby!
+
+    3 - Flamethrower
+
+    Let loose a firey stream from your hands, but lock yourself in place
+
+    4 - Flame Trap
+
+    Deal a strong explosion to enemies who fall into this trap!'
 --- !u!114 &114127821173740640
 MonoBehaviour:
   m_ObjectHideFlags: 1
