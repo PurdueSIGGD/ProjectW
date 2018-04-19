@@ -2966,7 +2966,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicDraw: 35
-  abilitySprite: {fileID: 0}
+  abilitySprite: {fileID: 21300000, guid: 7b9108e9db794634f90c03dfdf354a90, type: 3}
   abilityIcon: {fileID: 0}
   animationTriggerType: 0
   CAST_STRING: Cast_Down
@@ -2994,7 +2994,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicDraw: 25
-  abilitySprite: {fileID: 0}
+  abilitySprite: {fileID: 21300000, guid: d525f99b5a0fcd347b2eb2d9edde7368, type: 3}
   abilityIcon: {fileID: 0}
   animationTriggerType: 0
   CAST_STRING: Cast
@@ -3130,7 +3130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicDraw: 40
-  abilitySprite: {fileID: 0}
+  abilitySprite: {fileID: 21300000, guid: f005f1c57c73b514390e7893cfc30086, type: 3}
   abilityIcon: {fileID: 0}
   animationTriggerType: 0
   CAST_STRING: Cast_Down
@@ -3162,7 +3162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicDraw: 30
-  abilitySprite: {fileID: 0}
+  abilitySprite: {fileID: 21300000, guid: 3bffe28b3eeb89c4ab2179d72c3ac1e6, type: 3}
   abilityIcon: {fileID: 0}
   animationTriggerType: 0
   CAST_STRING: Cast_Down
