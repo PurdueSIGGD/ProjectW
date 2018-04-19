@@ -2969,7 +2969,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicDraw: 40
-  abilitySprite: {fileID: 21300000, guid: ecbdf35e05f667b48b92803dc27f31d4, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 945aee820840ef34683d94df1382f3fe, type: 3}
   abilityIcon: {fileID: 0}
   animationTriggerType: 0
   CAST_STRING: Cast
@@ -2993,7 +2993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicDraw: 30
-  abilitySprite: {fileID: 21300000, guid: 8f1991f6c8ed10c439ea42936cb40917, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 828a3524cc8375641b64c57a34935eaa, type: 3}
   abilityIcon: {fileID: 0}
   animationTriggerType: 0
   CAST_STRING: Cast
@@ -3129,7 +3129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicDraw: 50
-  abilitySprite: {fileID: 21300000, guid: c7a7aa07575f6644693d59bab698d685, type: 3}
+  abilitySprite: {fileID: 21300000, guid: c6e0e00498a6b8e48ba53450a357aefe, type: 3}
   abilityIcon: {fileID: 0}
   animationTriggerType: 0
   CAST_STRING: Cast_Down
@@ -3199,7 +3199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicDraw: 40
-  abilitySprite: {fileID: 21300000, guid: 99d18c9b44304744a8a53a38aeafd015, type: 3}
+  abilitySprite: {fileID: 21300000, guid: edce7524e35e9f04489f048118b82ce9, type: 3}
   abilityIcon: {fileID: 0}
   animationTriggerType: 0
   CAST_STRING: Cast
