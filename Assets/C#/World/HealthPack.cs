@@ -58,6 +58,7 @@ public class HealthPack : NetworkBehaviour {
                         .withDamageType(type));
                     //Remove health pack
                     CmdSetActive(false);
+                    active = false; // do this so we don't keep grabbing healthpacks until server responds
                 }
                 
                 yield return new WaitForSeconds(0);
