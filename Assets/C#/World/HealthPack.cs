@@ -3,19 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class HealthPack : MonoBehaviour{
+public class HealthPack : NetworkBehaviour {
     private ArrayList toDamage;
     public HitArguments.DamageType type;
     public float Health;
     public float respawnTimer;
-    private bool active;
+    [SyncVar]
+    private bool active = true;
+    
     /*
     TODO: When player joins while health pack is despawned, client side timers are off.
     */
     void Start()
     {
         toDamage = new ArrayList();
-        active = true;
+        //active = true;
+    }
+    private void Update() {
+        GetComponent<MeshRenderer>().enabled = active; // should update with server
     }
     void OnTriggerEnter(Collider col)
     {
@@ -52,24 +57,30 @@ public class HealthPack : MonoBehaviour{
                         .withDamage(-1 * Health)
                         .withDamageType(type));
                     //Remove health pack
-                    active = false;
-                    GetComponent<MeshRenderer>().enabled = false;
-                    //Start respawning it
-                    StartCoroutine(RespawnBehavior());
+                    CmdSetActive(false);
                 }
                 
                 yield return new WaitForSeconds(0);
             }
         } while (h != null && toDamage.Contains(h));
     }
-    
+    [Command]
+    void CmdSetActive(bool desired) {
+        active = desired;
+        RpcActiveSet(desired);
+        //Start respawning it
+        if (!desired) StartCoroutine(RespawnBehavior());
+    }
+    [ClientRpc]
+    void RpcActiveSet(bool desired) {
+        // idk is this needed?
+    }
     public IEnumerator RespawnBehavior()
     {
         do {
             yield return new WaitForSeconds(respawnTimer);
             //Respawn health pack
-            active = true;
-            GetComponent<MeshRenderer>().enabled = true;
+            CmdSetActive(true);
         } while (active == false);
     }
 }
