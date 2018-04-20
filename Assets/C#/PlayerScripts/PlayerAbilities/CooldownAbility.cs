@@ -14,7 +14,8 @@ public abstract class CooldownAbility : PlayerAbility {
 
     public float cooldown = 1; // Cooldown, in seconds
     private float lastUse = -100; // Last time we used it, in seconds;
-	private bool hasNotified;
+	[HideInInspector]
+	public bool hasNotified;
 
     public override void ability_Start() {
         cooldown_Start();
