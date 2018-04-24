@@ -748,6 +748,7 @@ GameObject:
   - component: {fileID: 95332287579240254}
   - component: {fileID: 114158344842705598}
   - component: {fileID: 114661250626394756}
+  - component: {fileID: 114512498958963054}
   - component: {fileID: 114075068264393376}
   m_Layer: 8
   m_Name: Wind Player
@@ -3033,6 +3034,39 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 0.5
   m_InterpolateMovement: 1
+--- !u!114 &114512498958963054
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1560229490994772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aa84de287a9cab4ca99918bd3b23bd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magicDraw: 40
+  abilitySprite: {fileID: 21300000, guid: f005f1c57c73b514390e7893cfc30086, type: 3}
+  abilityIcon: {fileID: 0}
+  animationTriggerType: 0
+  CAST_STRING: Cast_Down
+  cooldown: 6
+  hasNotified: 0
+  itemToSpawn: {fileID: 1375169914028612, guid: a3284a49d1a809849b0719a1ead88d1b,
+    type: 2}
+  spawnPoint: {fileID: 4664534772316392}
+  spawnOffset: {x: 0, y: 0, z: 0}
+  aimAngle: {fileID: 4348218798183130}
+  spawnSpeed: 0
+  spellDuration: 3
+  boostMultiplier: 1
+  maxVelocity: 30
+  endVelocity: 8
+  verticalForce: 0
+  initialUpwardVelocity: 4
+  pushForce: 2000
+  damage: 5
+  hitSameTeam: 0
 --- !u!114 &114629192821050142
 MonoBehaviour:
   m_ObjectHideFlags: 1
