@@ -43,7 +43,7 @@ public class Ability_FlamethrowerSpawner : Ability_ObjectSpawner {
 
         Destroy(flameSpawned, lifetime);
         PlayerStats sourcePlayerStats = GetComponentInParent<PlayerStats>();
-        HitManager.HitClientside(new HitArguments(sourcePlayerStats.gameObject, sourcePlayerStats.gameObject).withEffect(effect).withEffectDuration(cooldown+.2f));
+        HitManager.HitClientside(new HitArguments(sourcePlayerStats.gameObject, sourcePlayerStats.gameObject).withEffect(effect).withEffectDuration(cooldown));
     }
     public override void use()
     {
