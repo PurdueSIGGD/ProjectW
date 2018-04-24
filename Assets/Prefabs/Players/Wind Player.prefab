@@ -749,6 +749,7 @@ GameObject:
   - component: {fileID: 114158344842705598}
   - component: {fileID: 114661250626394756}
   - component: {fileID: 114512498958963054}
+  - component: {fileID: 114407847404263854}
   - component: {fileID: 114075068264393376}
   m_Layer: 8
   m_Name: Wind Player
@@ -3013,6 +3014,30 @@ MonoBehaviour:
   myGUI: {fileID: 0}
   myEffects: {fileID: 0}
   playerId: 
+--- !u!114 &114407847404263854
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1560229490994772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84d0bb171ff7f4444af6aa5145e4ff2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magicDraw: 30
+  abilitySprite: {fileID: 21300000, guid: 2732df4f1da3b5d40be64c3a347a7ffb, type: 3}
+  abilityIcon: {fileID: 0}
+  animationTriggerType: 0
+  CAST_STRING: Cast
+  cooldown: 3
+  hasNotified: 0
+  itemToSpawn: {fileID: 1612278143131010, guid: c08ba0bb64e4f5142b578082bf0a18ea,
+    type: 2}
+  spawnPoint: {fileID: 4494947735716498}
+  spawnOffset: {x: 0, y: 0, z: 4}
+  aimAngle: {fileID: 4348218798183130}
+  spawnSpeed: 0
 --- !u!114 &114507622497105028
 MonoBehaviour:
   m_ObjectHideFlags: 1
