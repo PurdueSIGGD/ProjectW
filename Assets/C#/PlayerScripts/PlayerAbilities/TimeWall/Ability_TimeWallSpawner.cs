@@ -33,7 +33,7 @@ public class Ability_TimeWallSpawner : Ability_ObjectSpawner{
         {
             Vector3 localAngle = aimAngle.position + aimAngle.forward * 100;
             RaycastHit[] hits = Physics.RaycastAll(aimAngle.position, aimAngle.forward * 100);
-            Debug.DrawRay(aimAngle.position, aimAngle.forward * 100, Color.green, 10);
+            //Debug.DrawRay(aimAngle.position, aimAngle.forward * 100, Color.green, 10);
             foreach (RaycastHit h in hits)
             {
                 PlayerStats tmpSts;

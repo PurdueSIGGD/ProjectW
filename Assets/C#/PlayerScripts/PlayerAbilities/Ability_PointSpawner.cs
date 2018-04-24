@@ -67,7 +67,7 @@ public class Ability_PointSpawner : CooldownAbility {// Spawns an object where t
 			foreach (RaycastHit h in hits) {
 				PlayerStats tmpSts;
 				if (tmpSts = h.transform.GetComponentInParent<PlayerStats> ()) {
-					if (tmpSts.gameObject == this.gameObject)
+					//if (tmpSts.gameObject == this.gameObject)
 						continue;
 				}
 				if (h.collider.isTrigger) {
@@ -196,14 +196,21 @@ public class Ability_PointSpawner : CooldownAbility {// Spawns an object where t
 	public virtual Vector3? maxRangeReached(Ray ray, float rangeVaried)
 	{
 
-
-		Ray drop = new Ray(ray.origin + ray.direction * rangeVaried, -Vector3.up);
-		RaycastHit hit;
-
-		if (Physics.SphereCast (drop, .5f, out hit, rangeVaried * 3)) {
-			return hit.point;
-		}
-		return null;
+        RaycastHit[] hits = Physics.SphereCastAll(ray.origin + ray.direction * rangeVaried, .5f, -Vector3.up);
+        foreach (RaycastHit h in hits)
+        {
+            PlayerStats tmpSts;
+            if (tmpSts = h.transform.GetComponentInParent<PlayerStats>())
+            {
+                //if (tmpSts.gameObject == this.gameObject)
+                continue;
+            }
+            else
+            {
+                return h.point;
+            }
+        }
+        return null;
 	}
 
 	public virtual void OnSpellSpawned(GameObject spawn)

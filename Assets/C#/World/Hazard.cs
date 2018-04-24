@@ -32,9 +32,10 @@ public class Hazard : MonoBehaviour {
         do {
             // Local damage only
 			if ((Component)h != null && ((Component)h).gameObject != null) {
-				h.Hit(new HitArguments(this.gameObject, ((Component)h).gameObject)
+				h.Hit(new HitArguments(((Component)h).gameObject, this.gameObject)
 					.withDamage(damage)
-					.withDamageType(type));
+					.withDamageType(type)
+					.withSourcePosition(new Vector3(transform.position.x, transform.position.z)));
 				yield return new WaitForSeconds(rate);
 			}
         } while (h != null && toDamage.Contains(h));
