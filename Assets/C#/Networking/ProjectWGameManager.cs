@@ -97,6 +97,7 @@ public class ProjectWGameManager : NetworkBehaviour {
 			newPG.desiredPlayerName = oldPG.desiredPlayerName;
 			newPG.desiredPlayerClass = oldPG.desiredPlayerClass;
 			newPG.desiredTeamIndex = oldPG.desiredTeamIndex;
+
 			// If not a bot, move connection to a new thing
 			int botId;
 			if ((botId = player.GetComponent<PlayerInput> ().getBot ()) != -1) {
@@ -187,6 +188,7 @@ public class ProjectWGameManager : NetworkBehaviour {
 				newPG.desiredPlayerClass = stats.classIndex;
 				newPG.desiredTeamIndex = stats.teamIndex;
 				spawn.name = stats.playerName;
+
 
 				NetworkServer.Spawn(spawn);
 

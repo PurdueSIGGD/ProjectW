@@ -142,7 +142,27 @@ MonoBehaviour:
   playerPrefabs: {fileID: 1415988781203326, guid: 1b835cf9884ce1b428c88869c7ccaea6,
     type: 2}
   teamItems: []
-  botItems: []
+  botItems:
+  - botName: (Bot) Frank
+    botTeam: -1
+    botDifficulty: 5
+    botType: 0
+  - botName: (Bot) Frank
+    botTeam: -1
+    botDifficulty: 5
+    botType: 0
+  - botName: (Bot) Frank
+    botTeam: -1
+    botDifficulty: 5
+    botType: 0
+  - botName: (Bot) Frank
+    botTeam: -1
+    botDifficulty: 5
+    botType: 0
+  - botName: (Bot) Frank
+    botTeam: -1
+    botDifficulty: 5
+    botType: 0
   mapSelect: 0
   gameModeSelect: 0
   gamemodeOptions: []

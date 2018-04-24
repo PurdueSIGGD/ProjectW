@@ -39,7 +39,7 @@ public class PlayerMovement : PlayerComponent {
         }
     }
     public void FixedUpdate() {
-        if (isLocalPlayer) {
+		if (isLocalPlayer || (isServer && this.myBase.myInput.isBot())) {
             CheckGroundStatus();
             lastPosition = transform.position;
 
@@ -63,7 +63,7 @@ public class PlayerMovement : PlayerComponent {
     
 
     public void processMovement(PlayerInput.InputData data) {
-      
+		//if (this.myBase.myInput.isBot()) print (data.jump);
         if (data.vertical < 0) {
             // If moving backwards, move a wee bit slower
             data.horizontal /= 2;

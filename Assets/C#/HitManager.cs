@@ -50,7 +50,7 @@ public class HitManager : NetworkBehaviour {
         //NetworkBehaviour targetBehavior;
         if ((/*targetBehavior = */args.target.GetComponentInParent<NetworkBehaviour>()))
         {
-            if (myPlayerStats.isLocalPlayer)    
+			if (myPlayerStats.isLocalPlayer || (myPlayerStats.isServer && args.sourcePlayer.GetComponent<PlayerInput>().isBot()))    
             {
                 // Call network event through server
                 myPlayerStats.CmdApplyDamage(verificationMethod, args);

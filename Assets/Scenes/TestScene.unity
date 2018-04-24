@@ -1118,6 +1118,10 @@ MonoBehaviour:
   magicBar: {fileID: 1699862911}
   hitMarker: {fileID: 464456945}
   teamColoredImages: []
+  abilityItemPrefab: {fileID: 0}
+  abilityHolder: {fileID: 0}
+  healthText: {fileID: 0}
+  magicText: {fileID: 0}
 --- !u!1 &464456943
 GameObject:
   m_ObjectHideFlags: 0
@@ -3984,6 +3988,31 @@ Prefab:
     - target: {fileID: 224521472898900840, guid: ebd881dffb59fbd4c8c04327e3e01589,
         type: 2}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224099959497167812, guid: ebd881dffb59fbd4c8c04327e3e01589,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224099959497167812, guid: ebd881dffb59fbd4c8c04327e3e01589,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224099959497167812, guid: ebd881dffb59fbd4c8c04327e3e01589,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 960
+      objectReference: {fileID: 0}
+    - target: {fileID: 224099959497167812, guid: ebd881dffb59fbd4c8c04327e3e01589,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224099959497167812, guid: ebd881dffb59fbd4c8c04327e3e01589,
+        type: 2}
+      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

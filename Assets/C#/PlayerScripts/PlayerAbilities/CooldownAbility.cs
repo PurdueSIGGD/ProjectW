@@ -20,7 +20,7 @@ public abstract class CooldownAbility : PlayerAbility {
     {
         // Clients should not worry about magic draw
         if (Time.time - lastUse > cooldown) {
-            if (!isLocalPlayer || myBase.myStats.canUseMagic(magicDraw)) {
+			if ((!isLocalPlayer && !(isServer && myBase.myInput.isBot())) || myBase.myStats.canUseMagic(magicDraw)) {
 				if (abilityIcon != null && cooldown > 0.2f) { // We don't let it go if it takes like no time
 					this.abilityIcon.myAnimator.SetFloat ("CooldownSpeed", 1 / cooldown);
 					string extra = UnityEngine.Random.Range (0.0f, 1.0f) < 0.001 ? "1" : ""; // ;)

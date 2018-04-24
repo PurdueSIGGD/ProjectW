@@ -70,7 +70,7 @@ public class Ability_PointSpawner : CooldownAbility {// Spawns an object where t
 					if (tmpSts.gameObject == this.gameObject)
 						continue;
 				}
-				if (h.transform.GetComponent<Collider> ().isTrigger) {
+				if (h.collider.isTrigger) {
 					continue;
 				}
 				//print ("overriding with object: " + h.transform);
@@ -164,9 +164,30 @@ public class Ability_PointSpawner : CooldownAbility {// Spawns an object where t
 	{
 		if (groundSpawn) {
 			Vector3 spot = hit.point;
-			if (!Physics.SphereCast (new Ray (spot + Vector3.up * .6f, Vector3.down), .5f, out hit, spawnRange, 1 << 11)) {
+			/*
+			RaycastHit[] hits = Physics.SphereCastAll (new Ray (spot + Vector3.up * .6f, Vector3.down), .5f, spawnRange, 1 << 11);
+			foreach (RaycastHit h in hits) {
+				PlayerStats tmpSts;
+				if (tmpSts = h.transform.GetComponentInParent<PlayerStats> ()) {
+					if (tmpSts.gameObject == this.gameObject)
+						continue;
+				}
+				if (h.collider.isTrigger  || Physics.SphereCast (new Ray (spot + Vector3.up * .6f, Vector3.down), .5f, spawnRange, 1 << 12)) {
+					Debug.Log ("trigger hit");
+					continue;
+				}
+				return h.point;
+
+			}
+
+			*/
+
+			if (!Physics.SphereCast (new Ray (spot + Vector3.up * .6f, Vector3.down), .5f, out hit, spawnRange, 1 << 11)
+				|| Physics.SphereCast (new Ray (spot + Vector3.up * .6f, Vector3.down), .5f, out hit, spawnRange, 1 << 12)) {
 				return null;
 			}
+
+			return null;
 		}
 
 		return hit.point;
