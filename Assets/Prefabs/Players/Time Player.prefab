@@ -3162,7 +3162,7 @@ MonoBehaviour:
   itemToSpawn: {fileID: 1360844552911466, guid: 0bef239f03de1854da1e03cbc8b9de30,
     type: 2}
   spawnPoint: {fileID: 4867833670910312}
-  spawnOffset: {x: 0, y: 0, z: 3}
+  spawnOffset: {x: 0, y: 0, z: 0}
   aimAngle: {fileID: 4037198736431142}
   spawnSpeed: 100
   wallLifetime: 3
