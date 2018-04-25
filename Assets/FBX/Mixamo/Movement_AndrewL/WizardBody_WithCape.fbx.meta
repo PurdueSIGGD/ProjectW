@@ -73,6 +73,7 @@ ModelImporter:
     100130: mixamorig:LeftHandThumb4
     100132: mixamorig:LeftToe_End
     100134: mixamorig:RightToe_End
+    100136: WizardBody_WithUvs1
     400000: Cape_WithUbs:RoadKillOut
     400002: Geo_SelectSet
     400004: mixamorig:Head
@@ -141,6 +142,7 @@ ModelImporter:
     400130: mixamorig:LeftHandThumb4
     400132: mixamorig:LeftToe_End
     400134: mixamorig:RightToe_End
+    400136: WizardBody_WithUvs1
     2100000: WizardBody
     2100002: TeamColor
     2100004: WizardCape
@@ -148,10 +150,12 @@ ModelImporter:
     3300000: Cape_WithUbs:RoadKillOut
     4300000: Geo_SelectSet
     4300002: Cape_WithUbs:RoadKillOut
+    4300004: WizardBody_WithUvs1
     7400000: Take 001
     9500000: //RootNode
     13700000: Geo_SelectSet
     13700002: Cape_WithUbs:RoadKillOut
+    13700004: WizardBody_WithUvs1
   externalObjects: {}
   materials:
     importMaterials: 1

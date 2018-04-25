@@ -32,6 +32,7 @@ public class ProjectWGameManager : NetworkBehaviour {
 		public string teamName;
         public int teamIndex;
         public Color teamColor;
+        public int teamColorIndex;
         public int teamSprite;
 	}
 	[System.Serializable]
@@ -93,6 +94,7 @@ public class ProjectWGameManager : NetworkBehaviour {
 			newP.classIndex = oldPG.desiredPlayerClass;
 			newP.teamIndex = teams.Length > 1 ? oldPG.desiredTeamIndex : -1;
 			newP.teamColor = teams [teams.Length > 1 ? newP.teamIndex : 0].teamColor;
+            newP.teamColorIndex = teams[teams.Length > 1 ? newP.teamIndex : 0].teamColorIndex;
 			PlayerGUI newPG = newPlayer.GetComponent<PlayerGUI> ();
 			newPG.desiredPlayerName = oldPG.desiredPlayerName;
 			newPG.desiredPlayerClass = oldPG.desiredPlayerClass;
@@ -179,7 +181,8 @@ public class ProjectWGameManager : NetworkBehaviour {
 				PlayerStats stats = spawn.GetComponent<PlayerStats>();
 				stats.teamIndex = teams.Length > 1 ? teamIndex : -1;
 				stats.teamColor = teams[teams.Length > 1 ? teamIndex : 0].teamColor;
-				stats.classIndex = classIndex;
+                stats.teamColorIndex = teams[teams.Length > 1 ? teamIndex : 0].teamColorIndex;
+                stats.classIndex = classIndex;
 				stats.playerName = spawnName;
 
 				PlayerGUI newPG = spawn.GetComponent<PlayerGUI>();
@@ -237,6 +240,7 @@ public class ProjectWGameManager : NetworkBehaviour {
 		PlayerStats p = newPlayer.GetComponent<PlayerStats> ();
 		p.teamIndex = teams.Length > 1 ? teamIndex : -1;
         p.teamColor = teams[teams.Length > 1 ? teamIndex : 0].teamColor;
+        p.teamColorIndex = teams[teams.Length > 1 ? teamIndex : 0].teamColorIndex;
         p.playerName = playerName;
         p.classIndex = classIndex;
         PlayerGUI newPG = newPlayer.GetComponent<PlayerGUI>();
