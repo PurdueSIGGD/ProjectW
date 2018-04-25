@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4510866823263260}
   - component: {fileID: 114986398184245588}
   m_Layer: 0
-  m_Name: Scenes_SceneHolder
+  m_Name: Scenes_SceneHolder_Test
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,6 +52,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scenes:
-  - image: {fileID: 21300000, guid: 0f2300990193bf14da35db1f5dcb6b13, type: 3}
-    icon: {fileID: 21300000, guid: 0f2300990193bf14da35db1f5dcb6b13, type: 3}
-    name: WizardCity
+  - image: {fileID: 21300000, guid: 1e517d936548d254fae0e22d42f694c2, type: 3}
+    icon: {fileID: 21300000, guid: 1e517d936548d254fae0e22d42f694c2, type: 3}
+    name: TestScene
+  - image: {fileID: 21300000, guid: 8485c56514cf72147b709f99b0b9f9be, type: 3}
+    icon: {fileID: 21300000, guid: 8485c56514cf72147b709f99b0b9f9be, type: 3}
+    name: TestSceneBig

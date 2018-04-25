@@ -127,10 +127,12 @@ public class ProjectWGameManager : NetworkBehaviour {
 			teams = networkManager.teamItems;
 			// GameMode & options
 			int gamemodeType = networkManager.gameModeSelect;
+            // Game time
 			// People may forget the time limit in their games
-			if (networkManager.gamemodeOptions[0].optionName == "Time Limit") {
+			if (networkManager.gamemodeOptions[0].optionName == "Time Limit (m)") {
 				gameTime = networkManager.gamemodeOptions [0].value * 60; // Time is passed in minutes, we use seconds here
 			} else {
+                print("Using default time limit");
 				gameTime = timeLimit; // TODO should we just make this infinite?
 			}
 
@@ -208,7 +210,7 @@ public class ProjectWGameManager : NetworkBehaviour {
             {
                 GameReset();
 				int randomRange = Random.Range (0, scenesToLoad.scenes.Length - 1);
-				print ("Changing scene to scene: " + randomRange + " out of " + scenesToLoad.scenes.Length);
+				print ("Changing scene to scene: " + (randomRange + 1) + " out of " + scenesToLoad.scenes.Length);
                 networkManager.ServerChangeScene(scenesToLoad.scenes[randomRange].name);
             }
             
