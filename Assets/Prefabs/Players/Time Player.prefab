@@ -1694,7 +1694,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1708269976427860}
   m_LocalRotation: {x: 0.4564698, y: -9.273546e-12, z: 3.2769484e-12, w: 0.889739}
-  m_LocalPosition: {x: 0, y: 0.08, z: 0.023}
+  m_LocalPosition: {x: 0, y: 0.07, z: 0.023}
   m_LocalScale: {x: 0.016844628, y: 0.016844634, z: 0.016844634}
   m_Children: []
   m_Father: {fileID: 4352635964862948}
@@ -3241,8 +3241,9 @@ MonoBehaviour:
   lastHitWeaponType: 0
   numberOfSummonedObjects: 0
   poisonStacks: 0
-  aliveParticles: {fileID: 0}
-  headMesh: {fileID: 54571870888582612}
+  aliveParticles: []
+  headMeshes:
+  - {fileID: 54571870888582612}
   teamMeshes:
   - {fileID: 137781446842878096}
   - {fileID: 137618528830106546}
@@ -3383,9 +3384,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.025
-  m_Height: 0.15
+  m_Height: 0.18
   m_Direction: 1
-  m_Center: {x: 0, y: 0.11787002, z: 0}
+  m_Center: {x: 0, y: 0.07, z: 0}
 --- !u!136 &136519369130393640
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -3422,9 +3423,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.025
-  m_Height: 0.15
+  m_Height: 0.18
   m_Direction: 1
-  m_Center: {x: 0, y: 0.11810311, z: 0}
+  m_Center: {x: 0, y: 0.07, z: 0}
 --- !u!136 &136869847326814048
 CapsuleCollider:
   m_ObjectHideFlags: 1

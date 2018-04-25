@@ -3066,8 +3066,9 @@ MonoBehaviour:
   lastHitWeaponType: 0
   numberOfSummonedObjects: 0
   poisonStacks: 0
-  aliveParticles: {fileID: 0}
-  headMesh: {fileID: 54750598140963626}
+  aliveParticles: []
+  headMeshes:
+  - {fileID: 54750598140963626}
   teamMeshes:
   - {fileID: 137139460295376832}
   - {fileID: 137186543200020938}
@@ -3251,9 +3252,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.025
-  m_Height: 0.15
+  m_Height: 0.18
   m_Direction: 1
-  m_Center: {x: 0, y: 0.11787002, z: 0}
+  m_Center: {x: 0, y: 0.07, z: 0}
 --- !u!136 &136416247749644150
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -3277,9 +3278,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.025
-  m_Height: 0.15
+  m_Height: 0.18
   m_Direction: 1
-  m_Center: {x: 0, y: 0.11810311, z: 0}
+  m_Center: {x: 0, y: 0.07, z: 0}
 --- !u!136 &136697958049657372
 CapsuleCollider:
   m_ObjectHideFlags: 1
