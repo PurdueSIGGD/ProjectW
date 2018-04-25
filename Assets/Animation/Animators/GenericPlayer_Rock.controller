@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: GenericPlayer_Time
+  m_Name: GenericPlayer_Rock
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Vertical
@@ -382,10 +382,10 @@ BlendTree:
     m_DirectBlendParameter: Vertical
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 8113e00b9ca198749896d655c2b1db5a, type: 3}
+    m_Motion: {fileID: 7400000, guid: 8def37ebd27e3a549bb4e2c04da5bb18, type: 3}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
-    m_TimeScale: 0.8
+    m_TimeScale: 0.7
     m_CycleOffset: 0
     m_DirectBlendParameter: Vertical
     m_Mirror: 0

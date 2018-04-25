@@ -2937,7 +2937,7 @@ Animator:
   m_GameObject: {fileID: 1152163843985176}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 8734b92cdb3f08f48bd03093f4f7b0d1, type: 3}
-  m_Controller: {fileID: 9100000, guid: b9fff580116158b4698ef1c65c91396e, type: 2}
+  m_Controller: {fileID: 9100000, guid: f416c51160a3e8542975afa014dc134a, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -3283,6 +3283,7 @@ MonoBehaviour:
   death: 0
   teamIndex: -1
   teamColor: {r: 1, g: 0, b: 0, a: 1}
+  teamColorIndex: 0
   playerName: 
   classIndex: -1
   deathSounds:
@@ -3388,7 +3389,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.06
+  m_Radius: 0.08
   m_Height: 0.19
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}

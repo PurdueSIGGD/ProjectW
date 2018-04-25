@@ -3369,6 +3369,7 @@ MonoBehaviour:
   death: 0
   teamIndex: -1
   teamColor: {r: 1, g: 0, b: 0, a: 1}
+  teamColorIndex: 0
   playerName: 
   classIndex: -1
   deathSounds:
@@ -3519,7 +3520,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.06
+  m_Radius: 0.08
   m_Height: 0.19
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}

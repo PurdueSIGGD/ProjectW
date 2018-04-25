@@ -49,7 +49,6 @@ public class PlayerStats : PlayerComponent, IHittable {
         foreach (SkinnedMeshRenderer m in teamMeshes) {
             Material[] replacementMaterials = new Material[2];
             replacementMaterials[0] = m.materials[0];
-            print(m + " " + m.materials[0]);
             replacementMaterials[1] = materials.materials[teamColorIndex];
             m.materials = replacementMaterials;
 
