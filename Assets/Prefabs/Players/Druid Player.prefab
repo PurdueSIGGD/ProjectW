@@ -2966,13 +2966,13 @@ MonoBehaviour:
   spawnRange: 2
   itemToSpawn: {fileID: 1793901477549992, guid: 6efafed88fd1a4f44a6d0160d439aefd,
     type: 2}
-  spawnOffset: {x: -0.65, y: 1.15, z: 1}
+  spawnOffset: {x: -0.65, y: 1.15, z: 1.2}
   spawnSpeed: 0
   groundSpawn: 1
   bambooShootsSpawned: 12
   damage: 8
   attackDuration: 1
-  spreadMultiplier: 1.6
+  spreadMultiplier: 1.8
   hitSameTeam: 0
 --- !u!114 &114332602364004438
 MonoBehaviour:
@@ -2985,7 +2985,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b91a0a0674f3c14f8416a158944a208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magicDraw: 25
+  magicDraw: 30
   abilitySprite: {fileID: 21300000, guid: d525f99b5a0fcd347b2eb2d9edde7368, type: 3}
   abilityIcon: {fileID: 0}
   animationTriggerType: 0
@@ -2997,7 +2997,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 4442798387862726}
   spawnOffset: {x: 0, y: 0, z: 0.3}
   aimAngle: {fileID: 4338967783843814}
-  spawnSpeed: 2000
+  spawnSpeed: 1500
   verticalRotationOffset: 0
 --- !u!114 &114404135056960728
 MonoBehaviour:
