@@ -1101,7 +1101,7 @@ GameObject:
   - component: {fileID: 95131095507080360}
   - component: {fileID: 114086594904208122}
   - component: {fileID: 114207067422742926}
-  - component: {fileID: 114849264696230426}
+  - component: {fileID: 114955957725948596}
   - component: {fileID: 114187196035932632}
   - component: {fileID: 114596992011343986}
   - component: {fileID: 114413950209045444}
@@ -3210,31 +3210,6 @@ MonoBehaviour:
   myGUI: {fileID: 0}
   myEffects: {fileID: 0}
   playerId: 
---- !u!114 &114849264696230426
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1860666892717170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b91a0a0674f3c14f8416a158944a208, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  magicDraw: 40
-  abilitySprite: {fileID: 21300000, guid: edce7524e35e9f04489f048118b82ce9, type: 3}
-  abilityIcon: {fileID: 0}
-  animationTriggerType: 0
-  CAST_STRING: Cast
-  cooldown: 2
-  hasNotified: 0
-  itemToSpawn: {fileID: 1851383594523318, guid: 8aada5f21600d354689f0d39775c8708,
-    type: 2}
-  spawnPoint: {fileID: 4488042454194792}
-  spawnOffset: {x: 0, y: 0, z: 0}
-  aimAngle: {fileID: 4760257634039490}
-  spawnSpeed: 100
-  verticalRotationOffset: 0
 --- !u!114 &114914647988773290
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3290,6 +3265,30 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+--- !u!114 &114955957725948596
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1860666892717170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ccca904a714eeb4aba5119ab3ef0b6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magicDraw: 40
+  abilitySprite: {fileID: 21300000, guid: edce7524e35e9f04489f048118b82ce9, type: 3}
+  abilityIcon: {fileID: 0}
+  animationTriggerType: 0
+  CAST_STRING: Cast
+  cooldown: 2
+  hasNotified: 0
+  itemToSpawn: {fileID: 1469220445907016, guid: 57aca70939dac354d808aa3e29ed022e,
+    type: 2}
+  spawnPoint: {fileID: 4357469643700610}
+  spawnOffset: {x: 0, y: 0, z: 0}
+  aimAngle: {fileID: 4760257634039490}
+  spawnSpeed: 0
 --- !u!124 &124384678244715756
 Behaviour:
   m_ObjectHideFlags: 1
