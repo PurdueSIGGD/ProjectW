@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45386273, g: 0.5724853, b: 0.36298305, a: 1}
+  m_IndirectSpecularColor: {r: 0.45359725, g: 0.57248986, b: 0.36298347, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -3838,7 +3838,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.025
+  m_Radius: 0.03
   m_Height: 0.18
   m_Direction: 1
   m_Center: {x: 0, y: 0.07, z: 0}
@@ -14754,7 +14754,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.03
+  m_Radius: 0.04
   m_Height: 0.09
   m_Direction: 1
   m_Center: {x: 0, y: 0.04320085, z: 0}
@@ -19081,7 +19081,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.025
+  m_Radius: 0.03
   m_Height: 0.18
   m_Direction: 1
   m_Center: {x: 0, y: 0.07, z: 0}
@@ -26712,7 +26712,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.025
+  m_Radius: 0.03
   m_Height: 0.18
   m_Direction: 1
   m_Center: {x: 0, y: 0.07, z: 0}
@@ -33197,7 +33197,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.03
+  m_Radius: 0.04
   m_Height: 0.09
   m_Direction: 1
   m_Center: {x: 0, y: 0.04320085, z: 0}
@@ -33429,7 +33429,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.03
+  m_Radius: 0.04
   m_Height: 0.09
   m_Direction: 1
   m_Center: {x: 0, y: 0.04320085, z: 0}
@@ -44098,7 +44098,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.03
+  m_Radius: 0.04
   m_Height: 0.09
   m_Direction: 1
   m_Center: {x: 0, y: 0.04320085, z: 0}
@@ -47722,7 +47722,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.03
+  m_Radius: 0.04
   m_Height: 0.09
   m_Direction: 1
   m_Center: {x: 0, y: 0.04320085, z: 0}
@@ -67830,7 +67830,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.025
+  m_Radius: 0.03
   m_Height: 0.18
   m_Direction: 1
   m_Center: {x: 0, y: 0.07, z: 0}
@@ -68160,7 +68160,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.03
+  m_Radius: 0.04
   m_Height: 0.09
   m_Direction: 1
   m_Center: {x: 0, y: 0.04320085, z: 0}
@@ -69382,7 +69382,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.03
+  m_Radius: 0.04
   m_Height: 0.09
   m_Direction: 1
   m_Center: {x: 0, y: 0.04320085, z: 0}
@@ -75272,7 +75272,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.025
+  m_Radius: 0.03
   m_Height: 0.18
   m_Direction: 1
   m_Center: {x: 0, y: 0.07, z: 0}
@@ -75932,7 +75932,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.025
+  m_Radius: 0.03
   m_Height: 0.18
   m_Direction: 1
   m_Center: {x: 0, y: 0.07, z: 0}
@@ -76220,7 +76220,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.00010681152}
+  m_AnchoredPosition: {x: 0, y: 0.0001373291}
   m_SizeDelta: {x: 0, y: 75}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1120267174
@@ -79489,7 +79489,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 159163734}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9999996
+  m_Size: 0.99999976
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -87239,7 +87239,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.025
+  m_Radius: 0.03
   m_Height: 0.18
   m_Direction: 1
   m_Center: {x: 0, y: 0.07, z: 0}
@@ -87438,10 +87438,6 @@ Prefab:
     - target: {fileID: 4559471726491810, guid: 30eb4c1a1bd224c44a0d4ac296483ba9, type: 2}
       propertyPath: m_RootOrder
       value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 1708269976427860, guid: 30eb4c1a1bd224c44a0d4ac296483ba9, type: 2}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1860666892717170, guid: 30eb4c1a1bd224c44a0d4ac296483ba9, type: 2}
       propertyPath: m_IsActive
@@ -88154,7 +88150,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.03
+  m_Radius: 0.04
   m_Height: 0.09
   m_Direction: 1
   m_Center: {x: 0, y: 0.04320085, z: 0}
@@ -92069,7 +92065,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.025
+  m_Radius: 0.03
   m_Height: 0.18
   m_Direction: 1
   m_Center: {x: 0, y: 0.07, z: 0}
@@ -100003,7 +99999,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.025
+  m_Radius: 0.03
   m_Height: 0.18
   m_Direction: 1
   m_Center: {x: 0, y: 0.07, z: 0}
@@ -100941,7 +100937,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.03
+  m_Radius: 0.04
   m_Height: 0.09
   m_Direction: 1
   m_Center: {x: 0, y: 0.04320085, z: 0}
@@ -105647,7 +105643,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.03
+  m_Radius: 0.04
   m_Height: 0.09
   m_Direction: 1
   m_Center: {x: 0, y: 0.04320085, z: 0}
@@ -110850,7 +110846,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.025
+  m_Radius: 0.03
   m_Height: 0.18
   m_Direction: 1
   m_Center: {x: 0, y: 0.07, z: 0}
@@ -111097,7 +111093,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000086933556, y: -0.0000066173484}
+  m_AnchoredPosition: {x: -0.000025939906, y: 0.000023879476}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2103171750
