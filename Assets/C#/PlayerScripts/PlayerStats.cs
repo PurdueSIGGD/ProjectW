@@ -19,6 +19,8 @@ public class PlayerStats : PlayerComponent, IHittable {
     [SyncVar]
     public Color teamColor = Color.red;
     [SyncVar]
+    public int teamColorIndex = 0;
+    [SyncVar]
     public string playerName;
     [SyncVar]
     public int classIndex = -1;
@@ -35,11 +37,23 @@ public class PlayerStats : PlayerComponent, IHittable {
     private float lastHitTime;
     private float hurtCooldown;
 
-    public ParticleSystem aliveParticles;
-	public Rigidbody headMesh;
+    public ParticleSystem[] aliveParticles;
+	public Rigidbody[] headMeshes;
+
+
+    public SkinnedMeshRenderer[] teamMeshes;
+    public MaterialHolder materials;
 
     public override void PlayerComponent_Start() {
         
+        foreach (SkinnedMeshRenderer m in teamMeshes) {
+            Material[] replacementMaterials = new Material[2];
+            replacementMaterials[0] = m.materials[0];
+            replacementMaterials[1] = materials.materials[teamColorIndex];
+            m.materials = replacementMaterials;
+
+        }
+
         if (!isLocalPlayer) {
             //magicBar.SetActive(false);
             //healthBar.SetActive(false);
@@ -228,14 +242,24 @@ public class PlayerStats : PlayerComponent, IHittable {
         myBase.myCollider.enabled = false;
         myBase.myNoFrictionCollider.enabled = false;
 
-		if (this.aliveParticles) {
-			this.aliveParticles.Stop ();
+		if (this.aliveParticles.Length > 0) {
+            foreach (ParticleSystem p in aliveParticles) {
+                p.Stop();
+            }
 		}
-		if (this.headMesh) {
-			headMesh.isKinematic = false;
-			headMesh.GetComponent<Collider>().isTrigger = false;
-			headMesh.transform.parent = this.transform;
-			headMesh.AddForce(Vector3.up * 30 + UnityEngine.Random.insideUnitSphere * 30);
+        if (this.aliveParticles.Length > 0) {
+            foreach (ParticleSystem p in aliveParticles) {
+                p.Stop();
+            }
+        }
+        if (this.headMeshes.Length > 0) {
+            foreach (Rigidbody r in headMeshes) {
+                r.isKinematic = false;
+                r.GetComponent<Collider>().isTrigger = false;
+                r.transform.parent = this.transform;
+                r.AddForce(Vector3.up * 30 + UnityEngine.Random.insideUnitSphere * 30);
+            }
+           
 		}
         // Move all parts to the ragdoll layer
         // So it interacts with the world, but not itself

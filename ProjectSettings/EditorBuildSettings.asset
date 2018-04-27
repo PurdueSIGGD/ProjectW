@@ -14,3 +14,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TestSceneBig.unity
     guid: fbd60647173ef9e43a1f5abefc00e775
+  - enabled: 1
+    path: Assets/Scenes/WizardCity.unity
+    guid: 1c9134d2053795a4fb89773f10632f02

@@ -32,6 +32,7 @@ public class ProjectWGameManager : NetworkBehaviour {
 		public string teamName;
         public int teamIndex;
         public Color teamColor;
+        public int teamColorIndex;
         public int teamSprite;
 	}
 	[System.Serializable]
@@ -93,6 +94,7 @@ public class ProjectWGameManager : NetworkBehaviour {
 			newP.classIndex = oldPG.desiredPlayerClass;
 			newP.teamIndex = teams.Length > 1 ? oldPG.desiredTeamIndex : -1;
 			newP.teamColor = teams [teams.Length > 1 ? newP.teamIndex : 0].teamColor;
+            newP.teamColorIndex = teams[teams.Length > 1 ? newP.teamIndex : 0].teamColorIndex;
 			PlayerGUI newPG = newPlayer.GetComponent<PlayerGUI> ();
 			newPG.desiredPlayerName = oldPG.desiredPlayerName;
 			newPG.desiredPlayerClass = oldPG.desiredPlayerClass;
@@ -127,10 +129,12 @@ public class ProjectWGameManager : NetworkBehaviour {
 			teams = networkManager.teamItems;
 			// GameMode & options
 			int gamemodeType = networkManager.gameModeSelect;
+            // Game time
 			// People may forget the time limit in their games
-			if (networkManager.gamemodeOptions[0].optionName == "Time Limit") {
+			if (networkManager.gamemodeOptions[0].optionName == "Time Limit (m)") {
 				gameTime = networkManager.gamemodeOptions [0].value * 60; // Time is passed in minutes, we use seconds here
 			} else {
+                print("Using default time limit");
 				gameTime = timeLimit; // TODO should we just make this infinite?
 			}
 
@@ -179,7 +183,8 @@ public class ProjectWGameManager : NetworkBehaviour {
 				PlayerStats stats = spawn.GetComponent<PlayerStats>();
 				stats.teamIndex = teams.Length > 1 ? teamIndex : -1;
 				stats.teamColor = teams[teams.Length > 1 ? teamIndex : 0].teamColor;
-				stats.classIndex = classIndex;
+                stats.teamColorIndex = teams[teams.Length > 1 ? teamIndex : 0].teamColorIndex;
+                stats.classIndex = classIndex;
 				stats.playerName = spawnName;
 
 				PlayerGUI newPG = spawn.GetComponent<PlayerGUI>();
@@ -208,7 +213,7 @@ public class ProjectWGameManager : NetworkBehaviour {
             {
                 GameReset();
 				int randomRange = Random.Range (0, scenesToLoad.scenes.Length - 1);
-				print ("Changing scene to scene: " + randomRange + " out of " + scenesToLoad.scenes.Length);
+				print ("Changing scene to scene: " + (randomRange + 1) + " out of " + scenesToLoad.scenes.Length);
                 networkManager.ServerChangeScene(scenesToLoad.scenes[randomRange].name);
             }
             
@@ -237,6 +242,7 @@ public class ProjectWGameManager : NetworkBehaviour {
 		PlayerStats p = newPlayer.GetComponent<PlayerStats> ();
 		p.teamIndex = teams.Length > 1 ? teamIndex : -1;
         p.teamColor = teams[teams.Length > 1 ? teamIndex : 0].teamColor;
+        p.teamColorIndex = teams[teams.Length > 1 ? teamIndex : 0].teamColorIndex;
         p.playerName = playerName;
         p.classIndex = classIndex;
         PlayerGUI newPG = newPlayer.GetComponent<PlayerGUI>();

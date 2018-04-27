@@ -70,14 +70,14 @@ public abstract class PlayerInput : PlayerComponent {
                 if (!myBase.myStats.death && !disabled) {
                     // Have camera move closer if up against a wall
                     // This raycast is returning nothing for some reason
-                    /*RaycastHit[] hits = Physics.RaycastAll(new Ray(rotator.position, rotator.forward * -1), MAX_CAMERA_DISTANCE * 100, ~0);
-                    Debug.DrawRay(rotator.position, rotator.forward * -1, Color.green, 10);
-                    print(hits.Length);
-                    if (hits.Length > 0) {
-                       cameraSlider.localPosition = new Vector3(0, 0, hits[0].distance);
+                    RaycastHit[] hits = Physics.RaycastAll(rotator.position, rotator.forward * MAX_CAMERA_DISTANCE);
+                    Debug.DrawLine(rotator.position, rotator.position + (rotator.forward * -1), Color.green, 10);
+                    //print(hits.Length + " " + Vector3.Distance(hits[0].point, rotator.position));
+                    if (hits.Length > 0 && Vector3.Distance(hits[0].point, rotator.position) < Mathf.Abs(MAX_CAMERA_DISTANCE)) {
+                       cameraSlider.localPosition = new Vector3(0, 0, -1 * hits[0].distance);
                     } else {
                         cameraSlider.localPosition = new Vector3(0, 0, MAX_CAMERA_DISTANCE);
-                    }*/
+                    }
                    
                     myBase.myMovement.processMovement(myData);
 

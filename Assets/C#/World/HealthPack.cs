@@ -8,6 +8,7 @@ public class HealthPack : NetworkBehaviour {
     public HitArguments.DamageType type;
     public float Health;
     public float respawnTimer;
+    public MeshRenderer[] meshes;
     [SyncVar]
     private bool active = true;
     
@@ -20,7 +21,9 @@ public class HealthPack : NetworkBehaviour {
         //active = true;
     }
     private void Update() {
-        GetComponent<MeshRenderer>().enabled = active; // should update with server
+        foreach (MeshRenderer m in meshes) {
+            m.enabled = active; // should update with server
+        }
     }
     void OnTriggerEnter(Collider col)
     {
@@ -57,7 +60,7 @@ public class HealthPack : NetworkBehaviour {
                         .withDamage(-1 * Health)
                         .withDamageType(type));
                     //Remove health pack
-                    CmdSetActive(false);
+                    CmdSetActivee(false);
                     active = false; // do this so we don't keep grabbing healthpacks until server responds
                 }
                 
@@ -66,7 +69,7 @@ public class HealthPack : NetworkBehaviour {
         } while (h != null && toDamage.Contains(h));
     }
     [Command]
-    void CmdSetActive(bool desired) {
+    void CmdSetActivee(bool desired) {
         active = desired;
         RpcActiveSet(desired);
         //Start respawning it
@@ -81,7 +84,7 @@ public class HealthPack : NetworkBehaviour {
         do {
             yield return new WaitForSeconds(respawnTimer);
             //Respawn health pack
-            CmdSetActive(true);
+            CmdSetActivee(true);
         } while (active == false);
     }
 }
