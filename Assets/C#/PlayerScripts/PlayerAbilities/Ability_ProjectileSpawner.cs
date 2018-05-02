@@ -29,6 +29,7 @@ public class Ability_ProjectileSpawner : Ability_ObjectSpawner
 		{
 			r.AddForce((rotated) * spawnSpeed);
 		}
+		Debug.Log("spacer");
 		OnSpellSpawned(spawn);
 
 	}

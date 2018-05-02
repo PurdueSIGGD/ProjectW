@@ -24,6 +24,8 @@ public abstract class CooldownAbility : PlayerAbility {
     public override void use()
     {
         // Clients should not worry about magic draw
+		Debug.Log("checking");
+
         if (Time.time - lastUse > cooldown) {
 			if ((!isLocalPlayer && !(isServer && myBase.myInput.isBot())) || myBase.myStats.canUseMagic(magicDraw)) {
 				if (abilityIcon != null && cooldown > 0.2f) { // We don't let it go if it takes like no time
@@ -32,7 +34,13 @@ public abstract class CooldownAbility : PlayerAbility {
 					this.abilityIcon.myAnimator.SetTrigger ("Cooldown" + extra);
                 }
                 myBase.myStats.changeMagic(-1 * magicDraw);
+
+				Debug.Log("setting cool");
+
                 lastUse = Time.time;
+
+				Debug.Log("cool set");
+
                 hasNotified = false;
                 use_UseAbility();
                 switch (animationTriggerType) {

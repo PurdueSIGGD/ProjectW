@@ -147,22 +147,6 @@ MonoBehaviour:
     botTeam: -1
     botDifficulty: 5
     botType: 0
-  - botName: (Bot) Frank
-    botTeam: -1
-    botDifficulty: 5
-    botType: 0
-  - botName: (Bot) Frank
-    botTeam: -1
-    botDifficulty: 5
-    botType: 0
-  - botName: (Bot) Frank
-    botTeam: -1
-    botDifficulty: 5
-    botType: 0
-  - botName: (Bot) Frank
-    botTeam: -1
-    botDifficulty: 5
-    botType: 0
   mapSelect: 0
   gameModeSelect: 0
   gamemodeOptions: []

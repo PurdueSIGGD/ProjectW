@@ -47,6 +47,8 @@ public class Ability_ObjectSpawner : CooldownAbility {
         {
             r.AddForce(spawnAngle * spawnSpeed);
         }
+
+		Debug.Log ("BOOM!");
         OnSpellSpawned(spawn);
     }
     /**

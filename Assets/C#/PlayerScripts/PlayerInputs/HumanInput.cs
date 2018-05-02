@@ -9,11 +9,12 @@ public class HumanInput : PlayerInput {
 
 	public override void PlayerComponent_Start() {
 		base.PlayerComponent_Start ();
-		ProjectWGameManager manager = FindObjectOfType<ProjectWGameManager> ();
-		if (manager.teams.Length > 1) {
-			multTeams = true;
+		if (isServer) {
+			ProjectWGameManager manager = FindObjectOfType<ProjectWGameManager> ();
+			if (manager.teams.Length > 1) {
+				multTeams = true;
+			}
 		}
-
 	}
 
 	public override PlayerInput.InputData getData() {
@@ -146,7 +147,7 @@ public class HumanInput : PlayerInput {
 					continue;
 
 				if (tmpSts.classIndex != 1) {//will fireball if target is not a time wizard
-					useAbilities [0] = true;
+					//useAbilities [0] = true;
 				}
 
 

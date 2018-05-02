@@ -44,7 +44,7 @@ public class PlayerMovement : PlayerComponent {
         }
     }
     public void FixedUpdate() {
-        if (isLocalPlayer) {
+		if (isLocalPlayer || (isServer && myBase.myInput.isBot())) {
             CheckGroundStatus();
             lastPosition = transform.position;
 
